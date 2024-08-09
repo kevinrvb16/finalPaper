@@ -53,7 +53,7 @@ export default {
   methods: {
     redirect() {
       //redirect to board page
-      this.$router.push('/board')
+      this.$router.push('/rules')
     }
   },
 }
