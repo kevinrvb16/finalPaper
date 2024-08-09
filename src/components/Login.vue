@@ -11,7 +11,7 @@
       />
 
       <div class="text-center">
-        <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
+        <div class="text-body-2 font-weight-light mb-n1">Boas vindas à</div>
 
         <h1 class="text-h2 font-weight-bold">Metrics Poker</h1>
       </div>
@@ -25,7 +25,7 @@
       </v-row>
       <v-row justify="center" align="center">
         <v-col cols="8" class="text-center">
-          <v-btn :disabled="v$.$invalid" @click="redirect()">start game</v-btn>
+          <v-btn :disabled="v$.$invalid" @click="redirect()">Iniciar</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
