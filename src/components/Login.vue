@@ -52,7 +52,8 @@ export default {
   },
   methods: {
     redirect() {
-      this.router.push('/board')
+      //redirect to board page
+      this.$router.push('/board')
     }
   },
 }
