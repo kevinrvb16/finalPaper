@@ -8,7 +8,7 @@
         <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
       </div>
       <v-row justify="center" >
-        <v-col cols="4" v-for="(metric, index) in metrics" :key="index" justify="center" align="center">
+        <v-col class="pb-0" cols="4" v-for="(metric, index) in metrics" :key="index" justify="center" align="center">
             <flip-card :title="metric.title" :description="metric.description" :color="metric.backgroundColor"></flip-card>
         </v-col>
       </v-row>
