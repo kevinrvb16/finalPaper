@@ -24,7 +24,9 @@
         </v-col>
       </v-row>
       <v-row justify="center" align="center">
-        <v-btn :disabled="v$.$invalid" @click="redirect()">Iniciar</v-btn>
+        <v-col cols="2">
+          <v-btn  class="mx-auto" :disabled="v$.$invalid" @click="redirect()">Iniciar</v-btn>
+        </v-col>
       </v-row>
     </v-responsive>
   </v-container>
