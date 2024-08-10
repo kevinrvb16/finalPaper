@@ -7,9 +7,12 @@
       <div class="text-center">
         <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
       </div>
-      <v-row justify="center" >
+      <v-row justify="end" >
         <v-col class="pb-0" cols="4" v-for="(metric, index) in metrics" :key="index" justify="center" align="center">
             <flip-card :title="metric.title" :description="metric.description" :color="metric.backgroundColor"></flip-card>
+        </v-col>
+        <v-col cols="4" justify="center" align="center" class="my-auto">
+          <v-btn append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
