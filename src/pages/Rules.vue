@@ -64,6 +64,11 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-row justify="center" align="center">
+        <v-col cols="12" class="text-center">
+          <problems-dialog>Descrever dores</problems-dialog>
+        </v-col>
+      </v-row>
     </v-responsive>
   </v-container>
 </template>
@@ -71,10 +76,14 @@
 <script>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators'
+import ProblemsDialog from '@/components/ProblemsDialog.vue'
 
 export default {
   setup() {
     return { v$: useVuelidate() }
+  },
+  components: {
+    ProblemsDialog
   },
   data() {
     return {
