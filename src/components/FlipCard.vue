@@ -2,10 +2,10 @@
   <v-container>
     <div class="flip-card" @click="isFlipped = !isFlipped">
       <div :class="['flip-card-inner', { 'flipped': isFlipped }]">
-        <v-card elevation="24" color="dark" class="flip-card-front pa-5" outlined>
-          <v-card-text>{{ title }}</v-card-text>
+        <v-card elevation="24" :color="color" class="flip-card-front pa-5" outlined>
+          <v-card-title>{{ title }}</v-card-title>
         </v-card>
-        <v-card elevation="24" color="dark" class="flip-card-back pa-5" outlined>
+        <v-card elevation="24" :color="color" class="flip-card-back pa-5" outlined>
           <v-card-text>{{ description }}</v-card-text>
         </v-card>
       </div>
@@ -26,6 +26,9 @@ export default {
     },
     description: {
       type: String
+    },
+    color: {
+      type: String
     }
   }
 };
@@ -33,9 +36,8 @@ export default {
 
 <style scoped>
 .flip-card {
-  perspective: 360px;
-  width: 196px;
-  height: 260px;
+  perspective: 1080px;
+  height: 30vh;
 }
 
 .flip-card-inner {
@@ -61,6 +63,7 @@ export default {
 .flip-card-front {
   z-index: 2;
   text-align: center;
+  filter: brightness(0.85);
 }
 
 .flip-card-back {
