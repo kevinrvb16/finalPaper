@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       email: '',
+      selectedMetrics: [],
       metrics: [
         {
           title: "Qualidade do Produto",
@@ -82,7 +83,10 @@ export default {
   },
   methods: {
     redirect() {
-      this.$router.push('/table')
+      this.$router.push({
+        path: '/table',
+        query: { metrics: JSON.stringify(this.selectedMetrics)}
+      })
     }
   },
   validations() {
