@@ -1,24 +1,37 @@
 <template>
-  <v-container class="fill-height">
-    <v-responsive
-      class="align-center mx-auto"
-      max-width="1200"
-    >
-      <div class="text-center">
-        <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
-      </div>
-      <v-row justify="center" >
-        <v-col class="pb-0" cols="4" v-for="(metric, index) in metrics" :key="index" justify="center" align="center">
-            <flip-card :title="metric.title" :description="metric.description" :color="metric.backgroundColor"></flip-card>
-        </v-col>
-      </v-row>
-      <v-row justify="center" >
-        <v-col class="pb-0" cols="4" v-for="(metric, index) in metrics" :key="index" justify="center" align="center">
-            <v-btn></v-btn>
-        </v-col>
-      </v-row>
-    </v-responsive>
-  </v-container>
+<v-container class="fill-height">
+  <v-responsive
+    class="align-center mx-auto"
+    max-width="2400"
+  >
+    <div class="text-center my-3">
+      <h1 class="text-h2 font-weight-bold">Metrics Poker</h1>
+    </div>
+    <v-row justify="center" align="center" class="ml-7 mr-2">
+      <v-tooltip :text="metricsGroup[0].description" max-width="360px">
+        <template v-slot:activator="{ props }">
+          <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0].backgroundColor">{{metricsGroup[0].title}}</v-btn>
+        </template>
+      </v-tooltip>
+      <v-col class="px-1" v-for="(metric, index) in metricsOfFirstGroup" :key="index">
+        <flip-card @click="selectedMetrics.push(metric)" :customClass="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
+      </v-col>
+    </v-row>
+    <v-row class="ml-2">
+      <v-btn variant="outlined">DOR/PROBLEMA</v-btn>
+    </v-row>
+    <v-row class="ml-7 mr-2"  justify="center" align="center">
+      <v-tooltip :text="metricsGroup[1].description" max-width="360px">
+        <template v-slot:activator="{ props }">
+          <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1].backgroundColor">{{metricsGroup[1].title}}</v-btn>
+        </template>
+      </v-tooltip>
+      <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
+        <flip-card @click="selectedMetrics.push(metric)" :customClass="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
+      </v-col>
+    </v-row>
+  </v-responsive>
+</v-container>
 </template>
 
 <script>
@@ -36,44 +49,149 @@ export default {
   data() {
     return {
       email: '',
-      metrics: [
-        {
-          title: "Qualidade do Produto",
-          description: "Se concentra na qualidade do produto ou serviço entregue, incluindo sua funcionalidade, confiabilidade, segurança, facilidade de uso, desempenho, manutenção, entre outros aspectos.",
-          backgroundColor: "#B90000" // Vermelho
-        },
-        {
-          title: "Recursos e Custos",
-          description: "Se concentra nos recursos usados no projeto e no custo total do projeto, incluindo o orçamento e o uso de materiais ou ferramentas.",
-          backgroundColor: "#000000" // Preto
-        },
-        {
-          title: "Desempenho do Processo",
-          description: "Se concentra na eficiência e eficácia dos processos usados no projeto, incluindo a eficácia dos métodos de gerenciamento de projetos, a qualidade dos processos de produção, a produtividade da equipe e a eficácia da comunicação interna.",
-          backgroundColor: "#1C4E8A" // Azul
-        },
-        {
-          title: "Cronograma e Progresso",
-          description: "Se concentra no cronograma e no progresso do projeto, incluindo o cumprimento de prazos, o acompanhamento do progresso e a identificação e correção de atrasos.",
-          backgroundColor: "#B971CA" // Roxo
-        },
-        {
-          title: "Eficácia da Tecnologia",
-          description: "Se concentra na eficácia das tecnologias usadas no projeto, incluindo a eficácia dos sistemas de informação, a eficácia dos softwares e a segurança e privacidade dos dados.",
-          backgroundColor: "#4F8A10" // Verde
-        },
-        {
-          title: "Tamanho e Estabilidade",
-          description: "Se concentra no tamanho e estabilidade do produto ou sistema desenvolvido, incluindo o número de usuários, a capacidade de armazenamento, a escalabilidade e a estabilidade.",
-          backgroundColor: "#F0803C" // Laranja
-        },
-        {
-          title: "Satisfação do Cliente",
-          description: "Se concentra na satisfação do cliente com o produto ou serviço entregue, incluindo a qualidade, a usabilidade, a confiabilidade e a experiência geral do usuário. Isso pode ser medido por meio de pesquisas de satisfação do cliente e avaliações de clientes.",
-          backgroundColor: "#6CAF44" // Verde Claro
-        }
-      ]
+      metricsGroup: JSON.parse(this.$route.query.metricGroup),
+      selectedMetrics: [],
+      metricsOfFirstGroup: [],
+      metricsOfSecondGroup: [],
+      metricOfEachGroup: {
+        "resources": [
+          {
+            "name": "EFFORT REMAINING",
+            "description": "É a métrica que mede a quantidade de esforço que ainda precisa ser aplicada para concluir uma tarefa."
+          },
+          {
+            "name": "EFFORT",
+            "description": "É a métrica que mede a quantidade de trabalho necessário para concluir uma tarefa."
+          },
+          {
+            "name": "EFFORT ESTIMATION ACCURACY",
+            "description": "É a métrica que mede a precisão da estimativa de esforço necessário para completar uma tarefa."
+          },
+          {
+            "name": "TOTAL EFFECTIVE AVAILABLE HOURS",
+            "description": "É a métrica que mede o tempo que a equipe tem disponível para trabalhar."
+          },
+          {
+            "name": "BACKLOG SIZE",
+            "description": "É a métrica que mede o número de tarefas pendentes na lista de tarefas."
+          }
+        ],
+        "performance_and_process": [
+          {
+            "name": "FIXED BUGS",
+            "description": "É a métrica que mede a quantidade de erros corrigidos em um produto."
+          },
+          {
+            "name": "HOURS SPENT ON TASK",
+            "description": "É a métrica que mede o tempo gasto em uma tarefa específica."
+          },
+          {
+            "name": "HOURS SPENT ON BUGS",
+            "description": "É a métrica que mede o tempo gasto na correção de bugs."
+          },
+          {
+            "name": "CYCLE TIME",
+            "description": "É a métrica que mede o tempo necessário para concluir uma tarefa desde o início até a entrega."
+          },
+          {
+            "name": "TASKS ATTRIBUTES QUALITY",
+            "description": "É a métrica que mede a qualidade das tarefas, incluindo descrição, informações e objetivos."
+          }
+        ],
+        "schedule_and_progress": [
+          {
+            "name": "NUMBER OF COMPLETED TASKS",
+            "description": "É a métrica que mede a quantidade de tarefas concluídas em um período de tempo."
+          },
+          {
+            "name": "SCOPE GROWTH",
+            "description": "É a métrica que mede o aumento do escopo do projeto."
+          },
+          {
+            "name": "PRIORITY SHIFT",
+            "description": "É a métrica que mede a taxa de mudança de prioridade das tarefas."
+          },
+          {
+            "name": "CUMULATIVE FLOW DIAGRAMS",
+            "description": "É a métrica que mede a quantidade de trabalho em cada estágio do processo de desenvolvimento."
+          },
+          {
+            "name": "MERGE REQUEST REVIEW",
+            "description": "É a métrica que mede o tempo gasto na revisão de solicitações de mesclagem."
+          }
+        ],
+        "technology_effectiveness": [
+          {
+            "name": "TEST RUN FREQUENCY",
+            "description": "É a métrica que mede a frequência com que os testes são executados."
+          },
+          {
+            "name": "TEST FAILURE RATE",
+            "description": "É a métrica que mede a quantidade de testes que falharam em relação ao número total de testes executados."
+          },
+          {
+            "name": "AVG. TEST RUN TIME",
+            "description": "É a métrica que mede o tempo médio gasto na execução de um teste."
+          },
+          {
+            "name": "TEST COVERAGE",
+            "description": "É a métrica que mede a porcentagem do código que é testado."
+          },
+          {
+            "name": "SECURITY TEST PASS RATE",
+            "description": "É a métrica que mede a quantidade de testes de segurança aprovados em relação ao número total de testes de segurança executados."
+          }
+        ],
+        "size_and_stability": [
+          {
+            "name": "CHANGED PRODUCT BACKLOG ITEMS",
+            "description": "É a métrica que mede o número de itens no backlog do produto que foram modificados."
+          },
+          {
+            "name": "NUMBER OF CODE LINES",
+            "description": "É a métrica que mede a quantidade de linhas de código escritas."
+          },
+          {
+            "name": "WEAK COMPONENTS",
+            "description": "É a métrica que mede a presença de componentes fracos ou vulnerabilidades em um software."
+          }
+        ],
+        "customer_satisfaction": [
+          {
+            "name": "NPS",
+            "description": "É a métrica que mede a satisfação do cliente com um produto ou serviço em uma escala de 0-10."
+          }
+        ],
+        "product_quality": [
+          {
+            "name": "OUTSTANDING BUGS",
+            "description": "É a métrica que mede a quantidade de erros em um produto que foram identificados, mas ainda não foram corrigidos."
+          },
+          {
+            "name": "DELIVERY ON TIME",
+            "description": "É a métrica que indica se a entrega foi feita dentro do prazo estabelecido."
+          },
+          {
+            "name": "PRODUCT VELOCITY",
+            "description": "É a métrica que mede a quantidade de trabalho realizado em um período de tempo."
+          },
+          {
+            "name": "LEAD TIME",
+            "description": "É a métrica que mede o tempo necessário para completar um item de trabalho."
+          },
+          {
+            "name": "THROUGHPUT",
+            "description": "É a métrica que mede a quantidade de trabalho que é concluída com sucesso em um determinado período de tempo."
+          }
+        ]
+      }
     }
+  },
+  mounted() {
+    this.metricsOfFirstGroup = this.metricOfEachGroup[this.metricsGroup[0].value]
+    console.log(this.metricsOfFirstGroup)
+    this.metricsOfSecondGroup = this.metricOfEachGroup[this.metricsGroup[1].value]
+    console.log(this.metricsOfSecondGroup)
   },
   validations() {
     return {
@@ -82,3 +200,9 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.white-space-normal {
+  white-space: normal;
+}
+
+</style>
