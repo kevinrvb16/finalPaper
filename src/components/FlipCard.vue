@@ -39,6 +39,7 @@ export default {
 .flip-card {
   perspective: 1080px;
   height: 32vh;
+  max-width: 16vw;
 }
 
 .flip-card-inner {

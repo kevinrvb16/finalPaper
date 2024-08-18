@@ -7,29 +7,31 @@
     <div class="text-center my-3">
       <h1 class="text-h2 font-weight-bold">Metrics Poker</h1>
     </div>
-    <v-row justify="center" align="center" class="ml-7 mr-2">
-      <v-tooltip :text="metricsGroup[0].description" max-width="360px">
-        <template v-slot:activator="{ props }">
-          <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0].backgroundColor">{{metricsGroup[0].title}}</v-btn>
-        </template>
-      </v-tooltip>
-      <v-col class="px-1" v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-        <flip-card @click="selectedMetrics.push(metric)" :customClass="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
-      </v-col>
-    </v-row>
-    <v-row class="ml-2">
-      <v-btn variant="outlined">DOR/PROBLEMA</v-btn>
-    </v-row>
-    <v-row class="ml-7 mr-2"  justify="center" align="center">
-      <v-tooltip :text="metricsGroup[1].description" max-width="360px">
-        <template v-slot:activator="{ props }">
-          <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1].backgroundColor">{{metricsGroup[1].title}}</v-btn>
-        </template>
-      </v-tooltip>
-      <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
-        <flip-card @click="selectedMetrics.push(metric)" :customClass="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
-      </v-col>
-    </v-row>
+    <div class="bg-table">
+      <v-row justify="center" align="center" class="ml-7 mr-2">
+        <v-tooltip :text="metricsGroup[0].description" max-width="360px">
+          <template v-slot:activator="{ props }">
+            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0].backgroundColor">{{metricsGroup[0].title}}</v-btn>
+          </template>
+        </v-tooltip>
+        <v-col class="px-1" v-for="(metric, index) in metricsOfFirstGroup" :key="index">
+          <flip-card @click="selectedMetrics.push(metric)" :customClass="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
+        </v-col>
+      </v-row>
+      <v-row class="ml-2">
+        <v-btn>DOR/PROBLEMA</v-btn>
+      </v-row>
+      <v-row class="ml-7 mr-2"  justify="center" align="center">
+        <v-tooltip :text="metricsGroup[1].description" max-width="360px">
+          <template v-slot:activator="{ props }">
+            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1].backgroundColor">{{metricsGroup[1].title}}</v-btn>
+          </template>
+        </v-tooltip>
+        <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
+          <flip-card @click="selectedMetrics.push(metric)" :customClass="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
+        </v-col>
+      </v-row>
+    </div>
   </v-responsive>
 </v-container>
 </template>
@@ -205,4 +207,9 @@ export default {
   white-space: normal;
 }
 
+.bg-table {
+  background-image: linear-gradient(white, white), linear-gradient(white, white);
+  background-size: 2px 50%, 100% 2px; /* Tamanho das linhas */
+  background-position: 100px, 250px; /* Posiciona as linhas */
+  background-repeat: no-repeat;}
 </style>
