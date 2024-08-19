@@ -38,7 +38,7 @@ export default {
       metrics: [
         {
           title: "Qualidade do Produto",
-          value: "quality",
+          value: "product_quality",
           description: "Se concentra na qualidade do produto ou serviço entregue, incluindo sua funcionalidade, confiabilidade, segurança, facilidade de uso, desempenho, manutenção, entre outros aspectos.",
           backgroundColor: "#B90000" // Vermelho
         },
