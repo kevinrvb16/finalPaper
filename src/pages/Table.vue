@@ -7,28 +7,28 @@
     <div class="text-center my-3">
       <h1 class="text-h2 font-weight-bold">Metrics Poker</h1>
     </div>
-    <div class="bg-table">
-      <v-row justify="center" align="center" class="ml-7 mr-2">
+    <div class="bg-table-vertical">
+      <v-row justify="center" align="center" class="ml-7 mr-2 bg-table-horizontal">
         <v-tooltip :text="metricsGroup[0].description" max-width="360px">
           <template v-slot:activator="{ props }">
             <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0].backgroundColor">{{metricsGroup[0].title}}</v-btn>
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-          <flip-card @click="selectedMetrics.push(metric)" :customClass="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
+          <flip-card @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
         </v-col>
       </v-row>
       <v-row class="ml-2">
         <v-btn>DOR/PROBLEMA</v-btn>
       </v-row>
-      <v-row class="ml-7 mr-2"  justify="center" align="center">
+      <v-row class="ml-7 mr-2 bg-table-horizontal"  justify="center" align="center">
         <v-tooltip :text="metricsGroup[1].description" max-width="360px">
           <template v-slot:activator="{ props }">
             <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1].backgroundColor">{{metricsGroup[1].title}}</v-btn>
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
-          <flip-card @click="selectedMetrics.push(metric)" :customClass="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
+          <flip-card @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
         </v-col>
       </v-row>
     </div>
@@ -207,9 +207,24 @@ export default {
   white-space: normal;
 }
 
-.bg-table {
+.bg-table-horizontal {
   background-image: linear-gradient(white, white), linear-gradient(white, white);
-  background-size: 2px 50%, 100% 2px; /* Tamanho das linhas */
-  background-position: 100px, 250px; /* Posiciona as linhas */
-  background-repeat: no-repeat;}
+  background-size: 2px 0%, 100% 2px; /* Tamanho das linhas */
+  background-position: 100px, 150px; /* Posiciona as linhas */
+  background-repeat: no-repeat;
+  }
+
+  .bg-table-vertical {
+  background-image: linear-gradient(white, white), linear-gradient(white, white);
+  background-size: 2px 50%, 0% 2px; /* Tamanho das linhas */
+  background-position: 100px, 150px; /* Posiciona as linhas */
+  background-repeat: no-repeat;
+  }
+
+  .custom-flip-card {
+    border: 1px solid white;
+    border-radius: 2%;
+    padding: 4px;
+    max-width: 250px;
+  }
 </style>
