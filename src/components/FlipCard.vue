@@ -1,8 +1,8 @@
 <template>
-  <div class="flip-card" @click="isFlipped = !isFlipped">
+  <div :class="`flip-card ${customClassFlipCard}`" @click="isFlipped = !isFlipped">
     <div :class="['flip-card-inner', { 'flipped': isFlipped }]">
       <v-card elevation="24" :color="color" class="flip-card-front pa-0" outlined>
-        <v-card-title :class="customClass">{{ title }}</v-card-title>
+        <v-card-title :class="customClassTitle">{{ title }}</v-card-title>
       </v-card>
       <v-card elevation="24" :color="color" class="flip-card-back pa-0" outlined>
         <v-card-text>{{ description }}</v-card-text>
@@ -28,7 +28,10 @@ export default {
     color: {
       type: String
     },
-    customClass: {
+    customClassTitle: {
+      type: String
+    },
+    customClassFlipCard: {
       type: String
     }
   }
@@ -38,8 +41,7 @@ export default {
 <style scoped>
 .flip-card {
   perspective: 1080px;
-  height: 32vh;
-  max-width: 16vw;
+  height: 33vh;
 }
 
 .flip-card-inner {
