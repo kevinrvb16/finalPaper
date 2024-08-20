@@ -7,6 +7,11 @@
     <div class="text-center my-3">
       <h1 class="text-h2 font-weight-bold">Metrics Poker</h1>
     </div>
+      <div class="text-center my-3">
+        <v-avatar class="mx-4 mb-3" color="black" size="109">Relevância para a dor</v-avatar>
+        <v-avatar class="mx-4 mb-3" color="black" size="109">Facilidade de coleta</v-avatar>
+        <v-avatar class="mx-4 mb-3" color="black" size="109">Preferência pessoal</v-avatar>
+      </div>
     <div class="bg-table-vertical">
       <v-row justify="center" align="center" class="ml-7 mr-2 bg-table-horizontal">
         <v-tooltip :text="metricsGroup[0].description" max-width="360px">
