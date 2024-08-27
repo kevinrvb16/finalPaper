@@ -8,9 +8,9 @@
       <h1 class="text-h2 font-weight-bold">Metrics Poker</h1>
     </div>
       <div class="text-center my-3">
-        <v-avatar class="mx-4 mb-3" color="black" size="109">Relevância para a dor</v-avatar>
-        <v-avatar class="mx-4 mb-3" color="black" size="109">Facilidade de coleta</v-avatar>
-        <v-avatar class="mx-4 mb-3" color="black" size="109">Preferência pessoal</v-avatar>
+        <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="elevated" color="black" size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
+        <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="flat" color="black" size="" rounded="circle">Facilidade de coleta</v-chip>
+        <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="flat" color="black" size="" rounded="circle">Preferência pessoal</v-chip>
       </div>
     <div class="bg-table-vertical">
       <v-row justify="center" align="center" class="ml-7 mr-2 bg-table-horizontal">
@@ -20,7 +20,7 @@
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-          <flip-card @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
+          <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
         </v-col>
       </v-row>
       <v-row class="ml-2">
@@ -33,7 +33,7 @@
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
-          <flip-card @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
+          <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
         </v-col>
       </v-row>
     </div>
@@ -200,6 +200,19 @@ export default {
     this.metricsOfSecondGroup = this.metricOfEachGroup[this.metricsGroup[1].value]
     console.log(this.metricsOfSecondGroup)
   },
+  methods: {
+    dragStart(event) {
+      event.dataTransfer.setData('text', event.target.innerText);
+    },
+    dropChip(event) {
+      const data = event.dataTransfer.getData('text');
+      console.log('Dropped Chip: ', data);
+    },
+    dropCard(event) {
+      const data = event.dataTransfer.getData('text');
+      console.log('Dropped on Card: ', data);
+    }
+  },
   validations() {
     return {
       email: { required }
@@ -208,8 +221,23 @@ export default {
 }
 </script>
 <style lang="scss">
+$chip-height: 100px!important;
 .white-space-normal {
-  white-space: normal;
+  white-space: normal!important;
+}
+
+.rounded-chip {
+  height: 124px;            /* Define a altura do chip */
+  width: 124px;             /* Define a largura do chip */
+  border-radius: 50%;       /* Torna o chip completamente circular */
+  display: flex;            /* Alinha o conteúdo no centro */
+  align-items: center;      /* Alinha verticalmente no centro */
+  justify-content: center;  /* Alinha horizontalmente no centro */
+  text-align: center;       /* Centraliza o texto */
+  white-space: normal!important;      /* Permite que o texto quebre linha */
+  padding: 34px;            /* Adiciona espaçamento interno */
+  word-wrap: break-word!important;    /* Quebra palavras longas */
+  overflow: hidden;         /* Esconde o conteúdo que transborda */
 }
 
 .bg-table-horizontal {
