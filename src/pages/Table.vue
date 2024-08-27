@@ -221,7 +221,7 @@ export default {
 }
 </script>
 <style lang="scss">
-$chip-height: 100px!important;
+
 .white-space-normal {
   white-space: normal!important;
 }
