@@ -62,6 +62,7 @@ export default {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  cursor: pointer;
 }
 
 .flip-card-front {
