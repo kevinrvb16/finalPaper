@@ -20,7 +20,7 @@
 
       <v-row justify="center" align="center">
         <v-col cols="8">
-          <v-text-field v-model="email" label="E-mail" @blur="$v.form.email.$touch()" class="pt-3"></v-text-field>
+          <v-text-field variant="outlined" v-model="email" label="E-mail" @blur="v$.email.$touch()" :error="v$.email.$dirty && v$.email.$invalid" class="pt-3"></v-text-field>
         </v-col>
       </v-row>
       <v-row justify="center" align="center">
@@ -30,7 +30,7 @@
       </v-row>
     </v-responsive>
   </v-container>
-   <v-alert
+  <v-alert
     text="Preencha o e-mail corretamente"
     title="E-mail inválido"
     type="error"
@@ -52,7 +52,6 @@ export default {
   data() {
     return {
       email: '',
-      successEmail: false,
       errorEmail: false
     }
   },
@@ -69,7 +68,7 @@ export default {
       this.v$.email.$touch()
       //redirect to board page
       if (!this.v$.email.$invalid) {
-        this.successEmail = true;
+
         this.$router.push({
           path: '/rules',
           query: { session: this.email}
