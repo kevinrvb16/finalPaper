@@ -84,7 +84,6 @@
 
 <script>
 import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators'
 import ProblemsDialog from '@/components/ProblemsDialog.vue'
 
 export default {
@@ -100,10 +99,6 @@ export default {
       successEmail: true
     }
   },
-  validations() {
-    return {
-      email: { required }
-    }
-  }
+
 }
 </script>
