@@ -20,7 +20,7 @@
 
       <v-row justify="center" align="center">
         <v-col cols="8">
-          <v-text-field v-model="email" label="E-mail" class="pt-3"></v-text-field>
+          <v-text-field v-model="email" label="E-mail" @blur="$v.form.email.$touch()" class="pt-3"></v-text-field>
         </v-col>
       </v-row>
       <v-row justify="center" align="center">
@@ -29,12 +29,20 @@
         </v-col>
       </v-row>
     </v-responsive>
-  </v-container>
+   <v-alert
+    text="Preencha o e-mail corretamente"
+    title="E-mail inválido"
+    type="error"
+    icon="$error"
+    closable
+    variant="elevated"
+    v-if="erroEmail"
+  ></v-alert>
 </template>
 
 <script>
 import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators'
+import { required, email } from '@vuelidate/validators'
 
 export default {
   setup() {
@@ -42,18 +50,32 @@ export default {
   },
   data() {
     return {
-      email: ''
+      email: '',
+      successEmail: false,
+      errorEmail: false
     }
   },
   validations() {
     return {
-      email: { required }
+      email: {
+        required,
+        email
+       }
     }
   },
   methods: {
     redirect() {
+      this.v$.email.$touch()
       //redirect to board page
-      this.$router.push('/rules')
+      if (!this.v$.email.$invalid) {
+        this.successEmail = true;
+        this.$router.push({
+          path: '/rules',
+          query: { session: this.email}
+        })
+      } else {
+        this.erroEmail = true;
+      }
     }
   },
 }
