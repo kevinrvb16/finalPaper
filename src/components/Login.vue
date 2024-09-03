@@ -29,6 +29,7 @@
         </v-col>
       </v-row>
     </v-responsive>
+  </v-container>
    <v-alert
     text="Preencha o e-mail corretamente"
     title="E-mail inválido"
