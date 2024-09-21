@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
 import { io } from "socket.io-client"
+import api from '../api';
 
 export const useGameStore = defineStore("game", {
     state: () => ({
+        gameId: null,
         gameState: {},
         socket: null
     }),
@@ -16,6 +18,14 @@ export const useGameStore = defineStore("game", {
         },
         sendGameAction(action) {
             this.socket.emit("gameAction", action);
+        },
+        async setupGame() {
+            const response = await api.get('/api/game/setup');
+            this.gameId = response.data.gameId;
+        },
+        async joinGame(gameId) {
+            await api.get(`/game/join/${gameId}`);
+            // Atualizar o estado conforme necessário
         }
     }
 })
