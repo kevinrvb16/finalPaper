@@ -45,31 +45,26 @@
 <script>
 import { supabase } from '../main'
 
+ // eslint-disable-next-line no-unused-vars
+ async function handleSignInWithGoogle(response) {
+  try {
+    // send id token returned in response.credential to supabase
+    const { data, error } = await supabase.auth.signInWithIdToken({
+      provider: 'google',
+      token: response.credential,
+    })
+
+    if (error) throw error
+    console.log('Session data: ', data)
+    console.log('Successfully logged in with Google One Tap')
+
+    // redirect to protected page
+    this.$router.push('/rules')
+  } catch (error) {
+    console.error('Error logging in with Google One Tap', error)
+  }
+}
 export default {
-  setup() {
-    async function handleSignInWithGoogle(response) {
-      try {
-        // send id token returned in response.credential to supabase
-        const { data, error } = await supabase.auth.signInWithIdToken({
-          provider: 'google',
-          token: response.credential,
-        })
-
-        if (error) throw error
-        console.log('Session data: ', data)
-        console.log('Successfully logged in with Google One Tap')
-
-        // redirect to protected page
-        this.$router.push('/rules')
-      } catch (error) {
-        console.error('Error logging in with Google One Tap', error)
-      }
-    }
-
-    return {
-      handleSignInWithGoogle
-    }
-  },
   mounted() {
     const { data, error } = supabase.auth.getSession()
     if (error) {
