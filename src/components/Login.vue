@@ -18,23 +18,23 @@
 
       <div class="py-4" />
       <v-row class="mb-4" justify="center" align="center">
-          <div id="g_id_onload"
-            data-client_id="266301269895-9iap0cpovgq5fju28e6q6a87qudv2is0.apps.googleusercontent.com"
-            data-context="signin"
-            data-ux_mode="popup"
-            data-login_uri="https://metricspoker.netlify.app/"
-            data-itp_support="true">
-          </div>
+        <div id="g_id_onload"
+          data-client_id="266301269895-9iap0cpovgq5fju28e6q6a87qudv2is0.apps.googleusercontent.com"
+          data-context="signin"
+          data-ux_mode="popup"
+          data-login_uri="https://metricspoker.netlify.app/"
+          data-itp_support="true">
+        </div>
 
-          <div class="g_id_signin"
-            data-type="standard"
-            data-shape="pill"
-            data-theme="outline"
-            data-text="signin_with"
-            data-size="large"
-            data-logo_alignment="center"
-            data-width="256">
-          </div>
+        <div class="g_id_signin"
+          data-type="standard"
+          data-shape="pill"
+          data-theme="filled_black"
+          data-text="signin_with"
+          data-size="large"
+          data-logo_alignment="left"
+          data-width="256">
+        </div>
       </v-row>
     </v-responsive>
   </v-container>
