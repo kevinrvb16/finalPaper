@@ -95,7 +95,6 @@ export default {
   },
   data() {
     return {
-      email: this.$route.query.session,
       successEmail: true
     }
   },
