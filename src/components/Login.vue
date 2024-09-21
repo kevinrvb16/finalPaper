@@ -17,66 +17,25 @@
       </div>
 
       <div class="py-4" />
+      <v-row class="mb-4" justify="center" align="center">
+          <div id="g_id_onload"
+            data-client_id="266301269895-9iap0cpovgq5fju28e6q6a87qudv2is0.apps.googleusercontent.com"
+            data-context="signin"
+            data-ux_mode="popup"
+            data-login_uri="https://metricspoker.netlify.app/"
+            data-itp_support="true">
+          </div>
 
-      <v-row justify="center" align="center">
-        <v-col cols="8">
-          <v-text-field variant="outlined" v-model="email" label="E-mail" @blur="v$.email.$touch()" :error="v$.email.$dirty && v$.email.$invalid" class="pt-3"></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row justify="center" align="center">
-        <v-col cols="2">
-          <v-btn  class="mx-auto" :disabled="v$.$invalid" @click="redirect()">Iniciar</v-btn>
-        </v-col>
+          <div class="g_id_signin"
+            data-type="standard"
+            data-shape="pill"
+            data-theme="outline"
+            data-text="signin_with"
+            data-size="large"
+            data-logo_alignment="center"
+            data-width="256">
+          </div>
       </v-row>
     </v-responsive>
   </v-container>
-  <v-alert
-    text="Preencha o e-mail corretamente"
-    title="E-mail inválido"
-    type="error"
-    icon="$error"
-    closable
-    variant="elevated"
-    v-if="erroEmail"
-  ></v-alert>
 </template>
-
-<script>
-import { useVuelidate } from '@vuelidate/core';
-import { required, email } from '@vuelidate/validators'
-
-export default {
-  setup() {
-    return { v$: useVuelidate() }
-  },
-  data() {
-    return {
-      email: '',
-      errorEmail: false
-    }
-  },
-  validations() {
-    return {
-      email: {
-        required,
-        email
-       }
-    }
-  },
-  methods: {
-    redirect() {
-      this.v$.email.$touch()
-      //redirect to board page
-      if (!this.v$.email.$invalid) {
-
-        this.$router.push({
-          path: '/rules',
-          query: { session: this.email}
-        })
-      } else {
-        this.erroEmail = true;
-      }
-    }
-  },
-}
-</script>
