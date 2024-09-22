@@ -45,6 +45,7 @@
 <script>
 import { supabase } from '../main'
 
+// eslint-disable-next-line no-unused-vars
 async function handleSignInWithGoogle(response) {
   try {
     // send id token returned in response.credential to supabase
@@ -58,17 +59,10 @@ async function handleSignInWithGoogle(response) {
     console.log('Successfully logged in with Google One Tap')
 
     // redirect to protected page
-    window.location.href = '/rules'
+    window.location.href = '/games'
   } catch (error) {
     console.error('Error logging in with Google One Tap', error)
   }
-}
-
-window.onload = function () {
-  google.accounts.id.initialize({
-    client_id: import.meta.env.VITE_CLIENT_ID,
-    callback: handleSignInWithGoogle
-  });
 }
 
 export default {
@@ -79,7 +73,7 @@ export default {
     }
     if (data?.session) {
       console.log(data)
-      this.$router.push('/rules')
+      this.$router.push('/games')
       return
     }
   },
