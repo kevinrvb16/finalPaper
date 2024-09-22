@@ -58,7 +58,7 @@ async function handleSignInWithGoogle(response) {
     console.log('Successfully logged in with Google One Tap')
 
     // redirect to protected page
-    this.$router.push('/rules')
+    window.location.href = '/rules'
   } catch (error) {
     console.error('Error logging in with Google One Tap', error)
   }
