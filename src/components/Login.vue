@@ -50,10 +50,6 @@ window.onload = function () {
     client_id: import.meta.env.VITE_CLIENT_ID,
     callback: handleSignInWithGoogle
   });
-  google.accounts.id.renderButton(
-    document.getElementById("buttonDiv"),
-    { theme: "outline", size: "large" }
-  );
 }
 
 async function handleSignInWithGoogle(response) {
