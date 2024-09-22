@@ -45,13 +45,6 @@
 <script>
 import { supabase } from '../main'
 
-window.onload = function () {
-  google.accounts.id.initialize({
-    client_id: import.meta.env.VITE_CLIENT_ID,
-    callback: handleSignInWithGoogle
-  });
-}
-
 async function handleSignInWithGoogle(response) {
   try {
     // send id token returned in response.credential to supabase
@@ -70,6 +63,14 @@ async function handleSignInWithGoogle(response) {
     console.error('Error logging in with Google One Tap', error)
   }
 }
+
+window.onload = function () {
+  google.accounts.id.initialize({
+    client_id: import.meta.env.VITE_CLIENT_ID,
+    callback: handleSignInWithGoogle
+  });
+}
+
 export default {
   mounted() {
     const { data, error } = supabase.auth.getSession()
