@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height">
     <v-responsive
-      class="align-centerfill-height mx-auto"
+      class="align-center fill-height mx-auto"
       max-width="900"
     >
       <v-img
@@ -9,13 +9,12 @@
         height="150"
         src="@/assets/logo.png"
       />
-
+      
       <div class="text-center">
         <div class="text-body-2 font-weight-light mb-n1">Boas vindas à</div>
-
         <h1 class="text-h2 font-weight-bold">Metrics Poker</h1>
       </div>
-
+      
       <div class="py-4" />
       <v-row class="mb-4" justify="center" align="center">
         <div
@@ -23,11 +22,11 @@
           data-client_id="266301269895-9iap0cpovgq5fju28e6q6a87qudv2is0.apps.googleusercontent.com"
           data-context="signin"
           data-ux_mode="popup"
-          data-callback="handleSignInWithGoogle"
+          data-callback="handleCredentialResponse"
           data-itp_support="true"
           data-use_fedcm_for_prompt="true">
         </div>
-
+        
         <div class="g_id_signin"
           data-type="standard"
           data-shape="pill"
@@ -45,27 +44,27 @@
 <script>
 import { supabase } from '../main'
 
-// eslint-disable-next-line no-unused-vars
-async function handleSignInWithGoogle(response) {
-  try {
-    // send id token returned in response.credential to supabase
-    const { data, error } = await supabase.auth.signInWithIdToken({
-      provider: 'google',
-      token: response.credential,
-    })
-
-    if (error) throw error
-    console.log('Session data: ', data)
-    console.log('Successfully logged in with Google One Tap')
-
-    // redirect to protected page
-    window.location.href = '/games'
-  } catch (error) {
-    console.error('Error logging in with Google One Tap', error)
-  }
-}
-
 export default {
+  methods: {
+    async handleCredentialResponse(response) {
+      try {
+        // send id token returned in response.credential to supabase
+        const { data, error } = await supabase.auth.signInWithIdToken({
+          provider: 'google',
+          token: response.credential,
+        })
+
+        if (error) throw error
+        console.log('Session data: ', data)
+        console.log('Successfully logged in with Google One Tap')
+
+        // redirect to protected page
+        this.$router.push('/games')
+      } catch (error) {
+        console.error('Error logging in with Google One Tap', error)
+      }
+    }
+  },
   mounted() {
     const { data, error } = supabase.auth.getSession()
     if (error) {
@@ -76,7 +75,16 @@ export default {
       this.$router.push('/games')
       return
     }
+
+    // Add the Google Sign-In script dynamically
+    const script = document.createElement('script')
+    script.src = 'https://accounts.google.com/gsi/client'
+    script.async = true
+    script.defer = true
+    document.head.appendChild(script)
+
+    // Expose the handleCredentialResponse method globally
+    window.handleCredentialResponse = this.handleCredentialResponse
   },
 }
 </script>
-
