@@ -45,8 +45,18 @@
 <script>
 import { supabase } from '../main'
 
- // eslint-disable-next-line no-unused-vars
- async function handleSignInWithGoogle(response) {
+window.onload = function () {
+  google.accounts.id.initialize({
+    client_id: import.meta.env.VITE_CLIENT_ID,
+    callback: handleSignInWithGoogle
+  });
+  google.accounts.id.renderButton(
+    document.getElementById("buttonDiv"),
+    { theme: "outline", size: "large" }
+  );
+}
+
+async function handleSignInWithGoogle(response) {
   try {
     // send id token returned in response.credential to supabase
     const { data, error } = await supabase.auth.signInWithIdToken({
