@@ -99,7 +99,7 @@ export default {
   data() {
     return {
       successEmail: true,
-      userMetadata: null
+      userMetadata: supabase.auth.getSession().data?.user?.user_metadata
     }
   },
   mounted() {
@@ -111,7 +111,7 @@ export default {
       console.log(data)
       this.userMetadata = data.user.user_metadata
     }
-    console.log('this.usetMetaData', this.userMetadata)
+    console.log('this.usermetaData', this.userMetadata)
   }
 
 }
