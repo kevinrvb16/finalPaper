@@ -87,15 +87,10 @@
 import { useVuelidate } from '@vuelidate/core';
 import ProblemsDialog from '@/components/ProblemsDialog.vue'
 import HeaderApp from '@/components/HeaderApp.vue'
-
+import { supabase } from '../main'
 export default {
   setup() {
     return { v$: useVuelidate() }
-  },
-  props: {
-    user: {
-      type: Object
-    }
   },
   components: {
     ProblemsDialog,
@@ -104,9 +99,19 @@ export default {
   data() {
     return {
       successEmail: true,
-      userMetadata: this?.props?.user
+      userMetadata: null
     }
   },
+  mounted() {
+    const { data, error } = supabase.auth.getSession()
+    if (error) {
+      console.error('Não está logado ou deu erro,', error)
+    }
+    if (data?.session) {
+      console.log(data)
+      this.userMetadata = data.user.user_metadata
+    }
+  }
 
 }
 </script>
