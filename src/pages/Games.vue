@@ -1,5 +1,6 @@
 <template>
   <v-container class="fill-height">
+    <header-app :user="userMetadata"></header-app>
     <v-responsive
       class="align-centerfill-height mx-auto"
       max-width="1200"
@@ -85,17 +86,25 @@
 <script>
 import { useVuelidate } from '@vuelidate/core';
 import ProblemsDialog from '@/components/ProblemsDialog.vue'
+import HeaderApp from '@/components/HeaderApp.vue'
 
 export default {
   setup() {
     return { v$: useVuelidate() }
   },
+  props: {
+    user: {
+      type: Object
+    }
+  },
   components: {
-    ProblemsDialog
+    ProblemsDialog,
+    HeaderApp
   },
   data() {
     return {
-      successEmail: true
+      successEmail: true,
+      userMetadata: this?.props?.user
     }
   },
 
