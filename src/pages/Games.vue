@@ -111,6 +111,7 @@ export default {
       console.log(data)
       this.userMetadata = data.user.user_metadata
     }
+    console.log('this.usetMetaData', this.userMetadata)
   }
 
 }
