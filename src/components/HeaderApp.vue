@@ -9,7 +9,7 @@
         <template v-slot:append>
             <div v-if="userMetadata?.avatar_url" class="d-flex align-center">
                 {{ userMetadata?.full_name }}
-                <v-avatar :image="userMetadata?.avatar_url" size="64"></v-avatar>
+                <v-avatar class="ml-3" :image="userMetadata?.avatar_url" size="48"></v-avatar>
             </div>
             <v-btn v-else icon="mdi-account"></v-btn>
         </template>
