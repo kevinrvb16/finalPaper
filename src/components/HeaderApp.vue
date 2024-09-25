@@ -9,11 +9,11 @@
         <template v-slot:append>
             <v-menu>
                 <template v-slot:activator="{ props }">
-                    <v-list v-if="!userMetadata?.avatar_url">
+                    <v-list v-bind="props" v-if="!userMetadata?.avatar_url">
                         <v-list-item
                             :title="userMetadata?.full_name"
                             :prepend-avatar="userMetadata?.avatar_url"
-                            v-bind="props"
+                            
                         ></v-list-item>
                     </v-list>
                     <v-btn v-else icon="mdi-account"></v-btn>
