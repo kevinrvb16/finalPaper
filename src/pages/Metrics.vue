@@ -21,7 +21,6 @@
 
 <script>
 import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators'
 import FlipCard from '@/components/FlipCard.vue';
 
 export default {
@@ -33,7 +32,6 @@ export default {
   },
   data() {
     return {
-      email: '',
       selectedMetrics: [],
       metrics: [
         {
@@ -89,10 +87,5 @@ export default {
       })
     }
   },
-  validations() {
-    return {
-      email: { required }
-    }
-  }
 }
 </script>
