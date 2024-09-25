@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height">
-    <header-app :user="userMetadata"></header-app>
+    <header-app></header-app>
     <v-responsive
       class="align-centerfill-height mx-auto"
       max-width="1200"
@@ -87,7 +87,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import ProblemsDialog from '@/components/ProblemsDialog.vue'
 import HeaderApp from '@/components/HeaderApp.vue'
-import { supabase } from '../main'
+
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -99,20 +99,7 @@ export default {
   data() {
     return {
       successEmail: true,
-      userMetadata: supabase.auth.getSession().data?.user?.user_metadata
     }
   },
-  mounted() {
-    const { data, error } = supabase.auth.getSession()
-    if (error) {
-      console.error('Não está logado ou deu erro,', error)
-    }
-    if (data?.session) {
-      console.log(data)
-      this.userMetadata = data.user.user_metadata
-    }
-    console.log('this.usermetaData', this.userMetadata)
-  }
-
 }
 </script>
