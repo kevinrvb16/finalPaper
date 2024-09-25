@@ -33,7 +33,7 @@ export default {
         } */
         if (user) {
             console.log(user)
-            this.userMetadata = user.user_metadata
+            /* this.userMetadata = user.user_metadata */
         }
         console.log('this.usermetaData', this.userMetadata)
     }
