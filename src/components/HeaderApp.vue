@@ -7,11 +7,54 @@
         <v-app-bar-title>Metrics Poker</v-app-bar-title>
 
         <template v-slot:append>
-            <div v-if="userMetadata?.avatar_url" class="d-flex align-center">
-                {{ userMetadata?.full_name }}
-                <v-avatar class="ml-3" :image="userMetadata?.avatar_url" size="48"></v-avatar>
-            </div>
-            <v-btn v-else icon="mdi-account"></v-btn>
+            <v-menu>
+                <template v-slot:activator="{ props }">
+                    <v-list v-if="!userMetadata?.avatar_url" class="d-flex align-center">
+                        <v-list-item
+                            :title="userMetadata?.full_name"
+                            prepend-avatar="userMetadata?.avatar_url"
+                            v-bind="props"
+                        ></v-list-item>
+                    </v-list>
+                    <v-btn v-else icon="mdi-account"></v-btn>
+                </template>
+                <v-list>
+                    <v-list-item
+                        prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
+                        subtitle="john@google.com"
+                        title="John Leider"
+                    >
+                        <template v-slot:append>
+                            <v-btn
+                                icon="mdi-menu-down"
+                                size="small"
+                                variant="text"
+                            ></v-btn>
+                        </template>
+                    </v-list-item>
+                </v-list>
+
+                <v-divider></v-divider>
+
+                <v-list
+                    :lines="false"
+                    density="compact"
+                    nav
+                >
+                    <v-list-item
+                        v-for="(item, i) in items"
+                        :key="i"
+                        :value="item"
+                        color="primary"
+                    >
+                        <template v-slot:prepend>
+                        <v-icon :icon="item.icon"></v-icon>
+                        </template>
+
+                        <v-list-item-title :v-text="item.text"></v-list-item-title>
+                    </v-list-item>
+                </v-list>
+            </v-menu>
         </template>
     </v-app-bar>
 </template>
@@ -22,7 +65,12 @@ export default {
     name: 'HeaderApp',
     data() {
         return  {
-            userMetadata: null
+            userMetadata: null,
+            items: [
+                { text: 'Perfil', icon: 'mdi-account-details' },
+                { text: 'Jogos', icon: 'mdi-view-list' },
+                { text: 'Sair', icon: 'mdi-logout' },
+            ]
         }
     },
     async created() {
