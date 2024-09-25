@@ -9,7 +9,7 @@
         <template v-slot:append>
             <v-menu>
                 <template v-slot:activator="{ props }">
-                    <v-list v-bind="props" v-if="!userMetadata?.avatar_url">
+                    <v-list v-bind="props" v-if="userMetadata?.avatar_url">
                         <v-list-item
                             :title="userMetadata?.full_name"
                             :prepend-avatar="userMetadata?.avatar_url"
@@ -83,7 +83,7 @@ export default {
             console.log(user)
             this.userMetadata = user.user_metadata
         }
-        console.log('this.usermetaData', this.userMetadata)
+        console.log('this.userMetadata', this.userMetadata)
     }
 }
 
