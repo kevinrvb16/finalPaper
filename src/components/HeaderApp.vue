@@ -12,7 +12,7 @@
                     <v-list v-if="!userMetadata?.avatar_url">
                         <v-list-item
                             :title="userMetadata?.full_name"
-                            :prepend-avatar="userMetadata?.avatar_ur"
+                            :prepend-avatar="userMetadata?.avatar_url"
                             v-bind="props"
                         ></v-list-item>
                     </v-list>
@@ -20,7 +20,7 @@
                 </template>
                 <v-list>
                     <v-list-item
-                        :prepend-avatar="userMetadata?.avatar_ur"
+                        :prepend-avatar="userMetadata?.avatar_url"
                         :subtitle="userMetadata?.email"
                         :title="userMetadata?.full_name"
                     >
