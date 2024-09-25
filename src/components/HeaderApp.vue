@@ -9,10 +9,10 @@
         <template v-slot:append>
             <v-menu>
                 <template v-slot:activator="{ props }">
-                    <v-list v-if="!userMetadata?.avatar_url" class="d-flex align-center">
+                    <v-list v-if="!userMetadata?.avatar_url">
                         <v-list-item
                             :title="userMetadata?.full_name"
-                            prepend-avatar="userMetadata?.avatar_url"
+                            :prepend-avatar="userMetadata?.avatar_ur"
                             v-bind="props"
                         ></v-list-item>
                     </v-list>
@@ -20,9 +20,9 @@
                 </template>
                 <v-list>
                     <v-list-item
-                        prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
-                        subtitle="john@google.com"
-                        title="John Leider"
+                        :prepend-avatar="userMetadata?.avatar_ur"
+                        :subtitle="userMetadata?.email"
+                        :title="userMetadata?.full_name"
                     >
                         <template v-slot:append>
                             <v-btn
@@ -48,10 +48,10 @@
                         color="primary"
                     >
                         <template v-slot:prepend>
-                        <v-icon :icon="item.icon"></v-icon>
+                            <v-icon :icon="item.icon"></v-icon>
                         </template>
 
-                        <v-list-item-title :v-text="item.text"></v-list-item-title>
+                        <v-list-item-title>{{ item.text }}</v-list-item-title>
                     </v-list-item>
                 </v-list>
             </v-menu>
