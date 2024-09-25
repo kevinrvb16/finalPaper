@@ -7,23 +7,35 @@
         <v-app-bar-title>Metrics Poker</v-app-bar-title>
 
         <template v-slot:append>
-            <div v-if="user?.avatar_url" class="d-flex align-center">
-                {{ user?.full_name }}
-                <v-avatar :image="user?.avatar_url" size="64"></v-avatar>
+            <div v-if="userMetadata?.avatar_url" class="d-flex align-center">
+                {{ userMetadata?.full_name }}
+                <v-avatar :image="userMetadata?.avatar_url" size="64"></v-avatar>
             </div>
             <v-btn v-else icon="mdi-account"></v-btn>
         </template>
     </v-app-bar>
 </template>
 <script>
+import { supabase } from '../main'
 
 export default {
     name: 'HeaderApp',
-    props: {
-        user: {
-            type: Object
+    data() {
+        return  {
+            userMetadata: null
         }
     },
+    created() {
+        const { data, error } = supabase.auth.getSession()
+        if (error) {
+            console.error('Não está logado ou deu erro,', error)
+        }
+        if (data?.session) {
+            console.log(data)
+            this.userMetadata = data.user.user_metadata
+        }
+        console.log('this.usermetaData', this.userMetadata)
+    }
 }
 
 </script>
