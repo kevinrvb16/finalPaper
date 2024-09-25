@@ -25,14 +25,15 @@ export default {
             userMetadata: null
         }
     },
-    created() {
-        const { data, error } = supabase.auth.getSession()
-        if (error) {
+    async created() {
+        const { data: { user } } = await supabase.auth.getUser()
+
+       /*  if (error) {
             console.error('Não está logado ou deu erro,', error)
-        }
-        if (data?.session) {
-            console.log(data)
-            this.userMetadata = data.user.user_metadata
+        } */
+        if (user) {
+            console.log(user)
+            this.userMetadata = user.user_metadata
         }
         console.log('this.usermetaData', this.userMetadata)
     }
