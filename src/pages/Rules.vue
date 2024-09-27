@@ -4,15 +4,6 @@
       class="align-centerfill-height mx-auto"
       max-width="1200"
     >
-        <v-alert
-          text="Sessão de jogo iniciada com sucesso"
-          title="Sucesso no login"
-          type="success"
-          icon="$success"
-          closable
-          variant="flat"
-          v-if="successEmail"
-        ></v-alert>
       <div class="text-center">
         <h1 class="text-h2 mt-4 font-weight-bold">Regras</h1>
       </div>
@@ -92,12 +83,6 @@ export default {
   },
   components: {
     ProblemsDialog
-  },
-  data() {
-    return {
-      successEmail: true
-    }
-  },
-
+  }
 }
 </script>
