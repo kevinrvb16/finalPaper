@@ -1,5 +1,6 @@
 <template>
   <v-container class="fill-height">
+    <header-app></header-app>
     <v-responsive
       class="align-centerfill-height mx-auto"
       max-width="1200"
@@ -76,13 +77,15 @@
 <script>
 import { useVuelidate } from '@vuelidate/core';
 import ProblemsDialog from '@/components/ProblemsDialog.vue'
+import HeaderApp from '@/components/HeaderApp.vue';
 
 export default {
   setup() {
     return { v$: useVuelidate() }
   },
   components: {
-    ProblemsDialog
+    ProblemsDialog,
+    HeaderApp
   }
 }
 </script>
