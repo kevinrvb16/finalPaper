@@ -51,7 +51,7 @@
                             <v-icon :icon="item.icon"></v-icon>
                         </template>
 
-                        <v-list-item-title>{{ item.text }}</v-list-item-title>
+                        <v-list-item-title @click="redirect(item.link)" >{{ item.text }}</v-list-item-title>
                     </v-list-item>
                 </v-list>
             </v-menu>
@@ -67,23 +67,26 @@ export default {
         return  {
             userMetadata: null,
             items: [
-                { text: 'Perfil', icon: 'mdi-account-details' },
-                { text: 'Jogos', icon: 'mdi-view-list' },
-                { text: 'Sair', icon: 'mdi-logout' },
+                { text: 'Perfil', icon: 'mdi-account-details', link: "/profile" },
+                { text: 'Jogos', icon: 'mdi-view-list', link: "/games" },
+                { text: 'Regras', icon: 'mdi-ruler' , link: "/rules"},
+                { text: 'Sair', icon: 'mdi-logout' , link: "/logout"},
             ]
         }
     },
     async created() {
         const { data: { user } } = await supabase.auth.getUser()
 
-       /*  if (error) {
-            console.error('Não está logado ou deu erro,', error)
-        } */
         if (user) {
             console.log(user)
             this.userMetadata = user.user_metadata
         }
         console.log('this.userMetadata', this.userMetadata)
+    },
+    methods: {
+        redirect(link) {
+            this.$router.push(link)
+        }
     }
 }
 
