@@ -1,5 +1,6 @@
 <template>
   <v-container class="fill-height">
+    <header-app></header-app>
     <v-responsive
       class="align-center mx-auto"
       max-width="1200"
@@ -22,13 +23,15 @@
 <script>
 import { useVuelidate } from '@vuelidate/core';
 import FlipCard from '@/components/FlipCard.vue';
+import HeaderApp from '@/components/HeaderApp.vue'
 
 export default {
   setup() {
     return { v$: useVuelidate() }
   },
   components: {
-    FlipCard
+    FlipCard,
+    HeaderApp
   },
   data() {
     return {
