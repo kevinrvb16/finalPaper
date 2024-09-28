@@ -85,7 +85,7 @@ export default {
   methods: {
     redirect() {
       this.$router.push({
-        path: '/table',
+        path: '/game',
         query: { metricGroup: JSON.stringify(this.selectedMetrics)}
       })
     }
