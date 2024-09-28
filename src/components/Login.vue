@@ -68,7 +68,6 @@ export default {
       console.error('Não está logado ou deu erro de sessão', error)
     }
     if (data?.session) {
-      console.log(data)
       this.$router.push('/games')
       return
     }
