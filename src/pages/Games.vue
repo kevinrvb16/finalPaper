@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height">
-    <header-app @input="user=user"></header-app>
+    <header-app @input="setUser(u)"></header-app>
     <v-responsive
       class="align-centerfill-height mx-auto"
       max-width="1200"
@@ -118,6 +118,9 @@ export default {
         this.loading = false
       }
     },
+    setUser(u) {
+      this.user = u
+    }
   },
 }
 </script>
