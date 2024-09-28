@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height">
-    <header-app @input="setUser(u)"></header-app>
+    <header-app @input="setUser"></header-app>
     <v-responsive
       class="align-centerfill-height mx-auto"
       max-width="1200"
