@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height">
-    <header-app></header-app>
+    <header-app @input="user=user"></header-app>
     <v-responsive
       class="align-centerfill-height mx-auto"
       max-width="1200"
@@ -85,16 +85,16 @@ export default {
           metricas: ['Qualidade', 'Relevância']
         },
       ],
+      user: {}
     }
   },
   methods: {
     async createGameSession() {
       this.loading = true
       try {
-        // Create a new game session in Supabase
         const { data, error } = await supabase
           .from('game_sessions')
-          .insert([{ created_by: supabase.auth.getUser().id }])
+          .insert([{ created_by: this.user?.id }])
           .single()
 
         if (error) throw error
