@@ -96,7 +96,7 @@ export default {
           .from('game_sessions')
           .insert([{ created_by: this.user?.id }])
           .single()
-
+        console.log('data inside createGameSession: ', data)
         if (error) throw error
 
         // Generate a session link
