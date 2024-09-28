@@ -55,10 +55,7 @@ export default {
         })
 
         if (error) throw error
-        console.log('Session data: ', data)
-        console.log('Successfully logged in with Google One Tap')
 
-        // redirect to protected page
         this.$router.push('/games')
       } catch (error) {
         console.error('Error logging in with Google One Tap', error)
