@@ -79,6 +79,7 @@ export default {
 
         if (user) {
             console.log(user)
+            this.$emit(user, 'input')
             this.userMetadata = user.user_metadata
         }
         console.log('this.userMetadata', this.userMetadata)
