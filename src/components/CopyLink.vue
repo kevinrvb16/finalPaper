@@ -45,11 +45,13 @@ export default {
     },
     watch: {
         value() {
+            console.log("text", this.text)
             this.text = this.value
         }
     },
     methods: {
         copyText() {
+            console.log("text", this.text)
         navigator.clipboard.writeText(this.text).then(() => {
             this.copySuccess = true
             this.showSnackbar = true
