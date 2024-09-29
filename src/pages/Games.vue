@@ -82,17 +82,6 @@ export default {
     HeaderApp,
     CopyLink,
   },
-  async mounted() {
-    console.log("this.user",this.user)
-    if (this.user) {
-      const { data: game_sessions } = await supabase
-        .from('game_sessions')
-        .select("*")
-        .eq('created_by', this.user.id)
-        console.log("game_session", game_sessions)
-      this.gamesList = game_sessions;
-    }
-  },
   data() {
     return {
       successEmail: true,
@@ -142,6 +131,18 @@ export default {
     },
     setUser(u) {
       this.user = u
+      this.setList();
+    },
+    async setList() {
+    console.log("this.user",this.user)
+    if (this.user) {
+      const { data: game_sessions } = await supabase
+        .from('game_sessions')
+        .select("*")
+        .eq('created_by', this.user.id)
+        console.log("game_session", game_sessions)
+      this.gamesList = game_sessions;
+    }
     }
   },
 }
