@@ -111,7 +111,7 @@ export default {
 
         // Generate a session link
         this.sessionLink = `${window.location.origin}/game/${data[0].id}`
-
+        console.log(this.sessionLink)
         // Set up real-time subscription
 /*         supabase
           .from(`game_sessions:id=eq.${data.id}`)
