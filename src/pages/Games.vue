@@ -21,7 +21,7 @@
             <v-btn @click="createGameSession" color="primary" :loading="loading" :disabled="!user">
               Criar novo Jogo
             </v-btn>
-            <v-text-field
+            <!-- <v-text-field
             class="mt-2"
               v-if="sessionLink"
               v-model="sessionLink"
@@ -29,9 +29,10 @@
               readonly
               variant="solo-filled"
               hide-details
-            ></v-text-field>
+            ></v-text-field> -->
           </v-card-text>
         </v-card>
+        <copy-link v-if="sessionLink" v-model="sessionLink"></copy-link>
       </div>
       <div class="py-4" />
       <v-table>
@@ -67,13 +68,15 @@
 import { useVuelidate } from '@vuelidate/core';
 import HeaderApp from '@/components/HeaderApp.vue'
 import { supabase } from '@/main';
+import CopyLink from '@/components/CopyLink.vue'
 
 export default {
   setup() {
     return { v$: useVuelidate() }
   },
   components: {
-    HeaderApp
+    HeaderApp,
+    CopyLink,
   },
   data() {
     return {
@@ -86,7 +89,8 @@ export default {
         },
       ],
       user: null,
-      loading: false
+      loading: false,
+      sessionLink: ''
     }
   },
   methods: {
