@@ -43,6 +43,11 @@ export default {
             showSnackbar: false,
         }
     },
+    watch: {
+        value() {
+            this.text = this.value
+        }
+    },
     methods: {
         copyText() {
         navigator.clipboard.writeText(this.text).then(() => {
