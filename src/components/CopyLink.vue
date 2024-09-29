@@ -3,7 +3,7 @@
     <v-row align="center" no-gutters>
       <v-col>
         <v-text-field
-          v-model="text"
+          model-value="text"
           label="Link gerado para copiar"
           readonly
           dense
