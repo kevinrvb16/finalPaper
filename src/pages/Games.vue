@@ -59,7 +59,7 @@
           >
             <td>{{ item.id }}</td>
             <td>{{ item?.problem }}</td>
-            <td>{{ item?.metricas[0] }}, {{ item?.metricas[1] }}</td>
+            <td>{{ item?.metricas }}</td>
             <td>{{ item.created_at }}</td>
           </tr>
         </tbody>
