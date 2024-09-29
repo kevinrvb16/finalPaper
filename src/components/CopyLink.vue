@@ -9,7 +9,7 @@
           hide-details
           variant="solo-filled"
           density="compact"
-        >{{ value }}</v-text-field>
+        >{{ text }}</v-text-field>
       </v-col>
       <v-col cols="auto" class="ml-2">
         <v-btn
@@ -37,8 +37,15 @@ export default {
     },
     data() {
         return {
+            text: '',
             copySuccess: false,
             showSnackbar: false,
+        }
+    },
+    watch: {
+        value(val) {
+            console.log("text", this.value)
+            this.text = val
         }
     },
     methods: {
@@ -48,7 +55,7 @@ export default {
                 this.copySuccess = true
                 this.showSnackbar = true
                 setTimeout(() => {
-                this.copySuccess = false
+                    this.copySuccess = false
                 }, 2000)
             })
         },
