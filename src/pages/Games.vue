@@ -47,6 +47,9 @@
             <th class="text-left">
               Métricas Escolhidas
             </th>
+            <th class="text-left">
+              Data de criação
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -54,9 +57,10 @@
             v-for="item in gamesList"
             :key="item.name"
           >
-            <td>{{ item.name }}</td>
-            <td>{{ item.problem }}</td>
-            <td>{{ item.metricas[0] }}, {{ item.metricas[1] }}</td>
+            <td>{{ item.id }}</td>
+            <td>{{ item?.problem }}</td>
+            <td>{{ item?.metricas[0] }}, {{ item?.metricas[1] }}</td>
+            <td>{{ item.created_at }}</td>
           </tr>
         </tbody>
       </v-table>
