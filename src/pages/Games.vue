@@ -32,7 +32,7 @@
             ></v-text-field> -->
           </v-card-text>
         </v-card>
-        <copy-link v-if="sessionLink" v-model="sessionLink"></copy-link>
+        <copy-link v-if="sessionLink" :value="sessionLink" @input="updateSessionLink"></copy-link>
       </div>
       <div class="py-4" />
       <v-table>
@@ -127,6 +127,9 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    updateSessionLink(newValue) {
+      this.sessionLink = newValue;
     },
     setUser(u) {
       this.user = u

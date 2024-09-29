@@ -4,7 +4,8 @@
       <v-col>
         <v-text-field
           label="Link gerado para copiar"
-          :model-value="value"
+          :value="value"
+          @input="$emit('input', $event.target.value)"
           readonly
           dense
           hide-details
