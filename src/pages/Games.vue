@@ -51,7 +51,7 @@
         </thead>
         <tbody>
           <tr
-            v-for="item in desserts"
+            v-for="item in gamesList"
             :key="item.name"
           >
             <td>{{ item.name }}</td>
@@ -78,16 +78,19 @@ export default {
     HeaderApp,
     CopyLink,
   },
+  async created() {
+    if (this.user) {
+      const { data: game_sessions } = await supabase
+        .from('game_sessions')
+        .select("*")
+        .eq('created_by', this.user.id)
+      this.gamesList = game_sessions;
+    }
+  },
   data() {
     return {
       successEmail: true,
-      desserts: [
-        {
-          name: 'Jogo',
-          problem: 'UX - Usabilidade',
-          metricas: ['Qualidade', 'Relevância']
-        },
-      ],
+      gamesList: [],
       user: null,
       loading: false,
       sessionLink: ''
