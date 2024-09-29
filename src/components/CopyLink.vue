@@ -3,14 +3,13 @@
     <v-row align="center" no-gutters>
       <v-col>
         <v-text-field
-          v-model="text"
           label="Link gerado para copiar"
           readonly
           dense
           hide-details
           variant="solo-filled"
           density="compact"
-        ></v-text-field>
+        >{{ value }}</v-text-field>
       </v-col>
       <v-col cols="auto" class="ml-2">
         <v-btn
@@ -38,15 +37,8 @@ export default {
     },
     data() {
         return {
-            text: '',
             copySuccess: false,
             showSnackbar: false,
-        }
-    },
-    watch: {
-        value() {
-            console.log("text", this.text)
-            this.text = this.value
         }
     },
     methods: {
