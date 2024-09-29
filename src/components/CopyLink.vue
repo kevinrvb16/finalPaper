@@ -38,7 +38,7 @@ export default {
     },
     data() {
         return {
-            text: this.value,
+            text: '',
             copySuccess: false,
             showSnackbar: false,
         }
@@ -52,13 +52,13 @@ export default {
     methods: {
         copyText() {
             console.log("text", this.text)
-        navigator.clipboard.writeText(this.text).then(() => {
-            this.copySuccess = true
-            this.showSnackbar = true
-            setTimeout(() => {
-            this.copySuccess = false
-            }, 2000)
-        })
+            navigator.clipboard.writeText(this.text).then(() => {
+                this.copySuccess = true
+                this.showSnackbar = true
+                setTimeout(() => {
+                this.copySuccess = false
+                }, 2000)
+            })
         },
     },
 }
