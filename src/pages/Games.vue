@@ -82,7 +82,8 @@ export default {
     HeaderApp,
     CopyLink,
   },
-  async created() {
+  async mounted() {
+    console.log("this.user",this.user)
     if (this.user) {
       const { data: game_sessions } = await supabase
         .from('game_sessions')
