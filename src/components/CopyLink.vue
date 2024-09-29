@@ -4,12 +4,13 @@
       <v-col>
         <v-text-field
           label="Link gerado para copiar"
+          :model-value="value"
           readonly
           dense
           hide-details
           variant="solo-filled"
           density="compact"
-        >{{ text }}</v-text-field>
+        ></v-text-field>
       </v-col>
       <v-col cols="auto" class="ml-2">
         <v-btn
@@ -23,42 +24,35 @@
       </v-col>
     </v-row>
     <v-snackbar v-model="showSnackbar" :timeout="2000" color="success">
-        Texto copiado com sucesso!
+      Texto copiado com sucesso!
     </v-snackbar>
   </v-card>
 </template>
 
 <script>
 export default {
-    props: {
-        value: {
-            type: String
-        }
+  props: {
+    value: {
+      type: String,
+      required: true
+    }
+  },
+  data() {
+    return {
+      copySuccess: false,
+      showSnackbar: false,
+    }
+  },
+  methods: {
+    copyText() {
+      navigator.clipboard.writeText(this.value).then(() => {
+        this.copySuccess = true
+        this.showSnackbar = true
+        setTimeout(() => {
+          this.copySuccess = false
+        }, 2000)
+      })
     },
-    data() {
-        return {
-            text: '',
-            copySuccess: false,
-            showSnackbar: false,
-        }
-    },
-    watch: {
-        value(val) {
-            console.log("text", this.value)
-            this.text = val
-        }
-    },
-    methods: {
-        copyText() {
-            console.log("text", this.text)
-            navigator.clipboard.writeText(this.text).then(() => {
-                this.copySuccess = true
-                this.showSnackbar = true
-                setTimeout(() => {
-                    this.copySuccess = false
-                }, 2000)
-            })
-        },
-    },
+  },
 }
 </script>
