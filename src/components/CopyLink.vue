@@ -3,7 +3,6 @@
     <v-row align="center" no-gutters>
       <v-col>
         <v-text-field
-          label="Link gerado para copiar"
           :value="value"
           @input="$emit('input', $event.target.value)"
           readonly
