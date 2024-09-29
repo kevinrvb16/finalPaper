@@ -18,7 +18,7 @@
         <h2 class="text-h3 mt-4 font-weight-bold">Jogos recentes</h2>
         <v-card>
           <v-card-text>
-            <v-btn @click="createGameSession" color="primary" :loading="loading">
+            <v-btn @click="createGameSession" color="primary" :loading="loading" :disabled="!user">
               Criar novo Jogo
             </v-btn>
             <v-text-field
@@ -85,11 +85,17 @@ export default {
           metricas: ['Qualidade', 'Relevância']
         },
       ],
-      user: {}
+      user: null,
+      loading: false
     }
   },
   methods: {
     async createGameSession() {
+      if (!this.user) {
+        console.error('User not logged in');
+        // Show an error message to the user
+        return;
+      }
       this.loading = true
       try {
         const { data, error } = await supabase
