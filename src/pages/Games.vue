@@ -109,13 +109,13 @@ export default {
         this.sessionLink = `${window.location.origin}/game/${data.id}`
 
         // Set up real-time subscription
-        supabase
+/*         supabase
           .from(`game_sessions:id=eq.${data.id}`)
           .on('UPDATE', payload => {
             console.log('Game session updated:', payload)
             // Handle updates here
           })
-          .subscribe()
+          .subscribe() */
 
       } catch (error) {
         console.error('Error creating game session:', error)
