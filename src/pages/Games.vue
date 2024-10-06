@@ -50,7 +50,14 @@
             <td>{{ item?.problem }}</td>
             <td>{{ item?.metricas }}</td>
             <td>{{ formattedDate(item.created_at) }}</td>
-            <td><v-btn @click="copyURL(item.name)" icon="mdi-link-variant"></v-btn> <v-btn icon="mdi-delete-outline"></v-btn></td>
+            <td>
+              <v-tooltip text="copiar link">
+                <template v-slot:activator="{ props }">
+                  <v-btn v-bind="props" @click="copyURL(item.name)" icon="mdi-link-variant"></v-btn>
+                </template>
+              </v-tooltip>
+              <v-btn icon="mdi-delete-outline"></v-btn>
+            </td>
           </tr>
         </tbody>
       </v-table>
