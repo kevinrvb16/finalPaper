@@ -144,6 +144,8 @@ export default {
         .eq('id', id)
       if (error) {
         this.showError = true
+      } else {
+        this.setList()
       }
     },
     updateSessionLink(newValue) {
