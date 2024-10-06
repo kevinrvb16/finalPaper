@@ -46,7 +46,7 @@
             v-for="item in gamesList"
             :key="item.name"
           >
-            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
             <td>{{ item?.problem }}</td>
             <td>{{ item?.metricas }}</td>
             <td>{{ formattedDate(item.created_at) }}</td>
