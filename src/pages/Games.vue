@@ -59,7 +59,7 @@
                   <v-btn v-bind="props" @click="copyURL(item.name)" icon="mdi-link-variant"></v-btn>
                 </template>
               </v-tooltip>
-              <v-btn icon="mdi-delete-outline"></v-btn>
+              <v-btn @click="deleteRow(item.id)" icon="mdi-delete-outline"></v-btn>
             </td>
           </tr>
         </tbody>
@@ -67,6 +67,9 @@
     </v-responsive>
     <v-snackbar v-model="showSnackbar" :timeout="2500" color="success">
       Texto copiado com sucesso!
+    </v-snackbar>
+    <v-snackbar v-model="showError" :timeout="2500" color="error">
+      Desculpe. ocorreu um erro ao tentar deletar o jogo.
     </v-snackbar>
   </v-container>
 </template>
@@ -95,7 +98,8 @@ export default {
       user: null,
       loading: false,
       sessionLink: '',
-      showSnackBar: false
+      showSnackBar: false,
+      showError: false
     }
   },
   methods: {
@@ -131,6 +135,15 @@ export default {
         // Handle error (show message to user, etc.)
       } finally {
         this.loading = false
+      }
+    },
+    async deleteRow(id) {
+      const { error } = await supabase
+        .from('game_sessions')
+        .delete()
+        .eq('id', id)
+      if (error) {
+        this.showError = true
       }
     },
     updateSessionLink(newValue) {
