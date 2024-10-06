@@ -138,6 +138,7 @@ export default {
       }
     },
     async deleteRow(id) {
+      console.log('id delete row:',id)
       const { error } = await supabase
         .from('game_sessions')
         .delete()
