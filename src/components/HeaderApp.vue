@@ -70,7 +70,7 @@ export default {
                 { text: 'Perfil', icon: 'mdi-account-details', link: "/profile" },
                 { text: 'Jogos', icon: 'mdi-view-list', link: "/games" },
                 { text: 'Regras', icon: 'mdi-ruler' , link: "/rules"},
-                { text: 'Sair', icon: 'mdi-logout' , link: "/logout"},
+                { text: 'Sair', icon: 'mdi-logout' , link: "/login"},
             ]
         }
     },
@@ -85,7 +85,11 @@ export default {
         console.log('this.userMetadata', this.userMetadata)
     },
     methods: {
-        redirect(link) {
+        async redirect(link) {
+            if(link === '/login') {
+                const { error } = await supabase.auth.signOut()
+                if (error) throw error
+            }
             this.$router.push(link)
         }
     }
