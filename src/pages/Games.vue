@@ -16,38 +16,29 @@
         ></v-snackbar>
       <div class="text-center d-flex justify-space-between align-center">
         <h2 class="text-h3 mt-4 font-weight-bold">Jogos recentes</h2>
+        <copy-link v-if="sessionLink" :value="sessionLink" @input="updateSessionLink"></copy-link>
         <v-card>
           <v-card-text>
             <v-btn @click="createGameSession" color="primary" :loading="loading" :disabled="!user">
               Criar novo Jogo
             </v-btn>
-            <!-- <v-text-field
-            class="mt-2"
-              v-if="sessionLink"
-              v-model="sessionLink"
-              label="Link gerado"
-              readonly
-              variant="solo-filled"
-              hide-details
-            ></v-text-field> -->
           </v-card-text>
         </v-card>
-        <copy-link v-if="sessionLink" :value="sessionLink" @input="updateSessionLink"></copy-link>
       </div>
       <div class="py-4" />
       <v-table>
         <thead>
           <tr>
-            <th class="text-left">
+            <th id="name" class="text-left">
               Nome do jogo
             </th>
-            <th class="text-left">
+            <th id="problem" class="text-left">
               Dor
             </th>
-            <th class="text-left">
+            <th id="metrics" class="text-left">
               Métricas Escolhidas
             </th>
-            <th class="text-left">
+            <th id="created_at" class="text-left">
               Data de criação
             </th>
           </tr>
