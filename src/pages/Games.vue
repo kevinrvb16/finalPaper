@@ -19,9 +19,7 @@
         <copy-link v-if="sessionLink" :value="sessionLink" @input="updateSessionLink"></copy-link>
         <v-card>
           <v-card-text>
-            <v-btn @click="createGameSession" color="primary" :loading="loading" :disabled="!user">
-              Criar novo Jogo
-            </v-btn>
+            <create-game-modal :loading="loading" @create="createGameSession"></create-game-modal>
           </v-card-text>
         </v-card>
       </div>
@@ -65,6 +63,8 @@ import HeaderApp from '@/components/HeaderApp.vue'
 import { supabase } from '@/main'
 import CopyLink from '@/components/CopyLink.vue'
 import { format, parseISO } from 'date-fns'
+import CreateGameModal from '@/components/CreateGameModal.vue'
+
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -72,6 +72,7 @@ export default {
   components: {
     HeaderApp,
     CopyLink,
+    CreateGameModal
   },
   data() {
     return {
@@ -83,7 +84,8 @@ export default {
     }
   },
   methods: {
-    async createGameSession() {
+    async createGameSession(name) {
+      console.log(name)
       if (!this.user) {
         console.error('User not logged in');
         return;
@@ -92,7 +94,7 @@ export default {
       try {
         const { data, error } = await supabase
           .from('game_sessions')
-          .insert([{ created_by: this.user?.id }])
+          .insert([{ created_by: this.user?.id, name }])
           .select()
         console.log('data inside createGameSession: ', data)
         if (error) throw error
