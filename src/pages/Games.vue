@@ -39,7 +39,10 @@
             <th id="created_at" class="text-left">
               Data de criação
             </th>
-            <th id="links" class="text-left">Ações</th>
+            <th id="links" class="text-left">
+              Ações
+            </th>
+          </tr>
         </thead>
         <tbody>
           <tr
