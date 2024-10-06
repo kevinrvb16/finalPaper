@@ -11,7 +11,7 @@
   <template v-slot:default="{ isActive }">
     <v-card title="Criar jogo:">
       <div class="mx-5">
-        <v-text-field label="Digite o nome do jogo" variant="solo-filled" ></v-text-field>
+        <v-text-field v-model="name" label="Digite o nome do jogo" variant="solo-filled" ></v-text-field>
       </div>
       <v-spacer></v-spacer>
       <v-card-actions>
@@ -43,7 +43,8 @@ export default {
   },
   data() {
     return {
-      problems: []
+      problems: [],
+      name: ''
     }
   },
   validations() {
@@ -53,7 +54,7 @@ export default {
   },
   methods: {
     close(isActive) {
-        this.$emit('create')
+        this.$emit('create', this.name)
       isActive.value = false
     }
   },
