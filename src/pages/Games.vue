@@ -51,7 +51,7 @@
             <td>{{ item.id }}</td>
             <td>{{ item?.problem }}</td>
             <td>{{ item?.metricas }}</td>
-            <td>{{ item.created_at }}</td>
+            <td>{{ formattedDate(item.created_at) }}</td>
           </tr>
         </tbody>
       </v-table>
@@ -60,11 +60,11 @@
 </template>
 
 <script>
-import { useVuelidate } from '@vuelidate/core';
+import { useVuelidate } from '@vuelidate/core'
 import HeaderApp from '@/components/HeaderApp.vue'
-import { supabase } from '@/main';
+import { supabase } from '@/main'
 import CopyLink from '@/components/CopyLink.vue'
-
+import { format, parseISO } from 'date-fns'
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -86,7 +86,6 @@ export default {
     async createGameSession() {
       if (!this.user) {
         console.error('User not logged in');
-        // Show an error message to the user
         return;
       }
       this.loading = true
@@ -125,15 +124,18 @@ export default {
       this.setList();
     },
     async setList() {
-    console.log("this.user",this.user)
-    if (this.user) {
-      const { data: game_sessions } = await supabase
-        .from('game_sessions')
-        .select("*")
-        .eq('created_by', this.user.id)
-        console.log("game_session", game_sessions)
-      this.gamesList = game_sessions;
-    }
+      console.log("this.user",this.user)
+      if (this.user) {
+        const { data: game_sessions } = await supabase
+          .from('game_sessions')
+          .select("*")
+          .eq('created_by', this.user.id)
+          console.log("game_session", game_sessions)
+        this.gamesList = game_sessions;
+      }
+    },
+    formattedDate(created_at) {
+      return format(parseISO(created_at), 'dd/MM/yyyy HH:mm:ss')
     }
   },
 }
