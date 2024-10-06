@@ -23,7 +23,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-snackbar v-model="showSnackbar" :timeout="2000" color="success">
+    <v-snackbar v-model="showSnackbar" :timeout="2500" color="success">
       Texto copiado com sucesso!
     </v-snackbar>
   </v-card>
@@ -50,7 +50,7 @@ export default {
         this.showSnackbar = true
         setTimeout(() => {
           this.copySuccess = false
-        }, 2000)
+        }, 2500)
       })
     },
   },
