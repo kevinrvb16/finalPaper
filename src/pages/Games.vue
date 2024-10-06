@@ -39,7 +39,7 @@
             <th id="created_at" class="text-left">
               Data de criação
             </th>
-          </tr>
+            <th id="links" class="text-left"></tr>
         </thead>
         <tbody>
           <tr
@@ -50,10 +50,14 @@
             <td>{{ item?.problem }}</td>
             <td>{{ item?.metricas }}</td>
             <td>{{ formattedDate(item.created_at) }}</td>
+            <td><v-btn @click="copyURL(item.name)" icon="mdi-link-variant"></v-btn> <v-btn icon="mdi-delete-outline"></v-btn></td>
           </tr>
         </tbody>
       </v-table>
     </v-responsive>
+    <v-snackbar v-model="showSnackbar" :timeout="2500" color="success">
+      Texto copiado com sucesso!
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -80,7 +84,8 @@ export default {
       gamesList: [],
       user: null,
       loading: false,
-      sessionLink: ''
+      sessionLink: '',
+      showSnackBar: false
     }
   },
   methods: {
@@ -138,6 +143,14 @@ export default {
     },
     formattedDate(created_at) {
       return format(parseISO(created_at), 'dd/MM/yyyy HH:mm:ss')
+    },
+    copyURL(id) {
+      navigator.clipboard.writeText(`${window.location.origin}/game/${id}`).then(() => {
+        this.showSnackBar = true
+        setTimeout(() => {
+          this.showSnackBar = false
+        }, 2500)
+      })
     }
   },
 }
