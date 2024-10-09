@@ -12,6 +12,10 @@
     <v-card title="Criar jogo:">
       <div class="mx-5">
         <v-text-field v-model="name" label="Digite o nome do jogo" variant="solo-filled" ></v-text-field>
+        <div class="d-flex">
+          <v-text-field v-model="problemA" label="Digite a dor 1" variant="solo-filled"></v-text-field>
+          <v-text-field v-model="problemB" label="Digite a dor 2" variant="solo-filled"></v-text-field>
+        </div>
       </div>
       <v-spacer></v-spacer>
       <v-card-actions>
@@ -20,7 +24,7 @@
           text="Criar"
           class="mx-auto mb-6"
           color="primary"
-          @click="close(isActive)"
+          @click="save(isActive)"
         ></v-btn>
       </v-card-actions>
     </v-card>
@@ -44,17 +48,24 @@ export default {
   data() {
     return {
       problems: [],
+      problemA: '',
+      problemB: '',
       name: ''
     }
   },
   validations() {
     return {
-      problems: { required }
+      name: { required },
+      problemA: { required },
+      problemB: { required }
     }
   },
   methods: {
-    close(isActive) {
-        this.$emit('create', this.name)
+    save(isActive) {
+        this.$emit('create', {
+          name: this.name,
+          problems: [ this.problemA, this.problemB ]
+        })
       isActive.value = false
     }
   },
