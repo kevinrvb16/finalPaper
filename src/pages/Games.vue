@@ -116,7 +116,7 @@ export default {
         if (error) throw error
 
         // Generate a session link
-        this.sessionLink = `${window.location.origin}/game?id=${data[0].id}`
+        this.sessionLink = `${window.location.origin}/metrics?id=${data[0].id}`
         this.setList()
         // Set up real-time subscription
 /*         supabase

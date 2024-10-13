@@ -1,10 +1,11 @@
 <template>
   <v-container class="fill-height">
-    <header-app></header-app>
     <v-responsive
       class="align-center mx-auto"
       max-width="1200"
+      v-if="game?.status == 'started'"
     >
+      <header-app></header-app>
       <div class="text-center">
         <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
       </div>
@@ -17,10 +18,19 @@
         </v-col>
       </v-row>
     </v-responsive>
+    <v-responsive
+      class="align-center mx-auto"
+      max-width="1200"
+      v-else-if="game?.status == 'not_started'"
+    >
+      <h4>Jogo não iniciado</h4>
+      <p>Aguarde o responsável iniciar, enquanto isso beba água.</p>
+    </v-responsive>
   </v-container>
 </template>
 
 <script>
+import { supabase } from '@/main'
 import { useVuelidate } from '@vuelidate/core';
 import FlipCard from '@/components/FlipCard.vue';
 import HeaderApp from '@/components/HeaderApp.vue'
@@ -36,6 +46,7 @@ export default {
   data() {
     return {
       selectedMetrics: [],
+      game: {},
       metrics: [
         {
           title: "Qualidade do Produto",
@@ -80,6 +91,17 @@ export default {
           backgroundColor: "#6CAF44" // Verde Claro
         }
       ]
+    }
+  },
+  async mounted() {
+    const id = JSON.parse(this.$route.query.id);
+    if (id) {
+      const { data: game_sessions } = await supabase
+        .from('game_sessions')
+        .select("*")
+        .eq('id', id)
+        console.log("game_session", game_sessions)
+      this.game = game_sessions[0];
     }
   },
   methods: {
