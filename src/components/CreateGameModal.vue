@@ -64,7 +64,8 @@ export default {
     save(isActive) {
         this.$emit('create', {
           name: this.name,
-          problems: [ this.problemA, this.problemB ]
+          problemA: this.problemA,
+          problemB: this.problemB
         })
       isActive.value = false
     }
