@@ -50,7 +50,7 @@
             :key="item?.name"
           >
             <td>{{ item?.name }}</td>
-            <td>{{ item?.problemA }}, {{ item?.problemB }}</td>
+            <td>{{ item?.problemA?.description }}, {{ item?.problemB?.description }}</td>
             <td>{{ item?.metricas }}</td>
             <td>{{ formattedDate(item.created_at) }}</td>
             <td>
@@ -114,7 +114,7 @@ export default {
       try {
         const { data, error } = await supabase
           .from('game_sessions')
-          .insert([{ created_by: this.user?.id, name, problemA, problemB }])
+          .insert([{ created_by: this.user?.id, name, problemA: { description: problemA }, problemB: { description: problemB } }])
           .select()
         console.log('data inside createGameSession: ', data)
         if (error) throw error
