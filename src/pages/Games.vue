@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import { useVuelidate } from '@vuelidate/core'
 import HeaderApp from '@/components/HeaderApp.vue'
 import { supabase } from '@/main'
 import CopyLink from '@/components/CopyLink.vue'
@@ -83,9 +82,6 @@ import { format, parseISO } from 'date-fns'
 import CreateGameModal from '@/components/CreateGameModal.vue'
 
 export default {
-  setup() {
-    return { v$: useVuelidate() }
-  },
   components: {
     HeaderApp,
     CopyLink,
