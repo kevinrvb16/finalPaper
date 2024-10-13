@@ -31,7 +31,7 @@
               Nome do jogo
             </th>
             <th id="problem" class="text-left">
-              Dor
+              Dores
             </th>
             <th id="metrics" class="text-left">
               Métricas Escolhidas
@@ -47,10 +47,10 @@
         <tbody>
           <tr
             v-for="item in gamesList"
-            :key="item.name"
+            :key="item?.name"
           >
-            <td>{{ item.name }}</td>
-            <td>{{ item?.problem }}</td>
+            <td>{{ item?.name }}</td>
+            <td>{{ item?.problemA }}, {{ item?.problemB }}</td>
             <td>{{ item?.metricas }}</td>
             <td>{{ formattedDate(item.created_at) }}</td>
             <td>
@@ -104,6 +104,7 @@ export default {
   },
   methods: {
     async createGameSession(obj) {
+      const { name, problemA, problemB } = obj
       console.log(obj)
       if (!this.user) {
         console.error('User not logged in');
@@ -113,7 +114,7 @@ export default {
       try {
         const { data, error } = await supabase
           .from('game_sessions')
-          .insert([{ created_by: this.user?.id, name: obj?.name }])
+          .insert([{ created_by: this.user?.id, name, problemA, problemB }])
           .select()
         console.log('data inside createGameSession: ', data)
         if (error) throw error
