@@ -24,7 +24,6 @@
           text="Criar"
           class="mx-auto mb-6"
           color="primary"
-          :disabled="v$.$validate"
           @click="save(isActive)"
         ></v-btn>
       </v-card-actions>
