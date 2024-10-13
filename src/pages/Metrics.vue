@@ -23,7 +23,7 @@
       max-width="1200"
       v-else-if="game?.status == 'not_started'"
     >
-      <h4>Jogo não iniciado</h4>
+      <h3>Jogo não iniciado</h3>
       <p>Aguarde o responsável iniciar, enquanto isso beba água.</p>
     </v-responsive>
   </v-container>
