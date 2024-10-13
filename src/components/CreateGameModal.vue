@@ -11,10 +11,10 @@
   <template v-slot:default="{ isActive }">
     <v-card title="Criar jogo:">
       <div class="mx-5">
-        <v-text-field v-model="name" label="Digite o nome do jogo" variant="solo-filled" ></v-text-field>
+        <v-text-field :error="v$.name.$error" v-model="name" label="Digite o nome do jogo" variant="solo-filled" ></v-text-field>
         <div class="d-flex">
-          <v-text-field class="mr-3" v-model="problemA" label="Digite a dor 1" variant="solo-filled"></v-text-field>
-          <v-text-field v-model="problemB" label="Digite a dor 2" variant="solo-filled"></v-text-field>
+          <v-text-field :error="v$.problemA.$error" class="mr-3" v-model="problemA" label="Digite a dor 1" variant="solo-filled"></v-text-field>
+          <v-text-field :error="v$.problemB.$error" v-model="problemB" label="Digite a dor 2" variant="solo-filled"></v-text-field>
         </div>
       </div>
       <v-spacer></v-spacer>
