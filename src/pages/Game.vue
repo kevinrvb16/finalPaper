@@ -8,11 +8,11 @@
     <div class="text-center my-3">
       <h1 class="text-h2 font-weight-bold">Metrics Poker</h1>
     </div>
-      <div class="text-center my-3">
-        <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="elevated" color="black" size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
-        <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="flat" color="black" size="" rounded="circle">Facilidade de coleta</v-chip>
-        <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="flat" color="black" size="" rounded="circle">Preferência pessoal</v-chip>
-      </div>
+    <div class="text-center my-3">
+      <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="elevated" color="black" size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
+      <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="flat" color="black" size="" rounded="circle">Facilidade de coleta</v-chip>
+      <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="flat" color="black" size="" rounded="circle">Preferência pessoal</v-chip>
+    </div>
     <div class="bg-table-vertical">
       <v-row justify="center" align="center" class="ml-7 mr-2 bg-table-horizontal">
         <v-tooltip :text="metricsGroup[0].description" max-width="360px">
