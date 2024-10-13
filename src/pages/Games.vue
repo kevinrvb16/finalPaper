@@ -56,7 +56,7 @@
             <td>
               <v-tooltip text="copiar link">
                 <template v-slot:activator="{ props }">
-                  <v-btn v-bind="props" @click="copyURL(item.name)" icon="mdi-link-variant"></v-btn>
+                  <v-btn v-bind="props" @click="(item.name)" icon="mdi-link-variant"></v-btn>
                 </template>
               </v-tooltip>
               <v-btn @click="deleteRow(item.id)" icon="mdi-delete-outline"></v-btn>
@@ -168,7 +168,7 @@ export default {
       return format(parseISO(created_at), 'dd/MM/yyyy HH:mm:ss')
     },
     copyURL(id) {
-      navigator.clipboard.writeText(`${window.location.origin}/game/${id}`).then(() => {
+      navigator.clipboard.writeText(`${window.location.origin}/metrics?id=${id}`).then(() => {
         this.showSnackBar = true
         setTimeout(() => {
           this.showSnackBar = false
