@@ -18,7 +18,7 @@
                     </v-list>
                     <v-btn v-else icon="mdi-account"></v-btn>
                 </template>
-                <v-list>
+                <v-list v-if="userMetadata?.avatar_url">
                     <v-list-item
                         :prepend-avatar="userMetadata?.avatar_url"
                         :subtitle="userMetadata?.email"
