@@ -29,8 +29,8 @@
         <div></div>
       </div>
       <v-responsive
-      class="align-center mx-auto"
-      max-width="1200" v-else-if="noAnonUser">
+      class="align-center fill-height mx-auto"
+        max-width="900" v-else-if="noAnonUser">
         <p>Para jogar:</p>
         <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
         <v-btn
@@ -41,9 +41,8 @@
           @click="createAnonUser"
         ></v-btn>
       </v-responsive>
-      <v-responsive
-      class="align-center mx-auto"
-      max-width="1200" v-else>
+      <v-responsive class="align-center fill-height mx-auto"
+        max-width="900" v-else>
         <header-app></header-app>
         <div class="text-center">
           <h1 class="text-h2 font-weight-bold">Aguarde o dealer iniciar</h1>
