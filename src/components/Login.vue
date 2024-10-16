@@ -55,6 +55,9 @@ export default {
         })
 
         if (error) throw error
+        if(data) {
+          console.log('data inside handleCredential', data)
+        }
 
         this.$router.push('/games')
       } catch (error) {
