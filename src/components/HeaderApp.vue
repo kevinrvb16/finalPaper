@@ -89,6 +89,7 @@ export default {
             if(link === '/') {
                 const { error } = await supabase.auth.signOut()
                 if (error) throw error
+                localStorage.removeItem('logedUserId');
             }
             this.$router.push(link)
         }

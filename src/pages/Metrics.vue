@@ -24,7 +24,28 @@
       v-else-if="game?.status == 'not_started'"
     >
       <h3>Jogo não iniciado</h3>
-      <p>Aguarde o responsável iniciar, enquanto isso beba água.</p>
+      <div v-if="isDealer">
+        <h5>Participantes: </h5>
+        <div></div>
+      </div>
+      <div v-else-if="noAnonUser">
+        <p>Para jogar:</p>
+        <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
+        <v-btn
+          variant="outlined"
+          text="Jogar"
+          class="mx-auto"
+          color="primary"
+          @click="createAnonUser"
+        ></v-btn>
+      </div>
+      <div v-else>
+        <header-app></header-app>
+        <div class="text-center">
+          <h1 class="text-h2 font-weight-bold">Aguarde o dealer iniciar</h1>
+          <p>Enquanto isso beba água.</p>
+        </div>
+      </div>
     </v-responsive>
   </v-container>
 </template>
@@ -47,6 +68,9 @@ export default {
     return {
       selectedMetrics: [],
       game: {},
+      isDealer: false,
+      noAnonUser: true,
+      anonUser: '',
       metrics: [
         {
           title: "Qualidade do Produto",
@@ -102,6 +126,9 @@ export default {
         .eq('id', id)
         console.log("game_session", game_sessions)
       this.game = game_sessions[0];
+      console.log(' this.game.created_by:',  this.game.created_by)
+      console.log(" localStorage.getItem('logedUserId'):",  localStorage.getItem('logedUserId'))
+      this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
     }
   },
   methods: {
@@ -110,6 +137,16 @@ export default {
         path: '/game',
         query: { metricGroup: JSON.stringify(this.selectedMetrics)}
       })
+    },
+    async createAnonUser() {
+      const { data, error } = await supabase.auth.signInAnonymously()
+      if (data) {
+        console.log('data createAnonUser', data)
+        console.log(this.anonUser)
+        this.noAnonUser = false;
+      } else if (error){
+        console.log('error CreateAnonUser', error)
+      }
     }
   },
 }

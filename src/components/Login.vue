@@ -68,6 +68,7 @@ export default {
       console.error('Não está logado ou deu erro de sessão', error)
     }
     if (data?.session) {
+      localStorage.setItem('logedUserId', data.session.user.id)
       this.$router.push('/games')
       return
     }
