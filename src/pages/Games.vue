@@ -160,7 +160,6 @@ export default {
           .from('game_sessions')
           .select("*")
           .eq('created_by', this.user.id)
-          console.log("game_session", game_sessions)
         this.gamesList = game_sessions;
       }
     },
