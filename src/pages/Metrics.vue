@@ -19,36 +19,31 @@
       </v-row>
     </v-responsive>
     <v-responsive
-      class="align-center mx-auto"
-      max-width="1200"
+      class="align-center fill-height mx-auto"
+      max-width="480"
       v-else-if="game?.status == 'not_started'"
     >
-      <h3>Jogo não iniciado</h3>
+      <h2>Jogo não iniciado</h2>
       <div v-if="isDealer">
         <h5>Participantes: </h5>
         <div></div>
       </div>
-      <v-responsive
-      class="align-center fill-height mx-auto"
-        max-width="900" v-else-if="noAnonUser">
-        <p>Para jogar:</p>
+      <div v-else-if="noAnonUser">
         <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
         <v-btn
-          variant="outlined"
           text="Jogar"
           class="mx-auto"
           color="primary"
           @click="createAnonUser"
         ></v-btn>
-      </v-responsive>
-      <v-responsive class="align-center fill-height mx-auto"
-        max-width="900" v-else>
+      </div>
+      <div v-else>
         <header-app></header-app>
         <div class="text-center">
           <h1 class="text-h2 font-weight-bold">Aguarde o dealer iniciar</h1>
           <p>Enquanto isso beba água.</p>
         </div>
-      </v-responsive>
+      </div>
     </v-responsive>
   </v-container>
 </template>
