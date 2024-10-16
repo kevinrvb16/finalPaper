@@ -40,8 +40,7 @@
       <div v-else>
         <header-app></header-app>
         <div class="text-center">
-          <h1 class="text-h2 font-weight-bold">Aguarde o dealer iniciar</h1>
-          <p>Enquanto isso beba água.</p>
+          <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
         </div>
       </div>
     </v-responsive>
