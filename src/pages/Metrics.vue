@@ -122,7 +122,6 @@ export default {
         .from('game_sessions')
         .select("*")
         .eq('id', id)
-        console.log("game_session", game_sessions)
       this.game = game_sessions[0];
       console.log(' this.game.created_by:',  this.game.created_by)
       console.log(" localStorage.getItem('logedUserId'):",  localStorage.getItem('logedUserId'))
