@@ -80,9 +80,9 @@ export default {
         if (user) {
             console.log(user)
             this.$emit('input', user)
+            localStorage.setItem('logedUserId', user?.id)
             this.userMetadata = user.user_metadata
         }
-        console.log('this.userMetadata', this.userMetadata)
     },
     methods: {
         async redirect(link) {
