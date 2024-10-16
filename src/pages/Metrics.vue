@@ -28,7 +28,9 @@
         <h5>Participantes: </h5>
         <div></div>
       </div>
-      <div v-else-if="noAnonUser">
+      <v-responsive
+      class="align-center mx-auto"
+      max-width="1200" v-else-if="noAnonUser">
         <p>Para jogar:</p>
         <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
         <v-btn
@@ -38,14 +40,16 @@
           color="primary"
           @click="createAnonUser"
         ></v-btn>
-      </div>
-      <div v-else>
+      </v-responsive>
+      <v-responsive
+      class="align-center mx-auto"
+      max-width="1200" v-else>
         <header-app></header-app>
         <div class="text-center">
           <h1 class="text-h2 font-weight-bold">Aguarde o dealer iniciar</h1>
           <p>Enquanto isso beba água.</p>
         </div>
-      </div>
+      </v-responsive>
     </v-responsive>
   </v-container>
 </template>
