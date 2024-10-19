@@ -56,7 +56,7 @@
             <td>
               <v-tooltip text="copiar link">
                 <template v-slot:activator="{ props }">
-                  <v-btn v-bind="props" @click="copyURL(item.name)" icon="mdi-link-variant"></v-btn>
+                  <v-btn v-bind="props" @click="copyURL(item.id)" icon="mdi-link-variant"></v-btn>
                 </template>
               </v-tooltip>
               <v-btn @click="deleteRow(item.id)" icon="mdi-delete-outline"></v-btn>
