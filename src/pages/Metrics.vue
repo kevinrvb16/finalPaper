@@ -136,7 +136,7 @@ export default {
       // Set up real-time subscription
       supabase
       .channel('participants')
-      .on('postgres_changes', {event: 'INSERT', schema: 'public', table: 'participants'}, handleInserts)
+      .on('postgres_changes', {event: 'INSERT', schema: 'public', table: 'participants'}, this.handleInserts)
       .subscribe()
     }
   },
