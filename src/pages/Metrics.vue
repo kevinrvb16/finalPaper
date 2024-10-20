@@ -31,10 +31,10 @@
           :value="item"
           color="seccondary"
       >
-          <template v-slot:prepend>
-              <v-img :width="264" :src="'https://robohash.org/'.item"></v-img>
-          </template>
-          <v-list-item-title>{{ item }}</v-list-item-title>
+        <template v-slot:prepend>
+          <v-img :width="264" :src="`https://robohash.org/${item}`"></v-img>
+        </template>
+        <v-list-item-title>{{ item }}</v-list-item-title>
       </v-list-item>
       <div v-if="isDealer">
         <v-btn
