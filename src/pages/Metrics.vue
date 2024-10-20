@@ -148,7 +148,7 @@ export default {
         const participant = await supabase
         .from('participants')
           .insert([
-            { game_sessions: this.id, nickname: this.anonUser }
+            { game_session: this.id, nickname: this.anonUser }
           ])
         .select()
         if (participant?.error){
