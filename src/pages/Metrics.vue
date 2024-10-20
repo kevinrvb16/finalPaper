@@ -61,8 +61,7 @@ export default {
   },
   components: {
     FlipCard,
-    HeaderApp,
-    VueHcaptcha 
+    HeaderApp
   },
   data() {
     return {
