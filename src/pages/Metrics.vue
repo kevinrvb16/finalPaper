@@ -41,9 +41,9 @@
           text="Iniciar jogo"
           class="mx-auto mt-4"
           color="primary"
-          icon="mdi-play"
           @click="changeStatus"
-        ></v-btn>
+        > <v-icon icon="mdi-play" start></v-icon>
+      </v-btn>
       </div>
       <div v-else-if="noAnonUser">
         <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
