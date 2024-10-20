@@ -25,7 +25,17 @@
     >
       <h2>Jogo não iniciado</h2>
       <h5>Participantes: </h5>
-      <div></div>
+      <v-list-item
+          v-for="(item, i) in participants"
+          :key="i"
+          :value="item"
+          color="seccondary"
+      >
+          <template v-slot:prepend>
+              <v-img :src="'https://robohash.org/'.item"></v-img>
+          </template>
+          <v-list-item-title>{{ item }}</v-list-item-title>
+      </v-list-item>
       <div v-if="isDealer">
         <v-btn
           text="Iniciar jogo"
@@ -76,6 +86,7 @@ export default {
       isDealer: false,
       noAnonUser: true,
       anonUser: '',
+      participants: [],
       id: JSON.parse(this?.$route.query.id),
       metrics: [
         {
@@ -173,7 +184,10 @@ export default {
       }
     },
     handleInserts(payload) {
-      console.log('Mudanca recebida', payload)
+      if (!payload.errors) {
+        console.log('Mudanca recebida', payload)
+        this.participants.push(payload?.new?.nickname)
+      }
     }
   },
 }
