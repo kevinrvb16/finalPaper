@@ -135,11 +135,8 @@ export default {
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
       // Set up real-time subscription
       supabase
-      .from(`participants:game_session=eq.${this.id}`)
-      .on('INSERT', payload => {
-        console.log('Participant inserted, payload:', payload)
-        // Handle updates here
-      })
+      .channel('participants')
+      .on('postgres_changes', {event: 'INSERT', schema: 'public', table: 'participants'}, handleInserts)
       .subscribe()
     }
   },
@@ -174,6 +171,9 @@ export default {
           this.noAnonUser = false;
         }
       }
+    },
+    handleInserts(payload) {
+      console.log('Mudanca recebida', payload)
     }
   },
 }
