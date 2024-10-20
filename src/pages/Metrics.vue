@@ -39,7 +39,7 @@
       <div v-if="isDealer">
         <v-btn
           text="Iniciar jogo"
-          class="mx-auto"
+          class="mx-auto mt-4"
           color="primary"
           icon="mdi-play"
           @click="changeStatus"
