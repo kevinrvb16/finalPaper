@@ -118,15 +118,6 @@ export default {
         // Generate a session link
         this.sessionLink = `${window.location.origin}/metrics?id=${data[0].id}`
         this.setList()
-        // Set up real-time subscription
-/*         supabase
-          .from(`game_sessions:id=eq.${data.id}`)
-          .on('UPDATE', payload => {
-            console.log('Game session updated:', payload)
-            // Handle updates here
-          })
-          .subscribe() */
-
       } catch (error) {
         console.error('Error creating game session:', error)
         // Handle error (show message to user, etc.)
