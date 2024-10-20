@@ -32,9 +32,9 @@
           color="seccondary"
       >
         <template v-slot:prepend>
-          <v-img :width="56" :src="`https://robohash.org/${item}`"></v-img>
+          <v-img :width="56" :src="`https://robohash.org/${item.nickname}`"></v-img>
         </template>
-        <v-list-item-title>{{ item }}</v-list-item-title>
+        <v-list-item-title>{{ item.nickname }}</v-list-item-title>
       </v-list-item>
       <div v-if="isDealer">
         <v-btn
@@ -145,6 +145,14 @@ export default {
       console.log(" localStorage.getItem('logedUserId'):",  localStorage.getItem('logedUserId'))
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
       // Set up real-time subscription
+      const participantsInDataBase = await supabase
+        .from('participants')
+        .select("*")
+        .eq('game_session', this.id)
+      console.log('participantsInDataBase', participantsInDataBase)
+      if (!participantsInDataBase.error) {
+        this.participants = participantsInDataBase?.data
+      }
       supabase
       .channel('participants')
       .on('postgres_changes', {event: 'INSERT', schema: 'public', table: 'participants'}, this.handleInserts)
@@ -186,7 +194,7 @@ export default {
     handleInserts(payload) {
       if (!payload.errors) {
         console.log('Mudanca recebida', payload)
-        this.participants.push(payload?.new?.nickname)
+        this.participants.push(payload?.new)
       }
     }
   },
