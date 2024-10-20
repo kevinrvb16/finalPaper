@@ -70,6 +70,7 @@ export default {
       isDealer: false,
       noAnonUser: true,
       anonUser: '',
+      id: JSON.parse(this?.$route.query.id),
       metrics: [
         {
           title: "Qualidade do Produto",
@@ -117,8 +118,7 @@ export default {
     }
   },
   async mounted() {
-    const id = JSON.parse(this.$route.query.id);
-    if (id) {
+    if (this.id) {
       const { data: game_sessions } = await supabase
         .from('game_sessions')
         .select("*")
@@ -138,15 +138,15 @@ export default {
     },
     async createAnonUser() {
       const { data, error } = await supabase.auth.signInAnonymously()
-      if (data) {
+      if (error){
+        console.log('error CreateAnonUser', error)
+      } else if (data) {
         console.log('data createAnonUser', data)
         console.log(this.anonUser)
         const { data: game_sessions } = await supabase
-          .update({ participants })
+          .update({ participants: '' })
+          .eq('id', this.id)
         this.noAnonUser = false;
-      }
-      if (error){
-        console.log('error CreateAnonUser', error)
       }
     }
   },
