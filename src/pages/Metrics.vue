@@ -122,7 +122,7 @@ export default {
       const { data: game_sessions } = await supabase
         .from('game_sessions')
         .select("*")
-        .eq('id', id)
+        .eq('id', this.id)
       this.game = game_sessions[0];
       console.log(' this.game.created_by:',  this.game.created_by)
       console.log(" localStorage.getItem('logedUserId'):",  localStorage.getItem('logedUserId'))
@@ -140,13 +140,25 @@ export default {
       const { data, error } = await supabase.auth.signInAnonymously()
       if (error){
         console.log('error CreateAnonUser', error)
-      } else if (data) {
+        return
+      }
+      if (data) {
         console.log('data createAnonUser', data)
         console.log(this.anonUser)
-        const { data: game_sessions } = await supabase
-          .update({ participants: '' })
-          .eq('id', this.id)
-        this.noAnonUser = false;
+        const participant = await supabase
+        .from('participants')
+          .insert([
+            { game_sessions: this.id, nickname: this.anonUser }
+          ])
+        .select()
+        if (participant?.error){
+          console.log('error participant', error)
+          return
+        }
+        if( participant?.data ) {
+          console.log(participant.data)
+          this.noAnonUser = false;
+        }
       }
     }
   },
