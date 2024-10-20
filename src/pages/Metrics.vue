@@ -32,7 +32,7 @@
           color="seccondary"
       >
         <template v-slot:prepend>
-          <v-img :width="264" :src="`https://robohash.org/${item}`"></v-img>
+          <v-img :width="56" :src="`https://robohash.org/${item}`"></v-img>
         </template>
         <v-list-item-title>{{ item }}</v-list-item-title>
       </v-list-item>
