@@ -140,7 +140,8 @@ export default {
         console.log('data createAnonUser', data)
         console.log(this.anonUser)
         this.noAnonUser = false;
-      } else if (error){
+      }
+      if (error){
         console.log('error CreateAnonUser', error)
       }
     }
