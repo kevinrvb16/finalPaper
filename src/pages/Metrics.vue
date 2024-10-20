@@ -24,9 +24,15 @@
       v-else-if="game?.status == 'not_started'"
     >
       <h2>Jogo não iniciado</h2>
+      <h5>Participantes: </h5>
+      <div></div>
       <div v-if="isDealer">
-        <h5>Participantes: </h5>
-        <div></div>
+        <v-btn
+          text="Iniciar jogo"
+          class="mx-auto"
+          color="primary"
+          @click="changeStatus"
+        ></v-btn>
       </div>
       <div v-else-if="noAnonUser">
         <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
@@ -127,6 +133,14 @@ export default {
       console.log(' this.game.created_by:',  this.game.created_by)
       console.log(" localStorage.getItem('logedUserId'):",  localStorage.getItem('logedUserId'))
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
+      // Set up real-time subscription
+      supabase
+      .from(`participants:game_session=eq.${this.id}`)
+      .on('INSERT', payload => {
+        console.log('Participant inserted, payload:', payload)
+        // Handle updates here
+      })
+      .subscribe()
     }
   },
   methods: {
