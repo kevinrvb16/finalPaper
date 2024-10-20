@@ -41,6 +41,7 @@
           text="Iniciar jogo"
           class="mx-auto"
           color="primary"
+          icon="mdi-play"
           @click="changeStatus"
         ></v-btn>
       </div>
