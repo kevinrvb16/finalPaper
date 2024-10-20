@@ -8,6 +8,7 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@hcaptcha/vue3-hcaptcha": "^1.3.0",
     "@mdi/font": "7.4.47",
     "@supabase/supabase-js": "^2.45.4",
     "@vuelidate/core": "^2.0.3",
