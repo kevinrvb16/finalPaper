@@ -30,6 +30,7 @@
       </div>
       <div v-else-if="noAnonUser">
         <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
+        <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
         <v-btn
           text="Jogar"
           class="mx-auto"
@@ -52,6 +53,7 @@ import { supabase } from '@/main'
 import { useVuelidate } from '@vuelidate/core';
 import FlipCard from '@/components/FlipCard.vue';
 import HeaderApp from '@/components/HeaderApp.vue'
+import VueHcaptcha from '@hcaptcha/vue3-hcaptcha';
 
 export default {
   setup() {
@@ -139,6 +141,8 @@ export default {
       if (data) {
         console.log('data createAnonUser', data)
         console.log(this.anonUser)
+        const { data: game_sessions } = await supabase
+          .update({ participants })
         this.noAnonUser = false;
       }
       if (error){
