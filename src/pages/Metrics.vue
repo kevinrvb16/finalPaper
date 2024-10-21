@@ -198,8 +198,8 @@ export default {
         this.participants.push(payload?.new)
       }
     },
-    changeStatus() {
-      const { data, error } = supabase
+    async changeStatus() {
+      const { data, error } = await supabase
         .from('game_sessions')
         .update({ status: 'started'})
         .eq('id', this.id)
