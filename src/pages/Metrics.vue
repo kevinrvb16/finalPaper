@@ -38,11 +38,12 @@
       </v-list-item>
       <div v-if="isDealer">
         <v-btn
-          text="Iniciar jogo"
           class="mx-auto mt-4"
           color="primary"
           @click="changeStatus"
-        > <v-icon icon="mdi-play" start></v-icon>
+        > 
+          <v-icon icon="mdi-play" start></v-icon>
+          Iniciar jogo
       </v-btn>
       </div>
       <div v-else-if="noAnonUser">
