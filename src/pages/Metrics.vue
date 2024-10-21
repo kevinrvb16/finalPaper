@@ -199,14 +199,14 @@ export default {
       }
     },
     async changeStatus() {
-      const { data, error } = await supabase
+      const resp = await supabase
         .from('game_sessions')
         .update({ status: 'started'})
         .eq('id', this.id)
         .select()
-      if (!error) {
-        console.log('dataa2334 :', data)
-        this.game = data[0]
+      if (!resp.error) {
+        console.log('responseee23 :', resp)
+        this.game = resp.data[0]
         console.log(this.game)
       }
     }
