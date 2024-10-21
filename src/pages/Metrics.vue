@@ -71,7 +71,6 @@ import { supabase } from '@/main'
 import { useVuelidate } from '@vuelidate/core';
 import FlipCard from '@/components/FlipCard.vue';
 import HeaderApp from '@/components/HeaderApp.vue'
-import VueHcaptcha from '@hcaptcha/vue3-hcaptcha';
 
 export default {
   setup() {
@@ -197,6 +196,18 @@ export default {
       if (!payload.errors) {
         console.log('Mudanca recebida', payload)
         this.participants.push(payload?.new)
+      }
+    },
+    changeStatus() {
+      const { data, error } = supabase
+        .from('game_sessions')
+        .update({ status: 'started'})
+        .eq('id', this.id)
+        .select()
+      if (!error) {
+        console.log('dataa2334 :', data)
+        this.game = data[0]
+        console.log(this.game)
       }
     }
   },
