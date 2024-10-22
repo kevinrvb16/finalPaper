@@ -27,26 +27,22 @@
       <h2>Jogo não iniciado</h2>
       <v-list>
         <v-list-item
-            v-for="(item, i) in game.problemA"
-            :key="i"
-            :value="item"
+            :value="game.problemA"
             color="seccondary"
         >
           <template v-slot:prepend>
             <v-icon icon="mdi-play"></v-icon>
           </template>
-          <v-list-item-title>{{ item.description }}</v-list-item-title>
+          <v-list-item-title>{{  game.problemA.description }}</v-list-item-title>
         </v-list-item>
         <v-list-item
-            v-for="(item, i) in game.problemB"
-            :key="i"
-            :value="item"
+            :value="game.problemB"
             color="seccondary"
         >
           <template v-slot:prepend>
             <v-icon icon="mdi-play"></v-icon>
           </template>
-          <v-list-item-title>{{ item.description }}</v-list-item-title>
+          <v-list-item-title>{{  game.problemB.description }}</v-list-item-title>
         </v-list-item>
       </v-list>
       <h5>Participantes: </h5>
