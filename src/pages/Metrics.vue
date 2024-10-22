@@ -21,7 +21,7 @@
     </v-responsive>
     <v-responsive
       class="align-center fill-height mx-auto"
-      max-width="780"
+      max-width="1000"
       v-else-if="game?.status == 'not_started'"
     >
       <div class="d-flex">
