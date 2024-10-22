@@ -36,13 +36,13 @@
               <v-list-item-title>{{ game.problemB.description }}</v-list-item-title>
             </v-list-item>
           </v-list>
-          <div v-if="isDealer">
+          <div  class="align-center fill-height mx-auto" v-if="isDealer">
             <v-btn class="mx-auto mt-4" color="primary" @click="changeStatus">
               <v-icon icon="mdi-play" start></v-icon>
               Iniciar jogo
             </v-btn>
           </div>
-          <div v-else-if="noAnonUser">
+          <div  class="align-center fill-height mx-auto" v-else-if="noAnonUser">
             <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
             <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
             <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
