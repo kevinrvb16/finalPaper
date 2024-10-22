@@ -8,6 +8,7 @@
       <header-app></header-app>
       <div class="text-center">
         <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
+        <h3>Selecione 2 grupos de métricas:</h3>
       </div>
       <v-row justify="end" >
         <v-col class="pb-0" cols="4" v-for="(metricGroup, index) in metrics" :key="index" justify="center" align="center">
