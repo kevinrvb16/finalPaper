@@ -24,7 +24,7 @@
       max-width="1000"
       v-else-if="game?.status == 'not_started'"
     >
-      <div class="d-flex">
+      <div class="d-flex justify-space-between">
         <div class="mr-2">
           <h2>Jogo não iniciado</h2>
           <p>Dores cadastradas pelo Dealer:</p>
@@ -76,7 +76,11 @@
           Iniciar jogo
       </v-btn>
       </div>
-      <div v-else-if="noAnonUser">
+      <v-responsive
+        class="align-center fill-height mx-auto"
+        max-width="480"
+        v-else-if="noAnonUser"
+      >
         <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
         <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
         <v-btn
@@ -85,13 +89,14 @@
           color="primary"
           @click="createAnonUser"
         ></v-btn>
+      </v-responsive>
+    </v-responsive>
+    <div v-else>
+      <header-app></header-app>
+      <div class="text-center">
+        <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
       </div>
-      <div v-else>
-        <header-app></header-app>
-        <div class="text-center">
-          <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
-        </div>
-      </div>
+    </div>
     </v-responsive>
   </v-container>
 </template>
