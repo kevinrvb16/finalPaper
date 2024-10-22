@@ -21,7 +21,7 @@
       <div class="d-flex justify-space-between">
         <div class="mr-2">
           <h2>Jogo não iniciado</h2>
-          <p>Dores cadastradas pelo Dealer:</p>
+          <p class="py-4">Dores cadastradas pelo Dealer:</p>
           <v-list>
             <v-list-item :value="game.problemA" color="seccondary">
               <template v-slot:prepend>
@@ -43,7 +43,7 @@
             </v-btn>
           </div>
           <div  class="align-center fill-height mx-auto" v-else-if="noAnonUser">
-            <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
+            <v-text-field class="mt-4" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
             <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
             <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
           </div>
