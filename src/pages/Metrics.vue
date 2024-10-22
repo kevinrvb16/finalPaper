@@ -36,6 +36,17 @@
               <v-list-item-title>{{ game.problemB.description }}</v-list-item-title>
             </v-list-item>
           </v-list>
+          <div v-if="isDealer">
+            <v-btn class="mx-auto mt-4" color="primary" @click="changeStatus">
+              <v-icon icon="mdi-play" start></v-icon>
+              Iniciar jogo
+            </v-btn>
+          </div>
+          <div v-else-if="noAnonUser">
+            <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
+            <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
+            <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
+          </div>
         </div>
         <div>
           <h4>Participantes: </h4>
@@ -49,17 +60,6 @@
           </v-list>
         </div>
       </div>
-      <div v-if="isDealer">
-        <v-btn class="mx-auto mt-4" color="primary" @click="changeStatus">
-          <v-icon icon="mdi-play" start></v-icon>
-          Iniciar jogo
-        </v-btn>
-      </div>
-      <v-responsive class="align-center fill-height mx-auto" max-width="480" v-else-if="noAnonUser">
-        <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
-        <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
-        <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
-      </v-responsive>
     </v-responsive>
     <div v-else>
       <header-app></header-app>
