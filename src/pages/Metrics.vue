@@ -60,13 +60,13 @@
         <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
         <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
       </v-responsive>
-      <div v-else>
-        <header-app></header-app>
-        <div class="text-center">
-          <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
-        </div>
-      </div>
     </v-responsive>
+    <div v-else>
+      <header-app></header-app>
+      <div class="text-center">
+        <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
+      </div>
+    </div>
   </v-container>
 </template>
 
