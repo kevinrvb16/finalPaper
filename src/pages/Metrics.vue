@@ -31,7 +31,7 @@
             color="seccondary"
         >
           <template v-slot:prepend>
-            <v-icon icon="mdi-play"></v-icon>
+            <v-icon icon="mdi-dots-hexagon"></v-icon>
           </template>
           <v-list-item-title>{{  game.problemA.description }}</v-list-item-title>
         </v-list-item>
@@ -40,7 +40,7 @@
             color="seccondary"
         >
           <template v-slot:prepend>
-            <v-icon icon="mdi-play"></v-icon>
+            <v-icon icon="mdi-dots-hexagon"></v-icon>
           </template>
           <v-list-item-title>{{  game.problemB.description }}</v-list-item-title>
         </v-list-item>
