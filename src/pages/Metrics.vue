@@ -1,63 +1,46 @@
 <template>
   <v-container class="fill-height">
-    <v-responsive
-      class="align-center mx-auto"
-      max-width="1200"
-      v-if="game?.status == 'started'"
-    >
+    <v-responsive class="align-center mx-auto" max-width="1200" v-if="game?.status == 'started'">
       <header-app></header-app>
       <div class="text-center">
         <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
         <h3>Selecione 2 grupos de métricas:</h3>
       </div>
-      <v-row justify="end" >
-        <v-col class="pb-0" cols="4" v-for="(metricGroup, index) in metrics" :key="index" justify="center" align="center">
-            <flip-card @click="selectedMetrics.push(metricGroup)" :title="metricGroup.title" :description="metricGroup.description" :color="metricGroup.backgroundColor"></flip-card>
+      <v-row justify="end">
+        <v-col class="pb-0" cols="4" v-for="(metricGroup, index) in metrics" :key="index" justify="center"
+          align="center">
+          <flip-card @click="selectedMetrics.push(metricGroup)" :title="metricGroup.title"
+            :description="metricGroup.description" :color="metricGroup.backgroundColor"></flip-card>
         </v-col>
         <v-col cols="4" justify="center" align="center" class="my-auto">
           <v-btn append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
         </v-col>
       </v-row>
     </v-responsive>
-    <v-responsive
-      class="align-center fill-height mx-auto"
-      max-width="1000"
-      v-else-if="game?.status == 'not_started'"
-    >
+    <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
       <div class="d-flex justify-space-between">
         <div class="mr-2">
           <h2>Jogo não iniciado</h2>
           <p>Dores cadastradas pelo Dealer:</p>
           <v-list>
-            <v-list-item
-                :value="game.problemA"
-                color="seccondary"
-            >
+            <v-list-item :value="game.problemA" color="seccondary">
               <template v-slot:prepend>
                 <v-icon icon="mdi-dots-hexagon"></v-icon>
               </template>
-              <v-list-item-title>{{  game.problemA.description }}</v-list-item-title>
+              <v-list-item-title>{{ game.problemA.description }}</v-list-item-title>
             </v-list-item>
-            <v-list-item
-                :value="game.problemB"
-                color="seccondary"
-            >
+            <v-list-item :value="game.problemB" color="seccondary">
               <template v-slot:prepend>
                 <v-icon icon="mdi-dots-hexagon"></v-icon>
               </template>
-              <v-list-item-title>{{  game.problemB.description }}</v-list-item-title>
+              <v-list-item-title>{{ game.problemB.description }}</v-list-item-title>
             </v-list-item>
           </v-list>
         </div>
-        <div>     
+        <div>
           <h4>Participantes: </h4>
           <v-list>
-            <v-list-item
-                v-for="(item, i) in participants"
-                :key="i"
-                :value="item"
-                color="seccondary"
-            >
+            <v-list-item v-for="(item, i) in participants" :key="i" :value="item" color="seccondary">
               <template v-slot:prepend>
                 <v-img :width="56" :src="`https://robohash.org/${item.nickname}`"></v-img>
               </template>
@@ -67,36 +50,22 @@
         </div>
       </div>
       <div v-if="isDealer">
-        <v-btn
-          class="mx-auto mt-4"
-          color="primary"
-          @click="changeStatus"
-        > 
+        <v-btn class="mx-auto mt-4" color="primary" @click="changeStatus">
           <v-icon icon="mdi-play" start></v-icon>
           Iniciar jogo
-      </v-btn>
+        </v-btn>
       </div>
-      <v-responsive
-        class="align-center fill-height mx-auto"
-        max-width="480"
-        v-else-if="noAnonUser"
-      >
+      <v-responsive class="align-center fill-height mx-auto" max-width="480" v-else-if="noAnonUser">
         <v-text-field v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
         <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
-        <v-btn
-          text="Jogar"
-          class="mx-auto"
-          color="primary"
-          @click="createAnonUser"
-        ></v-btn>
+        <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
       </v-responsive>
-    </v-responsive>
-    <div v-else>
-      <header-app></header-app>
-      <div class="text-center">
-        <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
+      <div v-else>
+        <header-app></header-app>
+        <div class="text-center">
+          <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
+        </div>
       </div>
-    </div>
     </v-responsive>
   </v-container>
 </template>
@@ -177,7 +146,7 @@ export default {
         .select("*")
         .eq('id', this.id)
       this.game = game_sessions[0];
-      console.log(" localStorage.getItem('logedUserId'):",  localStorage.getItem('logedUserId'))
+      console.log(" localStorage.getItem('logedUserId'):", localStorage.getItem('logedUserId'))
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
       // Set up real-time subscription
       const participantsInDataBase = await supabase
@@ -188,21 +157,21 @@ export default {
         this.participants = participantsInDataBase?.data
       }
       supabase
-      .channel('participants')
-      .on('postgres_changes', {event: 'INSERT', schema: 'public', table: 'participants'}, this.handleInserts)
-      .subscribe()
+        .channel('participants')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
+        .subscribe()
     }
   },
   methods: {
     redirect() {
       this.$router.push({
         path: '/game',
-        query: { metricGroup: JSON.stringify(this.selectedMetrics)}
+        query: { metricGroup: JSON.stringify(this.selectedMetrics) }
       })
     },
     async createAnonUser() {
       const { data, error } = await supabase.auth.signInAnonymously()
-      if (error){
+      if (error) {
         console.log('error CreateAnonUser', error)
         return
       }
@@ -210,16 +179,16 @@ export default {
         console.log('data createAnonUser', data)
         console.log(this.anonUser)
         const participant = await supabase
-        .from('participants')
+          .from('participants')
           .insert([
             { game_session: this.id, nickname: this.anonUser }
           ])
-        .select()
-        if (participant?.error){
+          .select()
+        if (participant?.error) {
           console.log('error participant', error)
           return
         }
-        if( participant?.data ) {
+        if (participant?.data) {
           console.log(participant.data)
           this.noAnonUser = false;
         }
@@ -235,7 +204,7 @@ export default {
       console.log(this.id)
       const resp = await supabase
         .from('game_sessions')
-        .update({ status: 'started'})
+        .update({ status: 'started' })
         .eq('id', this.id)
         .select()
       if (!resp.error) {
