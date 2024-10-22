@@ -48,7 +48,7 @@
             <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
           </div>
         </div>
-        <div v-if="participants">
+        <div v-if="participants && participants.length >0">
           <h4>Participantes: </h4>
           <v-list>
             <v-list-item v-for="(item, i) in participants" :key="i" :value="item" color="seccondary">
