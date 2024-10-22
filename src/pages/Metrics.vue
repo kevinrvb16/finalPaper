@@ -199,6 +199,7 @@ export default {
       }
     },
     async changeStatus() {
+      console.log(this.id)
       const resp = await supabase
         .from('game_sessions')
         .update({ status: 'started'})
