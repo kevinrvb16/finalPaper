@@ -25,40 +25,44 @@
       v-else-if="game?.status == 'not_started'"
     >
       <h2>Jogo não iniciado</h2>
-      <v-list-item
-          v-for="(item, i) in game.problemA"
-          :key="i"
-          :value="item"
-          color="seccondary"
-      >
-        <template v-slot:prepend>
-          <v-icon icon="mdi-play"></v-icon>
-        </template>
-        <v-list-item-title>{{ item.description }}</v-list-item-title>
-      </v-list-item>
-      <v-list-item
-          v-for="(item, i) in game.problemB"
-          :key="i"
-          :value="item"
-          color="seccondary"
-      >
-        <template v-slot:prepend>
-          <v-icon icon="mdi-play"></v-icon>
-        </template>
-        <v-list-item-title>{{ item.description }}</v-list-item-title>
-      </v-list-item>
+      <v-list>
+        <v-list-item
+            v-for="(item, i) in game.problemA"
+            :key="i"
+            :value="item"
+            color="seccondary"
+        >
+          <template v-slot:prepend>
+            <v-icon icon="mdi-play"></v-icon>
+          </template>
+          <v-list-item-title>{{ item.description }}</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+            v-for="(item, i) in game.problemB"
+            :key="i"
+            :value="item"
+            color="seccondary"
+        >
+          <template v-slot:prepend>
+            <v-icon icon="mdi-play"></v-icon>
+          </template>
+          <v-list-item-title>{{ item.description }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
       <h5>Participantes: </h5>
-      <v-list-item
-          v-for="(item, i) in participants"
-          :key="i"
-          :value="item"
-          color="seccondary"
-      >
-        <template v-slot:prepend>
-          <v-img :width="56" :src="`https://robohash.org/${item.nickname}`"></v-img>
-        </template>
-        <v-list-item-title>{{ item.nickname }}</v-list-item-title>
-      </v-list-item>
+      <v-list>
+        <v-list-item
+            v-for="(item, i) in participants"
+            :key="i"
+            :value="item"
+            color="seccondary"
+        >
+          <template v-slot:prepend>
+            <v-img :width="56" :src="`https://robohash.org/${item.nickname}`"></v-img>
+          </template>
+          <v-list-item-title>{{ item.nickname }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
       <div v-if="isDealer">
         <v-btn
           class="mx-auto mt-4"
