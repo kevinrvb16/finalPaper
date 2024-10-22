@@ -21,44 +21,51 @@
     </v-responsive>
     <v-responsive
       class="align-center fill-height mx-auto"
-      max-width="480"
+      max-width="780"
       v-else-if="game?.status == 'not_started'"
     >
-      <h2>Jogo não iniciado</h2>
-      <v-list>
-        <v-list-item
-            :value="game.problemA"
-            color="seccondary"
-        >
-          <template v-slot:prepend>
-            <v-icon icon="mdi-dots-hexagon"></v-icon>
-          </template>
-          <v-list-item-title>{{  game.problemA.description }}</v-list-item-title>
-        </v-list-item>
-        <v-list-item
-            :value="game.problemB"
-            color="seccondary"
-        >
-          <template v-slot:prepend>
-            <v-icon icon="mdi-dots-hexagon"></v-icon>
-          </template>
-          <v-list-item-title>{{  game.problemB.description }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-      <h4>Participantes: </h4>
-      <v-list>
-        <v-list-item
-            v-for="(item, i) in participants"
-            :key="i"
-            :value="item"
-            color="seccondary"
-        >
-          <template v-slot:prepend>
-            <v-img :width="56" :src="`https://robohash.org/${item.nickname}`"></v-img>
-          </template>
-          <v-list-item-title>{{ item.nickname }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
+      <div class="d-flex">
+        <div class="mr-2">
+          <h2>Jogo não iniciado</h2>
+          <p>Dores cadastradas pelo Dealer:</p>
+          <v-list>
+            <v-list-item
+                :value="game.problemA"
+                color="seccondary"
+            >
+              <template v-slot:prepend>
+                <v-icon icon="mdi-dots-hexagon"></v-icon>
+              </template>
+              <v-list-item-title>{{  game.problemA.description }}</v-list-item-title>
+            </v-list-item>
+            <v-list-item
+                :value="game.problemB"
+                color="seccondary"
+            >
+              <template v-slot:prepend>
+                <v-icon icon="mdi-dots-hexagon"></v-icon>
+              </template>
+              <v-list-item-title>{{  game.problemB.description }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </div>
+        <div>     
+          <h4>Participantes: </h4>
+          <v-list>
+            <v-list-item
+                v-for="(item, i) in participants"
+                :key="i"
+                :value="item"
+                color="seccondary"
+            >
+              <template v-slot:prepend>
+                <v-img :width="56" :src="`https://robohash.org/${item.nickname}`"></v-img>
+              </template>
+              <v-list-item-title>{{ item.nickname }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </div>
+      </div>
       <div v-if="isDealer">
         <v-btn
           class="mx-auto mt-4"
