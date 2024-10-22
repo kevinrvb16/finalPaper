@@ -25,6 +25,17 @@
       v-else-if="game?.status == 'not_started'"
     >
       <h2>Jogo não iniciado</h2>
+      <v-list-item
+          v-for="(item, i) in problems"
+          :key="i"
+          :value="item"
+          color="seccondary"
+      >
+        <template v-slot:prepend>
+          <v-icon icon="mdi-play"></v-icon>
+        </template>
+        <v-list-item-title>{{ item.description }}</v-list-item-title>
+      </v-list-item>
       <h5>Participantes: </h5>
       <v-list-item
           v-for="(item, i) in participants"
@@ -89,6 +100,7 @@ export default {
       noAnonUser: true,
       anonUser: '',
       participants: [],
+      problems: [],
       id: JSON.parse(this?.$route.query.id),
       metrics: [
         {
@@ -143,7 +155,6 @@ export default {
         .select("*")
         .eq('id', this.id)
       this.game = game_sessions[0];
-      console.log(' this.game.created_by:',  this.game.created_by)
       console.log(" localStorage.getItem('logedUserId'):",  localStorage.getItem('logedUserId'))
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
       // Set up real-time subscription
