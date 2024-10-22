@@ -45,7 +45,7 @@
           <v-list-item-title>{{  game.problemB.description }}</v-list-item-title>
         </v-list-item>
       </v-list>
-      <h5>Participantes: </h5>
+      <h4>Participantes: </h4>
       <v-list>
         <v-list-item
             v-for="(item, i) in participants"
