@@ -26,6 +26,17 @@
     >
       <h2>Jogo não iniciado</h2>
       <v-list-item
+          v-for="(item, i) in game.problems"
+          :key="i"
+          :value="item"
+          color="seccondary"
+      >
+        <template v-slot:prepend>
+          <v-icon icon="mdi-play"></v-icon>
+        </template>
+        <v-list-item-title>{{ item.description }}</v-list-item-title>
+      </v-list-item>
+      <v-list-item
           v-for="(item, i) in problems"
           :key="i"
           :value="item"
@@ -100,7 +111,6 @@ export default {
       noAnonUser: true,
       anonUser: '',
       participants: [],
-      problems: [],
       id: JSON.parse(this?.$route.query.id),
       metrics: [
         {
