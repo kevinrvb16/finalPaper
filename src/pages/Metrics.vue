@@ -19,7 +19,7 @@
     </v-responsive>
     <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
       <div class="d-flex justify-space-between">
-        <div class="mr-2 mx-auto">
+        <div class="mr-2">
           <h2>Jogo não iniciado</h2>
           <p>Dores cadastradas pelo Dealer:</p>
           <v-list>
