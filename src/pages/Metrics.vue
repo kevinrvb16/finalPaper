@@ -19,7 +19,7 @@
     </v-responsive>
     <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
       <div class="d-flex justify-space-between">
-        <div class="mr-2">
+        <div class="mr-2 mx-auto">
           <h2>Jogo não iniciado</h2>
           <p>Dores cadastradas pelo Dealer:</p>
           <v-list>
@@ -48,7 +48,7 @@
             <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
           </div>
         </div>
-        <div>
+        <div v-if="participants">
           <h4>Participantes: </h4>
           <v-list>
             <v-list-item v-for="(item, i) in participants" :key="i" :value="item" color="seccondary">
