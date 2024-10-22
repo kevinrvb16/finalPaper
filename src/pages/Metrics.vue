@@ -26,7 +26,7 @@
     >
       <h2>Jogo não iniciado</h2>
       <v-list-item
-          v-for="(item, i) in game.problems"
+          v-for="(item, i) in game.problemA"
           :key="i"
           :value="item"
           color="seccondary"
@@ -37,7 +37,7 @@
         <v-list-item-title>{{ item.description }}</v-list-item-title>
       </v-list-item>
       <v-list-item
-          v-for="(item, i) in problems"
+          v-for="(item, i) in game.problemB"
           :key="i"
           :value="item"
           color="seccondary"
