@@ -149,14 +149,7 @@ export default {
       console.log(" localStorage.getItem('logedUserId'):", localStorage.getItem('logedUserId'))
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
       // Set up real-time subscription
-      const participantsInDataBase = await supabase
-        .from('participants')
-        .select("*")
-        .eq('game_session', this.id)
-      console.log('participantsInDataBase', participantsInDataBase)
-      if (!participantsInDataBase.error) {
-        this.participants = participantsInDataBase?.data
-      }
+      this.getParticipants()
       supabase
         .channel('participants')
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
@@ -192,6 +185,7 @@ export default {
         if (participant?.data) {
           console.log(participant.data)
           this.noAnonUser = false;
+          this.getParticipants()
         }
       }
     },
@@ -212,6 +206,15 @@ export default {
         console.log('responseee23 :', resp)
         this.game = resp.data[0]
         console.log(this.game)
+      }
+    },
+    async getParticipants() {
+      const participantsInDataBase = await supabase
+        .from('participants')
+        .select("*")
+        .eq('game_session', this.id)
+      if (!participantsInDataBase.error) {
+        this.participants = participantsInDataBase?.data
       }
     }
   },
