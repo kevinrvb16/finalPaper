@@ -21,7 +21,7 @@
       <div class="d-flex justify-space-between">
         <div class="mr-2">
           <h2>Jogo não iniciado</h2>
-          <p class="py-4">Dores cadastradas pelo Dealer:</p>
+          <p class="py-4 pr-4">Dores cadastradas pelo Dealer:</p>
           <v-list>
             <v-list-item :value="game.problemA" color="seccondary">
               <template v-slot:prepend>
