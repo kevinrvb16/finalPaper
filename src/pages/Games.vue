@@ -59,6 +59,11 @@
                   <v-btn v-bind="props" @click="copyURL(item.id)" icon="mdi-link-variant"></v-btn>
                 </template>
               </v-tooltip>
+              <v-tooltip text="abrir em nova guia">
+                <template v-slot:activator="{ props }">
+                  <v-btn v-bind="props" :href="`${window.location.origin}/metrics?id=${item.id}`" target="_blank" icon="mdi-open-in-new"></v-btn>
+                </template>
+              </v-tooltip>
               <v-btn @click="deleteRow(item.id)" icon="mdi-delete-outline"></v-btn>
             </td>
           </tr>
