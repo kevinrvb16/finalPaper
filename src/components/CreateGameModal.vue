@@ -13,8 +13,12 @@
       <div class="mx-5">
         <v-text-field :error="v$.name.$error" v-model="name" label="Digite o nome do jogo" variant="solo-filled" ></v-text-field>
         <div class="d-flex">
-          <v-text-field :error="v$.problemA.$error" class="mr-3" v-model="problemA" label="Digite a dor 1" variant="solo-filled"></v-text-field>
-          <v-text-field :error="v$.problemB.$error" v-model="problemB" label="Digite a dor 2" variant="solo-filled"></v-text-field>
+          <v-text-field :error="v$.problemA.name.$error" class="mr-3" v-model="problemA.name" label="Digite o nome da dor 1" variant="solo-filled"></v-text-field>
+          <v-textarea :error="v$.problemA.description.$error" v-model="problemA.description" label="Digite a descrição da dor 1" variant="solo-filled"></v-textarea>
+        </div>
+        <div class="d-flex">
+          <v-text-field :error="v$.problemB.name.$error" class="mr-3" v-model="problemB.name" label="Digite o nome da dor 2" variant="solo-filled"></v-text-field>
+          <v-textarea :error="v$.problemB.description.$error" v-model="problemB.description" label="Digite a descrição da dor 2" variant="solo-filled"></v-textarea>
         </div>
       </div>
       <v-spacer></v-spacer>
@@ -48,16 +52,30 @@ export default {
   data() {
     return {
       problems: [],
-      problemA: '',
-      problemB: '',
+      problemA: {},
+      problemB: {},
       name: ''
     }
   },
   validations() {
     return {
       name: { required },
-      problemA: { required },
-      problemB: { required }
+      problemA: { 
+        name: {
+          required
+        },
+        description: {
+          required
+        }
+       },
+      problemB: {
+        name: {
+          required
+        },
+        description: {
+          required
+        }
+      }
     }
   },
   methods: {
