@@ -23,17 +23,19 @@
           <h2>Jogo não iniciado</h2>
           <p class="py-4 pr-4">Dores cadastradas pelo Dealer:</p>
           <v-list>
-            <v-list-item :value="game.problemA" color="seccondary">
+            <v-list-item v-model="game.problemA" color="seccondary">
               <template v-slot:prepend>
                 <v-icon icon="mdi-dots-hexagon"></v-icon>
               </template>
-              <v-list-item-title>{{ game.problemA.description }}</v-list-item-title>
+              <v-list-item-title>{{ game.problemA.name }}</v-list-item-title>
+              <v-list-item-subtitle>{{ game.problemA.description }}</v-list-item-subtitle>
             </v-list-item>
-            <v-list-item :value="game.problemB" color="seccondary">
+            <v-list-item v-model="game.problemB" color="seccondary">
               <template v-slot:prepend>
                 <v-icon icon="mdi-dots-hexagon"></v-icon>
               </template>
-              <v-list-item-title>{{ game.problemB.description }}</v-list-item-title>
+              <v-list-item-title>{{ game.problemB.name }}</v-list-item-title>
+              <v-list-item-subtitle>{{ game.problemB.description }}</v-list-item-subtitle>
             </v-list-item>
           </v-list>
           <div  class="align-center fill-height mx-auto" v-if="isDealer">
