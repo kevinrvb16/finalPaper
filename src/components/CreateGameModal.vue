@@ -13,7 +13,7 @@
       <div class="mx-5">
         <v-text-field :error="v$.name.$error" v-model="name" label="Digite o nome do jogo" variant="solo-filled" ></v-text-field>
         <div class="d-flex">
-          <v-text-field :error="v$.problemA.name.$error" class="mr-3" v-model="problemA.name" label="Digite o nome da dor 1" variant="solo-filled"></v-text-field>
+          <v-text-field density="compact" :error="v$.problemA.name.$error" class="mr-3" v-model="problemA.name" label="Digite o nome da dor 1" variant="solo-filled"></v-text-field>
           <v-textarea max-rows="5" rows="3" :error="v$.problemA.description.$error" v-model="problemA.description" label="Digite a descrição da dor 1" variant="solo-filled"></v-textarea>
         </div>
         <div class="d-flex">
