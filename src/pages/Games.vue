@@ -129,7 +129,7 @@ export default {
       try {
         const { data, error } = await supabase
           .from('game_sessions')
-          .insert([{ created_by: this.user?.id, name, problemA: { description: problemA }, problemB: { description: problemB } }])
+          .insert([{ created_by: this.user?.id, name, problemA, problemB }])
           .select()
         console.log('data inside createGameSession: ', data)
         if (error) throw error
