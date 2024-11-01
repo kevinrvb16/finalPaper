@@ -50,7 +50,21 @@
             :key="item?.name"
           >
             <td>{{ item?.name }}</td>
-            <td>{{ item?.problemA?.description }}, {{ item?.problemB?.description }}</td>
+            <td>
+              <v-tooltip :text="`Descrição: ${item?.problemA?.description}`"> 
+                <template v-slot:activator="{ props }">
+                  <span v-bind="props">
+                    {{ item?.problemA?.name }}
+                  </span>
+                </template>
+              </v-tooltip>, <v-tooltip :text="`Descrição: ${item?.problemB?.description}`">
+                <template v-slot:activator="{ props }">
+                  <span v-bind="props">
+                    {{ item?.problemB?.name }}
+                  </span>
+                </template>
+              </v-tooltip>
+            </td>
             <td>{{ item?.metricas }}</td>
             <td>{{ formattedDate(item.created_at) }}</td>
             <td>
