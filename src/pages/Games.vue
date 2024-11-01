@@ -61,7 +61,7 @@
               </v-tooltip>
               <v-tooltip text="abrir em nova guia">
                 <template v-slot:activator="{ props }">
-                  <v-btn v-bind="props" :href="`${window.location.origin}/metrics?id=${item.id}`" target="_blank" icon="mdi-open-in-new"></v-btn>
+                  <v-btn v-bind="props" :href="getLink()" target="_blank" icon="mdi-open-in-new"></v-btn>
                 </template>
               </v-tooltip>
               <v-btn @click="deleteRow(item.id)" icon="mdi-delete-outline"></v-btn>
@@ -163,12 +163,15 @@ export default {
       return format(parseISO(created_at), 'dd/MM/yyyy HH:mm:ss')
     },
     copyURL(id) {
-      navigator.clipboard.writeText(`${window.location.origin}/metrics?id=${id}`).then(() => {
+      navigator.clipboard.writeText(getLink(id)).then(() => {
         this.showSnackBar = true
         setTimeout(() => {
           this.showSnackBar = false
         }, 2500)
       })
+    },
+    getLink(id) {
+      return `${window.location.origin}/metrics?id=${id}`
     }
   },
 }
