@@ -50,7 +50,7 @@
             :key="item?.name"
           >
             <td>{{ item?.name }}</td>
-            <td class="d-flex justify-space-around">
+            <td>
               <v-tooltip :text="`Descrição: ${item?.problemA?.description}`"> 
                 <template v-slot:activator="{ props }">
                   <span v-bind="props">
