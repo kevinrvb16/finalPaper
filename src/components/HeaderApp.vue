@@ -19,7 +19,7 @@
                     <v-list v-else-if="nickname">
                         <v-list-item
                             :title="nickname"
-                            :prepend-avatar="`https://robohash.org/${item.nickname}`"
+                            :prepend-avatar="`https://robohash.org/${nickname}`"
                         ></v-list-item>
                     </v-list>
                     <v-btn v-else icon="mdi-account"></v-btn>
