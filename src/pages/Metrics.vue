@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height">
     <header-app></header-app>
-    <div  class="align-center fill-height m-auto" v-if="noAnonUser">
+    <div  class="align-center fill-height ma-auto" v-if="noAnonUser">
       <v-text-field class="mt-4" min-width="17vw" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
       <v-btn text=" Jogar " class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
     </div>
