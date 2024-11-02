@@ -16,6 +16,12 @@
                             
                         ></v-list-item>
                     </v-list>
+                    <v-list v-else-if="nickname">
+                        <v-list-item
+                            :title="nickname"
+                            :prepend-avatar="`https://robohash.org/${item.nickname}`"
+                        ></v-list-item>
+                    </v-list>
                     <v-btn v-else icon="mdi-account"></v-btn>
                 </template>
                 <v-list v-if="userMetadata?.avatar_url">
@@ -72,6 +78,11 @@ export default {
                 { text: 'Regras', icon: 'mdi-ruler' , link: "/rules"},
                 { text: 'Sair', icon: 'mdi-logout' , link: "/"},
             ]
+        }
+    },
+    props: {
+        nickname: {
+            default: ''
         }
     },
     async created() {

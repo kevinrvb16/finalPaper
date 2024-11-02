@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height">
-    <header-app></header-app>
+    <header-app :nickname="anonUser"></header-app>
     <div  class="align-center fill-height ma-auto" v-if="noAnonUser">
       <v-text-field class="mt-4" min-width="17vw" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
       <v-btn text=" Jogar " class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
@@ -169,9 +169,10 @@ export default {
       this.game = game_sessions[0];
       console.log(" localStorage.getItem('logedUserId'):", localStorage.getItem('logedUserId'))
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
-      const anonUserExist = localStorage.getItem('anonUser')
-      if(this.isDealer || (anonUserExist && anonUserExist['game_session'] == this.id)) {
+      const anonUserExist = localStorage.getItem("anonUser")
+      if(this.isDealer || (anonUserExist && anonUserExist.split(',')[0] == this.id)) {
         this.noAnonUser = false;
+        this.anonUser = anonUserExist.split(',')[1]
       }
       // Set up real-time subscription
       this.getParticipants()
@@ -217,7 +218,7 @@ export default {
           return
         }
         if (participant?.data) {
-          localStorage.setItem('anonUser', { game_session: this.id, nickname: this.anonUser })
+          localStorage.setItem("anonUser", `${this.id},${this.anonUser}`)
           console.log(participant.data)
           this.noAnonUser = false;
         }
