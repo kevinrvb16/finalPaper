@@ -17,7 +17,7 @@
           <v-text-field density="compact" :error="v$.problemB.name.$errors" v-model="v$.problemB.name.$model" label="Digite o nome da dor 2" variant="solo-filled"></v-text-field>
         </div>
         <div class="d-flex">
-          <v-textarea max-rows="5" rows="3" :error="v$.problemA.description.$errors" class="mr-3" v-model="problemA.description" label="Digite a descrição da dor 1" variant="solo-filled"></v-textarea>
+          <v-textarea max-rows="5" rows="3" :error="v$.problemA.description.$errors" class="mr-3" v-model="v$.problemA.description.$model" label="Digite a descrição da dor 1" variant="solo-filled"></v-textarea>
           <v-textarea max-rows="5" rows="3" :error="v$.problemB.description.$errors" v-model="v$.problemB.description.$model" label="Digite a descrição da dor 2" variant="solo-filled"></v-textarea>
         </div>
       </div>
