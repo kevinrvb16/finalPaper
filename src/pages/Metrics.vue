@@ -1,7 +1,12 @@
 <template>
   <v-container class="fill-height">
     <header-app></header-app>
-    <v-responsive class="align-center mx-auto" max-width="1200" v-if="game?.status == 'started'">
+    <div  class="align-center fill-height mx-auto" v-if="noAnonUser">
+      <v-text-field class="mt-4" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
+      <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
+      <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
+    </div>
+    <v-responsive class="align-center mx-auto" max-width="1200" v-else-if="game?.status == 'started'">
       <div class="text-center">
         <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
         <h3>Selecione 2 grupos de métricas:</h3>
@@ -41,11 +46,6 @@
               <v-icon icon="mdi-play" start></v-icon>
               Iniciar jogo
             </v-btn>
-          </div>
-          <div  class="align-center fill-height mx-auto" v-else-if="noAnonUser">
-            <v-text-field class="mt-4" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
-            <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
-            <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
           </div>
           <div  class="align-center fill-height mx-auto" v-else>
             <p class="py-4 pr-4">Dores cadastradas pelo Dealer:</p>
@@ -169,6 +169,10 @@ export default {
       this.game = game_sessions[0];
       console.log(" localStorage.getItem('logedUserId'):", localStorage.getItem('logedUserId'))
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
+      const anonUserExist = localStorage.getItem('anonUser')
+      if(this.isDealer || (anonUserExist && anonUserExist['game_session'] == this.id)) {
+        this.noAnonUser = false;
+      }
       // Set up real-time subscription
       this.getParticipants()
       supabase
@@ -207,6 +211,7 @@ export default {
           return
         }
         if (participant?.data) {
+          localStorage.setItem('anonUser', { game_session: this.id, nickname: this.anonUser })
           console.log(participant.data)
           this.noAnonUser = false;
           this.getParticipants()
