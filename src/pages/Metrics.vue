@@ -177,12 +177,10 @@ export default {
         .subscribe()
     }
   },
-  computed: {
+  methods: {
     hasParticipants() {
       return this.participants?.length > 0
-    }
-  },
-  methods: {
+    },
     redirect() {
       this.$router.push({
         path: '/game',
