@@ -84,7 +84,7 @@ export default {
       const isFormOk = await this.v$.$validate()
       console.log("this.$v", this.$v)
       console.log('isFormOk', isFormOk)
-      if (isFormOk) {
+      if (!isFormOk) {
         return 
       }
       this.$emit('create', {
