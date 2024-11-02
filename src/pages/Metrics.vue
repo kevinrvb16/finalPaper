@@ -21,23 +21,22 @@
       <div class="d-flex justify-space-between">
         <div class="mr-2">
           <h2>Jogo não iniciado</h2>
-          <p class="py-4 pr-4">Dores cadastradas pelo Dealer:</p>
-          <p>Selecione por qual problema iniciar</p>
-          <v-list>
-            <v-radio-group v-model="v$.problem.$model">
-              <v-tooltip :text="game.problemA.description">
-                <template v-slot:activator="{ props }">
-                  <v-radio v-bind="props" :label="game.problemA.name" :value="game.problemA"></v-radio>
-                </template>
-              </v-tooltip>
-              <v-tooltip :text="game.problemB.description">
-                <template v-slot:activator="{ props }">
-                  <v-radio v-bind="props" :label="game.problemB.name" :value="game.problemB"></v-radio>
-                </template>
-              </v-tooltip>
-            </v-radio-group>
-          </v-list>
           <div  class="align-center fill-height mx-auto" v-if="isDealer">
+            <p>Selecione por qual problema iniciar</p>
+            <v-list>
+              <v-radio-group v-model="v$.problem.$model">
+                <v-tooltip :text="game.problemA.description">
+                  <template v-slot:activator="{ props }">
+                    <v-radio v-bind="props" :label="game.problemA.name" :value="game.problemA"></v-radio>
+                  </template>
+                </v-tooltip>
+                <v-tooltip :text="game.problemB.description">
+                  <template v-slot:activator="{ props }">
+                    <v-radio v-bind="props" :label="game.problemB.name" :value="game.problemB"></v-radio>
+                  </template>
+                </v-tooltip>
+              </v-radio-group>
+            </v-list>
             <v-btn :disabled="v$.$invalid" class="mx-auto mt-4" color="primary" @click="changeStatus">
               <v-icon icon="mdi-play" start></v-icon>
               Iniciar jogo
@@ -47,6 +46,25 @@
             <v-text-field class="mt-4" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
             <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
             <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
+          </div>
+          <div  class="align-center fill-height mx-auto" v-else>
+            <p class="py-4 pr-4">Dores cadastradas pelo Dealer:</p>
+            <v-list>
+              <v-list-item v-model="game.problemA" color="seccondary">
+                <template v-slot:prepend>
+                  <v-icon icon="mdi-dots-hexagon"></v-icon>
+                </template>
+                <v-list-item-title>{{ game.problemA.name }}</v-list-item-title>
+                <v-list-item-subtitle>{{ game.problemA.description }}</v-list-item-subtitle>
+              </v-list-item>
+              <v-list-item v-model="game.problemB" color="seccondary">
+                <template v-slot:prepend>
+                  <v-icon icon="mdi-dots-hexagon"></v-icon>
+                </template>
+                <v-list-item-title>{{ game.problemB.name }}</v-list-item-title>
+                <v-list-item-subtitle>{{ game.problemB.description }}</v-list-item-subtitle>
+              </v-list-item>
+            </v-list>
           </div>
         </div>
         <div v-if="participants && participants.length >0">
