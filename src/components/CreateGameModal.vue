@@ -29,7 +29,7 @@
           class="mx-auto mb-6"
           color="primary"
           @click="save(isActive)"
-          :disabled="!v$.$validate()"
+          :disabled="v$.$invalid"
         ></v-btn>
       </v-card-actions>
     </v-card>
