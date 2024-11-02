@@ -1,10 +1,9 @@
 <template>
   <v-container class="fill-height">
     <header-app></header-app>
-    <div  class="align-center fill-height mx-auto" v-if="noAnonUser">
-      <v-text-field class="mt-4" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
-      <vue-hcaptcha sitekey="f74c305c-58c0-4efc-be44-fd64ab2ee01a"></vue-hcaptcha>
-      <v-btn text="Jogar" class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
+    <div  class="align-center fill-height m-auto" v-if="noAnonUser">
+      <v-text-field class="mt-4" min-width="17vw" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
+      <v-btn text=" Jogar " class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
     </div>
     <v-responsive class="align-center mx-auto" max-width="1200" v-else-if="game?.status == 'started'">
       <div class="text-center">
