@@ -213,7 +213,6 @@ export default {
           localStorage.setItem('anonUser', { game_session: this.id, nickname: this.anonUser })
           console.log(participant.data)
           this.noAnonUser = false;
-          this.getParticipants()
         }
       }
     },
