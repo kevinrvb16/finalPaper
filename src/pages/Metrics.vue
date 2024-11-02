@@ -19,6 +19,7 @@
         <v-col cols="4" justify="center" align="center" class="my-auto">
           <v-btn append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
         </v-col>
+        <v-btn append-icon="mdi-chevron-double-left" @click="changeStatus('not_started')">Voltar para Jogo não iniciado</v-btn>
       </v-row>
     </v-responsive>
     <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
@@ -41,7 +42,7 @@
                 </v-tooltip>
               </v-radio-group>
             </v-list>
-            <v-btn :disabled="v$.$invalid" class="mx-auto mt-4" color="primary" @click="changeStatus">
+            <v-btn :disabled="v$.$invalid" class="mx-auto mt-4" color="primary" @click="changeStatus('started')">
               <v-icon icon="mdi-play" start></v-icon>
               Iniciar jogo
             </v-btn>
@@ -222,11 +223,11 @@ export default {
         this.participants.push(payload?.new)
       }
     },
-    async changeStatus() {
+    async changeStatus(status) {
       console.log(this.id)
       const resp = await supabase
         .from('game_sessions')
-        .update({ status: 'started' })
+        .update({ status })
         .eq('id', this.id)
         .select()
       if (!resp.error) {
