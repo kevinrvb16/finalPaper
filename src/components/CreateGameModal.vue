@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     save(isActive) {
-      console.log(this.$v)
+      console.log($v)
       if (this.v$.$invalid) {
         return 
       }
