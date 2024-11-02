@@ -181,7 +181,7 @@ export default {
       return format(parseISO(created_at), 'dd/MM/yyyy HH:mm:ss')
     },
     copyURL(id) {
-      navigator.clipboard.writeText(getLink(id)).then(() => {
+      navigator.clipboard.writeText(this.getLink(id)).then(() => {
         this.showSnackBar = true
         setTimeout(() => {
           this.showSnackBar = false
