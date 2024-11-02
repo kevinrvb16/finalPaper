@@ -80,9 +80,11 @@ export default {
     }
   },
   methods: {
-    save(isActive) {
-      console.log($v)
-      if (this.v$.$invalid) {
+    async save(isActive) {
+      const isFormOk = await this.v$.$validate()
+      console.log("this.$v", this.$v)
+      console.log('isFormOk', isFormOk)
+      if (isFormOk) {
         return 
       }
       this.$emit('create', {
