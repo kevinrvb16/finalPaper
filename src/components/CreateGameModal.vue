@@ -81,11 +81,15 @@ export default {
   },
   methods: {
     save(isActive) {
-        this.$emit('create', {
-          name: this.name,
-          problemA: this.problemA,
-          problemB: this.problemB
-        })
+      console.log(this.$v)
+      if (this.v$.$invalid) {
+        return 
+      }
+      this.$emit('create', {
+        name: this.name,
+        problemA: this.problemA,
+        problemB: this.problemB
+      })
       isActive.value = false
     }
   },
