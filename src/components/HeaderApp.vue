@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar class="px-4" color="success" :elevation="2">
+    <v-app-bar class="px-4" color="purple-darken-3" :elevation="2">
         <template slot:prepend>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
         </template>
