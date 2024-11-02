@@ -78,7 +78,11 @@
                   <v-btn v-bind="props" :href="getLink(item.id)" target="_blank" icon="mdi-open-in-new"></v-btn>
                 </template>
               </v-tooltip>
-              <v-btn @click="deleteRow(item.id)" icon="mdi-delete-outline"></v-btn>
+              <v-tooltip text="Excluir jogo!">
+                <template v-slot:activator="{ props }">
+                  <v-btn v-bind="props" @click="deleteRow(item.id)" icon="mdi-delete-outline"></v-btn>
+                </template>
+              </v-tooltip>
             </td>
           </tr>
         </tbody>
