@@ -60,21 +60,21 @@ export default {
   },
   validations() {
     return {
-      name: { required },
+      name: { required, $autoDirty: true },
       problemA: { 
         name: {
-          required
+          required, $autoDirty: true
         },
         description: {
-          required
+          required, $autoDirty: true
         }
        },
       problemB: {
         name: {
-          required
+          required, $autoDirty: true
         },
         description: {
-          required
+          required, $autoDirty: true
         }
       }
     }
