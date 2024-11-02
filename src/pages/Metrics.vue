@@ -176,9 +176,15 @@ export default {
       // Set up real-time subscription
       this.getParticipants()
       supabase
-        .channel('participants')
+        .channel(`participants${this.id}`)
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
         .subscribe()
+      if (!this.isDealer) {
+        supabase
+          .channel(`game_sessions${this.id}`)
+          .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'game_sessions' }, this.handleUpdate)
+          .subscribe()
+      }
     }
   },
   methods: {
@@ -216,6 +222,9 @@ export default {
           this.noAnonUser = false;
         }
       }
+    },
+    handleUpdate(payload) {
+      console.log(payload)
     },
     handleInserts(payload) {
       if (!payload.errors) {
