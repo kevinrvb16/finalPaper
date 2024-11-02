@@ -94,6 +94,7 @@ import { supabase } from '@/main'
 import { useVuelidate } from '@vuelidate/core';
 import FlipCard from '@/components/FlipCard.vue';
 import HeaderApp from '@/components/HeaderApp.vue'
+import { required } from '@vuelidate/validators'
 
 export default {
   setup() {
