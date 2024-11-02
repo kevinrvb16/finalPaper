@@ -225,7 +225,7 @@ export default {
       }
     },
     handleUpdate(payload) {
-      console.log(payload)
+      this.status = payload?.new?.status
     },
     handleInserts(payload) {
       if (!payload.errors) {
