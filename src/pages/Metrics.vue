@@ -22,24 +22,23 @@
         <div class="mr-2">
           <h2>Jogo não iniciado</h2>
           <p class="py-4 pr-4">Dores cadastradas pelo Dealer:</p>
+          <p>Selecione por qual problema iniciar</p>
           <v-list>
-            <v-list-item v-model="game.problemA" color="seccondary">
-              <template v-slot:prepend>
-                <v-icon icon="mdi-dots-hexagon"></v-icon>
-              </template>
-              <v-list-item-title>{{ game.problemA.name }}</v-list-item-title>
-              <v-list-item-subtitle>{{ game.problemA.description }}</v-list-item-subtitle>
-            </v-list-item>
-            <v-list-item v-model="game.problemB" color="seccondary">
-              <template v-slot:prepend>
-                <v-icon icon="mdi-dots-hexagon"></v-icon>
-              </template>
-              <v-list-item-title>{{ game.problemB.name }}</v-list-item-title>
-              <v-list-item-subtitle>{{ game.problemB.description }}</v-list-item-subtitle>
-            </v-list-item>
+            <v-radio-group v-model="v$.problem.$model">
+              <v-tooltip :text="game.problemA.description">
+                <template v-slot:activator="{ props }">
+                  <v-radio v-bind="props" :label="game.problemA.name" :value="game.problemA"></v-radio>
+                </template>
+              </v-tooltip>
+              <v-tooltip :text="game.problemB.description">
+                <template v-slot:activator="{ props }">
+                  <v-radio v-bind="props" :label="game.problemB.name" :value="game.problemB"></v-radio>
+                </template>
+              </v-tooltip>
+            </v-radio-group>
           </v-list>
           <div  class="align-center fill-height mx-auto" v-if="isDealer">
-            <v-btn class="mx-auto mt-4" color="primary" @click="changeStatus">
+            <v-btn :disabled="v$.$invalid" class="mx-auto mt-4" color="primary" @click="changeStatus">
               <v-icon icon="mdi-play" start></v-icon>
               Iniciar jogo
             </v-btn>
@@ -94,6 +93,7 @@ export default {
       noAnonUser: true,
       anonUser: '',
       participants: [],
+      problem: null,
       id: JSON.parse(this?.$route.query.id),
       metrics: [
         {
@@ -218,7 +218,12 @@ export default {
       if (!participantsInDataBase.error) {
         this.participants = participantsInDataBase?.data
       }
-    }
+    },
   },
+  validations: {
+    problem: {
+      required
+    }
+  }
 }
 </script>
