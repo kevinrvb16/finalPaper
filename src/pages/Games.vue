@@ -67,7 +67,7 @@
             </td>
             <td>{{ item?.metricas }}</td>
             <td>{{ formattedDate(item.created_at) }}</td>
-            <td>
+            <td class="d-flex justify-space-around">
               <v-tooltip text="copiar link">
                 <template v-slot:activator="{ props }">
                   <v-btn v-bind="props" @click="copyURL(item.id)" icon="mdi-link-variant"></v-btn>
