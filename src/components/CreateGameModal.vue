@@ -29,6 +29,7 @@
           class="mx-auto mb-6"
           color="primary"
           @click="save(isActive)"
+          :disabled="v$.problemA.$error"
         ></v-btn>
       </v-card-actions>
     </v-card>
