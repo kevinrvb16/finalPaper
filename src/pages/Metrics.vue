@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height">
+    <header-app></header-app>
     <v-responsive class="align-center mx-auto" max-width="1200" v-if="game?.status == 'started'">
-      <header-app></header-app>
       <div class="text-center">
         <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
         <h3>Selecione 2 grupos de métricas:</h3>
