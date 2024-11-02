@@ -18,11 +18,11 @@
       </v-row>
     </v-responsive>
     <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
-      <div class="d-flex justify-space-between">
+      <div :class="`d-flex ${hasParticipants ? 'justify-space-between' : 'justify-space-center'}`">
         <div class="mr-2">
           <h2>Jogo não iniciado</h2>
           <div  class="align-center fill-height mx-auto" v-if="isDealer">
-            <p>Selecione por qual problema iniciar</p>
+            <p class="my-3">Selecione por qual problema iniciar</p>
             <v-list>
               <v-radio-group v-model="v$.problem.$model">
                 <v-tooltip :text="game.problemA.description">
@@ -67,7 +67,7 @@
             </v-list>
           </div>
         </div>
-        <div v-if="participants && participants.length >0">
+        <div v-if="hasParticipants()">
           <h4>Participantes: </h4>
           <v-list>
             <v-list-item v-for="(item, i) in participants" :key="i" :value="item" color="seccondary">
@@ -175,6 +175,11 @@ export default {
         .channel('participants')
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
         .subscribe()
+    }
+  },
+  computed: {
+    hasParticipants() {
+      return this.participants?.length > 0
     }
   },
   methods: {
