@@ -135,7 +135,9 @@ export default {
         this.anonUser = anonUserExist?.split(',')[1]
       }
       // Set up real-time subscription
-      this.getParticipants()
+      if(!this.participants) {
+        this.getParticipants()
+      }
       supabase
         .channel(`participants${this.id}`)
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
@@ -211,7 +213,7 @@ export default {
         .from('participants')
         .select("*")
         .eq('game_session', this.id)
-      console.log("erro getParticipants", participantsInDataBase)
+      console.log(" getParticipants", participantsInDataBase)
       if (!participantsInDataBase.error) {
         this.participants = participantsInDataBase?.data
       }
