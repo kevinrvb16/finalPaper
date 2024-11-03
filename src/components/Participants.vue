@@ -31,7 +31,7 @@ export default {
     },
     async mounted() {
         console.log(this.participants)
-        if (!this.participants) {
+        if (this.participants.length == 0) {
             this.getParticipants()
         }
         supabase
