@@ -122,6 +122,7 @@ export default {
         .select("*")
         .eq('id', this.id)
       this.game = game_sessions[0];
+      console.log("this.game: ", this.game)
       console.log(" localStorage.getItem('logedUserId'):", localStorage.getItem('logedUserId'))
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
       const anonUserExist = localStorage.getItem("anonUser")
