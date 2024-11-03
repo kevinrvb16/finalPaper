@@ -16,7 +16,7 @@
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
       </div>
       <participants :gameId="id"></participants>
-      <v-row no-gutters>
+      <v-row class="pa-0">
         <metrics-group></metrics-group>
       </v-row>
     </v-responsive>
