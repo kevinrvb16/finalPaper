@@ -1,14 +1,16 @@
 <template>
-    <v-expansion-panels class="pa-4" variant="popout">
-        <v-expansion-panel v-for="(participant, i) in participants" :key="i" hide-actions>
-            <v-expansion-panel-title>
-                <v-avatar size="42px">
-                    <v-img alt="Avatar" :src="`https://robohash.org/${participant.nickname}`" />
-                </v-avatar>
-            </v-expansion-panel-title>
-            <v-expansion-panel-text>
-                <v-card-text v-text="participant.nickname"></v-card-text>
-            </v-expansion-panel-text>
+    <v-expansion-panels class="pa-4">
+        <v-expansion-panel
+            v-for="(participant, i) in participants" :key="i"
+        >
+        <v-expansion-panel-title>
+            <v-avatar size="42px">
+                <v-img alt="Avatar" :src="`https://robohash.org/${participant.nickname}`" />
+            </v-avatar>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
+            <v-card-text v-text="participant.nickname"></v-card-text>
+        </v-expansion-panel-text>
         </v-expansion-panel>
     </v-expansion-panels>
 </template>
@@ -28,6 +30,7 @@ export default {
         }
     },
     async mounted() {
+        console.log(this.participants)
         if (!this.participants) {
             this.getParticipants()
         }
