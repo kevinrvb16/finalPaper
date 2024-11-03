@@ -17,12 +17,6 @@
                 <v-card-text>{{ metricGroup.description }}</v-card-text>
                 </div>
             </v-card-item>
-
-            <v-card-actions>
-                <v-btn>
-                Button
-                </v-btn>
-            </v-card-actions>
         </v-card>
     </v-col>
 </template>
