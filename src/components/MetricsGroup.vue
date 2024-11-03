@@ -8,7 +8,7 @@
             hover
             link
             density="compact"
-            min-height="24vh"
+            min-height="29vh"
             :disabled="selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 10"
             >
