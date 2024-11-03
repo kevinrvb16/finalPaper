@@ -15,6 +15,7 @@
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
       </div>
+      <participants :gameId="id"></participants>
       <v-row no-gutters>
         <metrics-group></metrics-group>
       </v-row>
@@ -82,7 +83,6 @@
         <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
       </div>
     </div>
-    <participants v-if="!noAnonUser && game?.status == 'started'" :gameId="id"></participants>
   </v-container>
 </template>
 
