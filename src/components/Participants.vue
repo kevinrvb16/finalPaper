@@ -1,26 +1,17 @@
 <template>
     <v-expansion-panels class="pa-4" variant="popout">
-      <v-expansion-panel
-        v-for="(participant, i) in participants"
-        :key="i"
-        hide-actions
-      >
-        <v-expansion-panel-title>
-              <v-avatar
-                size="42px"
-              >
-                <v-img
-                  alt="Avatar"
-                  :src="`https://robohash.org/${participant.nickname}`"
-                ></v-img>
-              </v-avatar>
-        </v-expansion-panel-title>
-        <v-expansion-panel-text>
-          <v-card-text v-text="lorem"></v-card-text>
-        </v-expansion-panel-text>
-      </v-expansion-panel>
+        <v-expansion-panel v-for="(participant, i) in participants" :key="i" hide-actions>
+            <v-expansion-panel-title>
+                <v-avatar size="42px">
+                    <v-img alt="Avatar" :src="`https://robohash.org/${participant.nickname}`" />
+                </v-avatar>
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+                <v-card-text v-text="participant.nickname"></v-card-text>
+            </v-expansion-panel-text>
+        </v-expansion-panel>
     </v-expansion-panels>
-  </template>
+</template>
 <script>
 import { supabase } from '@/main';
 
@@ -41,9 +32,9 @@ export default {
             this.getParticipants()
         }
         supabase
-        .channel(`participants${this.id}`)
-        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
-        .subscribe()
+            .channel(`participants${this.id}`)
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
+            .subscribe()
     },
     methods: {
         async getParticipants() {
@@ -68,5 +59,4 @@ export default {
     }
 }
 </script>
-<style>
-</style>
+<style></style>
