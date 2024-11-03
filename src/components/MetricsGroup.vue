@@ -57,7 +57,7 @@ export default {
                 title: "Eficácia da Tecnologia",
                 value: "technology_effectiveness",
                 description: "Se concentra na eficácia das tecnologias usadas no projeto, incluindo a eficácia dos sistemas de informação, a eficácia dos softwares e a segurança e privacidade dos dados.",
-                backgroundColor: "#4F8A10" // Verde
+                backgroundColor: "#1B5E20" // Verde
                 },
                 {
                 title: "Tamanho e Estabilidade",
