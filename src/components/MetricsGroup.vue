@@ -8,6 +8,7 @@
             @click="selectGroup(metricGroup)"
             hover
             link
+            density="compact"
             >
             <v-card-item>
                 <div>
