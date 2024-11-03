@@ -82,7 +82,7 @@ export default {
     },
     methods: {
         selectGroup(metricGroup) {
-            index = this.selectedGroups.indexOf(metricGroup)
+            const index = this.selectedGroups.indexOf(metricGroup)
             index != -1 ? this.selectedGroups.splice(index, 1) : this.selectedGroups.push(metricGroup)
             console.log("this.selectedGroups: ", this.selectedGroups)
         }
