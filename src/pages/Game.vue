@@ -15,20 +15,9 @@
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
       </div>
-      <v-row class="pa-0">
+      <v-row no-gutters>
         <metrics-group></metrics-group>
       </v-row>
-      <div>
-        <h4>Participantes: </h4>
-        <v-list>
-          <v-list-item v-for="(item, i) in participants" :key="i" :value="item" color="seccondary">
-            <template v-slot:prepend>
-              <v-img :width="56" :src="`https://robohash.org/${item.nickname}`"></v-img>
-            </template>
-            <v-list-item-title>{{ item.nickname }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </div>
     </v-responsive>
     <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
       <div :class="`d-flex ${hasParticipants ? 'justify-space-between' : 'justify-space-center'}`">
@@ -93,6 +82,7 @@
         <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
       </div>
     </div>
+    <participants v-if="!noAnonUser && game?.status == 'started'" :id="id"></participants>
   </v-container>
 </template>
 
@@ -103,6 +93,7 @@ import FlipCard from '@/components/FlipCard.vue';
 import HeaderApp from '@/components/HeaderApp.vue'
 import { required } from '@vuelidate/validators'
 import MetricsGroup from '@/components/MetricsGroup.vue';
+import Participants from '@/components/Participants.vue';
 
 export default {
   setup() {
@@ -111,7 +102,8 @@ export default {
   components: {
     FlipCard,
     HeaderApp,
-    MetricsGroup
+    MetricsGroup,
+    Participants
   },
   data() {
     return {
