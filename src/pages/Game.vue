@@ -11,12 +11,12 @@
         <p class="my-4">Selecione 2 grupos de métricas para a dor selecionada:</p>
         <p class="my-4"><v-icon icon="mdi-dots-hexagon"></v-icon>{{  game?.currentProblem }}</p>
       </div>
-      <v-row justify="end">
+      <v-row>
         <metrics-group></metrics-group>
-        <v-col cols="4" justify="center" align="center" class="my-auto">
-          <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
-        </v-col>
-        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('not_started')">Voltar para Jogo não iniciado</v-btn>
+      </v-row>
+      <v-row v-if="isDealer" justify="space-between">
+        <v-btn append-icon="mdi-chevron-double-left" @click="changeStatus('not_started')">Voltar para Jogo não iniciado</v-btn>
+        <v-btn append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
       </v-row>
     </v-responsive>
     <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
