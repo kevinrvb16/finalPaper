@@ -15,7 +15,7 @@
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
       </div>
-      <v-row no-gutters>
+      <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10">
           <v-row class="pa-0">
             <metrics-group></metrics-group>
