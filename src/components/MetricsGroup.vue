@@ -1,6 +1,5 @@
 <template>
-    <v-col class="pb-0 px-1" cols="2" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center"
-          align="justify">
+    <v-col class="pb-0 px-1" cols="2" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center">
         <v-card
             :color="metricGroup.backgroundColor"
             variant="tonal"
@@ -18,7 +17,7 @@
                 <div class="text-overline mb-1">
                     {{ metricGroup.title }}
                 </div>
-                <div class="text-caption">{{ metricGroup.description }}</div>
+                <div class="text-caption align-justify">{{ metricGroup.description }}</div>
                 </div>
             </v-card-item>
         </v-card>
