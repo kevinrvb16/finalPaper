@@ -1,18 +1,16 @@
 <template>
-    <v-expansion-panels class="pa-4">
-        <v-expansion-panel
-            v-for="(participant, i) in participants" :key="i"
+    <v-list>
+        <v-list-subheader>Participantes</v-list-subheader>
+        <v-list-item
+            v-for="participant in participants"
+            :title="participant.nickname"
+            :subtitle="participant.metric1"
         >
-        <v-expansion-panel-title>
-            <v-avatar size="42px">
-                <v-img alt="Avatar" :src="`https://robohash.org/${participant.nickname}`" />
-            </v-avatar>
-        </v-expansion-panel-title>
-        <v-expansion-panel-text>
-            <v-card-text v-text="participant.nickname"></v-card-text>
-        </v-expansion-panel-text>
-        </v-expansion-panel>
-    </v-expansion-panels>
+        <template v-slot:prepend>
+          <v-img :src="`https://robohash.org/${participant.nickname}`" />
+        </template>
+        </v-list-item>
+    </v-list>
 </template>
 <script>
 import { supabase } from '@/main';
@@ -48,6 +46,7 @@ export default {
             console.log("getParticipants", participantsInDataBase)
             if (!participantsInDataBase.error) {
                 this.participants = participantsInDataBase?.data
+
             }
         },
         handleInserts(payload) {
