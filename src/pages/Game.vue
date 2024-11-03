@@ -18,7 +18,7 @@
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10">
           <v-row class="pa-0">
-            <metrics-group></metrics-group>
+            <metrics-group :isDealer="isDealer"></metrics-group>
           </v-row>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
