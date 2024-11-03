@@ -1,5 +1,5 @@
 <template>
-    <v-col class="pb-0 px-1" cols="2" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center"
+    <v-col class="pb-0 px-1" cols="1" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center"
           align="justify">
         <v-card
             :color="metricGroup.backgroundColor"
@@ -9,7 +9,7 @@
             hover
             link
             density="compact"
-            :min-height="index > 3 ? '200' : '235'"
+            min-height="266"
             :disabled="selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 10"
             >
