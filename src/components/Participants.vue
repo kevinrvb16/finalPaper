@@ -1,5 +1,5 @@
 <template>
-    <v-card max-width="16.66%">
+    <v-card>
         <v-list>
             <v-list-subheader>Participantes</v-list-subheader>
             <v-list-item

@@ -15,9 +15,15 @@
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
       </div>
-      <participants :gameId="id"></participants>
-      <v-row class="pa-0">
-        <metrics-group></metrics-group>
+      <v-row no-gutters>
+        <v-col no-gutters cols="10">
+          <v-row class="pa-0">
+            <metrics-group></metrics-group>
+          </v-row>
+        </v-col>
+        <v-col no-gutters cols="2">
+          <participants :gameId="id"></participants>
+        </v-col>
       </v-row>
     </v-responsive>
     <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
