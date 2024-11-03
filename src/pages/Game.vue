@@ -192,7 +192,7 @@ export default {
       console.log(this.id)
       const resp = await supabase
         .from('game_sessions')
-        .update({ status })
+        .update({ status, currentProblem: this.problem.name })
         .eq('id', this.id)
         .select()
       if (!resp.error) {
