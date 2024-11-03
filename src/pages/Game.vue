@@ -5,7 +5,7 @@
       <v-text-field class="mt-4" min-width="17vw" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
       <v-btn text=" Jogar " class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
     </div>
-    <v-responsive class="align-center mx-auto" max-width="1280" v-else-if="game?.status == 'started'">
+    <v-responsive class="align-center mx-auto" max-width="95vw" v-else-if="game?.status == 'started'">
       <div class="text-center">
         <h1 class="text-h4 font-weight-bold">Grupos de Métricas</h1>
         <p class="my-3">Selecione 2 grupos de métricas para a dor selecionada:</p>
