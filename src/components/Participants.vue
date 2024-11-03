@@ -6,7 +6,6 @@
         hide-actions
       >
         <v-expansion-panel-title>
-
               <v-avatar
                 size="42px"
               >
@@ -32,7 +31,10 @@ export default {
         }
     },
     props: {
-        id
+        id: {
+            type: String,
+            required: true
+        }
     },
     async mounted() {
         if (!this.participants) {
