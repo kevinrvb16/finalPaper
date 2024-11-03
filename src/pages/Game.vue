@@ -9,7 +9,7 @@
       <div class="text-center">
         <h1 class="text-h3 font-weight-bold">Grupos de Métricas</h1>
         <p class="my-4">Selecione 2 grupos de métricas para a dor selecionada:</p>
-        <p class="my-4"><v-icon icon="mdi-dots-hexagon"></v-icon>{{  game.currentProblem.name }}</p>
+        <p class="my-4"><v-icon icon="mdi-dots-hexagon"></v-icon>{{  game?.currentProblem?.name }}</p>
       </div>
       <v-row justify="end">
         <metrics-group></metrics-group>
@@ -189,10 +189,10 @@ export default {
       }
     },
     async changeStatus(status) {
-      console.log(this.id)
+      console.log('this.problem', this.problem)
       const resp = await supabase
         .from('game_sessions')
-        .update({ status, currentProblem: this.problem.name })
+        .update({ status, currentProblem: this?.problem?.name })
         .eq('id', this.id)
         .select()
       if (!resp.error) {
