@@ -82,8 +82,6 @@ export default {
   methods: {
     async save(isActive) {
       const isFormOk = await this.v$.$validate()
-      console.log("this.$v", this.$v)
-      console.log('isFormOk', isFormOk)
       if (!isFormOk) {
         return 
       }

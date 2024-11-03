@@ -89,7 +89,6 @@ export default {
         const { data: { user } } = await supabase.auth.getUser()
 
         if (user) {
-            console.log(user)
             this.$emit('input', user)
             localStorage.setItem('logedUserId', user?.id)
             this.userMetadata = user.user_metadata
