@@ -1,5 +1,5 @@
 <template>
-    <v-col class="pb-0" :cols="index > 3 ? 4 : 3" v-for="(metricGroup, index) in metrics" :key="index" justify="center"
+    <v-col class="pb-0" :cols="index > 3 ? 4 : 3" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center"
           align="center">
         <v-card
             :color="metricGroup.backgroundColor"
@@ -10,6 +10,8 @@
             link
             density="compact"
             :min-height="index > 3 ? '200' : '235'"
+            :disabled="selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
+            :elevation="!selectedGroups.includes(metricGroup)"
             >
             <v-card-item>
                 <div>
@@ -28,7 +30,8 @@ export default {
     data() {
         return {
             problems: [],
-            metrics: [
+            selectedGroups: [],
+            metricsGroup: [
                 {
                 title: "Qualidade do Produto",
                 value: "product_quality",
@@ -77,6 +80,13 @@ export default {
     props: {
 
     },
+    methods: {
+        selectGroup(metricGroup) {
+            index = this.selectedGroups.indexOf(metricGroup)
+            index != -1 ? this.selectedGroups.splice(index, 1) : this.selectedGroups.push(metricGroup)
+            console.log("this.selectedGroups: ", this.selectedGroups)
+        }
+    }
 }
 </script>
 <style>
