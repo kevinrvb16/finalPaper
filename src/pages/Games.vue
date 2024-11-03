@@ -48,7 +48,7 @@
           <tr
             v-for="item in gamesList"
             :key="item?.name"
-            style="min-height: 24px;"
+            style="min-height: 48px;"
           >
             <td>{{ item?.name }}</td>
             <td>
