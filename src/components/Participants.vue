@@ -4,7 +4,7 @@
             <v-list-subheader>Participantes</v-list-subheader>
             <v-list-item
                 v-for="participant in participants"
-                :title="participant.nickname"
+                :title="participant?.nickname"
                 :subtitle="participant?.metric1"
             >
                 <template v-slot:prepend>

@@ -8,7 +8,7 @@
             hover
             link
             density="compact"
-            min-height="29vh"
+            min-height="33vh"
             max-width="288"
             :disabled="isDealer || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 10"
