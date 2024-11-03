@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height">
-    <header-app :nickname="anonUser"></header-app>
+    <header-app :nickname="noAnonUser ? '' : anonUser"></header-app>
     <div  class="align-center fill-height ma-auto" v-if="noAnonUser">
       <v-text-field class="mt-4" min-width="17vw" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
       <v-btn text=" Jogar " class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
@@ -110,6 +110,7 @@ export default {
       isDealer: false,
       noAnonUser: true,
       anonUser: '',
+      nickname: '',
       participants: [],
       problem: null,
       id: JSON.parse(this?.$route.query.id),
