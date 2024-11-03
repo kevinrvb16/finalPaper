@@ -1,16 +1,18 @@
 <template>
-    <v-list>
-        <v-list-subheader>Participantes</v-list-subheader>
-        <v-list-item
-            v-for="participant in participants"
-            :title="participant.nickname"
-            :subtitle="participant?.metric1"
-        >
-            <template v-slot:prepend>
-                <v-img :width="42" :src="`https://robohash.org/${participant.nickname}`"></v-img>
-            </template>
-        </v-list-item>
-    </v-list>
+    <v-card max-width="16.66%">
+        <v-list>
+            <v-list-subheader>Participantes</v-list-subheader>
+            <v-list-item
+                v-for="participant in participants"
+                :title="participant.nickname"
+                :subtitle="participant?.metric1"
+            >
+                <template v-slot:prepend>
+                    <v-img :width="42" :src="`https://robohash.org/${participant.nickname}`"></v-img>
+                </template>
+            </v-list-item>
+        </v-list>
+    </v-card>
 </template>
 <script>
 import { supabase } from '@/main';
