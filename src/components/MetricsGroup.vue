@@ -11,7 +11,7 @@
             density="compact"
             :min-height="index > 3 ? '200' : '235'"
             :disabled="selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
-            :elevation="!selectedGroups.includes(metricGroup) ? 5 : 0"
+            :elevation="!selectedGroups.includes(metricGroup) ? 24 : 0"
             >
             <v-card-item>
                 <div>
