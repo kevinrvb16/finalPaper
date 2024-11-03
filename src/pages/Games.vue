@@ -48,7 +48,7 @@
           <tr
             v-for="item in gamesList"
             :key="item?.name"
-            class="py-1"
+            class="py-2"
           >
             <td>{{ item?.name }}</td>
             <td>
