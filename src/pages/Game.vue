@@ -82,7 +82,7 @@
         <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
       </div>
     </div>
-    <participants v-if="!noAnonUser && game?.status == 'started'" :id="id"></participants>
+    <participants v-if="!noAnonUser && game?.status == 'started'" :gameId="id"></participants>
   </v-container>
 </template>
 

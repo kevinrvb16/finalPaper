@@ -22,7 +22,7 @@ export default {
         }
     },
     props: {
-        id: {
+        gameId: {
             type: String,
             required: true
         }
@@ -32,7 +32,7 @@ export default {
             this.getParticipants()
         }
         supabase
-            .channel(`participants${this.id}`)
+            .channel(`participants${this.gameId}`)
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
             .subscribe()
     },
@@ -41,7 +41,7 @@ export default {
             const participantsInDataBase = await supabase
                 .from('participants')
                 .select("*")
-                .eq('game_session', this.id)
+                .eq('game_session', this.gameId)
             console.log("getParticipants", participantsInDataBase)
             if (!participantsInDataBase.error) {
                 this.participants = participantsInDataBase?.data
