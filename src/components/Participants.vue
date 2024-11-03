@@ -51,7 +51,7 @@ export default {
                 .from('participants')
                 .select("*")
                 .eq('game_session', this.id)
-            console.log("erro getParticipants", participantsInDataBase)
+            console.log("getParticipants", participantsInDataBase)
             if (!participantsInDataBase.error) {
                 this.participants = participantsInDataBase?.data
             }
