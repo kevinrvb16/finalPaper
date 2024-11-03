@@ -1,6 +1,6 @@
 <template>
     <v-col class="pb-0" :cols="index > 3 ? 4 : 3" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center"
-          align="center">
+          align="justify">
         <v-card
             :color="metricGroup.backgroundColor"
             variant="tonal"
