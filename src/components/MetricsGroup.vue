@@ -18,7 +18,7 @@
                 <div class="text-overline mb-1">
                     {{ metricGroup.title }}
                 </div>
-                <v-card-text>{{ metricGroup.description }}</v-card-text>
+                <div class="text-caption">{{ metricGroup.description }}</div>
                 </div>
             </v-card-item>
         </v-card>
