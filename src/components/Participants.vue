@@ -32,7 +32,7 @@ export default {
             this.getParticipants()
         }
         supabase
-            .channel(`participants${this.gameId}`)
+            .channel(`participants${this.gameId}participantsComponent`)
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
             .subscribe()
     },
