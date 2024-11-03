@@ -9,7 +9,7 @@
       <div class="text-center">
         <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
         <h3 class="my-4">Selecione 2 grupos de métricas para a dor selecionada:</h3>
-        <h4><v-icon icon="mdi-dots-hexagon"></v-icon>{{  game.currentProblem.name }}</h4>
+        <h4 class="my-4"><v-icon icon="mdi-dots-hexagon"></v-icon>{{  game.currentProblem.name }}</h4>
       </div>
       <v-row justify="end">
         <metrics-group></metrics-group>
