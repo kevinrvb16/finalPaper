@@ -191,7 +191,6 @@ export default {
     },
     handleInserts(payload) {
       if (!payload.errors) {
-        console.log('Mudanca recebida', payload)
         this.participants.push(payload?.new)
       }
     },
@@ -203,9 +202,7 @@ export default {
         .eq('id', this.id)
         .select()
       if (!resp.error) {
-        console.log('responseee23 :', resp)
         this.game = resp.data[0]
-        console.log(this.game)
       }
     },
     async getParticipants() {
@@ -213,7 +210,6 @@ export default {
         .from('participants')
         .select("*")
         .eq('game_session', this.id)
-      console.log(" getParticipants", participantsInDataBase)
       if (!participantsInDataBase.error) {
         this.participants = participantsInDataBase?.data
       }

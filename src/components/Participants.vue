@@ -18,7 +18,7 @@ import { supabase } from '@/main';
 export default {
     data() {
         return {
-            participants: [],
+            participants: []
         }
     },
     props: {
@@ -46,9 +46,6 @@ export default {
             if (!participantsInDataBase.error) {
                 this.participants = participantsInDataBase?.data
             }
-        },
-        hasParticipants() {
-            return this.participants?.length > 0
         },
         handleInserts(payload) {
             if (!payload.errors) {
