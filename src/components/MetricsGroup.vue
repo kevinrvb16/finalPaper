@@ -9,7 +9,7 @@
             hover
             link
             density="compact"
-            min-height="282"
+            min-height="235"
             >
             <v-card-item>
                 <div>
