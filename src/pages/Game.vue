@@ -7,7 +7,7 @@
     </div>
     <v-responsive class="align-center mx-auto" max-width="1200" v-else-if="game?.status == 'started'">
       <div class="text-center">
-        <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
+        <h1 class="text-h3 font-weight-bold">Grupos de Métricas</h1>
         <h3 class="my-4">Selecione 2 grupos de métricas para a dor selecionada:</h3>
         <h4 class="my-4"><v-icon icon="mdi-dots-hexagon"></v-icon>{{  game.currentProblem.name }}</h4>
       </div>
