@@ -24,7 +24,7 @@
         </v-card>
       </div>
       <div class="py-4" />
-      <v-table>
+      <v-table density="comfortable">
         <thead>
           <tr>
             <th id="name" class="text-left">
