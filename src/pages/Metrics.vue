@@ -81,7 +81,6 @@
       </div>
     </v-responsive>
     <div v-else>
-      <header-app></header-app>
       <div class="text-center">
         <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
       </div>
