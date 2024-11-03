@@ -9,6 +9,7 @@
       <div class="text-center">
         <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
         <h3>Selecione 2 grupos de métricas:</h3>
+        <h4><v-icon icon="mdi-dots-hexagon"></v-icon>{{  problem.name }}</h4>
       </div>
       <v-row justify="end">
         <metrics-group></metrics-group>
