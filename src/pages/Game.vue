@@ -70,7 +70,7 @@
           <v-list>
             <v-list-item v-for="(item, i) in participants" :key="i" :value="item" color="seccondary">
               <template v-slot:prepend>
-                <v-img :width="56" :src="`https://robohash.org/${item.nickname}`"></v-img>
+                <v-img :width="48" :src="`https://robohash.org/${item.nickname}`"></v-img>
               </template>
               <v-list-item-title>{{ item.nickname }}</v-list-item-title>
             </v-list-item>

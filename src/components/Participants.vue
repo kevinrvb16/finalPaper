@@ -4,11 +4,11 @@
         <v-list-item
             v-for="participant in participants"
             :title="participant.nickname"
-            :subtitle="participant.metric1"
+            :subtitle="participant?.metric1"
         >
-        <template v-slot:prepend>
-          <v-img :src="`https://robohash.org/${participant.nickname}`" />
-        </template>
+            <template v-slot:prepend>
+                <v-img :width="42" :src="`https://robohash.org/${participant.nickname}`"></v-img>
+            </template>
         </v-list-item>
     </v-list>
 </template>
