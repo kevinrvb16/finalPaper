@@ -15,8 +15,12 @@
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
       </div>
-      <v-row>
-        <metrics-group></metrics-group>
+      <v-col class="pa-0" cols="10">
+        <v-row class="pa-0">
+          <metrics-group></metrics-group>
+        </v-row>
+      </v-col>
+      <v-col class="pa-0" cols="2">
         <div>
           <h4>Participantes: </h4>
           <v-list>
@@ -28,7 +32,7 @@
             </v-list-item>
           </v-list>
         </div>
-      </v-row>
+      </v-col>
     </v-responsive>
     <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
       <div :class="`d-flex ${hasParticipants ? 'justify-space-between' : 'justify-space-center'}`">
