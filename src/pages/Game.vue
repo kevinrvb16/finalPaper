@@ -1,52 +1,99 @@
 <template>
-<v-container class="fill-height">
-  <header-app></header-app>
-  <v-responsive
-    class="align-center mx-auto"
-    max-width="2400"
-  >
-    <div class="text-center my-3">
-      <h1 class="text-h2 font-weight-bold">Metrics Poker</h1>
+  <v-container class="fill-height">
+    <header-app :nickname="noAnonUser ? '' : anonUser"></header-app>
+    <div  class="align-center fill-height ma-auto" v-if="noAnonUser">
+      <v-text-field class="mt-4" min-width="17vw" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
+      <v-btn text=" Jogar " class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
     </div>
-    <div class="text-center my-3">
-      <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="elevated" color="black" size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
-      <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="flat" color="black" size="" rounded="circle">Facilidade de coleta</v-chip>
-      <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="flat" color="black" size="" rounded="circle">Preferência pessoal</v-chip>
-    </div>
-    <div class="bg-table-vertical">
-      <v-row justify="center" align="center" class="ml-7 mr-2 bg-table-horizontal">
-        <v-tooltip :text="metricsGroup[0].description" max-width="360px">
-          <template v-slot:activator="{ props }">
-            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0].backgroundColor">{{metricsGroup[0].title}}</v-btn>
-          </template>
-        </v-tooltip>
-        <v-col class="px-1" v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-          <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
+    <v-responsive class="align-center mx-auto" max-width="1200" v-else-if="game?.status == 'started'">
+      <div class="text-center">
+        <h1 class="text-h2 font-weight-bold">Grupos de Métricas</h1>
+        <h3>Selecione 2 grupos de métricas:</h3>
+      </div>
+      <v-row justify="end">
+        <v-col class="pb-0" cols="4" v-for="(metricGroup, index) in metrics" :key="index" justify="center"
+          align="center">
+          <flip-card @click="selectedMetrics.push(metricGroup)" :title="metricGroup.title"
+            :description="metricGroup.description" :color="metricGroup.backgroundColor"></flip-card>
         </v-col>
-      </v-row>
-      <v-row class="ml-2">
-        <v-btn>DOR/PROBLEMA</v-btn>
-      </v-row>
-      <v-row class="ml-7 mr-2 bg-table-horizontal"  justify="center" align="center">
-        <v-tooltip :text="metricsGroup[1].description" max-width="360px">
-          <template v-slot:activator="{ props }">
-            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1].backgroundColor">{{metricsGroup[1].title}}</v-btn>
-          </template>
-        </v-tooltip>
-        <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
-          <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
+        <v-col cols="4" justify="center" align="center" class="my-auto">
+          <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
         </v-col>
+        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('not_started')">Voltar para Jogo não iniciado</v-btn>
       </v-row>
+    </v-responsive>
+    <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
+      <div :class="`d-flex ${hasParticipants ? 'justify-space-between' : 'justify-space-center'}`">
+        <div class="mr-2">
+          <h2>Jogo não iniciado</h2>
+          <div  class="align-center fill-height mx-auto" v-if="isDealer">
+            <p class="my-3">Selecione por qual problema iniciar</p>
+            <v-list>
+              <v-radio-group v-model="v$.problem.$model">
+                <v-tooltip :text="game.problemA.description">
+                  <template v-slot:activator="{ props }">
+                    <v-radio v-bind="props" :label="game.problemA.name" :value="game.problemA"></v-radio>
+                  </template>
+                </v-tooltip>
+                <v-tooltip :text="game.problemB.description">
+                  <template v-slot:activator="{ props }">
+                    <v-radio v-bind="props" :label="game.problemB.name" :value="game.problemB"></v-radio>
+                  </template>
+                </v-tooltip>
+              </v-radio-group>
+            </v-list>
+            <v-btn :disabled="v$.$invalid" class="mx-auto mt-4" color="primary" @click="changeStatus('started')">
+              <v-icon icon="mdi-play" start></v-icon>
+              Iniciar jogo
+            </v-btn>
+          </div>
+          <div  class="align-center fill-height mx-auto" v-else>
+            <p class="py-4 pr-4">Dores cadastradas pelo Dealer:</p>
+            <v-list>
+              <v-list-item v-model="game.problemA" color="seccondary">
+                <template v-slot:prepend>
+                  <v-icon icon="mdi-dots-hexagon"></v-icon>
+                </template>
+                <v-list-item-title>{{ game.problemA.name }}</v-list-item-title>
+                <v-list-item-subtitle>{{ game.problemA.description }}</v-list-item-subtitle>
+              </v-list-item>
+              <v-list-item v-model="game.problemB" color="seccondary">
+                <template v-slot:prepend>
+                  <v-icon icon="mdi-dots-hexagon"></v-icon>
+                </template>
+                <v-list-item-title>{{ game.problemB.name }}</v-list-item-title>
+                <v-list-item-subtitle>{{ game.problemB.description }}</v-list-item-subtitle>
+              </v-list-item>
+            </v-list>
+          </div>
+        </div>
+        <div v-if="hasParticipants()">
+          <h4>Participantes: </h4>
+          <v-list>
+            <v-list-item v-for="(item, i) in participants" :key="i" :value="item" color="seccondary">
+              <template v-slot:prepend>
+                <v-img :width="56" :src="`https://robohash.org/${item.nickname}`"></v-img>
+              </template>
+              <v-list-item-title>{{ item.nickname }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </div>
+      </div>
+    </v-responsive>
+    <div v-else>
+      <div class="text-center">
+        <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
+      </div>
     </div>
-  </v-responsive>
-</v-container>
+  </v-container>
 </template>
 
 <script>
+import { supabase } from '@/main'
 import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators'
 import FlipCard from '@/components/FlipCard.vue';
 import HeaderApp from '@/components/HeaderApp.vue'
+import { required } from '@vuelidate/validators'
 
 export default {
   setup() {
@@ -58,209 +105,162 @@ export default {
   },
   data() {
     return {
-      email: '',
-      metricsGroup: JSON.parse(this.$route.query.metricGroup),
       selectedMetrics: [],
-      metricsOfFirstGroup: [],
-      metricsOfSecondGroup: [],
-      metricOfEachGroup: {
-        "resources": [
-          {
-            "name": "EFFORT REMAINING",
-            "description": "É a métrica que mede a quantidade de esforço que ainda precisa ser aplicada para concluir uma tarefa."
-          },
-          {
-            "name": "EFFORT",
-            "description": "É a métrica que mede a quantidade de trabalho necessário para concluir uma tarefa."
-          },
-          {
-            "name": "EFFORT ESTIMATION ACCURACY",
-            "description": "É a métrica que mede a precisão da estimativa de esforço necessário para completar uma tarefa."
-          },
-          {
-            "name": "TOTAL EFFECTIVE AVAILABLE HOURS",
-            "description": "É a métrica que mede o tempo que a equipe tem disponível para trabalhar."
-          },
-          {
-            "name": "BACKLOG SIZE",
-            "description": "É a métrica que mede o número de tarefas pendentes na lista de tarefas."
-          }
-        ],
-        "performance_and_process": [
-          {
-            "name": "FIXED BUGS",
-            "description": "É a métrica que mede a quantidade de erros corrigidos em um produto."
-          },
-          {
-            "name": "HOURS SPENT ON TASK",
-            "description": "É a métrica que mede o tempo gasto em uma tarefa específica."
-          },
-          {
-            "name": "HOURS SPENT ON BUGS",
-            "description": "É a métrica que mede o tempo gasto na correção de bugs."
-          },
-          {
-            "name": "CYCLE TIME",
-            "description": "É a métrica que mede o tempo necessário para concluir uma tarefa desde o início até a entrega."
-          },
-          {
-            "name": "TASKS ATTRIBUTES QUALITY",
-            "description": "É a métrica que mede a qualidade das tarefas, incluindo descrição, informações e objetivos."
-          }
-        ],
-        "schedule_and_progress": [
-          {
-            "name": "NUMBER OF COMPLETED TASKS",
-            "description": "É a métrica que mede a quantidade de tarefas concluídas em um período de tempo."
-          },
-          {
-            "name": "SCOPE GROWTH",
-            "description": "É a métrica que mede o aumento do escopo do projeto."
-          },
-          {
-            "name": "PRIORITY SHIFT",
-            "description": "É a métrica que mede a taxa de mudança de prioridade das tarefas."
-          },
-          {
-            "name": "CUMULATIVE FLOW DIAGRAMS",
-            "description": "É a métrica que mede a quantidade de trabalho em cada estágio do processo de desenvolvimento."
-          },
-          {
-            "name": "MERGE REQUEST REVIEW",
-            "description": "É a métrica que mede o tempo gasto na revisão de solicitações de mesclagem."
-          }
-        ],
-        "technology_effectiveness": [
-          {
-            "name": "TEST RUN FREQUENCY",
-            "description": "É a métrica que mede a frequência com que os testes são executados."
-          },
-          {
-            "name": "TEST FAILURE RATE",
-            "description": "É a métrica que mede a quantidade de testes que falharam em relação ao número total de testes executados."
-          },
-          {
-            "name": "AVG. TEST RUN TIME",
-            "description": "É a métrica que mede o tempo médio gasto na execução de um teste."
-          },
-          {
-            "name": "TEST COVERAGE",
-            "description": "É a métrica que mede a porcentagem do código que é testado."
-          },
-          {
-            "name": "SECURITY TEST PASS RATE",
-            "description": "É a métrica que mede a quantidade de testes de segurança aprovados em relação ao número total de testes de segurança executados."
-          }
-        ],
-        "size_and_stability": [
-          {
-            "name": "CHANGED PRODUCT BACKLOG ITEMS",
-            "description": "É a métrica que mede o número de itens no backlog do produto que foram modificados."
-          },
-          {
-            "name": "NUMBER OF CODE LINES",
-            "description": "É a métrica que mede a quantidade de linhas de código escritas."
-          },
-          {
-            "name": "WEAK COMPONENTS",
-            "description": "É a métrica que mede a presença de componentes fracos ou vulnerabilidades em um software."
-          }
-        ],
-        "customer_satisfaction": [
-          {
-            "name": "NPS",
-            "description": "É a métrica que mede a satisfação do cliente com um produto ou serviço em uma escala de 0-10."
-          }
-        ],
-        "product_quality": [
-          {
-            "name": "OUTSTANDING BUGS",
-            "description": "É a métrica que mede a quantidade de erros em um produto que foram identificados, mas ainda não foram corrigidos."
-          },
-          {
-            "name": "DELIVERY ON TIME",
-            "description": "É a métrica que indica se a entrega foi feita dentro do prazo estabelecido."
-          },
-          {
-            "name": "PRODUCT VELOCITY",
-            "description": "É a métrica que mede a quantidade de trabalho realizado em um período de tempo."
-          },
-          {
-            "name": "LEAD TIME",
-            "description": "É a métrica que mede o tempo necessário para completar um item de trabalho."
-          },
-          {
-            "name": "THROUGHPUT",
-            "description": "É a métrica que mede a quantidade de trabalho que é concluída com sucesso em um determinado período de tempo."
-          }
-        ]
+      game: {},
+      isDealer: false,
+      noAnonUser: true,
+      anonUser: '',
+      nickname: '',
+      participants: [],
+      problem: null,
+      id: JSON.parse(this?.$route.query.id),
+      metrics: [
+        {
+          title: "Qualidade do Produto",
+          value: "product_quality",
+          description: "Se concentra na qualidade do produto ou serviço entregue, incluindo sua funcionalidade, confiabilidade, segurança, facilidade de uso, desempenho, manutenção, entre outros aspectos.",
+          backgroundColor: "#B90000" // Vermelho
+        },
+        {
+          title: "Recursos e Custos",
+          value: "resources",
+          description: "Se concentra nos recursos usados no projeto e no custo total do projeto, incluindo o orçamento e o uso de materiais ou ferramentas.",
+          backgroundColor: "#000000" // Preto
+        },
+        {
+          title: "Desempenho e Processo",
+          value: "performance_and_process",
+          description: "Se concentra na eficiência e eficácia dos processos usados no projeto, incluindo a eficácia dos métodos de gerenciamento de projetos, a qualidade dos processos de produção, a produtividade da equipe e a eficácia da comunicação interna.",
+          backgroundColor: "#1C4E8A" // Azul
+        },
+        {
+          title: "Cronograma e Progresso",
+          value: "schedule_and_progress",
+          description: "Se concentra no cronograma e no progresso do projeto, incluindo o cumprimento de prazos, o acompanhamento do progresso e a identificação e correção de atrasos.",
+          backgroundColor: "#B971CA" // Roxo
+        },
+        {
+          title: "Eficácia da Tecnologia",
+          value: "technology_effectiveness",
+          description: "Se concentra na eficácia das tecnologias usadas no projeto, incluindo a eficácia dos sistemas de informação, a eficácia dos softwares e a segurança e privacidade dos dados.",
+          backgroundColor: "#4F8A10" // Verde
+        },
+        {
+          title: "Tamanho e Estabilidade",
+          value: "size_and_stability",
+          description: "Se concentra no tamanho e estabilidade do produto ou sistema desenvolvido, incluindo o número de usuários, a capacidade de armazenamento, a escalabilidade e a estabilidade.",
+          backgroundColor: "#F0803C" // Laranja
+        },
+        {
+          title: "Satisfação do Cliente",
+          value: "customer_satisfaction",
+          description: "Se concentra na satisfação do cliente com o produto ou serviço entregue, incluindo a qualidade, a usabilidade, a confiabilidade e a experiência geral do usuário. Isso pode ser medido por meio de pesquisas de satisfação do cliente e avaliações de clientes.",
+          backgroundColor: "#6CAF44" // Verde Claro
+        }
+      ]
+    }
+  },
+  async mounted() {
+    if (this.id) {
+      const { data: game_sessions } = await supabase
+        .from('game_sessions')
+        .select("*")
+        .eq('id', this.id)
+      this.game = game_sessions[0];
+      console.log(" localStorage.getItem('logedUserId'):", localStorage.getItem('logedUserId'))
+      this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
+      const anonUserExist = localStorage.getItem("anonUser")
+      if(this.isDealer || (anonUserExist && anonUserExist.split(',')[0] == this.id)) {
+        this.noAnonUser = false;
+        this.anonUser = anonUserExist.split(',')[1]
+      }
+      // Set up real-time subscription
+      this.getParticipants()
+      supabase
+        .channel(`participants${this.id}`)
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
+        .subscribe()
+      if (!this.isDealer) {
+        supabase
+          .channel(`game_sessions${this.id}`)
+          .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'game_sessions' }, this.handleUpdate)
+          .subscribe()
       }
     }
   },
-  mounted() {
-    this.metricsOfFirstGroup = this.metricOfEachGroup[this.metricsGroup[0].value]
-    console.log(this.metricsOfFirstGroup)
-    this.metricsOfSecondGroup = this.metricOfEachGroup[this.metricsGroup[1].value]
-    console.log(this.metricsOfSecondGroup)
-  },
   methods: {
-    dragStart(event) {
-      event.dataTransfer.setData('text', event.target.innerText);
+    hasParticipants() {
+      return this.participants?.length > 0
     },
-    dropChip(event) {
-      const data = event.dataTransfer.getData('text');
-      console.log('Dropped Chip: ', data);
+    redirect() {
+      this.$router.push({
+        path: '/game',
+        query: { metricGroup: JSON.stringify(this.selectedMetrics) }
+      })
     },
-    dropCard(event) {
-      const data = event.dataTransfer.getData('text');
-      console.log('Dropped on Card: ', data);
-    }
+    async createAnonUser() {
+      const { data, error } = await supabase.auth.signInAnonymously()
+      if (error) {
+        console.log('error CreateAnonUser', error)
+        return
+      }
+      if (data) {
+        console.log('data createAnonUser', data)
+        console.log(this.anonUser)
+        const participant = await supabase
+          .from('participants')
+          .insert([
+            { game_session: this.id, nickname: this.anonUser }
+          ])
+          .select()
+        if (participant?.error) {
+          console.log('error participant', error)
+          return
+        }
+        if (participant?.data) {
+          localStorage.setItem("anonUser", `${this.id},${this.anonUser}`)
+          console.log(participant.data)
+          this.noAnonUser = false;
+        }
+      }
+    },
+    handleUpdate(payload) {
+      this.status = payload?.new?.status
+    },
+    handleInserts(payload) {
+      if (!payload.errors) {
+        console.log('Mudanca recebida', payload)
+        this.participants.push(payload?.new)
+      }
+    },
+    async changeStatus(status) {
+      console.log(this.id)
+      const resp = await supabase
+        .from('game_sessions')
+        .update({ status })
+        .eq('id', this.id)
+        .select()
+      if (!resp.error) {
+        console.log('responseee23 :', resp)
+        this.game = resp.data[0]
+        console.log(this.game)
+      }
+    },
+    async getParticipants() {
+      const participantsInDataBase = await supabase
+        .from('participants')
+        .select("*")
+        .eq('game_session', this.id)
+      console.log("erro getParticipants", participantsInDataBase)
+      if (!participantsInDataBase.error) {
+        this.participants = participantsInDataBase?.data
+      }
+    },
   },
-  validations() {
-    return {
-      email: { required }
+  validations: {
+    problem: {
+      required
     }
   }
 }
 </script>
-<style lang="scss">
-
-.white-space-normal {
-  white-space: normal!important;
-}
-
-.rounded-chip {
-  height: 124px;            /* Define a altura do chip */
-  width: 124px;             /* Define a largura do chip */
-  border-radius: 50%;       /* Torna o chip completamente circular */
-  display: flex;            /* Alinha o conteúdo no centro */
-  align-items: center;      /* Alinha verticalmente no centro */
-  justify-content: center;  /* Alinha horizontalmente no centro */
-  text-align: center;       /* Centraliza o texto */
-  white-space: normal!important;      /* Permite que o texto quebre linha */
-  padding: 34px;            /* Adiciona espaçamento interno */
-  word-wrap: break-word!important;    /* Quebra palavras longas */
-  overflow: hidden;         /* Esconde o conteúdo que transborda */
-}
-
-.bg-table-horizontal {
-  background-image: linear-gradient(white, white), linear-gradient(white, white);
-  background-size: 2px 0%, 100% 2px; /* Tamanho das linhas */
-  background-position: 100px, 150px; /* Posiciona as linhas */
-  background-repeat: no-repeat;
-  }
-
-  .bg-table-vertical {
-  background-image: linear-gradient(white, white), linear-gradient(white, white);
-  background-size: 2px 50%, 0% 2px; /* Tamanho das linhas */
-  background-position: 100px, 150px; /* Posiciona as linhas */
-  background-repeat: no-repeat;
-  }
-
-  .custom-flip-card {
-    border: 1px solid white;
-    border-radius: 2%;
-    padding: 4px;
-    max-width: 250px;
-  }
-</style>
