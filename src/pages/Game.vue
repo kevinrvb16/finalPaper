@@ -125,9 +125,10 @@ export default {
       console.log(" localStorage.getItem('logedUserId'):", localStorage.getItem('logedUserId'))
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
       const anonUserExist = localStorage.getItem("anonUser")
-      if(this.isDealer || (anonUserExist && anonUserExist.split(',')[0] == this.id)) {
+
+      if(this.isDealer ||  anonUserExist?.split(',')[0] == this.id) {
         this.noAnonUser = false;
-        this.anonUser = anonUserExist.split(',')[1]
+        this.anonUser = anonUserExist?.split(',')[1]
       }
       // Set up real-time subscription
       this.getParticipants()
