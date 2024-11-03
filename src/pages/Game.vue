@@ -21,7 +21,7 @@
             <metrics-group></metrics-group>
           </v-row>
         </v-col>
-        <v-col no-gutters cols="2">
+        <v-col no-gutters cols="2" class="d-flex align-center">
           <participants :gameId="id"></participants>
         </v-col>
       </v-row>
