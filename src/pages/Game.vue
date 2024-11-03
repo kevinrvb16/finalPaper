@@ -135,7 +135,7 @@ export default {
         this.anonUser = anonUserExist?.split(',')[1]
       }
       // Set up real-time subscription
-      if(!this.participants) {
+      if(this.participants.length == 0) {
         this.getParticipants()
       }
       supabase
