@@ -19,7 +19,7 @@
         <v-col no-gutters cols="10">
           <v-row class="pa-0" align="center">
             <metrics-group :isDealer="isDealer" @input="setSelectedGroups"></metrics-group>
-            <v-col v-if="!isDealer" cols="3" justify="center">
+            <v-col v-if="!isDealer" cols="3" justify="center" align="center">
               <v-btn append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
             </v-col>
           </v-row>
