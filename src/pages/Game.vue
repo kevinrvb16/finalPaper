@@ -169,11 +169,6 @@ export default {
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'participants' }, this.handleUpdate)
         .subscribe()
       }
-      if(this.isDealer) {
-        this.participants?.forEach((participant)=> {
-          this.setChoosenParticipants(participant)
-        })
-      }
     }
   },
   methods: {
@@ -246,6 +241,11 @@ export default {
     },
     async setParticipants(participants) {
       this.participants = participants
+      if(this.isDealer) {
+        this.participants?.forEach((participant)=> {
+          this.setChoosenParticipants(participant)
+        })
+      }
     },
     setSelectedGroups(selectedGroups) {
       this.selectedGroups = selectedGroups
