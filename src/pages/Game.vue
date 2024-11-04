@@ -33,7 +33,7 @@
           </v-row>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
-          <participants :gameId="id"></participants>
+          <participants :gameId="id" @input="setParticipants"></participants>
         </v-col>
       </v-row>
     </v-responsive>
@@ -153,17 +153,6 @@ export default {
         this.noAnonUser = false;
         this.anonUser = anonUserExist?.split(',')[1]
       }
-      // Set up real-time subscription
-      if(this.participants.length == 0) {
-        this.getParticipants()
-      }
-      console.log('dealer', this.isDealer)
-      console.log('dealer', this.participants)
-      if(this.isDealer && this.participants.length > 0) {
-        this.participants.forEach((participant)=> {
-          this.setChoosenParticipants(participant)
-        })
-      }
       supabase
         .channel(`participants${this.id}`)
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
@@ -179,6 +168,11 @@ export default {
         .channel(`participantsProblems${this.id}`)
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'participants' }, this.handleUpdate)
         .subscribe()
+      }
+      if(this.isDealer) {
+        this.participants?.forEach((participant)=> {
+          this.setChoosenParticipants(participant)
+        })
       }
     }
   },
@@ -250,14 +244,8 @@ export default {
         this.status = this?.game?.status
       }
     },
-    async getParticipants() {
-      const participantsInDataBase = await supabase
-        .from('participants')
-        .select("*")
-        .eq('game_session', this.id)
-      if (!participantsInDataBase.error) {
-        this.participants = participantsInDataBase?.data
-      }
+    async setParticipants(participants) {
+      this.participants = participants
     },
     setSelectedGroups(selectedGroups) {
       this.selectedGroups = selectedGroups

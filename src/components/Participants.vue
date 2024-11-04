@@ -48,7 +48,7 @@ export default {
                 .eq('game_session', this.gameId)
             if (!participantsInDataBase.error) {
                 this.participants = participantsInDataBase?.data
-
+                this.$emit('input', this.participants)
             }
         },
         handleInserts(payload) {
