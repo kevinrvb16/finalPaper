@@ -157,6 +157,11 @@ export default {
       if(this.participants.length == 0) {
         this.getParticipants()
       }
+      if(this.isDealer && this.participants.length > 0) {
+        this.participants.forEach((participant)=> {
+          setChoosenParticipants(participant)
+        })
+      }
       supabase
         .channel(`participants${this.id}`)
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
@@ -176,6 +181,15 @@ export default {
     }
   },
   methods: {
+    setChoosenParticipants(participant) {
+      const newProblem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ? participant.problemA : participant.problemB
+        const values = newProblem.split(',')
+        this.choosenByParticipants = [
+          ...this.choosenByParticipants,
+          { nickname: participant.nickname, value: values[0] },
+          { nickname: participant.nickname, value: values[1] }
+        ]
+    },
     hasParticipants() {
       return this.participants?.length > 0
     },
@@ -214,13 +228,8 @@ export default {
         this.status = payload.new.status
       }
       if (payload?.new?.nickname) {
-        const newProblem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ? payload.new.problemA : payload.new.problemB
-        const values = newProblem.split(',')
-        this.choosenByParticipants = [
-          ...this.choosenByParticipants,
-          { nickname: payload.new.nickname, value: values[0] },
-          { nickname: payload.new.nickname, value: values[1] }
-        ]
+        const participant = payload.new
+        setChoosenParticipants(participant)
       }
     },
     handleInserts(payload) {
