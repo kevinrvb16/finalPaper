@@ -48,7 +48,6 @@
           <tr
             v-for="item in gamesList"
             :key="item?.name"
-            style="min-height: 48px;"
           >
             <td>{{ item?.name }}</td>
             <td>
@@ -71,17 +70,17 @@
             <td class="d-flex justify-space-between">
               <v-tooltip text="copiar link">
                 <template v-slot:activator="{ props }">
-                  <v-btn v-bind="props" @click="copyURL(item.id)" icon="mdi-link-variant"></v-btn>
+                  <v-btn v-bind="props" size="small" @click="copyURL(item.id)" icon="mdi-link-variant"></v-btn>
                 </template>
               </v-tooltip>
               <v-tooltip text="abrir em nova guia">
                 <template v-slot:activator="{ props }">
-                  <v-btn v-bind="props" :href="getLink(item.id)" target="_blank" icon="mdi-open-in-new"></v-btn>
+                  <v-btn v-bind="props" size="small" :href="getLink(item.id)" target="_blank" icon="mdi-open-in-new"></v-btn>
                 </template>
               </v-tooltip>
               <v-tooltip text="Excluir jogo!">
                 <template v-slot:activator="{ props }">
-                  <v-btn v-bind="props" @click="deleteRow(item.id)" icon="mdi-delete-outline"></v-btn>
+                  <v-btn v-bind="props" size="small" @click="deleteRow(item.id)" icon="mdi-delete-outline"></v-btn>
                 </template>
               </v-tooltip>
             </td>
