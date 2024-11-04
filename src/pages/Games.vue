@@ -125,7 +125,6 @@ export default {
   methods: {
     async createGameSession(obj) {
       const { name, problemA, problemB } = obj
-      console.log(obj)
       if (!this.user) {
         console.error('User not logged in');
         return;
@@ -140,7 +139,7 @@ export default {
 
         const { data, error } = await supabase
           .from('game_sessions')
-          .insert([{ created_by: this.user?.id, name, problemA: problems[0], problemB: problems[1] }])
+          .insert([{ created_by: this.user?.id, name, problemA: problems[0].id, problemB: problems[1].id }])
           .select()
         console.log('data inside createGameSession: ', data)
         if (error) throw error
