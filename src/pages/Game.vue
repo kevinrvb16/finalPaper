@@ -201,12 +201,11 @@ export default {
       }
     },
     async changeStatus(status) {
-      console.log('this.problem', this.problem)
       const resp = await supabase
         .from('game_sessions')
         .update({ status, currentProblem: this?.problem?.name })
         .eq('id', this.id)
-        .select()
+        .select('*, problemA (name, description), problemB (name, description)')
       if (!resp.error) {
         this.game = resp.data[0]
         this.status = this?.game?.status
