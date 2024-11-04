@@ -129,7 +129,7 @@ export default {
     if (this.id) {
       const { data: game_sessions } = await supabase
         .from('game_sessions')
-        .select("*")
+        .select("*, problemA (*), problemB (*)")
         .eq('id', this.id)
       this.game = game_sessions[0];
       console.log("this.game: ", this.game)

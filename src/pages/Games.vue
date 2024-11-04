@@ -132,9 +132,15 @@ export default {
       }
       this.loading = true
       try {
+        const { data: problems, error: err } = await supabase
+          .from('problems')
+          .insert([{ name: problemA.name, description: problemA.description }, { name: problemB.name, description: problemB.description }])
+          .select('id')
+          if (err) throw error
+
         const { data, error } = await supabase
           .from('game_sessions')
-          .insert([{ created_by: this.user?.id, name, problemA, problemB }])
+          .insert([{ created_by: this.user?.id, name, problemA: problems[0], problemB: problems[1] }])
           .select()
         console.log('data inside createGameSession: ', data)
         if (error) throw error
@@ -173,7 +179,7 @@ export default {
       if (this.user) {
         const { data: game_sessions } = await supabase
           .from('game_sessions')
-          .select("*")
+          .select("*, problems (*)")
           .eq('created_by', this.user.id)
         this.gamesList = game_sessions;
       }
