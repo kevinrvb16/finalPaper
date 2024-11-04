@@ -6,7 +6,7 @@
       <v-btn text=" Jogar " class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
     </div>
     <v-responsive class="align-center mx-auto" v-else-if="status == 'started'">
-      <div class="py-4 d-flex justify-space-around align-center">
+      <div class="pb-4 pt-2 d-flex justify-space-around align-center">
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('not_started')">Voltar para Jogo não iniciado</v-btn>
         <div class="text-center">
           <p v-if="isDealer" class="text-h5 font-weight-bold">Grupos de Métricas</p>
