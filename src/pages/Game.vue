@@ -237,13 +237,14 @@ export default {
       }, this.selectedGroups.shift().value)
       console.log('this.game', this.game)
       if (this?.game?.currentProblem?.id == this?.game?.problemA?.id) {
+        const uId = localStorage.getItem("anonUser").split(',')[2]
         const participantProblem = supabase
           .from('participants')
           .update({problemA: selected})
-          .eq('id', localStorage.getItem("anonUser").split(',')[2])
+          .eq('id', uId)
           .select('*')
         console.log('participantProblem:', participantProblem)
-        console.log("localStorage.getItem('anonUser').split(',')[2]:", localStorage.getItem("anonUser").split(',')[2])
+        console.log("uId:", uId)
         return
       }
       if (this?.game?.currentProblem?.id == this?.game?.problemB?.id) {
