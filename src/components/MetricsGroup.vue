@@ -22,8 +22,12 @@
                 </div>
             </v-card-item>
             <v-card-actions v-if="avatars.length > 0">
-                <v-avatar v-for="avatar in avatars">
-                    <v-img v-if="avatar.value == metricGroup.value" :width="32" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                <v-avatar v-for="avatar in avatars" v-if="avatar.value == metricGroup.value">
+                    <v-tooltip :text="avatar.nickname">
+                        <template v-slot:activator="{ props }">
+                            <v-img :width="32" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                        </template>
+                    </v-tooltip>
                 </v-avatar>
             </v-card-actions>
         </v-card>
