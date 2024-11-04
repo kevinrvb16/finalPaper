@@ -22,8 +22,8 @@
                 </div>
             </v-card-item>
             <v-card-actions v-if="avatars.length > 0">
-                <v-avatar v-if="avatar.value == metricGroup.value" v-for="avatar in avatars">
-                    <v-img :width="36" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                <v-avatar v-for="avatar in avatars">
+                    <v-img v-if="avatar.value == metricGroup.value" :width="36" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
                 </v-avatar>
             </v-card-actions>
         </v-card>
