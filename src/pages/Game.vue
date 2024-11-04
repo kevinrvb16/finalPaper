@@ -132,7 +132,7 @@ export default {
     if (this.id) {
       const { data: game_sessions } = await supabase
         .from('game_sessions')
-        .select("*, problemA (*), problemB (*)")
+        .select("*, problemA (name, description), problemB (name, description)")
         .eq('id', this.id)
       this.game = game_sessions[0];
       this.status = this.game?.status
@@ -176,8 +176,6 @@ export default {
         return
       }
       if (data) {
-        console.log('data createAnonUser', data)
-        console.log(this.anonUser)
         const participant = await supabase
           .from('participants')
           .insert([
@@ -190,7 +188,6 @@ export default {
         }
         if (participant?.data) {
           localStorage.setItem("anonUser", `${this.id},${this.anonUser}`)
-          console.log(participant.data)
           this.noAnonUser = false;
         }
       }
@@ -228,7 +225,6 @@ export default {
       this.selectedGroups = selectedGroups
     },
     async send() {
-      console.log("this.selectedGroups: ", this.selectedGroups)
       const selected = this.selectedGroups.reduce((acc, curr) => acc + ',' + curr.value, '')
       console.log(selected)
     }
