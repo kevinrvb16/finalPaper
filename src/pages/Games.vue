@@ -140,7 +140,6 @@ export default {
           .from('game_sessions')
           .insert([{ created_by: this.user?.id, name, problemA: problems[0].id, problemB: problems[1].id }])
           .select('*, problemA (name, description), problemB (name, description)')
-        console.log('data inside createGameSession: ', data)
         if (error) throw error
 
         // Generate a session link
@@ -154,7 +153,6 @@ export default {
       }
     },
     async deleteRow(id) {
-      console.log('id delete row:',id)
       const { error } = await supabase
         .from('game_sessions')
         .delete()
@@ -173,7 +171,6 @@ export default {
       this.setList();
     },
     async setList() {
-      console.log("this.user",this.user)
       if (this.user) {
         const { data: game_sessions } = await supabase
           .from('game_sessions')

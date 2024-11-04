@@ -199,9 +199,7 @@ export default {
   },
   mounted() {
     this.metricsOfFirstGroup = this.metricOfEachGroup[this.metricsGroup[0].value]
-    console.log(this.metricsOfFirstGroup)
     this.metricsOfSecondGroup = this.metricOfEachGroup[this.metricsGroup[1].value]
-    console.log(this.metricsOfSecondGroup)
   },
   methods: {
     dragStart(event) {
@@ -209,11 +207,9 @@ export default {
     },
     dropChip(event) {
       const data = event.dataTransfer.getData('text');
-      console.log('Dropped Chip: ', data);
     },
     dropCard(event) {
       const data = event.dataTransfer.getData('text');
-      console.log('Dropped on Card: ', data);
     }
   },
   validations() {

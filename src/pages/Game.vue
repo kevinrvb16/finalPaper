@@ -192,7 +192,6 @@ export default {
           { nickname: participant.nickname, value: values[0] },
           { nickname: participant.nickname, value: values[1] }
         ]
-        console.log("this.choosenByParticipants", this.choosenByParticipants)
     },
     hasParticipants() {
       return this.participants?.length > 0
