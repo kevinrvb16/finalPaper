@@ -10,7 +10,7 @@
             density="compact"
             min-height="33vh"
             max-width="288"
-            :disabled="alreadyChoose || isDealer || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
+            :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 10"
             >
             <v-card-item>
@@ -102,11 +102,13 @@ export default {
     },
     methods: {
         selectGroup(metricGroup) {
-            const index = this.selectedGroups.indexOf(metricGroup)
-            index != -1 ? this.selectedGroups.splice(index, 1) : this.selectedGroups.push(metricGroup)
-            console.log("this.selectedGroups: ", this.selectedGroups)
-            if ( this.selectedGroups.length == 2) {
-                this.$emit('input', this.selectedGroups)
+            if (!this.isDealer) {
+                const index = this.selectedGroups.indexOf(metricGroup)
+                index != -1 ? this.selectedGroups.splice(index, 1) : this.selectedGroups.push(metricGroup)
+                console.log("this.selectedGroups: ", this.selectedGroups)
+                if ( this.selectedGroups.length == 2) {
+                    this.$emit('input', this.selectedGroups)
+                }
             }
         }
     }
