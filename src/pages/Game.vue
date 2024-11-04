@@ -188,7 +188,7 @@ export default {
         }
         if (participant?.data) {
           console.log("participant: ",participant?.data)
-          localStorage.setItem("anonUser", `${this.id},${this.anonUser},${participant?.data?.id}`)
+          localStorage.setItem("anonUser", `${this.id},${this.anonUser},${participant?.data[0].id}`)
           this.noAnonUser = false;
         }
       }
