@@ -11,7 +11,7 @@
         <div class="text-center">
           <p v-if="isDealer" class="text-h5">Grupos de Métricas</p>
           <p v-else class="my-3 text-h5">Selecione 2 grupos de métricas</p>
-          <p class="mt-3">Dor selecionada: <strong>{{  game?.currentProblem }}</strong></p>
+          <p class="mt-3">Dor selecionada: <strong>{{  game?.currentProblem?.name }}</strong></p>
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
       </div>
@@ -132,7 +132,7 @@ export default {
     if (this.id) {
       const { data: game_sessions } = await supabase
         .from('game_sessions')
-        .select("*, problemA (name, description), problemB (name, description)")
+        .select("*, problemA (id, name, description), problemB (id, name, description)")
         .eq('id', this.id)
       this.game = game_sessions[0];
       this.status = this.game?.status
@@ -187,7 +187,7 @@ export default {
           return
         }
         if (participant?.data) {
-          localStorage.setItem("anonUser", `${this.id},${this.anonUser}`)
+          localStorage.setItem("anonUser", `${this.id},${this.anonUser},${participant?.data?.id}`)
           this.noAnonUser = false;
         }
       }
@@ -203,9 +203,9 @@ export default {
     async changeStatus(status) {
       const resp = await supabase
         .from('game_sessions')
-        .update({ status, currentProblem: this?.problem?.name })
+        .update({ status, currentProblem: this?.problem?.id })
         .eq('id', this.id)
-        .select('*, problemA (name, description), problemB (name, description)')
+        .select('*, problemA (id, name, description), problemB (id, name, description), currentProblem (id, name, description)')
       if (!resp.error) {
         this.game = resp.data[0]
         this.status = this?.game?.status
@@ -228,6 +228,24 @@ export default {
         return acc + ',' + curr.value
       }, this.selectedGroups.shift().value)
       console.log(selected)
+      if (this?.game?.currentProblem?.id == this?.game?.problemA?.id) {
+        supabase
+          .from('participants')
+          .update({problemA: selected})
+          .eq('id', localStorage.getItem("anonUser").split(',')[2])
+          .select('*')
+        console.log('participantProblem:', participantProblem)
+        return
+      }
+      if (this?.game?.currentProblem?.id == this?.game?.problemB?.id) {
+        const participantProblem = supabase
+          .from('participants')
+          .update({problemB: selected})
+          .eq('id', localStorage.getItem("anonUser").split(',')[2])
+          .select('*')
+        console.log('participantProblem:', participantProblem)
+      }
+
     }
   },
   validations: {
