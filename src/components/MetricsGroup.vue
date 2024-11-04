@@ -21,6 +21,11 @@
                 <div class="text-caption align-justify">{{ metricGroup.description }}</div>
                 </div>
             </v-card-item>
+            <v-card-actions v-if="avatars.length > 0">
+                <v-avatar v-if="avatar.value == metricGroup.value" v-for="avatar in avatars">
+                    <v-img :width="36" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                </v-avatar>
+            </v-card-actions>
         </v-card>
     </v-col>
 </template>
@@ -88,6 +93,11 @@ export default {
             type: Boolean,
             default: false,
 
+        },
+        avatars: {
+            required: false,
+            type: Array,
+            default: []
         }
     },
     methods: {

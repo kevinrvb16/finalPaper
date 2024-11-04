@@ -25,7 +25,7 @@
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10">
           <v-row class="pa-0" align="center">
-            <metrics-group :isDealer="isDealer" @input="setSelectedGroups" :alreadyChoose="problemsSaved"></metrics-group>
+            <metrics-group :isDealer="isDealer" @input="setSelectedGroups" :alreadyChoose="problemsSaved" :avatars="choosenByParticipants" ></metrics-group>
             <v-col v-if="!isDealer" cols="3" justify="center" align="center">
               <v-btn :disabled="problemsSaved" append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
               <div v-if="problemsSaved">Enviado com sucesso, aguarde o Dealer avançar.</div>
@@ -135,6 +135,7 @@ export default {
       participants: [],
       problem: null,
       id: JSON.parse(this?.$route.query.id),
+      choosenByParticipants: []
     }
   },
   async mounted() {
@@ -165,6 +166,12 @@ export default {
           .channel(`game_sessions${this.id}`)
           .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'game_sessions' }, this.handleUpdate)
           .subscribe()
+      }
+      if (this.isDealer) {
+        supabase
+        .channel(`participantsProblems${this.id}`)
+        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'participants' }, this.handleUpdate)
+        .subscribe()
       }
     }
   },
@@ -203,7 +210,18 @@ export default {
       }
     },
     handleUpdate(payload) {
-      this.status = payload?.new?.status
+      if (payload?.new?.status) {
+        this.status = payload.new.status
+      }
+      if (payload?.new?.nickname) {
+        const newProblem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ? payload.new.problemA : payload.new.problemB
+        const values = newProblem.split(',')
+        this.choosenByParticipants = [
+          ...this.choosenByParticipants,
+          { nickname: payload.new.nickname, value: values[0] },
+          { nickname: payload.new.nickname, value: values[1] }
+        ]
+      }
     },
     handleInserts(payload) {
       if (!payload.errors) {
