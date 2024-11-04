@@ -9,7 +9,7 @@
       <div class="py-4 d-flex justify-space-around align-center">
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('not_started')">Voltar para Jogo não iniciado</v-btn>
         <div class="text-center">
-          <h1 v-if="isDealer" class="text-h5 font-weight-bold">Grupos de Métricas</h1>
+          <p v-if="isDealer" class="text-h5 font-weight-bold">Grupos de Métricas</p>
           <p v-else class="my-3 text-h5">Selecione 2 grupos de métricas</p>
           <p class="mt-3">Dor selecionada: <strong>{{  game?.currentProblem }}</strong></p>
         </div>
