@@ -10,15 +10,16 @@
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('not_started')">Voltar para Jogo não iniciado</v-btn>
         <div class="text-center">
           <h1 class="text-h4 font-weight-bold">Grupos de Métricas</h1>
-          <p class="my-3">Selecione 2 grupos de métricas para a dor selecionada:</p>
-          <p class="mt-3"><v-icon icon="mdi-dots-hexagon"></v-icon>{{  game?.currentProblem }}</p>
+          <p class="my-3">Selecione 2 grupos de métricas</p>
+          <p class="mt-3">Dor selecionada: <v-icon icon="mdi-dots-hexagon"></v-icon>{{  game?.currentProblem }}</p>
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
       </div>
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10">
           <v-row class="pa-0">
-            <metrics-group :isDealer="isDealer"></metrics-group>
+            <metrics-group :isDealer="isDealer" @input="setSelectedGroups"></metrics-group>
+            <v-btn append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
           </v-row>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
@@ -113,7 +114,7 @@ export default {
   },
   data() {
     return {
-      selectedMetrics: [],
+      selectedGroups: [],
       game: {},
       isDealer: false,
       noAnonUser: true,
@@ -163,7 +164,7 @@ export default {
     redirect() {
       this.$router.push({
         path: '/game',
-        query: { metricGroup: JSON.stringify(this.selectedMetrics) }
+        query: { metricGroup: JSON.stringify(this.selectedGroups) }
       })
     },
     async createAnonUser() {
@@ -220,6 +221,12 @@ export default {
         this.participants = participantsInDataBase?.data
       }
     },
+    setSelectedGroups(selectedGroups) {
+      this.selectedGroups = selectedGroups
+    },
+    async send() {
+      console.log("this.selectedGroups: ", this.selectedGroups)
+    }
   },
   validations: {
     problem: {
