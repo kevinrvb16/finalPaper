@@ -109,7 +109,6 @@ export default {
             if (!this.isDealer) {
                 const index = this.selectedGroups.indexOf(metricGroup)
                 index != -1 ? this.selectedGroups.splice(index, 1) : this.selectedGroups.push(metricGroup)
-                console.log("this.selectedGroups: ", this.selectedGroups)
                 if ( this.selectedGroups.length == 2) {
                     this.$emit('input', this.selectedGroups)
                 }
