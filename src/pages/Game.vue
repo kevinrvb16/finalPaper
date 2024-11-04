@@ -28,6 +28,7 @@
             <metrics-group :isDealer="isDealer" @input="setSelectedGroups"></metrics-group>
             <v-col v-if="!isDealer" cols="3" justify="center" align="center">
               <v-btn append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
+              <div v-if="problemsSaved">Enviado com sucesso, aguarde o Dealer avançar.</div>
             </v-col>
           </v-row>
         </v-col>
@@ -125,6 +126,7 @@ export default {
     return {
       selectedGroups: [],
       game: {},
+      problemsSaved: false,
       isDealer: false,
       noAnonUser: true,
       anonUser: '',
@@ -235,35 +237,26 @@ export default {
       const selected = this.selectedGroups.reduce((acc, curr) => {
         return acc + ',' + curr.value
       }, this.selectedGroups.shift().value)
-      console.log('this.game', this.game)
-      if (this?.game?.currentProblem?.id == this?.game?.problemA?.id) {
-        const uId = localStorage.getItem("anonUser").split(',')[2];
-        try {
-          const { data, error } = await supabase
-            .from('participants')
-            .update({ problemA: selected })
-            .eq('id', uId)
-            .select('*');
-          
-          if (error) {
-            console.error("Erro ao atualizar o problema do participante:", error);
-            return;
-          }
-          console.log("participantProblem:", data);
-        } catch (error) {
-          console.error("Erro na execução da atualização:", error);
-        }
-        console.log("uId:", uId);
-      }
-      if (this?.game?.currentProblem?.id == this?.game?.problemB?.id) {
-        const participantProblem = supabase
+      const  updateProblem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ?
+        { problemA: selected } : { problemB: selected }
+      const uId = localStorage.getItem("anonUser").split(',')[2];
+      try {
+        const { data, error } = await supabase
           .from('participants')
-          .update({problemB: selected})
-          .eq('id', localStorage.getItem("anonUser").split(',')[2])
-          .select('*')
-        console.log('participantProblem:', participantProblem)
+          .update(updateProblem)
+          .eq('id', uId)
+          .select('*');
+        
+        if (error) {
+          console.error("Erro ao atualizar o problema do participante:", error);
+          return;
+        }
+        console.log("participantProblem:", data);
+        this.problemsSaved = true
+      } catch (error) {
+        console.error("Erro na execução da atualização:", error);
       }
-
+      console.log("uId:", uId);
     }
   },
   validations: {
