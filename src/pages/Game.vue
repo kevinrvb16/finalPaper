@@ -229,7 +229,7 @@ export default {
     },
     async send() {
       console.log("this.selectedGroups: ", this.selectedGroups)
-      const selected = this.selectedGroups.reduce((acc, curr) => acc + curr.value, '')
+      const selected = this.selectedGroups.reduce((acc, curr) => acc + ',' + curr.value, '')
       console.log(selected)
     }
   },
