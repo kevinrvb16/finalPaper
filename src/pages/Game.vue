@@ -157,6 +157,8 @@ export default {
       if(this.participants.length == 0) {
         this.getParticipants()
       }
+      console.log('dealer', this.isDealer)
+      console.log('dealer', this.participants)
       if(this.isDealer && this.participants.length > 0) {
         this.participants.forEach((participant)=> {
           this.setChoosenParticipants(participant)
