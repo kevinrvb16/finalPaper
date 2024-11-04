@@ -218,14 +218,12 @@ export default {
           return
         }
         if (participant?.data) {
-          console.log("participant: ",participant?.data)
           localStorage.setItem("anonUser", `${this.id},${this.anonUser},${participant?.data[0].id}`)
           this.noAnonUser = false;
         }
       }
     },
     handleUpdate(payload) {
-      console.log('payload', payload)
       if (payload?.new?.status) {
         this.status = payload.new.status
       }
@@ -280,12 +278,10 @@ export default {
           console.error("Erro ao atualizar o problema do participante:", error);
           return;
         }
-        console.log("participantProblem:", data);
         this.problemsSaved = true
       } catch (error) {
         console.error("Erro na execução da atualização:", error);
       }
-      console.log("uId:", uId);
     }
   },
   validations: {
