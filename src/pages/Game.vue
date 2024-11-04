@@ -133,7 +133,7 @@ export default {
     if (this.id) {
       const { data: game_sessions } = await supabase
         .from('game_sessions')
-        .select("*, problemA (id, name, description), problemB (id, name, description)")
+        .select("*, problemA (id, name, description), problemB (id, name, description), currentProblem (id, name, description)")
         .eq('id', this.id)
       this.game = game_sessions[0];
       this.status = this.game?.status
