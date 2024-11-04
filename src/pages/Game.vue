@@ -228,9 +228,9 @@ export default {
       const selected = this.selectedGroups.reduce((acc, curr) => {
         return acc + ',' + curr.value
       }, this.selectedGroups.shift().value)
-      console.log(selected)
+      console.log('this.game', this.game)
       if (this?.game?.currentProblem?.id == this?.game?.problemA?.id) {
-        supabase
+        const participantProblem = supabase
           .from('participants')
           .update({problemA: selected})
           .eq('id', localStorage.getItem("anonUser").split(',')[2])
