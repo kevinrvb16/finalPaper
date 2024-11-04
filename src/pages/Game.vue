@@ -243,6 +243,7 @@ export default {
           .eq('id', localStorage.getItem("anonUser").split(',')[2])
           .select('*')
         console.log('participantProblem:', participantProblem)
+        console.log("localStorage.getItem('anonUser').split(',')[2]:", localStorage.getItem("anonUser").split(',')[2])
         return
       }
       if (this?.game?.currentProblem?.id == this?.game?.problemB?.id) {
