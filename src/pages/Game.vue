@@ -184,6 +184,7 @@ export default {
     setChoosenParticipants(participant) {
       const newProblem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ? participant.problemA : participant.problemB
         const values = newProblem.split(',')
+        this.choosenByParticipants = this.choosenByParticipants.filter(item => item.nickname != participant.nickname)
         this.choosenByParticipants = [
           ...this.choosenByParticipants,
           { nickname: participant.nickname, value: values[0] },
