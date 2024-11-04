@@ -229,6 +229,10 @@ export default {
     },
     async send() {
       console.log("this.selectedGroups: ", this.selectedGroups)
+      const selected = this.selectedGroups.reduce((prev, curr) => {
+        prev += curr.value
+      }, '')
+      console.log(selected)
     }
   },
   validations: {
