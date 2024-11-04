@@ -5,7 +5,7 @@
       <v-text-field class="mt-4" min-width="17vw" v-model="anonUser" label="Digite seu nickname" variant="solo-filled"></v-text-field>
       <v-btn text=" Jogar " class="mx-auto" color="primary" @click="createAnonUser"></v-btn>
     </div>
-    <v-responsive class="align-center mx-auto" v-else-if="game?.status == 'started'">
+    <v-responsive class="align-center mx-auto" v-else-if="status == 'started'">
       <div class="py-4 d-flex justify-space-around align-center">
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('not_started')">Voltar para Jogo não iniciado</v-btn>
         <div class="text-center">
@@ -27,7 +27,7 @@
         </v-col>
       </v-row>
     </v-responsive>
-    <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="game?.status == 'not_started'">
+    <v-responsive class="align-center fill-height mx-auto" max-width="1000" v-else-if="status == 'not_started'">
       <div :class="`d-flex ${hasParticipants ? 'justify-space-between' : 'justify-space-center'}`">
         <div class="mr-2">
           <h2>Jogo não iniciado</h2>
@@ -120,6 +120,7 @@ export default {
       noAnonUser: true,
       anonUser: '',
       nickname: '',
+      status: '',
       participants: [],
       problem: null,
       id: JSON.parse(this?.$route.query.id),
@@ -132,8 +133,7 @@ export default {
         .select("*, problemA (*), problemB (*)")
         .eq('id', this.id)
       this.game = game_sessions[0];
-      console.log("this.game: ", this.game)
-      console.log(" localStorage.getItem('logedUserId'):", localStorage.getItem('logedUserId'))
+      this.status = this.game?.status
       this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
       const anonUserExist = localStorage.getItem("anonUser")
 
@@ -210,6 +210,7 @@ export default {
         .select()
       if (!resp.error) {
         this.game = resp.data[0]
+        this.status = this?.game?.status
       }
     },
     async getParticipants() {
