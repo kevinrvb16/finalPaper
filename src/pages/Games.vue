@@ -178,7 +178,7 @@ export default {
       if (this.user) {
         const { data: game_sessions } = await supabase
           .from('game_sessions')
-          .select("*, problems (*)")
+          .select("*, problemA (name, description), problemB (name, description)")
           .eq('created_by', this.user.id)
         this.gamesList = game_sessions;
       }
