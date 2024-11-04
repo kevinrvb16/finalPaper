@@ -237,15 +237,23 @@ export default {
       }, this.selectedGroups.shift().value)
       console.log('this.game', this.game)
       if (this?.game?.currentProblem?.id == this?.game?.problemA?.id) {
-        const uId = localStorage.getItem("anonUser").split(',')[2]
-        const participantProblem = supabase
-          .from('participants')
-          .update({problemA: selected})
-          .eq('id', uId)
-          .select('*')
-        console.log('participantProblem:', participantProblem)
-        console.log("uId:", uId)
-        return
+        const uId = localStorage.getItem("anonUser").split(',')[2];
+        try {
+          const { data, error } = await supabase
+            .from('participants')
+            .update({ problemA: selected })
+            .eq('id', uId)
+            .select('*');
+          
+          if (error) {
+            console.error("Erro ao atualizar o problema do participante:", error);
+            return;
+          }
+          console.log("participantProblem:", data);
+        } catch (error) {
+          console.error("Erro na execução da atualização:", error);
+        }
+        console.log("uId:", uId);
       }
       if (this?.game?.currentProblem?.id == this?.game?.problemB?.id) {
         const participantProblem = supabase
