@@ -159,7 +159,7 @@ export default {
       }
       if(this.isDealer && this.participants.length > 0) {
         this.participants.forEach((participant)=> {
-          setChoosenParticipants(participant)
+          this.setChoosenParticipants(participant)
         })
       }
       supabase
@@ -230,7 +230,7 @@ export default {
       }
       if (payload?.new?.nickname) {
         const participant = payload.new
-        setChoosenParticipants(participant)
+        this.setChoosenParticipants(participant)
       }
     },
     handleInserts(payload) {
