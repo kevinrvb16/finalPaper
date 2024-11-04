@@ -10,7 +10,7 @@
             density="compact"
             min-height="33vh"
             max-width="288"
-            :disabled="isDealer || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
+            :disabled="alreadyChoose || isDealer || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 10"
             >
             <v-card-item>
@@ -82,6 +82,12 @@ export default {
             required: false,
             type: Boolean,
             default: false
+        },
+        alreadyChoose: {
+            required: false,
+            type: Boolean,
+            default: false,
+
         }
     },
     methods: {
