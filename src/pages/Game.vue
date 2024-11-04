@@ -224,6 +224,7 @@ export default {
       }
     },
     handleUpdate(payload) {
+      console.log('payload', payload)
       if (payload?.new?.status) {
         this.status = payload.new.status
       }
