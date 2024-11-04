@@ -17,9 +17,9 @@
       </div>
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10">
-          <v-row class="pa-0">
+          <v-row class="pa-0" align="center">
             <metrics-group :isDealer="isDealer" @input="setSelectedGroups"></metrics-group>
-            <v-col v-if="!isDealer" cols="3" align="center" justify="center">
+            <v-col v-if="!isDealer" cols="3" justify="center">
               <v-btn append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
             </v-col>
           </v-row>
