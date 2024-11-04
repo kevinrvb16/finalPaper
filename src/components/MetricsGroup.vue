@@ -5,7 +5,7 @@
             variant="tonal"
             class="mx-auto"
             @click="selectGroup(metricGroup)"
-            hover
+            :hover="!isDealer"
             link
             density="compact"
             :min-height="isDealer ? '40vh' : '35vh'"
