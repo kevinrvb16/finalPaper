@@ -13,7 +13,7 @@
           <p v-if="isDealer" class="text-h5">Grupos de Métricas</p>
           <p v-else class="my-3 text-h5">Selecione 2 grupos de métricas</p>
           <p class="mt-3">Dor selecionada: 
-            <v-tooltip :text="game?.currentProblem?.description || problem?.description">
+            <v-tooltip :text="game?.currentProblem ? game?.currentProblem?.description : problem?.description">
               <template v-slot:activator="{ props }">
                 <strong>{{  problem?.name }}</strong>
               </template>
