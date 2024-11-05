@@ -315,7 +315,11 @@ export default {
           console.log('Grupos de métricas selecionados:', onlyTwo)
           //a partir dos values mais votados pegar os objetos dos grupos de métricas
           this.problem.metricsGroups = onlyTwo.map((value) => {
-            return this.metricsGroup.filter((group) => group.value == value)
+            console.log('value:', value)
+            return this.metricsGroup.filter((group) => {
+              console.log('group:', group)
+              return group.value == value
+            })
           })
           // salva no supabase
           console.log('Grupos de métricas selecionados:', this.problem.metricsGroups)
