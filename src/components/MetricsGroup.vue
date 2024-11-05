@@ -36,7 +36,7 @@
     </v-col>
 </template>
 <script>
-import { metricsGroup } from '@/db/metricsGroup';
+import metricsGroup from '@/db/metricsGroup';
 
 
 export default {

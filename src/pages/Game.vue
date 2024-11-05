@@ -140,7 +140,7 @@ import { required } from '@vuelidate/validators'
 import MetricsGroup from '@/components/MetricsGroup.vue';
 import Participants from '@/components/Participants.vue';
 import Metrics from '@/components/Metrics.vue';
-import { metricsGroup } from '@/db/metricsGroup';
+import metricsGroup from '@/db/metricsGroup';
 export default {
   setup() {
     return { v$: useVuelidate() }
