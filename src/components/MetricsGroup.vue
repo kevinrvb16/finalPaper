@@ -15,7 +15,7 @@
             >
             <v-card-item class="pb-0">
                 <div>
-                <div class="text-overline mb-1">
+                <div :class="`${small ? 'text-custom' : 'text-overline'} mb-1`">
                     {{ metricGroup.title }}
                 </div>
                 <div v-if="!small" class="text-caption align-justify">{{ metricGroup.description }}</div>
@@ -130,4 +130,12 @@ export default {
 }
 </script>
 <style>
+    .text-custom {
+        font-size: .62em !important;
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: .1em !important;
+        font-family: Roboto, sans-serif;
+        text-transform: uppercase !important;
+    }
 </style>
