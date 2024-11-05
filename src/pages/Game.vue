@@ -312,7 +312,7 @@ export default {
           this.problem.metricsGroups = sortedMetricsGroups.slice(0, 2)
           //a partir dos values mais votados pegar os objetos dos grupos de métricas
           this.problem.metricsGroups = this.problem.metricsGroups.map((value) => {
-            return this.getMetricsGroup.find((group) => group.value == value)
+            return this.getMetricsGroup().find((group) => group.value == value)
           })
           // salva no supabase
           this.sendToProblemsDatabase()
