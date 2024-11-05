@@ -327,6 +327,7 @@ export default {
       const metricsGroups = this.problem.metricsGroups.reduce((acc, curr) => {
         return acc + ',' + curr.value
       }, this.problem.metricsGroups.shift().value)
+      console.log('Grupos de métricas que vão rpo db:', metricsGroups)
       const { data, error } = supabase
         .from('problems')
         .update({ metricsGroups })
