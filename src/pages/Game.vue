@@ -116,8 +116,8 @@
         <v-col no-gutters cols="10">
           <v-row class="pa-0" align="center">
             <metrics-group :isDealer="isDealer" :small="true" @input="setSelectedGroups" :alreadyChoose="problemsSaved" :avatars="choosenByParticipants" ></metrics-group>
-            <metrics :selectedGroups="selectedGroups" :problem="problem"></metrics>
           </v-row>
+          <metrics :selectedGroups="selectedGroups" :problem="problem"></metrics>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
           <participants :gameId="id" @input="setParticipants"></participants>
