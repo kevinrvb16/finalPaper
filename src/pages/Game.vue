@@ -257,7 +257,7 @@ export default {
     },
     async changeStatus(direction = 'next') {
       let i = this.statusOptions.indexOf(this.status)
-      direction == 'next' ? i++ : i--
+      direction != 'prev' ? i++ : i--
       const resp = await supabase
         .from('game_sessions')
         .update({ status: this.statusOptions[i], currentProblem: this?.problem?.id })
