@@ -13,7 +13,7 @@
             :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 10"
             >
-            <v-card-item>
+            <v-card-item class="pb-0">
                 <div>
                 <div class="text-overline mb-1">
                     {{ metricGroup.title }}
@@ -21,7 +21,7 @@
                 <div v-if="!small" class="text-caption align-justify">{{ metricGroup.description }}</div>
                 </div>
             </v-card-item>
-            <v-card-actions v-if="avatars.length > 0">
+            <v-card-actions v-if="avatars.length > 0" class="pt-0">
                 <template v-for="avatar in avatars">
                     <v-avatar v-if="avatar.value == metricGroup.value">
                         <v-tooltip :text="avatar.nickname">
