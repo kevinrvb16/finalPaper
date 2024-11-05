@@ -15,7 +15,7 @@
           <p class="mt-3">Dor selecionada: 
             <v-tooltip :text="game?.currentProblem ? game?.currentProblem?.description : problem?.description">
               <template v-slot:activator="{ props }">
-                <strong>{{  problem?.name }}</strong>
+                <strong>{{  game?.currentProblem ? game?.currentProblem?.name : problem?.name }}</strong>
               </template>
             </v-tooltip>
           </p>
