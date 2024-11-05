@@ -20,7 +20,7 @@
             </v-tooltip>
           </p>
         </div>
-        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus()">Avançar</v-btn>
+        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus">Avançar</v-btn>
       </div>
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10">
@@ -58,7 +58,7 @@
                 </v-tooltip>
               </v-radio-group>
             </v-list>
-            <v-btn :disabled="v$.$invalid" class="mx-auto mt-4" color="primary" @click="changeStatus('started')">
+            <v-btn :disabled="v$.$invalid" class="mx-auto mt-4" color="primary" @click="changeStatus">
               <v-icon icon="mdi-play" start></v-icon>
               Iniciar jogo
             </v-btn>
