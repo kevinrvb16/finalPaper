@@ -311,10 +311,10 @@ export default {
           //retorna os 2 grupos de métricas mais votados
           const sortedMetricsGroups = Object.keys(metricsGroupsVotes).sort((a, b) => metricsGroupsVotes[b] - metricsGroupsVotes[a])
           console.log('Grupos de métricas votados:', sortedMetricsGroups)
-          this.problem.metricsGroups = sortedMetricsGroups.slice(0, 2)
-          console.log('Grupos de métricas selecionados:', this.problem.metricsGroups)
+          const onlyTwo = sortedMetricsGroups.slice(0, 2)
+          console.log('Grupos de métricas selecionados:', onlyTwo)
           //a partir dos values mais votados pegar os objetos dos grupos de métricas
-          this.problem.metricsGroups = this.problem.metricsGroups.map((value) => {
+          this.problem.metricsGroups = onlyTwo.map((value) => {
             return this.metricsGroup.filter((group) => group.value == value)
           })
           // salva no supabase
