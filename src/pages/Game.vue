@@ -96,6 +96,33 @@
         </div>
       </div>
     </v-responsive>
+    <v-responsive class="align-center mx-auto" v-else-if="status == 'select_metrics'">
+      <div class="pb-4 pt-0 d-flex justify-space-around align-center">
+        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('prev')">Voltar para Grupos de Métricas</v-btn>
+        <div class="text-center">
+          <p v-if="isDealer" class="text-h5">Métricas</p>
+          <p v-else class="my-3 text-h5">Selecione 3 métricas</p>
+          <p class="mt-3">Dor selecionada: 
+            <v-tooltip :text="game.currentProblem.description">
+              <template v-slot:activator="{ props }">
+                <strong>{{  game?.currentProblem?.name }}</strong>
+              </template>
+            </v-tooltip>
+          </p>
+        </div>
+        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus()">Avançar</v-btn>
+      </div>
+      <v-row no-gutters class="mb-3">
+        <v-col no-gutters cols="10">
+          <v-row class="pa-0" align="center">
+            <metrics-group :isDealer="isDealer" @input="setSelectedGroups" :alreadyChoose="problemsSaved" :avatars="choosenByParticipants" ></metrics-group>
+          </v-row>
+        </v-col>
+        <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
+          <participants :gameId="id" @input="setParticipants"></participants>
+        </v-col>
+      </v-row>
+    </v-responsive>
     <div v-else>
       <div class="text-center">
         <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
@@ -107,7 +134,6 @@
 <script>
 import { supabase } from '@/main'
 import { useVuelidate } from '@vuelidate/core';
-import FlipCard from '@/components/FlipCard.vue';
 import HeaderApp from '@/components/HeaderApp.vue'
 import { required } from '@vuelidate/validators'
 import MetricsGroup from '@/components/MetricsGroup.vue';
@@ -118,7 +144,6 @@ export default {
     return { v$: useVuelidate() }
   },
   components: {
-    FlipCard,
     HeaderApp,
     MetricsGroup,
     Participants
