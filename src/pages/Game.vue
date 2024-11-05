@@ -140,6 +140,7 @@ import { required } from '@vuelidate/validators'
 import MetricsGroup from '@/components/MetricsGroup.vue';
 import Participants from '@/components/Participants.vue';
 import Metrics from '@/components/Metrics.vue';
+import { metricsGroup } from '@/db/metricsGroup';
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -306,9 +307,32 @@ export default {
             }
             return acc
           }, {})
-          console.log('metricsGroupsVotes', metricsGroupsVotes)
+          //retorna os 2 grupos de métricas mais votados
+          const sortedMetricsGroups = Object.keys(metricsGroupsVotes).sort((a, b) => metricsGroupsVotes[b] - metricsGroupsVotes[a])
+          this.problem.metricsGroups = sortedMetricsGroups.slice(0, 2)
+          //a partir dos values mais votados pegar os objetos dos grupos de métricas
+          this.problem.metricsGroups = this.problem.metricsGroups.map((value) => {
+            return this.getMetricsGroup.find((group) => group.value == value)
+          })
+          // salva no supabase
+          this.sendToProblemsDatabase()
         }
       }
+    },
+    sendToProblemsDatabase() {
+      const metricsGroups = this.problem.metricsGroups.reduce((acc, curr) => {
+        return acc + ',' + curr.value
+      }, this.problem.metricsGroups.shift().value)
+      const { data, error } = supabase
+        .from('problems')
+        .update({ metricsGroups })
+        .eq('id', this.problem.id)
+        .select()
+      if (error) throw error
+      console.log('Problema atualizado com os grupos de métricas:', data)
+    },
+    getMetricsGroup() {
+      return metricsGroup
     },
     async setParticipants(participants) {
       this.participants = participants
