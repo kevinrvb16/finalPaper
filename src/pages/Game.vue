@@ -288,6 +288,7 @@ export default {
       
       this.game = data[0]
       this.status = this?.game?.status
+      this.prepareVariables()
       } catch (error) {
       console.error("Error changing status:", error);
       }
