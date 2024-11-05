@@ -115,7 +115,7 @@
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10">
           <v-row class="pa-0" align="center">
-            <metrics-group :isDealer="isDealer" @input="setSelectedGroups" :alreadyChoose="problemsSaved" :avatars="choosenByParticipants" ></metrics-group>
+            <metrics-group :isDealer="isDealer" :small="true" @input="setSelectedGroups" :alreadyChoose="problemsSaved" :avatars="choosenByParticipants" ></metrics-group>
           </v-row>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">

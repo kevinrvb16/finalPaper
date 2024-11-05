@@ -8,7 +8,7 @@
             hover
             :link="!isDealer"
             density="compact"
-            :min-height="isDealer ? '40vh' : '35vh'"
+            :min-height="getMinHeight"
             max-width="288"
             :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 10"
@@ -18,7 +18,7 @@
                 <div class="text-overline mb-1">
                     {{ metricGroup.title }}
                 </div>
-                <div class="text-caption align-justify">{{ metricGroup.description }}</div>
+                <div v-if="!small" class="text-caption align-justify">{{ metricGroup.description }}</div>
                 </div>
             </v-card-item>
             <v-card-actions v-if="avatars.length > 0">
@@ -104,6 +104,11 @@ export default {
             required: false,
             type: Array,
             default: []
+        },
+        small: {
+            required: false,
+            type: Boolean,
+            default: false
         }
     },
     methods: {
@@ -115,6 +120,11 @@ export default {
                     this.$emit('input', this.selectedGroups)
                 }
             }
+        },
+        getMinHeight() {
+            if (this.this.isDealer) return '38vh'
+            if (this.small) return '100'
+            return '35vh'
         }
     }
 }
