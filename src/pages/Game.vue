@@ -166,36 +166,46 @@ export default {
     }
   },
   async mounted() {
-    if (this.id) {
-      const { data: game_sessions } = await supabase
-        .from('game_sessions')
-        .select("*, problemA (id, name, description), problemB (id, name, description), currentProblem (id, name, description)")
-        .eq('id', this.id)
-      this.game = game_sessions[0];
-      this.status = this.game?.status
-      this.isDealer = this.game.created_by == localStorage.getItem('logedUserId')
-      const anonUserExist = localStorage.getItem("anonUser")
+    try {
+      if (this.id) {
+        const { data: game_sessions, error } = await supabase
+          .from('game_sessions')
+          .select("*, problemA (id, name, description), problemB (id, name, description), currentProblem (id, name, description)")
+          .eq('id', this.id);
 
-      if(this.isDealer ||  anonUserExist?.split(',')[0] == this.id) {
-        this.noAnonUser = false;
-        this.anonUser = anonUserExist?.split(',')[1]
-      }
-      supabase
-        .channel(`participants${this.id}`)
-        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
-        .subscribe()
-      if (!this.isDealer) {
+        if (error) throw error;
+
+        this.game = game_sessions[0];
+        this.status = this.game?.status;
+        this.isDealer = this.game.created_by == localStorage.getItem('logedUserId');
+        const anonUserExist = localStorage.getItem("anonUser");
+
+        if (this.isDealer || anonUserExist?.split(',')[0] == this.id) {
+          this.noAnonUser = false;
+          this.anonUser = anonUserExist?.split(',')[1];
+        }
+
         supabase
-          .channel(`game_sessions${this.id}`)
-          .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'game_sessions' }, this.handleUpdate)
-          .subscribe()
+          .channel(`participants${this.id}`)
+          .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
+          .subscribe();
+
+        if (!this.isDealer) {
+          supabase
+            .channel(`game_sessions${this.id}`)
+            .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'game_sessions' }, this.handleUpdate)
+            .subscribe();
+        }
+
+        if (this.isDealer) {
+          supabase
+            .channel(`participantsProblems${this.id}`)
+            .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'participants' }, this.handleUpdate)
+            .subscribe();
+        }
       }
-      if (this.isDealer) {
-        supabase
-        .channel(`participantsProblems${this.id}`)
-        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'participants' }, this.handleUpdate)
-        .subscribe()
-      }
+    } catch (error) {
+      console.error('Error in mounted:', error);
     }
   },
   methods: {
