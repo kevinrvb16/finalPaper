@@ -10,9 +10,9 @@
     </div>
     <div class="bg-table-vertical">
       <v-row justify="center" align="center" class="ml-7 mr-2 bg-table-horizontal">
-        <v-tooltip :text="metricsGroup[0].description" max-width="360px">
+        <v-tooltip :text="metricsGroup[0]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
-            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0].backgroundColor">{{metricsGroup[0].title}}</v-btn>
+            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0]?.backgroundColor">{{metricsGroup[0].title}}</v-btn>
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfFirstGroup" :key="index">
@@ -23,9 +23,9 @@
         <v-btn>DOR/PROBLEMA</v-btn>
       </v-row>
       <v-row class="ml-7 mr-2 bg-table-horizontal"  justify="center" align="center">
-        <v-tooltip :text="metricsGroup[1].description" max-width="360px">
+        <v-tooltip :text="metricsGroup[1]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
-            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1].backgroundColor">{{metricsGroup[1].title}}</v-btn>
+            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1]?.backgroundColor">{{metricsGroup[1]?.title}}</v-btn>
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
