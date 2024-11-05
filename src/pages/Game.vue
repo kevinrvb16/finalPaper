@@ -321,13 +321,13 @@ export default {
         }
       }
     },
-    sendToProblemsDatabase() {
+    async sendToProblemsDatabase() {
       const selected = this.problem.metricsGroups
       const metricsGroups = selected.reduce((acc, curr) => {
         return acc + ',' + curr.value
       }, selected.shift().value)
       console.log('Grupos de métricas que vão rpo db:', metricsGroups)
-      const { data, error } = supabase
+      const { data, error } = await supabase
         .from('problems')
         .update({ metricsGroups })
         .eq('id', this.problem.id)
