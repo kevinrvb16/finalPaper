@@ -85,6 +85,7 @@ export default {
             return '35vh'
         },
         getMetricsGroup() {
+            console.log('db.metricsGroup', db.metricsGroup)
             return db.metricsGroup
         }
     }

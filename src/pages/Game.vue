@@ -332,6 +332,7 @@ export default {
       console.log('Problema atualizado com os grupos de métricas:', data)
     },
     getMetricsGroup() {
+      console.log('db.metricsGroup', db.metricsGroup)
       return db.metricsGroup
     },
     async setParticipants(participants) {
