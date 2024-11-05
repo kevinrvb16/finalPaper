@@ -116,6 +116,7 @@
         <v-col no-gutters cols="10">
           <v-row class="pa-0" align="center">
             <metrics-group :isDealer="isDealer" :small="true" @input="setSelectedGroups" :alreadyChoose="problemsSaved" :avatars="choosenByParticipants" ></metrics-group>
+            <metrics :selectedGroups="selectedGroups" :problem="problem"></metrics>
           </v-row>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
@@ -138,7 +139,7 @@ import HeaderApp from '@/components/HeaderApp.vue'
 import { required } from '@vuelidate/validators'
 import MetricsGroup from '@/components/MetricsGroup.vue';
 import Participants from '@/components/Participants.vue';
-
+import Metrics from '@/components/Metrics.vue';
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -146,7 +147,8 @@ export default {
   components: {
     HeaderApp,
     MetricsGroup,
-    Participants
+    Participants,
+    Metrics
   },
   data() {
     return {
@@ -170,7 +172,7 @@ export default {
       if (this.id) {
         const { data: game_sessions, error } = await supabase
           .from('game_sessions')
-          .select("*, problemA (id, name, description), problemB (id, name, description), currentProblem (id, name, description)")
+          .select("*, problemA (id, name, description, metricsGroups), problemB (id, name, description, metricsGroups), currentProblem (id, name, description)")
           .eq('id', this.id);
 
         if (error) throw error;
@@ -273,16 +275,21 @@ export default {
       }
     },
     async changeStatus(direction = 'next') {
+      try {
       let i = this.statusOptions.indexOf(this.status)
       direction != 'prev' ? i++ : i--
-      const resp = await supabase
+      const { data, error } = await supabase
         .from('game_sessions')
         .update({ status: this.statusOptions[i], currentProblem: this?.problem?.id })
         .eq('id', this.id)
         .select('*, problemA (id, name, description), problemB (id, name, description), currentProblem (id, name, description)')
-      if (!resp.error) {
-        this.game = resp.data[0]
-        this.status = this?.game?.status
+      
+      if (error) throw error;
+      
+      this.game = data[0]
+      this.status = this?.game?.status
+      } catch (error) {
+      console.error("Error changing status:", error);
       }
     },
     async setParticipants(participants) {
