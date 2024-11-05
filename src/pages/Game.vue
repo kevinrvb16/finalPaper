@@ -179,7 +179,6 @@ export default {
 
         this.game = game_sessions[0];
         this.status = this.game?.status;
-        this.prepareVariables();
         this.isDealer = this.game.created_by == localStorage.getItem('logedUserId');
         const anonUserExist = localStorage.getItem("anonUser");
 
@@ -317,6 +316,7 @@ export default {
         this.participants?.forEach((participant)=> {
           this.setChoosenParticipants(participant)
         })
+        this.prepareVariables()
       }
     },
     setSelectedGroups(selectedGroups) {
