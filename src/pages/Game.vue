@@ -315,7 +315,7 @@ export default {
           console.log('Grupos de métricas selecionados:', this.problem.metricsGroups)
           //a partir dos values mais votados pegar os objetos dos grupos de métricas
           this.problem.metricsGroups = this.problem.metricsGroups.map((value) => {
-            return this.metricsGroup.find((group) => group.value == value)
+            return this.metricsGroup.filter((group) => group.value == value)
           })
           // salva no supabase
           console.log('Grupos de métricas selecionados:', this.problem.metricsGroups)
