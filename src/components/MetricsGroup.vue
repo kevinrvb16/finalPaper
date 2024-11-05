@@ -1,5 +1,5 @@
 <template>
-    <v-col class="pb-0 px-1" :cols="small? '' : '3'" cols-xs="6" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center">
+    <v-col class="pb-0 px-1" :cols="small? '' : '3'" cols-xs="6" v-for="(metricGroup, index) in getMetricsGroup" :key="index" justify="center">
         <v-card
             :color="metricGroup.backgroundColor"
             variant="tonal"
