@@ -29,6 +29,7 @@
             <v-col v-if="!isDealer" cols="3" justify="center" align="center">
               <v-btn :disabled="problemsSaved" append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
               <div v-if="problemsSaved">Enviado com sucesso, aguarde o Dealer avançar.</div>
+              <p class="text-caption">Caso queira mudar os cards selecionados, basta atualizar a tela e selecionar outro</p>
             </v-col>
           </v-row>
         </v-col>
