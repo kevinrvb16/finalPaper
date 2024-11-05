@@ -1,4 +1,4 @@
-const  metricsGroupList =  [
+const metricsGroupList =  [
     {
     title: "Qualidade do Produto",
     value: "product_quality",
@@ -43,4 +43,4 @@ const  metricsGroupList =  [
     }
 ]
 
-export default metricsGroupList;
+export { metricsGroupList };
