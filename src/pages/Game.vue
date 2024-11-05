@@ -13,9 +13,9 @@
           <p v-if="isDealer" class="text-h5">Grupos de Métricas</p>
           <p v-else class="my-3 text-h5">Selecione 2 grupos de métricas</p>
           <p class="mt-3">Dor selecionada: 
-            <v-tooltip :text="game.currentProblem.description">
+            <v-tooltip :text="problem?.description">
               <template v-slot:activator="{ props }">
-                <strong>{{  game?.currentProblem?.name }}</strong>
+                <strong>{{  problem?.name }}</strong>
               </template>
             </v-tooltip>
           </p>
@@ -101,7 +101,7 @@
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('prev')">Voltar para Grupos de Métricas</v-btn>
         <div class="text-center">
           <p v-if="isDealer" class="text-h5">Métricas</p>
-          <p v-else class="my-3 text-h5">Selecione 3 métricas</p>
+          <p v-else class="my-3 text-h5">Selecione as métricas</p>
           <p class="mt-3">Dor selecionada: 
             <v-tooltip :text="game.currentProblem.description">
               <template v-slot:activator="{ props }">
@@ -244,10 +244,17 @@ export default {
     handleUpdate(payload) {
       if (payload?.new?.status) {
         this.status = payload.new.status
+        this.getCurrentProblem()
       }
       if (payload?.new?.nickname) {
         const participant = payload.new
         this.setChoosenParticipants(participant)
+      }
+    },
+    getCurrentProblem() {
+      if (this.status == 'select_metrics') {
+        const problem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ? this?.game?.problemA : this?.game?.problemB
+        this.problem = problem
       }
     },
     handleInserts(payload) {
