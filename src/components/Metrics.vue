@@ -216,18 +216,6 @@ export default {
     dropCard(event) {
       const data = event.dataTransfer.getData('text');
     },
-    getProblem() {
-      supabase
-        .from('problems')
-        .select('*')
-        .eq('id', this.problem?.id)
-    },
-    prepareVariables() {
-      this.getCurrentProblem()
-      if (!this.problem?.metricsGroups) {
-        this.getProblem()
-      }
-    },
   },
   validations() {
     return {

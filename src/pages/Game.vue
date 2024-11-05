@@ -292,6 +292,23 @@ export default {
       console.error("Error changing status:", error);
       }
     },
+    prepareVariables() {
+      if(this.status == 'select_metrics') {
+        this.getCurrentProblem()
+        if (!this.problem?.metricsGroups) {
+          //retorna os 2 grupos de métricas mais selecioNADOS PELOS PARTICIPANTS
+          const metricsGroupsVotes = this.choosenByParticipants.reduce((acc, curr) => {
+            if (acc[curr.value]) {
+              acc[curr.value]++
+            } else {
+              acc[curr.value] = 1
+            }
+            return acc
+          }, {})
+          console.log('metricsGroupsVotes', metricsGroupsVotes)
+        }
+      }
+    },
     async setParticipants(participants) {
       this.participants = participants
       if(this.isDealer) {
