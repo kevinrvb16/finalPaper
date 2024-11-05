@@ -86,7 +86,6 @@ export default {
             return '35vh'
         },
         getMetricsGroup() {
-            console.log('metricsGroupList', metricsGroupList)
             return metricsGroupList
         }
     }
