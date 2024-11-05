@@ -165,7 +165,8 @@ export default {
       participants: [],
       problem: null,
       id: JSON.parse(this?.$route.query.id),
-      choosenByParticipants: []
+      choosenByParticipants: [],
+      metricsGroup: metricsGroupList
     }
   },
   async mounted() {
@@ -312,9 +313,10 @@ export default {
           this.problem.metricsGroups = sortedMetricsGroups.slice(0, 2)
           //a partir dos values mais votados pegar os objetos dos grupos de métricas
           this.problem.metricsGroups = this.problem.metricsGroups.map((value) => {
-            return this.getMetricsGroup().find((group) => group.value == value)
+            return this.metricsGroup.find((group) => group.value == value)
           })
           // salva no supabase
+          console.log('Grupos de métricas selecionados:', this.problem.metricsGroups)
           this.sendToProblemsDatabase()
         }
       }
@@ -330,10 +332,6 @@ export default {
         .select()
       if (error) throw error
       console.log('Problema atualizado com os grupos de métricas:', data)
-    },
-    getMetricsGroup() {
-      console.log('metricsGroupList', metricsGroupList)
-      return metricsGroupList
     },
     async setParticipants(participants) {
       this.participants = participants
