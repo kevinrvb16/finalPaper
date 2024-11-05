@@ -43,4 +43,4 @@ const metricsGroup =  [
     }
 ]
 
-export default metricsGroup;
+export { metricsGroup };
