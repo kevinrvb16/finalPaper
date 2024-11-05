@@ -36,7 +36,7 @@
     </v-col>
 </template>
 <script>
-import db from '@/db/metricsGroup';
+import metricsGroupList from '@/db/metricsGroup';
 
 
 export default {
@@ -85,8 +85,8 @@ export default {
             return '35vh'
         },
         getMetricsGroup() {
-            console.log('db.metricsGroup', db.metricsGroup)
-            return db.metricsGroup
+            console.log('metricsGroupList', metricsGroupList)
+            return metricsGroupList
         }
     }
 }

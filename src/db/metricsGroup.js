@@ -1,4 +1,4 @@
-const metricsGroup =  [
+export default metricsGroup =  [
     {
     title: "Qualidade do Produto",
     value: "product_quality",
@@ -42,5 +42,3 @@ const metricsGroup =  [
     backgroundColor: "#6CAF44" // Verde Claro
     }
 ]
-
-export { metricsGroup };

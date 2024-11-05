@@ -140,7 +140,7 @@ import { required } from '@vuelidate/validators'
 import MetricsGroup from '@/components/MetricsGroup.vue';
 import Participants from '@/components/Participants.vue';
 import Metrics from '@/components/Metrics.vue';
-import db from '@/db/metricsGroup';
+import metricsGroupList from '@/db/metricsGroup';
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -332,8 +332,8 @@ export default {
       console.log('Problema atualizado com os grupos de métricas:', data)
     },
     getMetricsGroup() {
-      console.log('db.metricsGroup', db.metricsGroup)
-      return db.metricsGroup
+      console.log('metricsGroupList', metricsGroupList)
+      return metricsGroupList
     },
     async setParticipants(participants) {
       this.participants = participants
