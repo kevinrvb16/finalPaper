@@ -301,7 +301,7 @@ export default {
           const metricsGroupsVotes = this.choosenByParticipants.reduce((acc, curr) => {
             if (acc[curr.value]) {
               acc[curr.value]++
-            } else {
+            } else if (curr?.value) {
               acc[curr.value] = 1
             }
             return acc
