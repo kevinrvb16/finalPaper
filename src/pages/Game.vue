@@ -8,7 +8,7 @@
     </div>
     <v-responsive class="align-center mx-auto" v-else-if="status == 'started'">
       <div class="pb-4 pt-0 d-flex justify-space-around align-center">
-        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('not_started')">Voltar para Jogo não iniciado</v-btn>
+        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('prev')">Voltar para Jogo não iniciado</v-btn>
         <div class="text-center">
           <p v-if="isDealer" class="text-h5">Grupos de Métricas</p>
           <p v-else class="my-3 text-h5">Selecione 2 grupos de métricas</p>
@@ -20,7 +20,7 @@
             </v-tooltip>
           </p>
         </div>
-        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="redirect()">Avançar</v-btn>
+        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus()">Avançar</v-btn>
       </div>
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10">
@@ -132,6 +132,7 @@ export default {
       anonUser: '',
       nickname: '',
       status: '',
+      statusOptions: [ 'not_started', 'started', 'select_metrics', 'voting', 'ended'],
       participants: [],
       problem: null,
       id: JSON.parse(this?.$route.query.id),
@@ -228,10 +229,12 @@ export default {
         this.participants.push(payload?.new)
       }
     },
-    async changeStatus(status) {
+    async changeStatus(direction = 'next') {
+      let i = this.statusOptions.indexOf(this.status)
+      direction == 'next' ? i++ : i--
       const resp = await supabase
         .from('game_sessions')
-        .update({ status, currentProblem: this?.problem?.id })
+        .update({ status: this.statusOptions[i], currentProblem: this?.problem?.id })
         .eq('id', this.id)
         .select('*, problemA (id, name, description), problemB (id, name, description), currentProblem (id, name, description)')
       if (!resp.error) {

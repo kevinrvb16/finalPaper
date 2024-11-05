@@ -56,10 +56,16 @@ export default {
     FlipCard,
     HeaderApp
   },
+  props: {
+    metricsGroup: {
+      type: Array,
+      default: [],
+      required: true
+    }
+  },
   data() {
     return {
       email: '',
-      metricsGroup: JSON.parse(this.$route.query.metricGroup),
       selectedMetrics: [],
       metricsOfFirstGroup: [],
       metricsOfSecondGroup: [],
