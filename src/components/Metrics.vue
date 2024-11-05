@@ -1,13 +1,8 @@
 <template>
-<v-container class="fill-height">
-  <header-app></header-app>
   <v-responsive
     class="align-center mx-auto"
-    max-width="2400"
+    max-width="1200"
   >
-    <div class="text-center my-3">
-      <h1 class="text-h2 font-weight-bold">Metrics Poker</h1>
-    </div>
     <div class="text-center my-3">
       <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="elevated" color="black" size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
       <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="flat" color="black" size="" rounded="circle">Facilidade de coleta</v-chip>
@@ -39,7 +34,6 @@
       </v-row>
     </div>
   </v-responsive>
-</v-container>
 </template>
 
 <script>

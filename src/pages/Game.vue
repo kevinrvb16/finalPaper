@@ -103,7 +103,7 @@
           <p v-if="isDealer" class="text-h5">Métricas</p>
           <p v-else class="my-3 text-h5">Selecione as métricas</p>
           <p class="mt-3">Dor selecionada: 
-            <v-tooltip :text="game.currentProblem.description">
+            <v-tooltip :text="game?.currentProblem?.description">
               <template v-slot:activator="{ props }">
                 <strong>{{  game?.currentProblem?.name }}</strong>
               </template>
