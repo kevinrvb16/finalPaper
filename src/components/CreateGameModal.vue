@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="650">
+  <v-dialog v-model="isDialogOpen" max-width="650">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         v-bind="activatorProps"
@@ -57,7 +57,8 @@ export default {
       problemB: {},
       name: '',
       isEditing: false,
-      currentRow: null
+      currentRow: null,
+      isDialogOpen: false
     }
   },
   validations() {
@@ -101,6 +102,7 @@ export default {
       isActive.value = false
     },
     edit(row) {
+      this.isDialogOpen = true
       console.log('row:', row)
       this.isEditing = true
       this.currentRow = row
