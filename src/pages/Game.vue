@@ -294,6 +294,7 @@ export default {
     prepareVariables() {
       if(this.status == 'select_metrics') {
         this.getCurrentProblem()
+        this.problemsSaved = false
         if (!this.problem?.metricsGroups) {
           if (this.choosenByParticipants.length == 0) {
             setChoosenParticipants(this.participants)
