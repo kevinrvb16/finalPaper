@@ -26,7 +26,7 @@
                     <v-avatar v-if="avatar.value == metricGroup.value">
                         <v-tooltip :text="avatar.nickname">
                             <template v-slot:activator="{ props }">
-                                <v-img :width="small? 16 : 32" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                                <v-img :width="small? 12 : 24" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
                             </template>
                         </v-tooltip>
                     </v-avatar>
