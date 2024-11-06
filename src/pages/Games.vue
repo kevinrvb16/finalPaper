@@ -164,18 +164,22 @@ export default {
     async editGameSession(obj) {
       const { name, problemA, problemB } = obj
       try {
-        const { data: problems, error: err } = await supabase
+        const { data: problemAData, error: errA } = await supabase
           .from('problems')
-          .update([{ name: problemA.name, description: problemA.description }, { name: problemB.name, description: problemB.description }])
-          .in('id', [problemA.id, problemB.id])
-          .select('id')
-          if (err) throw error
+          .update({ description: problemA.description })
+          .eq('id', problemA.id)
+        if (errA) throw errA
+      
+        const { data: problemBData, error: errB } = await supabase
+          .from('problems')
+          .update({ description: problemB.description })
+          .eq('id', problemB.id)
+        if (errB) throw errB
 
-        const { data, error } = await supabase
+        const { error } = await supabase
           .from('game_sessions')
-          .update({ name, problemA: problems[0].id, problemB: problems[1].id })
+          .update({ name, problemA: problemAData.id, problemB: problemBData.id })
           .eq('id', obj.id)
-          .select('*, problemA (name, description), problemB (name, description)')
         if (error) throw error
         this.setList()
       } catch (error) {
