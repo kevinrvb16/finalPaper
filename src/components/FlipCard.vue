@@ -44,7 +44,7 @@ export default {
 <style scoped lang="scss">
 .flip-card {
   perspective: 1080px;
-  height: 30vh;
+  height: 31vh;
 }
 
 .flip-card-inner {
