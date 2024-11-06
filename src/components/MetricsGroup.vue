@@ -1,6 +1,7 @@
 <template>
     <v-col class="pb-0 pr-1 pl-3" :cols="small? '' : '3'" cols-xs="6" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center">
         <v-card
+            :append-icon="selectedGroups.includes(metricGroup) ? 'mdi-check' : ''"
             :color="metricGroup.backgroundColor"
             variant="tonal"
             class="mx-auto"
