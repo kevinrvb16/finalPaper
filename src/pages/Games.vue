@@ -162,19 +162,20 @@ export default {
       }
     },
     async editGameSession(obj) {
-      console.log('obj:', obj)  
       const { name, problemA, problemB } = obj
       try {
         const { data: problemAData, error: errA } = await supabase
           .from('problems')
           .update({ description: problemA.description })
           .eq('id', problemA.id)
+          .select('id')
         if (errA) throw errA
       
         const { data: problemBData, error: errB } = await supabase
           .from('problems')
           .update({ description: problemB.description })
           .eq('id', problemB.id)
+          .select('id')
         if (errB) throw errB
 
         const { error } = await supabase
