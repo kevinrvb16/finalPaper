@@ -81,7 +81,7 @@ export default {
             }
         },
         getMinHeight() {
-            if (this.this.isDealer) return '38vh'
+            if (this.isDealer) return '38vh'
             if (this.small) return '100'
             return '35vh'
         },
