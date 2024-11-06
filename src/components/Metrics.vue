@@ -5,8 +5,8 @@
   >
     <div class="text-center mb-3 mt-5">
       <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable color="black" size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
-      <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable color="black" size="" rounded="circle">Facilidade de coleta</v-chip>
-      <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable color="black" size="" rounded="circle">Preferência pessoal</v-chip>
+      <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable color="black" size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
+      <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable color="black" size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
     </div>
     <div class="bg-table-vertical">
       <v-row justify="center" align="center" class=" bg-table-horizontal">
