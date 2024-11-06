@@ -206,6 +206,15 @@ export default {
     this.metricsOfFirstGroup = this.metricOfEachGroup[this.metricsGroup[0]?.value]
     this.metricsOfSecondGroup = this.metricOfEachGroup[this.metricsGroup[1]?.value]
   },
+  watch: {
+    metricsGroup: {
+      handler() {
+        this.metricsOfFirstGroup = this.metricOfEachGroup[this.metricsGroup[0]?.value]
+        this.metricsOfSecondGroup = this.metricOfEachGroup[this.metricsGroup[1]?.value]
+      },
+      deep: true
+    }
+  },
   methods: {
     dragStart(event) {
       event.dataTransfer.setData('text', event.target.innerText);
