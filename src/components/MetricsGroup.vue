@@ -3,8 +3,8 @@
         <v-card
             :color="metricGroup.backgroundColor"
             variant="tonal"
-            class="mx-auto"
             @click="selectGroup(metricGroup)"
+            class="mx-auto"
             hover
             :link="!isDealer"
             :height="getMinHeight"
