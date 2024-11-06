@@ -3,13 +3,15 @@ const metricsGroupList =  [
     title: "Qualidade do Produto",
     value: "product_quality",
     description: "Se concentra na qualidade do produto ou serviço entregue, incluindo sua funcionalidade, confiabilidade, segurança, facilidade de uso, desempenho, manutenção, entre outros aspectos.",
-    backgroundColor: "#B90000" // Vermelho
+    backgroundColor: "#B90000", // Vermelho
+    backgrounColorRGBA: "rgba(185, 0, 0, 0.5)"
     },
     {
     title: "Recursos e Custos",
     value: "resources",
     description: "Se concentra nos recursos usados no projeto e no custo total do projeto, incluindo o orçamento e o uso de materiais ou ferramentas.",
-    backgroundColor: "#000000" // Preto
+    backgroundColor: "#000000", // Preto
+    backgrounColorRGBA: "rgba(0, 0, 0, 0.5)"
     },
     {
     title: "Desempenho e Processo",
