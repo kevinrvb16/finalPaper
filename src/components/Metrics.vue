@@ -240,7 +240,7 @@ export default {
 }
 
 .back {
-  background-image: url('./assets/image.png');
+  background-image: url('@/assets/image.png');
   color: white;
 }
 
