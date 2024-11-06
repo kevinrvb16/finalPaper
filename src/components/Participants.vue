@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-list>
+        <v-list density="compact">
             <v-list-subheader>Participantes</v-list-subheader>
             <v-list-item
                 v-for="participant in participants"
