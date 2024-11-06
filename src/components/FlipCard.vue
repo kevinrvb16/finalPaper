@@ -2,9 +2,9 @@
   <div :class="`flip-card ${customClassFlipCard}`" @click="isFlipped = !isFlipped">
     <div :class="['flip-card-inner', { 'flipped': isFlipped }]">
       <v-card variant="tonal" :color="color" class="flip-card-front pa-0" outlined>
-        <v-card-title :class="customClassTitle">{{ title }}</v-card-title>
+        <v-card-title :class="`${customClassTitle} text-overline`">{{ title }}</v-card-title>
       </v-card>
-      <v-card variant="tonal" :color="color" class="flip-card-back pa-0" outlined>
+      <v-card variant="tonal" :color="color" class="flip-card-back pa-0 text-caption" outlined>
         <v-card-text>{{ description }}</v-card-text>
       </v-card>
     </div>
@@ -71,7 +71,6 @@ export default {
 .flip-card-front {
   z-index: 2;
   text-align: center;
-  filter: brightness(1.1);
 }
 
 .flip-card-back {
