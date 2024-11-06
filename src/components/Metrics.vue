@@ -224,6 +224,10 @@ export default {
     },
     dropCard(event) {
       const data = event.dataTransfer.getData('text');
+      console.log(data)
+      // permite que o elemento seja solto na área de destino
+      event.preventDefault();
+      
     },
   },
   validations() {
