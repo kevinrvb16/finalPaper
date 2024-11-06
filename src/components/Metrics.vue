@@ -240,8 +240,8 @@ export default {
 }
 
 .rounded-chip {
-  height: 124px;            /* Define a altura do chip */
-  width: 124px;             /* Define a largura do chip */
+  height: 94px;            /* Define a altura do chip */
+  width: 94px;             /* Define a largura do chip */
   border-radius: 50%;       /* Torna o chip completamente circular */
   display: flex;            /* Alinha o conteúdo no centro */
   align-items: center;      /* Alinha verticalmente no centro */
