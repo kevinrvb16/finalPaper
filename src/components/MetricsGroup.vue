@@ -1,10 +1,9 @@
 <template>
     <v-col class="pb-0 pr-1 pl-3" :cols="small? '' : '3'" cols-xs="6" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center">
         <v-card
-            :append-icon="selectedGroups.includes(metricGroup) ? 'mdi-check' : ''"
             :color="metricGroup.backgroundColor"
             variant="tonal"
-            class="mx-auto d-flex"
+            class="mx-auto"
             @click="selectGroup(metricGroup)"
             density="comfortable"
             hover
@@ -17,7 +16,7 @@
             <v-card-item>
                 <div>
                 <div :class="`${small ? 'text-custom' : 'text-overline'}`">
-                    {{ metricGroup.title }}
+                    {{ metricGroup.title }} <v-icon icon="mdi-check" v-if="selectedGroups.includes(metricGroup)"></v-icon>
                 </div>
                 <div v-if="!small" class="text-caption align-justify">{{ metricGroup.description }}</div>
                 </div>
