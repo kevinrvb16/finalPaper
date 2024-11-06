@@ -101,6 +101,7 @@ export default {
       isActive.value = false
     },
     edit(row) {
+      console.log('row:', row)
       this.isEditing = true
       this.currentRow = row
       this.name = row.name
