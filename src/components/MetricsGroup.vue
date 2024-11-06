@@ -7,7 +7,8 @@
             class="mx-auto"
             hover
             :link="!isDealer"
-            :height="isDealer ? '38vh' : '45vh'"
+            :min-height="isDealer ? '307' : '240'"
+            :height="isDealer ? '42vh' : '30vh'"
             max-width="288"
             :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 16"
