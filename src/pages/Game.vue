@@ -303,13 +303,12 @@ export default {
             return acc
           }, {})
           const onlyTwo = Object.keys(metricsGroupsVotes).sort((a, b) => metricsGroupsVotes[b] - metricsGroupsVotes[a]).slice(0, 2)
-          console.log('os dois que ganharam:', onlyTwo)
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => onlyTwo.includes(item.value))
-          console.log('Grupos de métricas selecionados:', this.twoMetricsGroupsSelected)
           this.sendToProblemsDatabase()
         } else {
           console.log('Grupos de métricas que já estão no problema:', this.problem)
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => this.problem.metricsGroups.split(',').includes(item.value))
+          console.log('Grupos de métricas:', this.twoMetricsGroupsSelected)
         }
       }
     },
@@ -318,14 +317,12 @@ export default {
       const metricsGroups = selected.reduce((acc, curr) => {
         return acc + ',' + curr.value
       }, selected.shift().value)
-      console.log('Grupos de métricas que vão rpo db:', metricsGroups)
       const { data, error } = await supabase
         .from('problems')
         .update({ metricsGroups })
         .eq('id', this.problem.id)
         .select()
       if (error) throw error
-      console.log('Problema atualizado com os grupos de métricas:', data)
     },
     async setParticipants(participants) {
       this.participants = participants
