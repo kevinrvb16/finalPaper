@@ -9,7 +9,7 @@
             >
                 <template v-slot:prepend>
                     <v-avatar>
-                        <v-img :width="42" :src="`https://robohash.org/${participant.nickname}`"></v-img>
+                        <v-img :width="35" :src="`https://robohash.org/${participant.nickname}`"></v-img>
                     </v-avatar>
                 </template>
             </v-list-item>
