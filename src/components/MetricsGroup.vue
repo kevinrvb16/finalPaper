@@ -4,7 +4,7 @@
             :append-icon="selectedGroups.includes(metricGroup) ? 'mdi-check' : ''"
             :color="metricGroup.backgroundColor"
             variant="tonal"
-            class="mx-auto"
+            class="mx-auto d-flex"
             @click="selectGroup(metricGroup)"
             density="comfortable"
             hover
