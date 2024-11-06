@@ -167,7 +167,7 @@ export default {
         const { data: problems, error: err } = await supabase
           .from('problems')
           .update([{ name: problemA.name, description: problemA.description }, { name: problemB.name, description: problemB.description }])
-          .eq('id', [problemA.id, problemB.id])
+          .in('id', [problemA.id, problemB.id])
           .select('id')
           if (err) throw error
 
