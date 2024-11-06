@@ -117,7 +117,7 @@
           <v-row class="pa-0" align="center">
             <metrics-group :isDealer="isDealer" :small="true" @input="setSelectedGroups" :alreadyChoose="problemsSaved" :avatars="choosenByParticipants" ></metrics-group>
           </v-row>
-          <metrics :selectedGroups="selectedGroups" :problem="problem"></metrics>
+          <metrics :metricsGroup="twoMetricsGroupsSelected" :problem="problem" :selectedMetrics></metrics>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
           <participants :gameId="id" @input="setParticipants"></participants>
@@ -154,6 +154,7 @@ export default {
   data() {
     return {
       selectedGroups: [],
+      twoMetricsGroupsSelected: [],
       game: {},
       problemsSaved: false,
       isDealer: false,
@@ -226,12 +227,6 @@ export default {
     hasParticipants() {
       return this.participants?.length > 0
     },
-    redirect() {
-      this.$router.push({
-        path: '/game',
-        query: { metricGroup: JSON.stringify(this.selectedGroups) }
-      })
-    },
     async createAnonUser() {
       const { data, error } = await supabase.auth.signInAnonymously()
       if (error) {
@@ -299,7 +294,6 @@ export default {
       if(this.status == 'select_metrics') {
         this.getCurrentProblem()
         if (!this.problem?.metricsGroups) {
-          //retorna os 2 grupos de métricas mais selecioNADOS PELOS PARTICIPANTS
           const metricsGroupsVotes = this.choosenByParticipants.reduce((acc, curr) => {
             if (acc[curr.value]) {
               acc[curr.value]++
@@ -308,21 +302,15 @@ export default {
             }
             return acc
           }, {})
-          //retorna os 2 grupos de métricas mais votados
-          const sortedMetricsGroups = Object.keys(metricsGroupsVotes).sort((a, b) => metricsGroupsVotes[b] - metricsGroupsVotes[a])
-          console.log('Grupos de métricas votados:', sortedMetricsGroups)
-          const onlyTwo = sortedMetricsGroups.slice(0, 2)
-          console.log('Grupos de métricas selecionados:', onlyTwo)
-          //a partir dos values mais votados pegar os 2 objetos dos grupos de métricas
-          this.problem.metricsGroups = this.metricsGroup.filter(item => onlyTwo.includes(item.value))
-          // salva no supabase
-          console.log('Grupos de métricas selecionados:', this.problem.metricsGroups)
+          const onlyTwo = Object.keys(metricsGroupsVotes).sort((a, b) => metricsGroupsVotes[b] - metricsGroupsVotes[a]).slice(0, 2)
+          this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => onlyTwo.includes(item.value))
+          console.log('Grupos de métricas selecionados:', this.twoMetricsGroupsSelected)
           this.sendToProblemsDatabase()
         }
       }
     },
     async sendToProblemsDatabase() {
-      const selected = this.problem.metricsGroups
+      const selected = [...this.twoMetricsGroupsSelected]
       const metricsGroups = selected.reduce((acc, curr) => {
         return acc + ',' + curr.value
       }, selected.shift().value)
