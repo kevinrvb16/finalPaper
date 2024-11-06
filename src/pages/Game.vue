@@ -326,7 +326,7 @@ export default {
     },
     async setParticipants(participants) {
       this.participants = participants
-      if(this.isDealer) {
+      if(this.isDealer || this.game.status == 'select_metrics') {
         this.participants?.forEach((participant)=> {
           this.setChoosenParticipants(participant)
         })
