@@ -254,6 +254,7 @@ export default {
       if (payload?.new?.status) {
         this.status = payload.new.status
         this.getCurrentProblem()
+        this.prepareVariables()
       }
       if (payload?.new?.nickname) {
         const participant = payload.new
