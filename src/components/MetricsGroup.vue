@@ -5,6 +5,7 @@
             variant="tonal"
             class="mx-auto"
             @click="selectGroup(metricGroup)"
+            density="comfortable"
             hover
             :link="!isDealer"
             :height="getMinHeight"
