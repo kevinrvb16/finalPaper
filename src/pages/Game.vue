@@ -306,9 +306,7 @@ export default {
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => onlyTwo.includes(item.value))
           this.sendToProblemsDatabase()
         } else {
-          console.log('Grupos de métricas que já estão no problema:', this.problem)
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => this.problem.metricsGroups.split(',').includes(item.value))
-          console.log('Grupos de métricas:', this.twoMetricsGroupsSelected)
         }
       }
     },
