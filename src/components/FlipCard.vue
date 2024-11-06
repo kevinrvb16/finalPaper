@@ -68,7 +68,7 @@ export default {
 .flip-card-front {
   z-index: 2;
   text-align: center;
-  filter: brightness(1.4);
+  filter: brightness(1.1);
 }
 
 .flip-card-back {
