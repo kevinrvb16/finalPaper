@@ -12,11 +12,11 @@
       <v-row justify="center" align="center" class=" bg-table-horizontal">
         <v-tooltip :text="metricsGroup[0]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
-            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0]?.backgroundColorRGBA">{{metricsGroup[0]?.title}}</v-btn>
+            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0]?.color">{{metricsGroup[0]?.title}}</v-btn>
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-          <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColorRGBA"></flip-card>
+          <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].color"></flip-card>
         </v-col>
       </v-row>
       <v-row class="ml-2">
@@ -25,11 +25,11 @@
       <v-row class="bg-table-horizontal"  justify="center" align="center">
         <v-tooltip :text="metricsGroup[1]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
-            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1]?.backgroundColorRGBA">{{metricsGroup[1]?.title}}</v-btn>
+            <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1]?.color">{{metricsGroup[1]?.title}}</v-btn>
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
-          <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColorRGBA"></flip-card>
+          <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].color"></flip-card>
         </v-col>
       </v-row>
     </div>
