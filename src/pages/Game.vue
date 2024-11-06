@@ -308,6 +308,7 @@ export default {
           console.log('Grupos de métricas selecionados:', this.twoMetricsGroupsSelected)
           this.sendToProblemsDatabase()
         } else {
+          console.log('Grupos de métricas que já estão no problema:', this.problem)
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => this.problem.metricsGroups.split(',').includes(item.value))
         }
       }
