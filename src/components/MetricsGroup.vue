@@ -14,7 +14,7 @@
             :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 16"
             >
-            <v-card-item class="pb-0">
+            <v-card-item>
                 <div>
                 <div :class="`${small ? 'text-custom' : 'text-overline'}`">
                     {{ metricGroup.title }}
