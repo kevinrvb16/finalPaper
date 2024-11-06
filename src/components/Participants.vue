@@ -52,7 +52,7 @@ export default {
             }
         },
         handleInserts(payload) {
-            if (!payload.errors && payload?.new?.game_session == this.gameId) {
+            if (!payload.errors && payload?.new?.game_session == this.gameId && !this.participants.find(participant => participant.id == payload?.new?.id)) {
                 this.participants.push(payload?.new)
             }
         },
