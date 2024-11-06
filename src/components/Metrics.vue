@@ -9,7 +9,7 @@
       <v-chip class="mx-4 mb-3 rounded-chip" draggable variant="flat" color="black" size="" rounded="circle">Preferência pessoal</v-chip>
     </div>
     <div class="bg-table-vertical">
-      <v-row justify="center" align="center" class="ml-7 mr-2 bg-table-horizontal">
+      <v-row justify="center" align="center" class=" bg-table-horizontal">
         <v-tooltip :text="metricsGroup[0]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
             <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0]?.backgroundColorRGBA">{{metricsGroup[0]?.title}}</v-btn>
@@ -22,7 +22,7 @@
       <v-row class="ml-2">
         <v-btn>DOR/PROBLEMA</v-btn>
       </v-row>
-      <v-row class="ml-7 mr-2 bg-table-horizontal"  justify="center" align="center">
+      <v-row class="bg-table-horizontal"  justify="center" align="center">
         <v-tooltip :text="metricsGroup[1]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
             <v-btn class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1]?.backgroundColorRGBA">{{metricsGroup[1]?.title}}</v-btn>
