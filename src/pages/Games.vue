@@ -93,10 +93,10 @@
         </tbody>
       </v-table>
     </v-responsive>
-    <v-snackbar v-model="showSnackbar" :timeout="2500" color="success">
+    <v-snackbar v-model="showSnackbar" :timeout="3500" color="success">
       Texto copiado com sucesso!
     </v-snackbar>
-    <v-snackbar v-model="showError" :timeout="2500" color="error">
+    <v-snackbar v-model="showError" :timeout="3500" color="error">
       {{ errorMessage }}
     </v-snackbar>
   </v-container>
@@ -232,7 +232,7 @@ export default {
         this.showSnackBar = true
         setTimeout(() => {
           this.showSnackBar = false
-        }, 2500)
+        }, 3500)
       })
     },
     getLink(id) {
