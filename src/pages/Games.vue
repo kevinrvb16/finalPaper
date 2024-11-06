@@ -80,7 +80,7 @@
               </v-tooltip>
               <v-tooltip text="Editar jogo">
                 <template v-slot:activator="{ props }">
-                  <v-btn v-bind="props" size="x-small" @click="openEditModal(item)" icon="mdi-pencil"></v-btn>
+                  <v-btn v-bind="props" size="x-small" @click="openEditModal(item)" icon="mdi-pencil-outline"></v-btn>
                 </template>
               </v-tooltip>
               <v-tooltip text="Excluir jogo!">
