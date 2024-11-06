@@ -209,6 +209,7 @@ export default {
   watch: {
     metricsGroup: {
       handler() {
+        console.log(this.metricsGroup)
         this.metricsOfFirstGroup = this.metricOfEachGroup[this.metricsGroup[0]?.value]
         this.metricsOfSecondGroup = this.metricOfEachGroup[this.metricsGroup[1]?.value]
       },
