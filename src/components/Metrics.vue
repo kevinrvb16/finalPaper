@@ -16,9 +16,6 @@
           <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
         </v-col>
       </v-row>
-      <v-row class="ml-2">
-        <v-btn variant="tonal" >DOR: {{ problem?.name }}</v-btn>
-      </v-row>
       <v-row class="bg-table-horizontal"  justify="center" align="center">
         <v-tooltip :text="metricsGroup[1]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
