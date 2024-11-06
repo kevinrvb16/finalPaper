@@ -4,7 +4,9 @@
     max-width="1200"
   >
     <div class="text-center mb-3 mt-5">
-      <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
+      <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+        <v-avatar image="@/assets/image.png"></v-avatar>
+      </v-chip>
       <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
       <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
     </div>
@@ -227,7 +229,7 @@ export default {
       console.log(data)
       // permite que o elemento seja solto na área de destino
       event.preventDefault();
-      
+
     },
   },
   validations() {
