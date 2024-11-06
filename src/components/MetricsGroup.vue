@@ -80,8 +80,8 @@ export default {
             }
         },
         getMinHeight() {
-            if (this?.isDealer) return '43vh'
-            if (this?.small) return '100'
+            if (this?.isDealer) {return '43vh'}
+            if (this?.small) {return '100'}
             return '38vh'
         },
         getMetricsGroup() {
