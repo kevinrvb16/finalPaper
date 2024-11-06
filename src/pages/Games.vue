@@ -168,19 +168,17 @@ export default {
           .from('problems')
           .update({ description: problemA.description })
           .eq('id', problemA.id)
-          .select('id')
         if (errA) throw errA
       
         const { data: problemBData, error: errB } = await supabase
           .from('problems')
           .update({ description: problemB.description })
           .eq('id', problemB.id)
-          .select('id')
         if (errB) throw errB
 
         const { error } = await supabase
           .from('game_sessions')
-          .update({ name, problemA: problemAData.id, problemB: problemBData.id })
+          .update({ name})
           .eq('id', obj.id)
         if (error) throw error
         this.setList()
