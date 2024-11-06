@@ -4,11 +4,15 @@
     max-width="1200"
   >
     <div class="text-center mb-3 mt-5">
-      <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+      Relevância para a dor: <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
         <v-avatar image="@/assets/image.png"></v-avatar>
       </v-chip>
-      <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
-      <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
+      Facilidade de coleta: <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+        <v-avatar image="@/assets/image.png"></v-avatar>
+      </v-chip>
+      Preferência pessoal: <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+        <v-avatar image="@/assets/image.png"></v-avatar>
+      </v-chip>
     </div>
     <div class="bg-table-vertical">
       <v-row justify="center" align="center" class=" bg-table-horizontal">
@@ -251,15 +255,12 @@ export default {
 }
 
 .rounded-chip {
-  height: 94px;            /* Define a altura do chip */
-  width: 94px;             /* Define a largura do chip */
   border-radius: 50%;       /* Torna o chip completamente circular */
   display: flex;            /* Alinha o conteúdo no centro */
   align-items: center;      /* Alinha verticalmente no centro */
   justify-content: center;  /* Alinha horizontalmente no centro */
   text-align: center;       /* Centraliza o texto */
   white-space: normal!important;      /* Permite que o texto quebre linha */
-  padding: 25px;            /* Adiciona espaçamento interno */
   word-wrap: break-word!important;    /* Quebra palavras longas */
   overflow: hidden;         /* Esconde o conteúdo que transborda */
 }
