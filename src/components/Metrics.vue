@@ -5,15 +5,17 @@
   >
     <div class="text-center mb-3 mt-5">
       Relevância para a dor: <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-        <v-avatar image="@/assets/image.png"></v-avatar>
+        <v-avatar image="@/assets/ficha-outlined.png"></v-avatar>
       </v-chip>
       Facilidade de coleta: <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-        <v-avatar image="@/assets/image.png"></v-avatar>
+        <v-avatar image="@/assets/ficha-preta.png"></v-avatar>
       </v-chip>
       Preferência pessoal: <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-        <v-avatar image="@/assets/image.png"></v-avatar>
+        <v-avatar image="@/assets/ficha.png"></v-avatar>
       </v-chip>
     </div>
+    <div>Arraste e solte as fichas acima em cima de cada carta abaixo.</div>
+    <div>Clique sobre a carta para ver a descrição.</div>
     <div class="bg-table-vertical">
       <v-row justify="center" align="center" class=" bg-table-horizontal">
         <v-tooltip :text="metricsGroup[0]?.description" max-width="360px">
