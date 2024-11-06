@@ -12,7 +12,7 @@
             :height="getMinHeight"
             max-width="288"
             :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
-            :elevation="!selectedGroups.includes(metricGroup) ? 0 : 20"
+            :elevation="!selectedGroups.includes(metricGroup) ? 0 : 16"
             >
             <v-card-item class="pb-0">
                 <div>
@@ -80,8 +80,8 @@ export default {
             }
         },
         getMinHeight() {
-            if (this.isDealer) return '43vh'
-            if (this.small) return '100'
+            if (this?.isDealer) return '43vh'
+            if (this?.small) return '100'
             return '38vh'
         },
         getMetricsGroup() {
