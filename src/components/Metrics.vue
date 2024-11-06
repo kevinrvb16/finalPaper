@@ -248,7 +248,7 @@ export default {
   justify-content: center;  /* Alinha horizontalmente no centro */
   text-align: center;       /* Centraliza o texto */
   white-space: normal!important;      /* Permite que o texto quebre linha */
-  padding: 34px;            /* Adiciona espaçamento interno */
+  padding: 25px;            /* Adiciona espaçamento interno */
   word-wrap: break-word!important;    /* Quebra palavras longas */
   overflow: hidden;         /* Esconde o conteúdo que transborda */
 }
