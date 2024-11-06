@@ -303,6 +303,7 @@ export default {
             return acc
           }, {})
           const onlyTwo = Object.keys(metricsGroupsVotes).sort((a, b) => metricsGroupsVotes[b] - metricsGroupsVotes[a]).slice(0, 2)
+          console.log('os dois que ganharam:', onlyTwo)
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => onlyTwo.includes(item.value))
           console.log('Grupos de métricas selecionados:', this.twoMetricsGroupsSelected)
           this.sendToProblemsDatabase()
