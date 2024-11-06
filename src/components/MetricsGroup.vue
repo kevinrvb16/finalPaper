@@ -7,7 +7,6 @@
             @click="selectGroup(metricGroup)"
             hover
             :link="!isDealer"
-            density="compact"
             :height="getMinHeight"
             max-width="288"
             :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
