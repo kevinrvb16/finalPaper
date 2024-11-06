@@ -294,6 +294,9 @@ export default {
       if(this.status == 'select_metrics') {
         this.getCurrentProblem()
         if (!this.problem?.metricsGroups) {
+          if (this.choosenByParticipants.length == 0) {
+            setChoosenParticipants(this.participants)
+          }
           const metricsGroupsVotes = this.choosenByParticipants.reduce((acc, curr) => {
             if (acc[curr.value]) {
               acc[curr.value]++
