@@ -128,6 +128,12 @@
         <p>Aguarde o dealer iniciar, enquanto isso beba água.</p>
       </div>
     </div>
+    <v-snackbar v-model="showSnackbar" :timeout="3500" color="success">
+      {{ successMessage }}
+    </v-snackbar>
+    <v-snackbar v-model="showError" :timeout="3500" color="error">
+      {{ errorMessage }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -166,7 +172,11 @@ export default {
       problem: null,
       id: JSON.parse(this?.$route.query.id),
       choosenByParticipants: [],
-      metricsGroup: metricsGroupList
+      metricsGroup: metricsGroupList,
+      showSnackBar: false,
+      showError: false,
+      errorMessage: 'Ocorreu um erro',
+      successMessage: 'Salvo com sucesso'
     }
   },
   async mounted() {
@@ -221,9 +231,27 @@ export default {
       return this.participants?.length > 0
     },
     async createAnonUser() {
+      const { data: participants, error: err } = await supabase
+        .from('participants')
+        .select()
+        .eq('game_session', this.id)
+        .eq('nickname', this.anonUser)
+      if (err) {
+        console.log('error CreateAnonUser', err)
+        this.errorMessage = err.message
+        this.showError = true
+        return
+      }
+      if (participants.length > 0) {
+        this.errorMessage = 'Já existe um participante com esse nickname'
+        this.showError = true
+        return
+      }
       const { data, error } = await supabase.auth.signInAnonymously()
       if (error) {
         console.log('error CreateAnonUser', error)
+        this.errorMessage = error.message
+        this.showError = true
         return
       }
       if (data) {
@@ -234,7 +262,8 @@ export default {
           ])
           .select()
         if (participant?.error) {
-          console.log('error participant', error)
+          this.errorMessage = participant?.error.message
+          this.showError = true
           return
         }
         if (participant?.data) {
@@ -271,12 +300,15 @@ export default {
         .select('*, problemA (id, name, description), problemB (id, name, description), currentProblem (id, name, description)')
       
       if (error) throw error;
-      
+      this.successMessage = 'Status de jogo atualizado com sucesso'
+      this.showSnackBar = true
       this.game = data[0]
       this.status = this?.game?.status
       this.prepareVariables()
       } catch (error) {
       console.error("Error changing status:", error);
+      this.errorMessage = error.message
+      this.showError = true
       }
     },
     prepareVariables() {
@@ -343,11 +375,15 @@ export default {
         
         if (error) {
           console.error("Erro ao atualizar o problema do participante:", error);
+          this.errorMessage = error.message
+          this.showError = true
           return;
         }
         this.problemsSaved = true
       } catch (error) {
         console.error("Erro na execução da atualização:", error);
+        this.errorMessage = error.message
+        this.showError = true
       }
     }
   },
