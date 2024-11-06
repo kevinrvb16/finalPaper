@@ -4,9 +4,9 @@
     max-width="1200"
   >
     <div class="text-center my-3">
-      <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable variant="elevated" color="black" size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
-      <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable variant="flat" color="black" size="" rounded="circle">Facilidade de coleta</v-chip>
-      <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable variant="flat" color="black" size="" rounded="circle">Preferência pessoal</v-chip>
+      <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable variant="outlined" color="black" size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
+      <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable variant="outlined" color="black" size="" rounded="circle">Facilidade de coleta</v-chip>
+      <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable variant="outlined" color="black" size="" rounded="circle">Preferência pessoal</v-chip>
     </div>
     <div class="bg-table-vertical">
       <v-row justify="center" align="center" class=" bg-table-horizontal">
