@@ -2,10 +2,10 @@
   <div :class="`flip-card ${customClassFlipCard}`" @click="isFlipped = !isFlipped">
     <div :class="['flip-card-inner', { 'flipped': isFlipped }]">
       <v-card variant="tonal" :color="color" class="flip-card-front pa-0" outlined>
-        <v-card-title :style="`color:${textColor}`" :class="customClassTitle">{{ title }}</v-card-title>
+        <v-card-title :class="customClassTitle">{{ title }}</v-card-title>
       </v-card>
       <v-card variant="tonal" :color="color" class="flip-card-back pa-0" outlined>
-        <v-card-text :style="`color:${textColor}`">{{ description }}</v-card-text>
+        <v-card-text>{{ description }}</v-card-text>
       </v-card>
     </div>
   </div>
