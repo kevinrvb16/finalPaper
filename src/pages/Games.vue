@@ -19,7 +19,7 @@
         <copy-link v-if="sessionLink" :value="sessionLink" @input="updateSessionLink"></copy-link>
         <v-card>
           <v-card-text>
-            <create-game-modal :loading="loading" @create="createGameSession" @update="editGameSession"></create-game-modal>
+            <create-game-modal ref="createGameModal" :loading="loading" @create="createGameSession" @update="editGameSession"></create-game-modal>
           </v-card-text>
         </v-card>
       </div>
@@ -128,6 +128,9 @@ export default {
     }
   },
   methods: {
+    async openEditModal(row) {
+      this.$refs.createGameModal.edit(row)
+    },
     async createGameSession(obj) {
       const { name, problemA, problemB } = obj
       if (!this.user) {
@@ -200,9 +203,6 @@ export default {
       } else {
         this.setList()
       }
-    },
-    async openEditModal(row) {
-      this.$refs.createGameModal.edit(row)
     },
     updateSessionLink(newValue) {
       this.sessionLink = newValue;
