@@ -20,7 +20,7 @@
         </v-col>
       </v-row>
       <v-row class="ml-2">
-        <v-btn>DOR/PROBLEMA</v-btn>
+        <v-btn>DOR: {{ problem?.name }}</v-btn>
       </v-row>
       <v-row class="bg-table-horizontal"  justify="center" align="center">
         <v-tooltip :text="metricsGroup[1]?.description" max-width="360px">
