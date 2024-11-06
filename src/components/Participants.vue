@@ -8,8 +8,8 @@
                 :subtitle="participant?.metric1"
             >
                 <template v-slot:prepend>
-                    <v-avatar>
-                        <v-img :width="35" :src="`https://robohash.org/${participant.nickname}`"></v-img>
+                    <v-avatar size="30">
+                        <v-img :src="`https://robohash.org/${participant.nickname}`"></v-img>
                     </v-avatar>
                 </template>
             </v-list-item>
