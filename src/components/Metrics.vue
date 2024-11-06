@@ -3,7 +3,7 @@
     class="align-center mx-auto"
     max-width="1200"
   >
-    <div class="text-center my-3">
+    <div class="text-center mb-3 mt-5">
       <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable variant="tonal" color="black" size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip"></v-chip>
       <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable variant="tonal" color="black" size="" rounded="circle">Facilidade de coleta</v-chip>
       <v-chip class="mx-4 mb-3 rounded-chip text-caption" draggable variant="tonal" color="black" size="" rounded="circle">Preferência pessoal</v-chip>
