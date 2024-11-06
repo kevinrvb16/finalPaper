@@ -8,7 +8,7 @@
             hover
             :link="!isDealer"
             density="compact"
-            :min-height="getMinHeight"
+            :height="getMinHeight"
             max-width="288"
             :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 10"
@@ -81,9 +81,9 @@ export default {
             }
         },
         getMinHeight() {
-            if (this.isDealer) return '38vh'
+            if (this.isDealer) return '43vh'
             if (this.small) return '100'
-            return '35vh'
+            return '38vh'
         },
         getMetricsGroup() {
             return metricsGroupList
