@@ -16,7 +16,7 @@
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-          <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColorRGBA"></flip-card>
+          <flip-card :text-color="metricsGroup[0]?.color" @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColorRGBA"></flip-card>
         </v-col>
       </v-row>
       <v-row class="ml-2">
@@ -29,7 +29,7 @@
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
-          <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColorRGBA"></flip-card>
+          <flip-card :text-color="metricsGroup[1]?.color" @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColorRGBA"></flip-card>
         </v-col>
       </v-row>
     </div>
