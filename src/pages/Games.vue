@@ -164,15 +164,15 @@ export default {
     async editGameSession(obj) {
       const { name, problemA, problemB } = obj
       try {
-        const { data: problemAData, error: errA } = await supabase
+        const { error: errA } = await supabase
           .from('problems')
-          .update({ description: problemA.description })
+          .update({ name: problemA.name, description: problemA.description })
           .eq('id', problemA.id)
         if (errA) throw errA
       
-        const { data: problemBData, error: errB } = await supabase
+        const { error: errB } = await supabase
           .from('problems')
-          .update({ description: problemB.description })
+          .update({ name: problemB.name, description: problemB.description })
           .eq('id', problemB.id)
         if (errB) throw errB
 
