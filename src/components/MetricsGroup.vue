@@ -11,7 +11,7 @@
             :height="getMinHeight"
             max-width="288"
             :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
-            :elevation="!selectedGroups.includes(metricGroup) ? 0 : 10"
+            :elevation="!selectedGroups.includes(metricGroup) ? 0 : 20"
             >
             <v-card-item class="pb-0">
                 <div>
