@@ -4,8 +4,8 @@
       <v-card variant="tonal" :color="color" class="flip-card-front pa-0" outlined>
         <v-card-title :class="`${customClassTitle} text-overline`">{{ title }}</v-card-title>
       </v-card>
-      <v-card variant="tonal" :color="color" class="flip-card-back pa-0 text-caption" outlined>
-        <v-card-text>{{ description }}</v-card-text>
+      <v-card variant="tonal" :color="color" class="flip-card-back pa-0" outlined>
+        <v-card-text class="text-caption">{{ description }}</v-card-text>
       </v-card>
     </div>
   </div>
@@ -44,7 +44,7 @@ export default {
 <style scoped lang="scss">
 .flip-card {
   perspective: 1080px;
-  height: 33vh;
+  height: 30vh;
 }
 
 .flip-card-inner {
