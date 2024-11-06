@@ -19,7 +19,7 @@
         <copy-link v-if="sessionLink" :value="sessionLink" @input="updateSessionLink"></copy-link>
         <v-card>
           <v-card-text>
-            <create-game-modal :loading="loading" @create="createGameSession"></create-game-modal>
+            <create-game-modal :loading="loading" @create="createGameSession" @update="editGameSession"></create-game-modal>
           </v-card-text>
         </v-card>
       </div>
@@ -78,9 +78,14 @@
                   <v-btn v-bind="props" size="x-small" :href="getLink(item.id)" target="_blank" icon="mdi-open-in-new"></v-btn>
                 </template>
               </v-tooltip>
+              <v-tooltip text="Editar jogo">
+                <template v-slot:activator="{ props }">
+                  <v-btn v-bind="props" size="x-small" @click="openEditModal(item)" icon="mdi-edit-outline"></v-btn>
+                </template>
+              </v-tooltip>
               <v-tooltip text="Excluir jogo!">
                 <template v-slot:activator="{ props }">
-                  <v-btn v-bind="props" size="x-small" @click="deleteRow(item.id)" icon="mdi-delete-outline"></v-btn>
+                  <v-btn v-bind="props" size="x-small" @click="deleteRow(item)" icon="mdi-delete-outline"></v-btn>
                 </template>
               </v-tooltip>
             </td>
@@ -92,7 +97,7 @@
       Texto copiado com sucesso!
     </v-snackbar>
     <v-snackbar v-model="showError" :timeout="2500" color="error">
-      Desculpe. ocorreu um erro ao tentar deletar o jogo.
+      {{ errorMessage }}
     </v-snackbar>
   </v-container>
 </template>
@@ -118,17 +123,20 @@ export default {
       loading: false,
       sessionLink: '',
       showSnackBar: false,
-      showError: false
+      showError: false,
+      errorMessage: ''
     }
   },
   methods: {
     async createGameSession(obj) {
       const { name, problemA, problemB } = obj
       if (!this.user) {
-        console.error('User not logged in');
+        console.error('Usuário não logado');
+        this.errorMessage = 'Usuário não logado'
+        this.showError = true
         return;
       }
-      this.loading = true
+
       try {
         const { data: problems, error: err } = await supabase
           .from('problems')
@@ -142,26 +150,59 @@ export default {
           .select('*, problemA (name, description), problemB (name, description)')
         if (error) throw error
 
-        // Generate a session link
         this.sessionLink = `${window.location.origin}/game?id=${data[0].id}`
         this.setList()
       } catch (error) {
         console.error('Error creating game session:', error)
-        // Handle error (show message to user, etc.)
-      } finally {
-        this.loading = false
+        this.errorMessage = 'Erro ao criar a sessão de jogo'
+        this.showError = true
       }
     },
-    async deleteRow(id) {
+    async editGameSession(obj) {
+      const { name, problemA, problemB } = obj
+      try {
+        const { data: problems, error: err } = await supabase
+          .from('problems')
+          .update([{ name: problemA.name, description: problemA.description }, { name: problemB.name, description: problemB.description }])
+          .eq('id', [problemA.id, problemB.id])
+          .select('id')
+          if (err) throw error
+
+        const { data, error } = await supabase
+          .from('game_sessions')
+          .update({ name, problemA: problems[0].id, problemB: problems[1].id })
+          .eq('id', obj.id)
+          .select('*, problemA (name, description), problemB (name, description)')
+        if (error) throw error
+        this.setList()
+      } catch (error) {
+        this.errorMessage = error.message
+        this.showError = true
+      }
+    },
+    async deleteRow(row) {
+      const { error: err } = await supabase
+        .from('problems')
+        .delete()
+        .in('id', [row.problemA.id, row.problemB.id])
+      if (err) {
+        this.errorMessage = 'Erro ao deletar problemas'
+        this.showError = true
+        return
+      }
       const { error } = await supabase
         .from('game_sessions')
         .delete()
-        .eq('id', id)
+        .eq('id', row.id)
       if (error) {
+        this.errorMessage = 'Erro ao deletar sessão de jogo'
         this.showError = true
       } else {
         this.setList()
       }
+    },
+    async openEditModal(row) {
+      this.$refs.createGameModal.edit(row)
     },
     updateSessionLink(newValue) {
       this.sessionLink = newValue;
@@ -174,7 +215,7 @@ export default {
       if (this.user) {
         const { data: game_sessions } = await supabase
           .from('game_sessions')
-          .select("*, problemA (name, description), problemB (name, description)")
+          .select("*, problemA (id, name, description), problemB (id, name, description)")
           .eq('created_by', this.user.id)
         this.gamesList = game_sessions;
       }
