@@ -269,6 +269,8 @@ export default {
         if (participant?.data) {
           localStorage.setItem("anonUser", `${this.id},${this.anonUser},${participant?.data[0].id}`)
           this.noAnonUser = false;
+          this.successMessage = 'Boa! Clique nos cards para escolher'
+          this.showSnackBar = true
         }
       }
     },
