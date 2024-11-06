@@ -189,12 +189,6 @@ export default {
           this.noAnonUser = false;
           this.anonUser = anonUserExist?.split(',')[1];
         }
-
-        supabase
-          .channel(`participants${this.id}`)
-          .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants' }, this.handleInserts)
-          .subscribe();
-
         if (!this.isDealer) {
           supabase
             .channel(`game_sessions${this.id}`)
@@ -265,11 +259,6 @@ export default {
       if (this.status == 'select_metrics') {
         const problem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ? this?.game?.problemA : this?.game?.problemB
         this.problem = problem
-      }
-    },
-    handleInserts(payload) {
-      if (!payload.errors) {
-        this.participants.push(payload?.new)
       }
     },
     async changeStatus(direction = 'next') {
