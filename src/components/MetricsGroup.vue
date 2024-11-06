@@ -7,7 +7,7 @@
             class="mx-auto"
             hover
             :link="!isDealer"
-            :height="getMinHeight"
+            :height="isDealer ? '38vh' : '45vh'"
             max-width="288"
             :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 16"
@@ -76,11 +76,6 @@ export default {
                     this.$emit('input', this.selectedGroups)
                 }
             }
-        },
-        getMinHeight() {
-            if (this?.isDealer) {return '43vh'}
-            if (this?.small) {return '100'}
-            return '38vh'
         },
         getMetricsGroup() {
             return metricsGroupList
