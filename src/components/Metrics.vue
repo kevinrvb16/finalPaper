@@ -9,7 +9,28 @@
       <v-row justify="center" align="center" class=" bg-table-horizontal">
         <v-tooltip :text="metricsGroup[0]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
-            <v-btn variant="tonal" class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[0]?.backgroundColor">{{metricsGroup[0]?.title}}</v-btn>
+            <v-card
+              :color="metricsGroup[0]?.backgroundColor"
+              variant="tonal"
+              class="mx-auto"
+              hover
+              v-bind="props"
+            >
+              <v-card-item>
+                <div class="text-overline">
+                  {{ metricsGroup[0]?.title }}
+                </div>
+                <template v-if="avatars.length > 0" v-for="avatar in avatars">
+                    <v-avatar size="28" v-if="avatar.value == metricsGroup[0]?.value">
+                        <v-tooltip :text="avatar.nickname">
+                            <template v-slot:activator="{ props }">
+                                <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                            </template>
+                        </v-tooltip>
+                    </v-avatar>
+                </template>
+              </v-card-item>
+            </v-card>
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfFirstGroup" :key="index">
@@ -65,6 +86,11 @@ export default {
       type: Object,
       default: {},
       required: true
+    },
+    avatars: {
+      type: Array,
+      default: [],
+      required: false
     },
   },
   data() {
