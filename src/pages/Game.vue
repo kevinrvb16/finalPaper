@@ -15,7 +15,7 @@
                 <v-btn v-bind="props" prepend-icon="mdi-dots-hexagon" variant="tonal" color="indigo-darken-3" size="large" rounded="xl" :ripple="false">{{  game?.currentProblem ? game?.currentProblem?.name : problem?.name }}</v-btn>
               </template>
             </v-tooltip>
-            <p>Dor escolhida</p>
+            <p class="text-caption">Dor escolhida</p>
             <p v-if="isDealer" >Grupos de Métricas</p>
             <p v-else class="mt-2">Selecione 2 grupos de métricas</p>
         </div>
@@ -104,7 +104,7 @@
                 <v-btn v-bind="props" prepend-icon="mdi-dots-hexagon" variant="tonal" color="indigo-darken-3" size="large" rounded="xl" :ripple="false">{{  game?.currentProblem ? game?.currentProblem?.name : problem?.name }}</v-btn>
               </template>
             </v-tooltip>
-            <p>Dor escolhida</p>
+            <p class="text-caption">Dor escolhida</p>
             <p v-if="isDealer" >Métricas</p>
             <p v-else class="mt-2">Vote nas métricas com as fichas</p>
         </div>
