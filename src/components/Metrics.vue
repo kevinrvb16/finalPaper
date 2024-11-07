@@ -13,6 +13,7 @@
               class="mx-auto"
               hover
               v-bind="props"
+              max-width="136"
             >
               <v-card-item>
                 <div class="text-overline">
