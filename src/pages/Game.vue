@@ -10,15 +10,14 @@
       <div class="pb-4 pt-0 d-flex justify-space-around align-center">
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('prev')">Voltar para Jogo não iniciado</v-btn>
         <div class="text-center">
-          <p v-if="isDealer" class="text-h5">Grupos de Métricas</p>
-          <p v-else class="my-3 text-h5">Selecione 2 grupos de métricas</p>
-          <p class="mt-3">Dor selecionada: 
+          <p v-if="isDealer" class="text-h6">Grupos de Métricas</p>
+          <p v-else class="my-2 text-h6">Selecione 2 grupos de métricas</p>
+          <p class="mt-3">Dor selecionada</p>
             <v-tooltip :text="game?.currentProblem ? game?.currentProblem?.description : problem?.description">
               <template v-slot:activator="{ props }">
-                <strong>{{  game?.currentProblem ? game?.currentProblem?.name : problem?.name }}</strong>
+                <v-btn variant="tonal">{{  game?.currentProblem ? game?.currentProblem?.name : problem?.name }}</v-btn>
               </template>
             </v-tooltip>
-          </p>
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus">Avançar</v-btn>
       </div>
