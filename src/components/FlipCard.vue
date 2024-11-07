@@ -1,10 +1,12 @@
 <template>
   <div :class="`flip-card ${customClassFlipCard}`" @click="isFlipped = !isFlipped">
     <div :class="['flip-card-inner', { 'flipped': isFlipped }]">
-      <v-card variant="tonal" :color="color" class="flip-card-front pa-0" outlined>
-        <v-card-title :class="`${customClassTitle} text-overline`">{{ title }}</v-card-title>
+      <v-card variant="outlined" :color="color" class="flip-card-front pa-0" outlined>
+        <v-img src="@/assets/card.jpg" height="100%" width="100%">
+          <v-card-title :class="`${customClassTitle} text-overline`">{{ title }}</v-card-title>
+        </v-img>
       </v-card>
-      <v-card variant="tonal" :color="color" class="flip-card-back pa-0" outlined>
+      <v-card variant="outlined" :color="color" class="flip-card-back pa-0" outlined>
         <v-card-text class="text-caption">{{ description }}</v-card-text>
       </v-card>
     </div>

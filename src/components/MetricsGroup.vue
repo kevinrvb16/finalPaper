@@ -2,7 +2,7 @@
     <v-col class="pb-0 pr-1 pl-3" cols="3" cols-xs="6" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center">
         <v-card
             :color="metricGroup.backgroundColor"
-            variant="tonal"
+            variant="outlined"
             @click="selectGroup(metricGroup)"
             class="mx-auto"
             hover
