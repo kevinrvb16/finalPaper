@@ -1,5 +1,5 @@
 <template>
-    <v-col class="pb-0 pr-1 pl-3" :cols="small? '' : '3'" cols-xs="6" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center">
+    <v-col class="pb-0 pr-1 pl-3" cols="3" cols-xs="6" v-for="(metricGroup, index) in metricsGroup" :key="index" justify="center">
         <v-card
             :color="metricGroup.backgroundColor"
             variant="tonal"
@@ -15,13 +15,13 @@
             >
             <v-card-item>
                 <div>
-                <div :class="`${small ? 'text-custom' : 'text-overline'}`">
+                <div :class="text-overline">
                     {{ metricGroup.title }} <v-icon icon="mdi-check" v-if="selectedGroups.includes(metricGroup)"></v-icon>
                 </div>
-                <div v-if="!small" class="text-caption align-justify">{{ metricGroup.description }}</div>
+                <div class="text-caption align-justify">{{ metricGroup.description }}</div>
                 </div>
-                <template v-if="avatars.length > 0 && ( isDealer || small)" class="pt-0" v-for="avatar in avatars">
-                    <v-avatar :size="small ? 26 : 32" v-if="avatar.value == metricGroup.value">
+                <template v-if="avatars.length > 0 && isDealer" class="pt-0" v-for="avatar in avatars">
+                    <v-avatar size="32" v-if="avatar.value == metricGroup.value">
                         <v-tooltip :text="avatar.nickname">
                             <template v-slot:activator="{ props }">
                                 <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
@@ -62,11 +62,6 @@ export default {
             type: Array,
             default: []
         },
-        small: {
-            required: false,
-            type: Boolean,
-            default: false
-        }
     },
     methods: {
         selectGroup(metricGroup) {

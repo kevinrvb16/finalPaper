@@ -112,9 +112,6 @@
       </div>
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10">
-          <v-row class="pa-0" align="center">
-            <metrics-group :small="true" @input="setSelectedGroups" :alreadyChoose="problemsSaved" :avatars="choosenByParticipants" ></metrics-group>
-          </v-row>
           <metrics :metricsGroup="twoMetricsGroupsSelected" :problem="problem" :avatars="choosenByParticipants" ></metrics>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
