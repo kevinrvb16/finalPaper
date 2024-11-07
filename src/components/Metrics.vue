@@ -41,7 +41,6 @@
       <v-row class="bg-table-horizontal"  justify="center" align="center" no-gutters>
         <v-tooltip :text="metricsGroup[1]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
-            <v-btn variant="tonal" class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1]?.backgroundColor">{{metricsGroup[1]?.title}}</v-btn>
             <v-card
               :color="metricsGroup[1]?.backgroundColor"
               variant="tonal"
