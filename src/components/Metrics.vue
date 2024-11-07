@@ -18,15 +18,17 @@
                 <div class="text-overline">
                   {{ metricsGroup[0]?.title }}
                 </div>
-                <template v-if="avatars.length > 0" v-for="avatar in avatars">
-                    <v-avatar size="28" v-if="avatar.value == metricsGroup[0]?.value">
-                        <v-tooltip :text="avatar.nickname">
-                            <template v-slot:activator="{ props }">
-                                <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
-                            </template>
-                        </v-tooltip>
-                    </v-avatar>
-                </template>
+                <div class="d-flex">
+                  <template v-for="avatar in avatars">
+                      <v-avatar size="28" v-if="avatar.value == metricsGroup[0]?.value">
+                          <v-tooltip :text="avatar.nickname">
+                              <template v-slot:activator="{ props }">
+                                  <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                              </template>
+                          </v-tooltip>
+                      </v-avatar>
+                  </template>
+                </div>
               </v-card-item>
             </v-card>
           </template>
