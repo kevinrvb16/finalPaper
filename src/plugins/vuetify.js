@@ -15,11 +15,16 @@ import { createVuetify } from 'vuetify'
 export default createVuetify({
   theme: {
     themes: {
+      light: {
+        colors: {
+          text: '#212121'
+        }
+      },
       dark: {
         colors: {
           background: '#E3F2FD'
         }
       }
-  },
+    },
   }
 })
