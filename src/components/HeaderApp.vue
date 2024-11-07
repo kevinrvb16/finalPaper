@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar image="@/assets/header.jpeg" class="px-4" :elevation="2">
+    <v-app-bar image="@/assets/header.jpg" class="px-4" :elevation="2">
         <template slot:prepend>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
         </template>
