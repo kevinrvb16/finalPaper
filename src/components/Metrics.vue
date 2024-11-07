@@ -3,8 +3,6 @@
     class="align-center mx-auto"
     max-width="1200"
   >
-    <div class="text-center text-caption">Arraste e solte as fichas acima em cima de cada carta abaixo.</div>
-    <div class="text-center text-caption">Clique sobre a carta para ver a descrição.</div>
     <div class="bg-table-vertical">
       <v-row justify="center" align="center" class=" bg-table-horizontal">
         <v-tooltip :text="metricsGroup[0]?.description" max-width="360px">
@@ -59,6 +57,8 @@
         <v-avatar image="@/assets/image.png"></v-avatar>
       </v-chip>
     </div>
+    <div class="text-center text-caption">Arraste e solte as fichas em cima de cada carta.</div>
+    <div class="text-center text-caption">Clique sobre a carta para ver a descrição.</div>
   </v-responsive>
 </template>
 
