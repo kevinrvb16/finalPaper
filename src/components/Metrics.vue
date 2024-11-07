@@ -19,7 +19,7 @@
                 <div class="text-overline">
                   {{ metricsGroup[0]?.title }}
                 </div>
-                <div class="d-flex">
+                <div>
                   <template v-for="avatar in avatars">
                       <v-avatar size="28" v-if="avatar.value == metricsGroup[0]?.value">
                           <v-tooltip :text="avatar.nickname">
@@ -85,7 +85,7 @@
         Relevância para a dor
       </div>
       <div class="d-flex flex-column mr-6"  style="max-width: 88px;">
-        <v-chip variant="elevated" class="mx-4 mb-1 rounded-chip text-caption" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+        <v-chip variant="elevated" size="40" class="mx-4 mb-1 text-caption" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
           <v-tooltip text="Ficha de Facilidade de coleta">
             <template v-slot:activator="{ props }">
               <v-avatar v-bind="props" image="@/assets/coin_blue_dark_white.png"></v-avatar>
@@ -95,7 +95,7 @@
         Facilidade de coleta
       </div>
       <div class="d-flex flex-column  mt-3"  style="max-width: 88px;">
-        <v-chip variant="elevated" class="mx-4 mb-2 rounded-chip text-caption" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+        <v-chip variant="elevated" size="40" class="mx-4 mb-2 text-caption" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
           <v-tooltip text="Ficha de Preferência pessoal">
             <template v-slot:activator="{ props }">
               <v-avatar v-bind="props" image="@/assets/coin_blue.png"></v-avatar>
