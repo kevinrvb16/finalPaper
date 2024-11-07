@@ -1,10 +1,10 @@
 <template>
-    <v-app-bar image="@/assets/header.jpg" class="px-4" :elevation="2">
+    <v-app-bar image="@/assets/header.jpg" class="px-4" :elevation="4" color="white">
         <template slot:prepend>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
         </template>
 
-        <v-app-bar-title>Metrics Poker</v-app-bar-title>
+        <v-app-bar-title class="text-center">Metrics Poker</v-app-bar-title>
 
         <template v-slot:append>
             <v-menu>
