@@ -47,8 +47,8 @@ export default {
 <style scoped lang="scss">
 .flip-card {
   perspective: 1080px;
-  width: 400px;
-  height: 560px;
+  width: 160px;
+  height: 224px;
   aspect-ratio: 400 / 560;
 }
 
