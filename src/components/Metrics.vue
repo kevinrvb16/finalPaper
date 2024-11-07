@@ -48,7 +48,7 @@
     </div>
     <div class="text-center mb-3 mt-5 text-caption">
       <div class="d-flex flex-column">
-        <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+        <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
           <v-tooltip text="Relevância para a dor">
             <template v-slot:activator="{ props }">
               <v-avatar v-bind="props" image="@/assets/coin_pink.png"></v-avatar>
@@ -58,7 +58,7 @@
         Relevância para a dor
       </div>
       <div class="d-flex flex-column">
-        <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+        <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
           <v-tooltip text="Facilidade de coleta">
             <template v-slot:activator="{ props }">
               <v-avatar v-bind="props" image="@/assets/coin_blue_dark_white.png"></v-avatar>
@@ -68,7 +68,7 @@
         Facilidade de coleta
       </div>
       <div class="d-flex flex-column">
-        <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+        <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
           <v-tooltip text="Preferência pessoal">
             <template v-slot:activator="{ props }">
               <v-avatar v-bind="props" image="@/assets/coin_blue.png"></v-avatar>
@@ -293,11 +293,6 @@ export default {
 
 .white-space-normal {
   white-space: normal!important;
-}
-
-.back {
-  background-image: url('@/assets/image.png');
-  color: white;
 }
 
 .rounded-chip {
