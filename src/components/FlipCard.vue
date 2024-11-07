@@ -4,10 +4,10 @@
       <v-tooltip text="Clique para ver a descrição">
         <template v-slot:activator="{ props }">
           <v-card v-bind="props" variant="outlined" :color="color" class="flip-card-front pa-0" outlined>
-            <v-icon :icon="cardIcon" style="position: absolute; top: 5; left: 5; font-size: 24px; " :color="color" ></v-icon>
+            <v-icon :icon="cardIcon" style="position: absolute; top: 5px; left: 5px; font-size: 24px; " :color="color" ></v-icon>
             <v-card-title :class="`${customClassTitle} text-overline mt-4`">{{ title }}</v-card-title>
             <v-icon :icon="cardIcon" style="position: absolute; top: 44%; left: 41%; font-size: 24px; " :color="color" ></v-icon>
-            <v-icon :icon="cardIcon" style="position: absolute; bottom: 5; right: 5; font-size: 24px; " :color="color" ></v-icon>
+            <v-icon :icon="cardIcon" style="position: absolute; bottom: 5px; right: 5px; font-size: 24px; " :color="color" ></v-icon>
           </v-card>
         </template>
       </v-tooltip>
