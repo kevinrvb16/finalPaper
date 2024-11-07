@@ -47,15 +47,36 @@
       </v-row>
     </div>
     <div class="text-center mb-3 mt-5 text-caption">
-      Relevância para a dor: <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-        <v-avatar image="@/assets/image.png"></v-avatar>
-      </v-chip>
-      Facilidade de coleta: <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-        <v-avatar image="@/assets/image.png"></v-avatar>
-      </v-chip>
-      Preferência pessoal: <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-        <v-avatar image="@/assets/image.png"></v-avatar>
-      </v-chip>
+      <div class="d-flex flex-column">
+        <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+          <v-tooltip text="Relevância para a dor">
+            <template v-slot:activator="{ props }">
+              <v-avatar v-bind="props" image="@/assets/coin_pink.png"></v-avatar>
+            </template>
+          </v-tooltip>
+        </v-chip>
+        Relevância para a dor
+      </div>
+      <div class="d-flex flex-column">
+        <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+          <v-tooltip text="Facilidade de coleta">
+            <template v-slot:activator="{ props }">
+              <v-avatar v-bind="props" image="@/assets/coin_blue_dark_white.png"></v-avatar>
+            </template>
+          </v-tooltip>
+        </v-chip>
+        Facilidade de coleta
+      </div>
+      <div class="d-flex flex-column">
+        <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+          <v-tooltip text="Preferência pessoal">
+            <template v-slot:activator="{ props }">
+              <v-avatar v-bind="props" image="@/assets/coin_blue.png"></v-avatar>
+            </template>
+          </v-tooltip>
+        </v-chip>
+        Preferência pessoal
+      </div>
     </div>
     <div class="text-center text-caption">Arraste e solte as fichas em cima de cada carta.</div>
     <div class="text-center text-caption">Clique sobre a carta para ver a descrição.</div>
