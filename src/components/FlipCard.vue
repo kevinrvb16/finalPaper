@@ -3,9 +3,9 @@
     <div :class="['flip-card-inner', { 'flipped': isFlipped }]">
       <v-card variant="outlined" :color="color" class="flip-card-front pa-0" outlined>
         <v-card-title :class="`${customClassTitle} text-overline`">{{ title }}</v-card-title>
-        <v-icon class="mdi-cards-diamond" style="position: absolute; top: 0; left: 0; font-size: 24px; color: white;"></v-icon>
-        <v-icon class="mdi-cards-diamond" style="position: absolute; bottom: 0; right: 0; font-size: 24px; color: white;"></v-icon>
-        <v-icon class="mdi-cards-diamond" style="position: absolute; top: 50%; left: 50%; font-size: 24px; color: white;"></v-icon>
+        <v-icon class="mdi-cards-diamond" style="position: absolute; top: 0; left: 0; font-size: 24px; " :color="color" ></v-icon>
+        <v-icon class="mdi-cards-diamond" style="position: absolute; bottom: 0; right: 0; font-size: 24px; " :color="color" ></v-icon>
+        <v-icon class="mdi-cards-diamond" style="position: absolute; top: 50%; left: 50%; font-size: 24px; " :color="color" ></v-icon>
       </v-card>
       <v-card variant="outlined" :color="color" class="flip-card-back pa-0" outlined>
         <v-card-text class="text-caption">{{ description }}</v-card-text>
