@@ -4,7 +4,7 @@
     max-width="1200"
   >
     <div class="bg-table-vertical">
-      <v-row justify="center" align="center" class=" bg-table-horizontal">
+      <v-row justify="center" align="center" class=" bg-table-horizontal" no-gutters>
         <v-tooltip :text="metricsGroup[0]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
             <v-card
@@ -38,10 +38,35 @@
           <flip-card @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
         </v-col>
       </v-row>
-      <v-row class="bg-table-horizontal"  justify="center" align="center">
+      <v-row class="bg-table-horizontal"  justify="center" align="center" no-gutters>
         <v-tooltip :text="metricsGroup[1]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
             <v-btn variant="tonal" class="cursor-pointer my-3" v-bind="props" :color="metricsGroup[1]?.backgroundColor">{{metricsGroup[1]?.title}}</v-btn>
+            <v-card
+              :color="metricsGroup[1]?.backgroundColor"
+              variant="tonal"
+              class="mx-auto"
+              hover
+              v-bind="props"
+              max-width="136"
+            >
+              <v-card-item>
+                <div class="text-overline">
+                  {{ metricsGroup[1]?.title }}
+                </div>
+                <div class="d-flex">
+                  <template v-for="avatar in avatars">
+                      <v-avatar size="28" v-if="avatar.value == metricsGroup[1]?.value">
+                          <v-tooltip :text="avatar.nickname">
+                              <template v-slot:activator="{ props }">
+                                  <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                              </template>
+                          </v-tooltip>
+                      </v-avatar>
+                  </template>
+                </div>
+              </v-card-item>
+            </v-card>
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
