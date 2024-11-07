@@ -76,7 +76,7 @@
     <div class="text-center mb-3 mt-5 text-caption d-flex justify-center">
       <div class="d-flex flex-column mr-6  mt-3" style="max-width: 88px;">
         <v-chip variant="elevated" class="mx-4 mb-2 rounded-chip text-caption" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-          <v-tooltip text="Relevância para a dor">
+          <v-tooltip text="Ficha de Relevância para a dor">
             <template v-slot:activator="{ props }">
               <v-avatar v-bind="props" image="@/assets/coin_pink.png"></v-avatar>
             </template>
@@ -86,7 +86,7 @@
       </div>
       <div class="d-flex flex-column mr-6"  style="max-width: 88px;">
         <v-chip variant="elevated" class="mx-4 mb-1 rounded-chip text-caption" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-          <v-tooltip text="Facilidade de coleta">
+          <v-tooltip text="Ficha de Facilidade de coleta">
             <template v-slot:activator="{ props }">
               <v-avatar v-bind="props" image="@/assets/coin_blue_dark_white.png"></v-avatar>
             </template>
@@ -96,7 +96,7 @@
       </div>
       <div class="d-flex flex-column  mt-3"  style="max-width: 88px;">
         <v-chip variant="elevated" class="mx-4 mb-2 rounded-chip text-caption" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-          <v-tooltip text="Preferência pessoal">
+          <v-tooltip text="Ficha de Preferência pessoal">
             <template v-slot:activator="{ props }">
               <v-avatar v-bind="props" image="@/assets/coin_blue.png"></v-avatar>
             </template>
@@ -106,7 +106,6 @@
       </div>
     </div>
     <div class="text-center text-caption">Arraste e solte as fichas em cima de cada carta.</div>
-    <div class="text-center text-caption">Clique sobre a carta para ver a descrição.</div>
   </v-responsive>
 </template>
 
