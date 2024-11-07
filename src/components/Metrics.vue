@@ -48,14 +48,14 @@
         </v-col>
       </v-row>
     </div>
-    <div class="text-center mb-3 mt-5">
-      Relevância para a dor: <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+    <div class="text-center mb-3 mt-5 text-caption">
+      Relevância para a dor: <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
         <v-avatar image="@/assets/image.png"></v-avatar>
       </v-chip>
-      Facilidade de coleta: <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+      Facilidade de coleta: <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
         <v-avatar image="@/assets/image.png"></v-avatar>
       </v-chip>
-      Preferência pessoal: <v-chip class="mx-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+      Preferência pessoal: <v-chip variant="plain" class="mr-4 mb-3 rounded-chip text-caption back" draggable size="" rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
         <v-avatar image="@/assets/image.png"></v-avatar>
       </v-chip>
     </div>
