@@ -80,7 +80,7 @@
             <v-chip :value="chip.value" v-bind="props" variant="elevated" :size="isHovering ? 50 : 38" :class="`mx-4 ${chip.customClass}`" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
               <v-tooltip :text="chip.description">
                 <template v-slot:activator="{ props }">
-                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" :image="chip.img"></v-avatar>
+                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" :image="chip.image"></v-avatar>
                 </template>
               </v-tooltip>
             </v-chip>
@@ -138,7 +138,7 @@ export default {
       chips: [
         {
           value: 'relevance',
-          img: '../assets/coin_pink.png',
+          image: '@/assets/coin_pink.png',
           text: 'Relevância para a dor',
           description: 'Ficha de Relevância para a dor',
           customClass: 'mb-2 mt-6',
@@ -147,7 +147,7 @@ export default {
         },
         {
           value: 'ease',
-          img: '../assets/coin_blue_dark_white.png',
+          image: '@/assets/coin_blue_dark_white.png',
           text: 'Facilidade de coleta',
           description: 'Ficha de Facilidade de coleta',
           customClass: 'mb-1',
@@ -156,7 +156,7 @@ export default {
         },
         {
           value: 'preference',
-          img: '../assets/coin_blue.png',
+          image: '@/assets/coin_blue.png',
           text: 'Preferência pessoal',
           description: 'Ficha de Preferência pessoal',
           customClass: 'mb-2 mt-6',
