@@ -109,7 +109,7 @@
       <div class="d-flex flex-column mt-3">
         <v-hover>
           <template v-slot:default=" { isHovering, props }">
-            <v-chip value="preference" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-2 text-caption" draggable rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+            <v-chip value="preference" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-2 text-caption" draggable rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart($event)">
               <v-tooltip text="Ficha de Preferência pessoal">
                 <template v-slot:activator="{ props }">
                   <v-avatar :size="isHovering ? 54 : 42" v-bind="props" image="@/assets/coin_blue.png"></v-avatar>
@@ -167,6 +167,9 @@ export default {
       relevance: null,
       ease: null,
       preference: null,
+      chips: ['relevance', 'ease', 'preference'],
+      draggedChip: null,
+      droppedChips: [],
       metricOfEachGroup: {
         "resources": [
           {
@@ -316,18 +319,25 @@ export default {
   },
   methods: {
     dragStart(event) {
-      event.dataTransfer.setData('text', event.target.innerText);
+      this.draggedChip = event.target.value;
+      event.dataTransfer.effectAllowed = 'move';
+      console.log('event drag start',event);
     },
     dropChip(event) {
-      const data = event.dataTransfer.getData('text');
-      console.log('drop',data)
+      event.preventDefault();
+      if (this.draggedChip) {
+        this.droppedChips.push(this.draggedChip);
+        this.chips = this.chips.filter(chip => chip !== this.draggedChip);
+        this.draggedChip = null;
+      }
     },
     dropCard(event) {
-      const data = event.dataTransfer.getData('text');
-      console.log(data)
-      // permite que o elemento seja solto na área de destino
       event.preventDefault();
-
+      if(this.draggedChip) {
+        this.droppedChips.push(this.draggedChip);
+        this.chips = this.chips.filter(chip => chip !== this.draggedChip);
+        this.draggedChip = null;
+      }
     },
   },
   validations() {
