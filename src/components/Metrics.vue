@@ -77,7 +77,7 @@
       <div class="d-flex flex-column mx-4" v-for="(chip, index) in chips" :key="index">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
-            <v-chip :value="chip?.value" v-bind="props"  :class="`mx-4 ${chip?.customClass}`" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+            <v-chip :id="chip.value" :value="chip?.value" v-bind="props"  :class="`mx-4 ${chip?.customClass}`" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
               <v-tooltip :text="chip?.description">
                 <template v-slot:activator="{ props }">
                   <v-avatar :size="isHovering ? 54 : 42" v-bind="props" >
@@ -317,7 +317,7 @@ export default {
   },
   methods: {
     dragStart(event) {
-      this.draggedChip = event.target.value;
+      this.draggedChip = event
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.setData('text/plain', this.draggedChip);
       console.log('event drag start',event);
