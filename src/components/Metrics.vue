@@ -77,7 +77,7 @@
       <div class="d-flex flex-column mr-6  mt-3">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
-            <v-chip :model-value="relevance" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-2 rounded-chip text-caption" draggable rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+            <v-chip value="relevance" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-2 rounded-chip text-caption" draggable rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
               <v-tooltip text="Ficha de Relevância para a dor">
                 <template v-slot:activator="{ props }">
                   <v-avatar :size="isHovering ? 54 : 42" v-bind="props" image="@/assets/coin_pink.png"></v-avatar>
@@ -93,7 +93,7 @@
       <div class="d-flex flex-column mr-6">
         <v-hover>
           <template v-slot:default=" { isHovering, props }">
-            <v-chip :model-value="relevance" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-1 text-caption" draggable rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+            <v-chip value="ease" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-1 text-caption" draggable rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
               <v-tooltip text="Ficha de Facilidade de coleta">
                 <template v-slot:activator="{ props }">
                   <v-avatar :size="isHovering ? 54 : 42" v-bind="props" image="@/assets/coin_blue_dark_white.png"></v-avatar>
@@ -109,7 +109,7 @@
       <div class="d-flex flex-column mt-3">
         <v-hover>
           <template v-slot:default=" { isHovering, props }">
-            <v-chip :model-value="relevance" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-2 text-caption" draggable rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+            <v-chip value="preference" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-2 text-caption" draggable rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
               <v-tooltip text="Ficha de Preferência pessoal">
                 <template v-slot:activator="{ props }">
                   <v-avatar :size="isHovering ? 54 : 42" v-bind="props" image="@/assets/coin_blue.png"></v-avatar>
@@ -320,6 +320,7 @@ export default {
     },
     dropChip(event) {
       const data = event.dataTransfer.getData('text');
+      console.log('drop',data)
     },
     dropCard(event) {
       const data = event.dataTransfer.getData('text');
