@@ -74,7 +74,7 @@
       </v-row>
     </div>
     <div class="text-center mb-3 mt-2 text-caption d-flex justify-center">
-      <div class="d-flex flex-column mx-4" v-for="(chip, index) in chips" :key="index">
+      <div class="d-flex flex-column mx-4 align-center" v-for="(chip, index) in chips" :key="index">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
             <v-chip size="x-large" variant="text" :value="chip?.value" v-bind="props"  :class="`mx-4 ${chip?.customClass}`" draggable rounded="circle" @dragstart="dragStart($event, index)" @dragover.prevent @drop="dropCard">
