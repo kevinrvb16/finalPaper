@@ -80,7 +80,9 @@
             <v-chip :value="chip.value" v-bind="props" variant="elevated" :size="isHovering ? 50 : 38" :class="`mx-4 ${chip.customClass}`" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
               <v-tooltip :text="chip.description">
                 <template v-slot:activator="{ props }">
-                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" :image="chip.image"></v-avatar>
+                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" >
+                    <v-img :src="require(chip.image)" />
+                  </v-avatar>
                 </template>
               </v-tooltip>
             </v-chip>

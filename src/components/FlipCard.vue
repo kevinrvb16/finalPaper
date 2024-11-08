@@ -11,7 +11,9 @@
               <v-chip :value="chip.value" v-bind="props" variant="elevated" size="38" :class="`mx-4 ${chip.classInsideCard}`" :style="chip.styleInsideCard" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
                 <v-tooltip :text="chip.description">
                   <template v-slot:activator="{ props }">
-                    <v-avatar size="42" v-bind="props" :image="chip.img"></v-avatar>
+                    <v-avatar size="42" v-bind="props">
+                      <v-img :src="require(chip.image)" />
+                    </v-avatar>
                   </template>
                 </v-tooltip>
               </v-chip>
