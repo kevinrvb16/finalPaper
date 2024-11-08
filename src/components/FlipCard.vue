@@ -3,12 +3,12 @@
     <div :class="['flip-card-inner', { 'flipped': isFlipped }]">
       <v-tooltip text="Clique para ver a descrição">
         <template v-slot:activator="{ props }">
-          <v-card v-bind="props" variant="outlined" :color="color" class="flip-card-front pa-0" outlined>
+          <v-card :id="id" v-bind="props" variant="outlined" :color="color" class="flip-card-front pa-0" outlined>
             <v-icon :icon="cardIcon" style="position: absolute; top: 5px; left: 5px; font-size: 24px; " :color="color" ></v-icon>
             <v-card-title :class="`${customClassTitle} text-overline mt-4`">{{ title }}</v-card-title>
             <v-icon :icon="cardIcon" style="position: absolute; top: 44%; left: 41%; font-size: 24px; " :color="color" ></v-icon>
             <template v-for="chip in chips">
-              <v-chip size="x-large" :value="chip.value" v-bind="props" variant="text" class="mx-4" :style="chip.styleInsideCard" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+              <v-chip v-if="chip.destinyId === id" size="x-large" :value="chip.value" v-bind="props" variant="text" class="mx-4" :style="chip.styleInsideCard" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
                 <v-tooltip :text="chip.description">
                   <template v-slot:activator="{ props }">
                     <v-avatar size="42" v-bind="props">
@@ -41,6 +41,9 @@ export default {
     };
   },
   props: {
+    id: {
+      type: String
+    },
     title: {
       type: String
     },

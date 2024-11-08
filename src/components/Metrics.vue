@@ -35,7 +35,7 @@
           </template>
         </v-tooltip>
         <v-col v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-          <flip-card :chips="droppedChips" :cardIcon="'mdi-cards-spade'" @dragover.prevent @drop="dropChip" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
+          <flip-card :id="metric.value" :chips="droppedChips" :cardIcon="'mdi-cards-spade'" @dragover.prevent @drop="dropChip" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
         </v-col>
       </v-row>
       <v-row class="bg-table-horizontal mt-1"  justify="center" align="center" no-gutters>
@@ -166,134 +166,163 @@ export default {
       draggedChip: null,
       droppedChips: [],
       metricOfEachGroup: {
-        "resources": [
+        resources: [
           {
-            "name": "EFFORT REMAINING",
-            "description": "É a métrica que mede a quantidade de esforço que ainda precisa ser aplicada para concluir uma tarefa."
+            name: "EFFORT REMAINING",
+            description: "É a métrica que mede a quantidade de esforço que ainda precisa ser aplicada para concluir uma tarefa.",
+            value: "effort_remaining"
           },
           {
-            "name": "EFFORT",
-            "description": "É a métrica que mede a quantidade de trabalho necessário para concluir uma tarefa."
+            name: "EFFORT",
+            description: "É a métrica que mede a quantidade de trabalho necessário para concluir uma tarefa.",
+            value: "effort"
           },
           {
-            "name": "EFFORT ESTIMATION ACCURACY",
-            "description": "É a métrica que mede a precisão da estimativa de esforço necessário para completar uma tarefa."
+            name: "EFFORT ESTIMATION ACCURACY",
+            description: "É a métrica que mede a precisão da estimativa de esforço necessário para completar uma tarefa.",
+            value: "effort_estimation_accuracy"
           },
           {
-            "name": "TOTAL EFFECTIVE AVAILABLE HOURS",
-            "description": "É a métrica que mede o tempo que a equipe tem disponível para trabalhar."
+            name: "TOTAL EFFECTIVE AVAILABLE HOURS",
+            description: "É a métrica que mede o tempo que a equipe tem disponível para trabalhar.",
+            value: "total_effective_available_hours"
           },
           {
-            "name": "BACKLOG SIZE",
-            "description": "É a métrica que mede o número de tarefas pendentes na lista de tarefas."
+            name: "BACKLOG SIZE",
+            description: "É a métrica que mede o número de tarefas pendentes na lista de tarefas.",
+            value: "backlog_size"
           }
         ],
-        "performance_and_process": [
+        performance_and_process: [
           {
-            "name": "FIXED BUGS",
-            "description": "É a métrica que mede a quantidade de erros corrigidos em um produto."
+            name: "FIXED BUGS",
+            description: "É a métrica que mede a quantidade de erros corrigidos em um produto.",
+            value: "fixed_bugs"
           },
           {
-            "name": "HOURS SPENT ON TASK",
-            "description": "É a métrica que mede o tempo gasto em uma tarefa específica."
+            name: "HOURS SPENT ON TASK",
+            description: "É a métrica que mede o tempo gasto em uma tarefa específica.",
+            value: "hours_spent_on_task"
           },
           {
-            "name": "HOURS SPENT ON BUGS",
-            "description": "É a métrica que mede o tempo gasto na correção de bugs."
+            name: "HOURS SPENT ON BUGS",
+            description: "É a métrica que mede o tempo gasto na correção de bugs.",
+            value: "hours_spent_on_bugs"
           },
           {
-            "name": "CYCLE TIME",
-            "description": "É a métrica que mede o tempo necessário para concluir uma tarefa desde o início até a entrega."
+            name: "CYCLE TIME",
+            description: "É a métrica que mede o tempo necessário para concluir uma tarefa desde o início até a entrega.",
+            value: "cycle_time"
           },
           {
-            "name": "TASKS ATTRIBUTES QUALITY",
-            "description": "É a métrica que mede a qualidade das tarefas, incluindo descrição, informações e objetivos."
+            name: "TASKS ATTRIBUTES QUALITY",
+            description: "É a métrica que mede a qualidade das tarefas, incluindo descrição, informações e objetivos.",
+            value: "tasks_attributes_quality"
           }
         ],
-        "schedule_and_progress": [
+        schedule_and_progress: [
           {
-            "name": "NUMBER OF COMPLETED TASKS",
-            "description": "É a métrica que mede a quantidade de tarefas concluídas em um período de tempo."
+            name: "NUMBER OF COMPLETED TASKS",
+            description: "É a métrica que mede a quantidade de tarefas concluídas em um período de tempo.",
+            value: "number_of_completed_tasks"
           },
           {
-            "name": "SCOPE GROWTH",
-            "description": "É a métrica que mede o aumento do escopo do projeto."
+            name: "SCOPE GROWTH",
+            description: "É a métrica que mede o aumento do escopo do projeto.",
+            value: "scope_growth"
           },
           {
-            "name": "PRIORITY SHIFT",
-            "description": "É a métrica que mede a taxa de mudança de prioridade das tarefas."
+            name: "PRIORITY SHIFT",
+            description: "É a métrica que mede a taxa de mudança de prioridade das tarefas.",
+            value: "priority_shift"
           },
           {
-            "name": "CUMULATIVE FLOW DIAGRAMS",
-            "description": "É a métrica que mede a quantidade de trabalho em cada estágio do processo de desenvolvimento."
+            name: "CUMULATIVE FLOW DIAGRAMS",
+            description: "É a métrica que mede a quantidade de trabalho em cada estágio do processo de desenvolvimento.",
+            value: "cumulative_flow_diagrams"
           },
           {
-            "name": "MERGE REQUEST REVIEW",
-            "description": "É a métrica que mede o tempo gasto na revisão de solicitações de mesclagem."
+            name: "MERGE REQUEST REVIEW",
+            description: "É a métrica que mede o tempo gasto na revisão de solicitações de mesclagem.",
+            value: "merge_request_review"
           }
         ],
-        "technology_effectiveness": [
+        technology_effectiveness: [
           {
-            "name": "TEST RUN FREQUENCY",
-            "description": "É a métrica que mede a frequência com que os testes são executados."
+            name: "TEST RUN FREQUENCY",
+            description: "É a métrica que mede a frequência com que os testes são executados.",
+            value: "test_run_frequency"
           },
           {
-            "name": "TEST FAILURE RATE",
-            "description": "É a métrica que mede a quantidade de testes que falharam em relação ao número total de testes executados."
+            name: "TEST FAILURE RATE",
+            description: "É a métrica que mede a quantidade de testes que falharam em relação ao número total de testes executados.",
+            value: "test_failure_rate"
           },
           {
-            "name": "AVG. TEST RUN TIME",
-            "description": "É a métrica que mede o tempo médio gasto na execução de um teste."
+            name: "AVG. TEST RUN TIME",
+            description: "É a métrica que mede o tempo médio gasto na execução de um teste.",
+            value: "avg_test_run_time"
           },
           {
-            "name": "TEST COVERAGE",
-            "description": "É a métrica que mede a porcentagem do código que é testado."
+            name: "TEST COVERAGE",
+            description: "É a métrica que mede a porcentagem do código que é testado.",
+            value: "test_coverage"
           },
           {
-            "name": "SECURITY TEST PASS RATE",
-            "description": "É a métrica que mede a quantidade de testes de segurança aprovados em relação ao número total de testes de segurança executados."
+            name: "SECURITY TEST PASS RATE",
+            description: "É a métrica que mede a quantidade de testes de segurança aprovados em relação ao número total de testes de segurança executados.",
+            value: "security_test_pass_rate"
           }
         ],
-        "size_and_stability": [
+        size_and_stability: [
           {
-            "name": "CHANGED PRODUCT BACKLOG ITEMS",
-            "description": "É a métrica que mede o número de itens no backlog do produto que foram modificados."
+            name: "CHANGED PRODUCT BACKLOG ITEMS",
+            description: "É a métrica que mede o número de itens no backlog do produto que foram modificados.",
+            value: "changed_product_backlog_items"
           },
           {
-            "name": "NUMBER OF CODE LINES",
-            "description": "É a métrica que mede a quantidade de linhas de código escritas."
+            name: "NUMBER OF CODE LINES",
+            description: "É a métrica que mede a quantidade de linhas de código escritas.",
+            value: "number_of_code_lines"
           },
           {
-            "name": "WEAK COMPONENTS",
-            "description": "É a métrica que mede a presença de componentes fracos ou vulnerabilidades em um software."
+            name: "WEAK COMPONENTS",
+            description: "É a métrica que mede a presença de componentes fracos ou vulnerabilidades em um software.",
+            value: "weak_components"
           }
         ],
-        "customer_satisfaction": [
+        customer_satisfaction: [
           {
-            "name": "NPS",
-            "description": "É a métrica que mede a satisfação do cliente com um produto ou serviço em uma escala de 0-10."
+            name: "NPS",
+            description: "É a métrica que mede a satisfação do cliente com um produto ou serviço em uma escala de 0-10.",
+            value: "nps"
           }
         ],
-        "product_quality": [
+        product_quality: [
           {
-            "name": "OUTSTANDING BUGS",
-            "description": "É a métrica que mede a quantidade de erros em um produto que foram identificados, mas ainda não foram corrigidos."
+            name: "OUTSTANDING BUGS",
+            description: "É a métrica que mede a quantidade de erros em um produto que foram identificados, mas ainda não foram corrigidos.",
+            value: "outstanding_bugs"
           },
           {
-            "name": "DELIVERY ON TIME",
-            "description": "É a métrica que indica se a entrega foi feita dentro do prazo estabelecido."
+            name: "DELIVERY ON TIME",
+            description: "É a métrica que indica se a entrega foi feita dentro do prazo estabelecido.",
+            value: "delivery_on_time"
           },
           {
-            "name": "PRODUCT VELOCITY",
-            "description": "É a métrica que mede a quantidade de trabalho realizado em um período de tempo."
+            name: "PRODUCT VELOCITY",
+            description: "É a métrica que mede a quantidade de trabalho realizado em um período de tempo.",
+            value: "product_velocity"
           },
           {
-            "name": "LEAD TIME",
-            "description": "É a métrica que mede o tempo necessário para completar um item de trabalho."
+            name: "LEAD TIME",
+            description: "É a métrica que mede o tempo necessário para completar um item de trabalho.",
+            value: "lead_time"
           },
           {
-            "name": "THROUGHPUT",
-            "description": "É a métrica que mede a quantidade de trabalho que é concluída com sucesso em um determinado período de tempo."
+            name: "THROUGHPUT",
+            description: "É a métrica que mede a quantidade de trabalho que é concluída com sucesso em um determinado período de tempo.",
+            value: "throughput"
           }
         ]
       }
@@ -321,10 +350,14 @@ export default {
     dropChip(event) {
       console.log('event dropChip',event);
       const index = event.dataTransfer.getData('text/plain');
-      if (index !== null) {
-        const chip = this.chips[index];
+      const destinyId = event?.target?.id;
+      if (index !== null && destinyId !== null) {
+        const chip = {
+          ...this.chips[index],
+          destinyId
+        };
         console.log('chip drop chip',chip);
-        this.droppedChips.push('chips',chip);
+        this.droppedChips.push(chip);
         console.log('droppedChips drop chip',this.droppedChips);
         this.chips.splice(index, 1);
         console.log('chips drop chip',this.chips);
@@ -336,6 +369,7 @@ export default {
       console.log('index drop card',index);
       if (index !== null) {
         const chip = this.droppedChips[index];
+        chip.destinyId = null;
         console.log('chip drop card',chip);
         this.chips.push(chip);
         console.log('chips drop card',this.chips);
