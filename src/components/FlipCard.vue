@@ -8,7 +8,7 @@
             <v-card-title :class="`${customClassTitle} text-overline mt-4`">{{ title }}</v-card-title>
             <v-icon :icon="cardIcon" style="position: absolute; top: 44%; left: 41%; font-size: 24px; " :color="color" ></v-icon>
             <template v-for="chip in chips">
-              <v-chip v-if="chip.destinyId === id" size="x-large" :value="chip.value" v-bind="props" variant="text" class="mx-4" :style="chip.styleInsideCard" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+              <v-chip v-if="chip.destinyId === id" size="x-large" :value="chip.value" v-bind="props" variant="text" class="pl-0" :style="chip.styleInsideCard" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
                 <v-tooltip :text="chip.description">
                   <template v-slot:activator="{ props }">
                     <v-avatar size="42" v-bind="props">
