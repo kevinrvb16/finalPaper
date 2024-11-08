@@ -77,10 +77,10 @@
       <div class="d-flex flex-column mr-6  mt-3" style="max-width: 88px;">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
-            <v-chip v-bind="props" variant="elevated" :size="isHovering ? 40 : 50" class="mx-4 mb-2 rounded-chip text-caption" draggable rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+            <v-chip v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-2 rounded-chip text-caption" draggable rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
               <v-tooltip text="Ficha de Relevância para a dor">
                 <template v-slot:activator="{ props }">
-                  <v-avatar :size="isHovering ? 40 : 50" v-bind="props" image="@/assets/coin_pink.png"></v-avatar>
+                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" image="@/assets/coin_pink.png"></v-avatar>
                 </template>
               </v-tooltip>
             </v-chip>
@@ -91,10 +91,10 @@
       <div class="d-flex flex-column mr-6"  style="max-width: 88px;">
         <v-hover>
           <template v-slot:default=" { isHovering, props }">
-            <v-chip v-bind="props" variant="elevated" :size="isHovering ? 40 : 50" class="mx-4 mb-1 text-caption" draggable rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+            <v-chip v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-1 text-caption" draggable rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
               <v-tooltip text="Ficha de Facilidade de coleta">
                 <template v-slot:activator="{ props }">
-                  <v-avatar :size="isHovering ? 40 : 50" v-bind="props" image="@/assets/coin_blue_dark_white.png"></v-avatar>
+                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" image="@/assets/coin_blue_dark_white.png"></v-avatar>
                 </template>
               </v-tooltip>
             </v-chip>
@@ -105,10 +105,10 @@
       <div class="d-flex flex-column mt-3"  style="max-width: 88px;">
         <v-hover>
           <template v-slot:default=" { isHovering, props }">
-            <v-chip v-bind="props" variant="elevated" :size="isHovering ? 40 : 50" class="mx-4 mb-2 text-caption" draggable rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+            <v-chip v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-2 text-caption" draggable rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
               <v-tooltip text="Ficha de Preferência pessoal">
                 <template v-slot:activator="{ props }">
-                  <v-avatar :size="isHovering ? 40 : 50" v-bind="props" image="@/assets/coin_blue.png"></v-avatar>
+                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" image="@/assets/coin_blue.png"></v-avatar>
                 </template>
               </v-tooltip>
             </v-chip>
