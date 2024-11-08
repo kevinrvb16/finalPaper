@@ -77,7 +77,7 @@
       <div class="d-flex flex-column mx-4" v-for="(chip, index) in chips" :key="index">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
-            <v-chip :value="chip?.value" v-bind="props" variant="elevated"  :class="`mx-4 ${chip?.customClass} ${ isHovering ? 'width-50' : 'width-40' }`" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+            <v-chip :value="chip?.value" v-bind="props"  :class="`mx-4 ${chip?.customClass}`" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
               <v-tooltip :text="chip?.description">
                 <template v-slot:activator="{ props }">
                   <v-avatar :size="isHovering ? 54 : 42" v-bind="props" >
@@ -347,14 +347,6 @@ export default {
 
 .white-space-normal {
   white-space: normal!important;
-}
-
-width-40 {
-  width: 40px;
-}
-
-.width-50 {
-  width: 50px;
 }
 
 .bg-table-horizontal {
