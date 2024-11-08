@@ -92,6 +92,7 @@
           {{ chip?.text }}
         </p>
       </div>
+      <v-btn :disabled="problemsSaved" append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
     </div>
   </v-responsive>
 </template>
@@ -136,6 +137,7 @@ export default {
       relevance: null,
       ease: null,
       preference: null,
+      problemsSaved: false,
       chips: [
         {
           value: 'relevance',
@@ -375,6 +377,13 @@ export default {
         this.droppedChips.splice(index, 1);
         console.log('droppedChips drop card',this.droppedChips);
       }
+    },
+    send() {
+      this.problemsSaved = true;
+      console.log('selectedMetrics',this.selectedMetrics);
+      console.log('relevance',this.relevance);
+      console.log('ease',this.ease);
+      console.log('preference',this.preference);
     }
   },
   validations() {
