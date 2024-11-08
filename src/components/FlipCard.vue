@@ -61,6 +61,7 @@ export default {
   width: 160px;
   height: 224px;
   aspect-ratio: 400 / 560;
+  background-color: white;
 }
 
 .flip-card-inner {
@@ -69,6 +70,7 @@ export default {
   height: 100%;
   transition: transform 0.6s;
   transform-style: preserve-3d;
+  background-color: white;
 }
 
 .flipped {

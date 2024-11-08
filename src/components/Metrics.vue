@@ -3,7 +3,7 @@
     class="align-center mx-auto"
     max-width="1200"
   >
-    <div class="bg-table-vertical">
+    <div>
       <v-row justify="center" align="center" class=" bg-table-horizontal" no-gutters>
         <v-tooltip :text="metricsGroup[0]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
@@ -333,34 +333,16 @@ export default {
   white-space: normal!important;
 }
 
-.rounded-chip {
-  border-radius: 50%;       /* Torna o chip completamente circular */
-  display: flex;            /* Alinha o conteúdo no centro */
-  align-items: center;      /* Alinha verticalmente no centro */
-  justify-content: center;  /* Alinha horizontalmente no centro */
-  text-align: center;       /* Centraliza o texto */
-  white-space: normal!important;      /* Permite que o texto quebre linha */
-  word-wrap: break-word!important;    /* Quebra palavras longas */
-  overflow: hidden;         /* Esconde o conteúdo que transborda */
-}
-
 .bg-table-horizontal {
-  background-image: linear-gradient(white, white), linear-gradient(white, white);
-  background-size: 2px 0%, 100% 2px; /* Tamanho das linhas */
-  background-position: 100px, 150px; /* Posiciona as linhas */
-  background-repeat: no-repeat;
-  }
-
-  .bg-table-vertical {
-  background-image: linear-gradient(white, white), linear-gradient(white, white);
-  background-size: 2px 50%, 0% 2px; /* Tamanho das linhas */
-  background-position: 100px, 150px; /* Posiciona as linhas */
+  background-image: linear-gradient(black, white), linear-gradient(white, black);
+  background-size: 2px 0%, 87% 2px; /* Tamanho das linhas */
+  background-position: 100px, 135px; /* Posiciona as linhas */
   background-repeat: no-repeat;
   }
 
   .custom-flip-card {
-    border: 1px solid white;
-    border-radius: 2%;
+    border: 1px solid black;
+    border-radius: 5%;
     padding: 4px;
     max-width: 250px;
   }
