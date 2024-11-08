@@ -77,19 +77,19 @@
       <div class="d-flex flex-column mx-4" v-for="(chip, index) in chips" :key="index">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
-            <v-chip :value="chip.value" v-bind="props" variant="elevated" :size="isHovering ? 50 : 38" :class="`mx-4 ${chip.customClass}`" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-              <v-tooltip :text="chip.description">
+            <v-chip :value="chip?.value" v-bind="props" variant="elevated"  :class="`mx-4 ${chip?.customClass}`" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+              <v-tooltip :text="chip?.description">
                 <template v-slot:activator="{ props }">
                   <v-avatar :size="isHovering ? 54 : 42" v-bind="props" >
-                    <v-img :src="require(chip.image)" />
+                    <v-img :src="chip?.image"></v-img>
                   </v-avatar>
                 </template>
               </v-tooltip>
             </v-chip>
           </template>
         </v-hover>
-        <p style="max-width: 87px;">
-          {{ chip.text }}
+        <p style="max-width: 88px;">
+          {{ chip?.text }}
         </p>
       </div>
     </div>

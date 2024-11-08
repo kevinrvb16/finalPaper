@@ -12,7 +12,7 @@
                 <v-tooltip :text="chip.description">
                   <template v-slot:activator="{ props }">
                     <v-avatar size="42" v-bind="props">
-                      <v-img :src="chip.image" alt="fichas para apostar nas cartas de métricas" />
+                      <v-img :src="chip.image" alt="fichas para apostar nas cartas de métricas"></v-img>
                     </v-avatar>
                   </template>
                 </v-tooltip>
