@@ -138,7 +138,7 @@ export default {
       chips: [
         {
           value: 'relevance',
-          img: '@/assets/coin_pink.png',
+          img: '../assets/coin_pink.png',
           text: 'Relevância para a dor',
           description: 'Ficha de Relevância para a dor',
           customClass: 'mb-2 mt-6',
@@ -147,7 +147,7 @@ export default {
         },
         {
           value: 'ease',
-          img: '@/assets/coin_blue_dark_white.png',
+          img: '../assets/coin_blue_dark_white.png',
           text: 'Facilidade de coleta',
           description: 'Ficha de Facilidade de coleta',
           customClass: 'mb-1',
@@ -156,7 +156,7 @@ export default {
         },
         {
           value: 'preference',
-          img: '@/assets/coin_blue.png',
+          img: '../assets/coin_blue.png',
           text: 'Preferência pessoal',
           description: 'Ficha de Preferência pessoal',
           customClass: 'mb-2 mt-6',
