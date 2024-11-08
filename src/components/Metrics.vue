@@ -35,7 +35,7 @@
           </template>
         </v-tooltip>
         <v-col v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-          <flip-card :cardIcon="'mdi-cards-spade'"  @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
+          <flip-card :chips="droppedChips" :cardIcon="'mdi-cards-spade'"  @dragover.prevent @drop="dropChip" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
         </v-col>
       </v-row>
       <v-row class="bg-table-horizontal mt-1"  justify="center" align="center" no-gutters>
@@ -74,52 +74,20 @@
       </v-row>
     </div>
     <div class="text-center mb-3 mt-2 text-caption d-flex justify-center">
-      <div class="d-flex flex-column mr-6  mt-3">
+      <div class="d-flex flex-column mx-4" v-for="(chip, index) in chips" :key="index">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
-            <v-chip value="relevance" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-2 rounded-chip text-caption" draggable rounded="circle" text="Relevância para a dor" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-              <v-tooltip text="Ficha de Relevância para a dor">
+            <v-chip :value="chip.value" v-bind="props" variant="elevated" :size="isHovering ? 50 : 38" :class="`mx-4 ${chip.customClass}`" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+              <v-tooltip :text="chip.description">
                 <template v-slot:activator="{ props }">
-                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" image="@/assets/coin_pink.png"></v-avatar>
+                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" :image="chip.img"></v-avatar>
                 </template>
               </v-tooltip>
             </v-chip>
           </template>
         </v-hover>
-        <p style="max-width: 88px;">
-          Relevância para a dor
-        </p>
-      </div>
-      <div class="d-flex flex-column mr-6">
-        <v-hover>
-          <template v-slot:default=" { isHovering, props }">
-            <v-chip value="ease" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-1 text-caption" draggable rounded="circle"  text="Facilidade de coleta"  @dragstart="dragStart" @dragover.prevent @drop="dropChip">
-              <v-tooltip text="Ficha de Facilidade de coleta">
-                <template v-slot:activator="{ props }">
-                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" image="@/assets/coin_blue_dark_white.png"></v-avatar>
-                </template>
-              </v-tooltip>
-            </v-chip>
-          </template>
-        </v-hover>
-        <p style="max-width: 88px;">
-          Facilidade de coleta
-        </p>
-      </div>
-      <div class="d-flex flex-column mt-3">
-        <v-hover>
-          <template v-slot:default=" { isHovering, props }">
-            <v-chip value="preference" v-bind="props" variant="elevated" :size="isHovering ? 50 : 40" class="mx-4 mb-2 text-caption" draggable rounded="circle"  text="Preferência pessoal"  @dragstart="dragStart($event)">
-              <v-tooltip text="Ficha de Preferência pessoal">
-                <template v-slot:activator="{ props }">
-                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" image="@/assets/coin_blue.png"></v-avatar>
-                </template>
-              </v-tooltip>
-            </v-chip>
-          </template>
-        </v-hover>
-        <p style="max-width: 88px;">
-          Preferência pessoal
+        <p style="max-width: 87px;">
+          {{ chip.text }}
         </p>
       </div>
     </div>
@@ -167,7 +135,35 @@ export default {
       relevance: null,
       ease: null,
       preference: null,
-      chips: ['relevance', 'ease', 'preference'],
+      chips: [
+        {
+          value: 'relevance',
+          img: '@/assets/coin_pink.png',
+          text: 'Relevância para a dor',
+          description: 'Ficha de Relevância para a dor',
+          customClass: 'mb-2 mt-6',
+          classInsideCard: 'bg-pink',
+          styleInsideCard: 'position: absolute; bottom: 5px; left: 5px; font-size: 24px; ',
+        },
+        {
+          value: 'ease',
+          img: '@/assets/coin_blue_dark_white.png',
+          text: 'Facilidade de coleta',
+          description: 'Ficha de Facilidade de coleta',
+          customClass: 'mb-1',
+          classInsideCard: 'bg-blue-dark',
+          styleInsideCard: 'position: absolute; bottom: 5px; left: 5px; font-size: 24px; ',
+        },
+        {
+          value: 'preference',
+          img: '@/assets/coin_blue.png',
+          text: 'Preferência pessoal',
+          description: 'Ficha de Preferência pessoal',
+          customClass: 'mb-2 mt-6',
+          classInsideCard: 'bg-blue',
+          styleInsideCard: 'position: absolute; bottom: 5px; left: 5px; font-size: 24px; ',
+        }
+      ],
       draggedChip: null,
       droppedChips: [],
       metricOfEachGroup: {
@@ -321,22 +317,20 @@ export default {
     dragStart(event) {
       this.draggedChip = event.target.value;
       event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('text/plain', this.draggedChip);
       console.log('event drag start',event);
+      console.log('this.draggedChip drag start',this.draggedChip);
     },
     dropChip(event) {
-      event.preventDefault();
-      if (this.draggedChip) {
-        this.droppedChips.push(this.draggedChip);
-        this.chips = this.chips.filter(chip => chip !== this.draggedChip);
-        this.draggedChip = null;
-      }
-    },
-    dropCard(event) {
-      event.preventDefault();
-      if(this.draggedChip) {
-        this.droppedChips.push(this.draggedChip);
-        this.chips = this.chips.filter(chip => chip !== this.draggedChip);
-        this.draggedChip = null;
+      console.log('event dropChip',event);
+      const value = event.dataTransfer.getData('text/plain');
+      if (value !== null) {
+        const chip = this.chips.find(chip => chip.value === value);
+        console.log('chip dropChip',chip);
+        if (chip) {
+          this.droppedChips.push(chip);
+          this.chips = this.chips.filter(chip => chip.value !== value);
+        }
       }
     },
   },

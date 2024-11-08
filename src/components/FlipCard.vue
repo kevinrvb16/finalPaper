@@ -7,6 +7,15 @@
             <v-icon :icon="cardIcon" style="position: absolute; top: 5px; left: 5px; font-size: 24px; " :color="color" ></v-icon>
             <v-card-title :class="`${customClassTitle} text-overline mt-4`">{{ title }}</v-card-title>
             <v-icon :icon="cardIcon" style="position: absolute; top: 44%; left: 41%; font-size: 24px; " :color="color" ></v-icon>
+            <template v-for="chip in chips">
+              <v-chip :value="chip.value" v-bind="props" variant="elevated" size="38" :class="`mx-4 ${chip.classInsideCard}`" :style="chip.styleInsideCard" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+                <v-tooltip :text="chip.description">
+                  <template v-slot:activator="{ props }">
+                    <v-avatar size="42" v-bind="props" :image="chip.img"></v-avatar>
+                  </template>
+                </v-tooltip>
+              </v-chip>
+            </template>
             <v-icon :icon="cardIcon" style="position: absolute; bottom: 5px; right: 5px; font-size: 24px; " :color="color" ></v-icon>
           </v-card>
         </template>
@@ -50,6 +59,9 @@ export default {
     },
     cardIcon: {
       type: String
+    },
+    chips: {
+      type: Array
     }
   }
 };
