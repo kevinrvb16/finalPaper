@@ -35,7 +35,7 @@
           </template>
         </v-tooltip>
         <v-col v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-          <flip-card :chips="droppedChips" :cardIcon="'mdi-cards-spade'"  @dragover.prevent @drop="dropChip" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
+          <flip-card :chips="droppedChips" :cardIcon="'mdi-cards-spade'" @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
         </v-col>
       </v-row>
       <v-row class="bg-table-horizontal mt-1"  justify="center" align="center" no-gutters>
@@ -69,7 +69,7 @@
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
-          <flip-card :cardIcon="'mdi-cards-club'"  @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
+          <flip-card :cardIcon="'mdi-cards-club'" @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
         </v-col>
       </v-row>
     </div>
@@ -77,7 +77,7 @@
       <div class="d-flex flex-column mx-4" v-for="(chip, index) in chips" :key="index">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
-            <v-chip :id="chip.value" :value="chip?.value" v-bind="props"  :class="`mx-4 ${chip?.customClass}`" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+            <v-chip :id="chip.value" :value="chip?.value" v-bind="props"  :class="`mx-4 ${chip?.customClass}`" draggable rounded="circle" @dragstart="dragStart($event, index)" @dragover.prevent @drop="dropChip">
               <v-tooltip :text="chip?.description">
                 <template v-slot:activator="{ props }">
                   <v-avatar :size="isHovering ? 54 : 42" v-bind="props" >
@@ -316,25 +316,29 @@ export default {
     }
   },
   methods: {
-    dragStart(event) {
-      this.draggedChip = event
+    dragStart(event, index) {
       event.dataTransfer.effectAllowed = 'move';
-      event.dataTransfer.setData('text/plain', this.draggedChip);
+      event.dataTransfer.setData('text/plain', index);
       console.log('event drag start',event);
-      console.log('this.draggedChip drag start',this.draggedChip);
     },
     dropChip(event) {
       console.log('event dropChip',event);
-      const value = event.dataTransfer.getData('text/plain');
-      if (value !== null) {
-        const chip = this.chips.find(chip => chip.value === value);
-        console.log('chip dropChip',chip);
-        if (chip) {
-          this.droppedChips.push(chip);
-          this.chips = this.chips.filter(chip => chip.value !== value);
-        }
+      const index = event.dataTransfer.getData('text/plain');
+      if (index !== null) {
+        const chip = this.chips[index];
+        this.droppedChips.push(chip);
+        this.chips.splice(index, 1);
       }
     },
+    dropCard(event) {
+      console.log('event dropCard',event);
+      const index = event.dataTransfer.getData('text/plain');
+      if (index !== null) {
+        const chip = this.droppedChips[index];
+        this.chips.push(chip);
+        this.droppedChips.splice(index, 1);
+      }
+    }
   },
   validations() {
     return {
