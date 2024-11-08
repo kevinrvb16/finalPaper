@@ -8,11 +8,11 @@
             <v-card-title :class="`${customClassTitle} text-overline mt-4`">{{ title }}</v-card-title>
             <v-icon :icon="cardIcon" style="position: absolute; top: 44%; left: 41%; font-size: 24px; " :color="color" ></v-icon>
             <template v-for="chip in chips">
-              <v-chip size="x-large" :value="chip.value" v-bind="props" variant="text" :class="`mx-4 ${chip.classInsideCard}`" :style="chip.styleInsideCard" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
+              <v-chip size="x-large" :value="chip.value" v-bind="props" variant="text" class="mx-4" :style="chip.styleInsideCard" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropChip">
                 <v-tooltip :text="chip.description">
                   <template v-slot:activator="{ props }">
                     <v-avatar size="42" v-bind="props">
-                      <v-img :src="chip.image" alt="fichas para apostar nas cartas de métricas"></v-img>
+                      <v-img :src="'/img/' + chip?.image + '.png'" alt="fichas para apostar nas cartas de métricas"></v-img>
                     </v-avatar>
                   </template>
                 </v-tooltip>

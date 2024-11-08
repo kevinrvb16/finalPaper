@@ -144,7 +144,6 @@ export default {
           text: 'Relevância para a dor',
           description: 'Ficha de Relevância para a dor',
           customClass: 'mb-2 mt-6',
-          classInsideCard: 'bg-pink',
           styleInsideCard: 'position: absolute; bottom: 5px; left: 5px; font-size: 24px; ',
         },
         {
@@ -153,7 +152,6 @@ export default {
           text: 'Facilidade de coleta',
           description: 'Ficha de Facilidade de coleta',
           customClass: 'mb-1',
-          classInsideCard: 'bg-blue-dark',
           styleInsideCard: 'position: absolute; bottom: 5px; left: 5px; font-size: 24px; ',
         },
         {
@@ -162,7 +160,6 @@ export default {
           text: 'Preferência pessoal',
           description: 'Ficha de Preferência pessoal',
           customClass: 'mb-2 mt-6',
-          classInsideCard: 'bg-blue',
           styleInsideCard: 'position: absolute; bottom: 5px; left: 5px; font-size: 24px; ',
         }
       ],
