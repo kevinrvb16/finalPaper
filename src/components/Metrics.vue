@@ -326,17 +326,24 @@ export default {
       const index = event.dataTransfer.getData('text/plain');
       if (index !== null) {
         const chip = this.chips[index];
-        this.droppedChips.push(chip);
+        console.log('chip drop chip',chip);
+        this.droppedChips.push('chips',chip);
+        console.log('droppedChips drop chip',this.droppedChips);
         this.chips.splice(index, 1);
+        console.log('chips drop chip',this.chips);
       }
     },
     dropCard(event) {
       console.log('event dropCard',event);
       const index = event.dataTransfer.getData('text/plain');
+      console.log('index drop card',index);
       if (index !== null) {
         const chip = this.droppedChips[index];
+        console.log('chip drop card',chip);
         this.chips.push(chip);
+        console.log('chips drop card',this.chips);
         this.droppedChips.splice(index, 1);
+        console.log('droppedChips drop card',this.droppedChips);
       }
     }
   },
