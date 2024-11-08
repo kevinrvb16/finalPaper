@@ -98,15 +98,16 @@
     <v-responsive class="align-center mx-auto" v-else-if="status == 'select_metrics'">
       <div class="pb-4 pt-0 d-flex justify-space-around align-center">
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('prev')">Voltar para Grupos de Métricas</v-btn>
-        <div class="text-center">
+        <div class="text-center d-flex">
+          <div>
             <v-tooltip :text="game?.currentProblem ? game?.currentProblem?.description : problem?.description">
               <template v-slot:activator="{ props }">
                 <v-btn v-bind="props" prepend-icon="mdi-dots-hexagon" variant="tonal" color="indigo-darken-3" size="large" rounded="xl" :ripple="false">{{  game?.currentProblem ? game?.currentProblem?.name : problem?.name }}</v-btn>
               </template>
             </v-tooltip>
             <p class="text-caption">Dor escolhida</p>
-            <p v-if="isDealer" >Métricas</p>
-            <p v-else class="mt-2">Vote nas métricas com as fichas</p>
+          </div>
+            <p v-if="!isDealer" class="mt-2 text-indigo-darken-2">Cada carta é uma métrica. Para votar, arraste e solte as fichas em cima da carta que você escolher. Clique na carta para ver detalhes.</p>
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus()">Avançar</v-btn>
       </div>

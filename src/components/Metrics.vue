@@ -93,7 +93,6 @@
         </p>
       </div>
     </div>
-    <div class="text-center text-caption">Arraste e solte as fichas em cima de cada carta.</div>
   </v-responsive>
 </template>
 
