@@ -81,7 +81,7 @@
               <v-tooltip :text="chip?.description">
                 <template v-slot:activator="{ props }">
                   <v-avatar :size="isHovering ? 54 : 42" v-bind="props" >
-                    <v-img :src="chip?.image"></v-img>
+                    <v-img :src="'/img/' + chip?.image + '.png'"></v-img>
                   </v-avatar>
                 </template>
               </v-tooltip>
@@ -140,7 +140,7 @@ export default {
       chips: [
         {
           value: 'relevance',
-          image: '@/assets/coin_pink.png',
+          image: 'coin_pink',
           text: 'Relevância para a dor',
           description: 'Ficha de Relevância para a dor',
           customClass: 'mb-2 mt-6',
@@ -149,7 +149,7 @@ export default {
         },
         {
           value: 'ease',
-          image: '@/assets/coin_blue_dark_white.png',
+          image: 'coin_blue_dark_white',
           text: 'Facilidade de coleta',
           description: 'Ficha de Facilidade de coleta',
           customClass: 'mb-1',
@@ -158,7 +158,7 @@ export default {
         },
         {
           value: 'preference',
-          image: '@/assets/coin_blue.png',
+          image: 'coin_blue',
           text: 'Preferência pessoal',
           description: 'Ficha de Preferência pessoal',
           customClass: 'mb-2 mt-6',
