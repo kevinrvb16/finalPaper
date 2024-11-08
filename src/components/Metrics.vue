@@ -4,7 +4,7 @@
     max-width="1200"
   >
     <div>
-      <v-row justify="center" align="center" class=" bg-table-horizontal" no-gutters>
+      <v-row justify="center" align="center" class=" bg-table-horizontal mb-1" no-gutters>
         <v-tooltip :text="metricsGroup[0]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
             <v-card
@@ -38,7 +38,7 @@
           <flip-card :cardIcon="'mdi-cards-spade'"  @dragover.prevent @drop="dropCard" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
         </v-col>
       </v-row>
-      <v-row class="bg-table-horizontal"  justify="center" align="center" no-gutters>
+      <v-row class="bg-table-horizontal mt-1"  justify="center" align="center" no-gutters>
         <v-tooltip :text="metricsGroup[1]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
             <v-card
