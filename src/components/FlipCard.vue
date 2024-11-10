@@ -9,7 +9,7 @@
             <v-icon :icon="cardIcon" style="position: absolute; top: 44%; left: 41%; font-size: 24px; " :color="color" ></v-icon>
             <template v-for="chip in chips.flat()">
               <v-chip v-if="chip.destinyId === id" size="x-large" :value="chip.value" v-bind="props" variant="text" class="pl-0 overflow-visible" :style="chip.styleInsideCard" draggable rounded="circle" @dragstart="dragStart" @dragover.prevent @drop="dropCard">
-                <v-tooltip :text="showChipDescOrParticipantsNickname(chip)">
+                <v-tooltip :text="chip?.count ? chip?.participants.map(participant => participant.nickname).join(', ') : chip?.description">
                   <template v-slot:activator="{ props }">
                     <v-badge v-if="chip?.count" :color="color" overlap="circle" :content="chip?.count" class="ma-0">
                       <v-avatar size="42" v-bind="props">
@@ -75,12 +75,6 @@ export default {
     }
   },
   methods: {
-    showChipDescOrParticipantsNickname(chip) {
-      if (chip?.count) {
-        return chip?.participants.reduce((acc, participant) => acc + participant.nickname + ', ', '').slice(0, -2);
-      }
-      return chip?.description;
-    },
     dragStart(event) {
       event.dataTransfer.setData('text/plain', event.target.value);
     },
