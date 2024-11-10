@@ -53,7 +53,7 @@
                 <div class="text-overline">
                   {{ metricsGroup[1]?.title }}
                 </div>
-                <div class="d-flex">
+                <div>
                   <template v-for="avatar in avatars">
                       <v-avatar size="28" v-if="avatar.value == metricsGroup[1]?.value">
                           <v-tooltip :text="avatar.nickname">
