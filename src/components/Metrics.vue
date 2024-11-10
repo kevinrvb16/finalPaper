@@ -429,7 +429,7 @@ export default {
       // verify if problem is problemA or problemB to save in relevanceB or relevanceA, easeB or easeA, preferenceB or preferenceA
       try {
         const uId = localStorage.getItem("anonUser").split(',')[2];
-        const { data: participants } = isProblemA ?
+        const { data: participants } = this.isProblemA ?
           await supabase
             .from('participants')
             .update({
