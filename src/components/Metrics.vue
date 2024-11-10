@@ -412,12 +412,12 @@ export default {
       this.problemsSaved = true;
       console.log('droppedChips',this.droppedChips);
       this.droppedChips.forEach(chip => {
-        if (chip.destinyId === 'relevance') {
-          this.relevance = chip.value;
-        } else if (chip.destinyId === 'ease') {
-          this.ease = chip.value;
-        } else if (chip.destinyId === 'preference') {
-          this.preference = chip.value;
+        if (chip.value === 'relevance') {
+          this.relevance = chip.destrinyId
+        } else if (chip.value === 'ease') {
+          this.ease = chip.destrinyId
+        } else if (chip.value === 'preference') {
+          this.preference = chip.destrinyId
         }
       });
       this.sendToSupabase();
