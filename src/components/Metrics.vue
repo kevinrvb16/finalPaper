@@ -372,18 +372,38 @@ export default {
       }
     },
     mountDroppedChipsWithParticipant(newPayload) {
-      const newParticipantVoted = this.chips.map(chip => {
-      let destinyId = null;
-      if (chip.value === 'relevance') {
-        destinyId = this.isProblemA ? newPayload?.relevanceA : newPayload?.relevanceB;
-      } else if (chip.value === 'ease') {
-        destinyId = this.isProblemA ? newPayload?.easeA : newPayload?.easeB;
-      } else if (chip.value === 'preference') {
-        destinyId = this.isProblemA ? newPayload?.preferenceA : newPayload?.preferenceB;
+      this.droppedChips = this.droppedChips.map(droppedChip => {
+      const existingChip = this.chips.find(chip => chip.destinyId === droppedChip.destinyId && chip.value === droppedChip.value);
+      if (existingChip) {
+        droppedChip.count += 1;
+        droppedChip.participants.push(newPayload);
       }
-      return { ...chip, destinyId };
-      }).filter(chip => chip.destinyId !== null);
-      
+      return droppedChip;
+      });
+
+      const newParticipantVoted = this.chips.map(chip => {
+        let destinyId = null;
+        if (chip.value === 'relevance') {
+          destinyId = this.isProblemA ? newPayload?.relevanceA : newPayload?.relevanceB;
+        } else if (chip.value === 'ease') {
+          destinyId = this.isProblemA ? newPayload?.easeA : newPayload?.easeB;
+        } else if (chip.value === 'preference') {
+          destinyId = this.isProblemA ? newPayload?.preferenceA : newPayload?.preferenceB;
+        }
+
+        const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChip => droppedChip.destinyId === destinyId && droppedChip.value !== chip.value);
+        if (destinyIdAlreadyHasCoin) {
+          chip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(chip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
+        }
+
+        const destinyIdAlreadyHasCoinWithValue = this.droppedChips.find(droppedChip => droppedChip.destinyId === destinyId && droppedChip.value === chip.value);
+        if (destinyIdAlreadyHasCoinWithValue) {
+          return null;
+        }
+
+        return { ...chip, destinyId, count: 1, participants: [newPayload] };
+      }).filter(chip => chip !== null && chip.destinyId !== null);
+
       this.droppedChips.push(...newParticipantVoted);
     },
     dragStart(event, index) {
