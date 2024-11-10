@@ -413,11 +413,11 @@ export default {
       console.log('droppedChips',this.droppedChips);
       this.droppedChips.forEach(chip => {
         if (chip.value === 'relevance') {
-          this.relevance = chip.destrinyId
+          this.relevance = chip.destinyId
         } else if (chip.value === 'ease') {
-          this.ease = chip.destrinyId
+          this.ease = chip.destinyId
         } else if (chip.value === 'preference') {
-          this.preference = chip.destrinyId
+          this.preference = chip.destinyId
         }
       });
       this.sendToSupabase();
