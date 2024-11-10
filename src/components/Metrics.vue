@@ -132,6 +132,16 @@ export default {
       type: Boolean,
       default: false,
       required: false
+    },
+    isProblemA: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    game: {
+      type: Object,
+      default: {},
+      required: false
     }
   },
   data() {
@@ -338,6 +348,13 @@ export default {
   mounted() {
     this.metricsOfFirstGroup = this.metricOfEachGroup[this.metricsGroup[0]?.value]
     this.metricsOfSecondGroup = this.metricOfEachGroup[this.metricsGroup[1]?.value]
+    // create channel to listen to changes in the database participants
+    if (this.isDealer) {
+      supabase
+        .channel(`participants${this.problem?.id}metricsComponent`)
+        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'participants' }, this.handleUpdate)
+        .subscribe();
+    }
   },
   watch: {
     metricsGroup: {
@@ -349,6 +366,13 @@ export default {
     }
   },
   methods: {
+    handleUpdate(payload) {
+      if (!payload.errors && payload?.new?.game_session == this.game?.id) {
+        this.relevance = payload?.new?.relevance;
+        this.ease = payload?.new?.ease;
+        this.preference = payload?.new?.preference;
+      }
+    },
     dragStart(event, index) {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.setData('text/plain', index);
@@ -402,15 +426,34 @@ export default {
       console.log('preference',this.preference);
     },
     async sendToSupabase() {
-      const { data, error } = await supabase.from('problems').update({
-        relevance: this.relevance,
-        ease: this.ease,
-        preference: this.preference
-      }).eq('id', this.problem?.id);
-      if (error) {
+      // verify if problem is problemA or problemB to save in relevanceB or relevanceA, easeB or easeA, preferenceB or preferenceA
+      try {
+        const uId = localStorage.getItem("anonUser").split(',')[2];
+        const { data: participants } = isProblemA ?
+          await supabase
+            .from('participants')
+            .update({
+              relevanceA: this.relevance,
+              easeA: this.ease,
+              preferenceA: this.preference
+            })
+            .eq('id', uId)
+            .select('*')
+        :
+          await supabase
+            .from('participants')
+            .update({
+              relevanceB: this.relevance,
+              easeB: this.ease,
+              preferenceB: this.preference
+            })
+            .eq('id', uId)
+            .select('*')
+        this.$emit('successOnSend', participants[0]);
+      } catch (error) {
         console.error('error',error);
-      } else {
-        console.log('data',data);
+        this.problemsSaved = false;
+        this.$emit('errorOnSend', error);
       }
     }
   },
