@@ -113,7 +113,7 @@
       </div>
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10" class="pr-0">
-          <metrics :game=game :isProblemA="game?.currentProblem?.id == game?.problemA?.id" :metricsGroup="twoMetricsGroupsSelected" :problem="problem" :avatars="choosenByParticipants" :isDealer="isDealer" ></metrics>
+          <metrics :participants="participants" :game=game :isProblemA="game?.currentProblem?.id == game?.problemA?.id" :metricsGroup="twoMetricsGroupsSelected" :problem="problem" :avatars="choosenByParticipants" :isDealer="isDealer" ></metrics>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
           <participants :gameId="id" @input="setParticipants"></participants>
