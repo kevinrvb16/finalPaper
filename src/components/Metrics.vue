@@ -155,7 +155,6 @@ export default {
       selectedMetrics: [],
       metricsOfFirstGroup: [],
       metricsOfSecondGroup: [],
-      participantsChannel: false,
       relevance: null,
       ease: null,
       preference: null,
@@ -355,12 +354,11 @@ export default {
     this.metricsOfFirstGroup = this.metricOfEachGroup[this.metricsGroup[0]?.value]
     this.metricsOfSecondGroup = this.metricOfEachGroup[this.metricsGroup[1]?.value]
     // create channel to listen to changes in the database participants
-    if (this.isDealer && this.participantsChannel === false && this.problem?.id) {
+    if (this.isDealer) {
       supabase
         .channel(`participants${this.problem?.id}metricsComponent`)
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'participants' }, this.handleUpdate)
         .subscribe();
-      this.participantsChannel = true;
     }
     if (this.participants > 0) {
       this.participants.forEach(participant => {
