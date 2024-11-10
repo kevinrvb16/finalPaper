@@ -107,7 +107,7 @@
             </v-tooltip>
             <p class="text-caption">Dor escolhida</p>
           </div>
-            <p v-if="!isDealer" class="mt-2 text-indigo-darken-2">Cada carta é uma métrica. Para votar, arraste e solte as fichas em cima da carta que você escolher. Clique na carta para ver detalhes.</p>
+            <p v-if="!isDealer" class=" ml-10 mt-2 text-indigo-darken-2">Cada carta é uma métrica. Para votar, arraste e solte as fichas em cima da carta que você escolher. Clique na carta para ver detalhes.</p>
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus()">Avançar</v-btn>
       </div>
