@@ -368,10 +368,23 @@ export default {
   methods: {
     handleUpdate(payload) {
       if (!payload.errors && payload?.new?.game_session == this.game?.id) {
-        this.relevance = payload?.new?.relevance;
-        this.ease = payload?.new?.ease;
-        this.preference = payload?.new?.preference;
+        this.mountDroppedChipsWithParticipant(payload.new);
       }
+    },
+    mountDroppedChipsWithParticipant(newPayload) {
+      const newParticipantVoted = this.chips.map(chip => {
+      let destinyId = null;
+      if (chip.value === 'relevance') {
+        destinyId = this.isProblemA ? newPayload?.relevanceA : newPayload?.relevanceB;
+      } else if (chip.value === 'ease') {
+        destinyId = this.isProblemA ? newPayload?.easeA : newPayload?.easeB;
+      } else if (chip.value === 'preference') {
+        destinyId = this.isProblemA ? newPayload?.preferenceA : newPayload?.preferenceB;
+      }
+      return { ...chip, destinyId };
+      }).filter(chip => chip.destinyId !== null);
+      
+      this.droppedChips.push(...newParticipantVoted);
     },
     dragStart(event, index) {
       event.dataTransfer.effectAllowed = 'move';
