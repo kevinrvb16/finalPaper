@@ -380,7 +380,7 @@ export default {
     },
     send() {
       this.problemsSaved = true;
-      console.log('selectedMetrics',this.selectedMetrics);
+      console.log('droppedChips',this.droppedChips);
       console.log('relevance',this.relevance);
       console.log('ease',this.ease);
       console.log('preference',this.preference);
