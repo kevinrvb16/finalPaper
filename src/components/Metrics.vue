@@ -381,9 +381,31 @@ export default {
     send() {
       this.problemsSaved = true;
       console.log('droppedChips',this.droppedChips);
+      this.droppedChips.forEach(chip => {
+        if (chip.destinyId === 'relevance') {
+          this.relevance = chip.value;
+        } else if (chip.destinyId === 'ease') {
+          this.ease = chip.value;
+        } else if (chip.destinyId === 'preference') {
+          this.preference = chip.value;
+        }
+      });
+      this.sendToSupabase();
       console.log('relevance',this.relevance);
       console.log('ease',this.ease);
       console.log('preference',this.preference);
+    },
+    async sendToSupabase() {
+      const { data, error } = await this.$supabase.from('problems').update({
+        relevance: this.relevance,
+        ease: this.ease,
+        preference: this.preference
+      }).eq('id', this.problem?.id);
+      if (error) {
+        console.error('error',error);
+      } else {
+        console.log('data',data);
+      }
     }
   },
   validations() {
