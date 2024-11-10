@@ -102,6 +102,7 @@ import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators'
 import FlipCard from '@/components/FlipCard.vue';
 import HeaderApp from '@/components/HeaderApp.vue'
+import { supabase } from '@/main';
 
 export default {
   setup() {
@@ -396,7 +397,7 @@ export default {
       console.log('preference',this.preference);
     },
     async sendToSupabase() {
-      const { data, error } = await this.$supabase.from('problems').update({
+      const { data, error } = await supabase.from('problems').update({
         relevance: this.relevance,
         ease: this.ease,
         preference: this.preference
