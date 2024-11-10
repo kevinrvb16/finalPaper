@@ -80,7 +80,7 @@
             <v-chip size="x-large" variant="text" :value="chip?.value" v-bind="props"  :class="`mx-4 ${chip?.customClass}`" draggable rounded="circle" @dragstart="dragStart($event, index)" @dragover.prevent @drop="dropCard">
               <v-tooltip :text="chip?.description">
                 <template v-slot:activator="{ props }">
-                  <v-avatar :size="isHovering ? 54 : 42" v-bind="props" >
+                  <v-avatar :size="isHovering && !isDealer ? 54 : 42" v-bind="props" >
                     <v-img :src="'/img/' + chip?.image + '.png'"></v-img>
                   </v-avatar>
                 </template>
@@ -92,7 +92,7 @@
           {{ chip?.text }}
         </p>
       </div>
-      <v-btn :disabled="problemsSaved" append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
+      <v-btn v-if="!isDealer" :disabled="problemsSaved" append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
     </div>
   </v-responsive>
 </template>
@@ -128,6 +128,11 @@ export default {
       default: [],
       required: false
     },
+    isDealer: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
   },
   data() {
     return {
