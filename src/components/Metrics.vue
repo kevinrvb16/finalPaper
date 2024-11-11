@@ -356,7 +356,7 @@ export default {
         .subscribe();
     }
     console.log('participants',this.participants);
-    if (this.participants.length == 0) {
+    if (this.participants.length == 0 && this.isDealer) {
       await this.getParticipants()
     }
     if (this.participants > 0 && this.isDealer) {
