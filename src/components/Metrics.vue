@@ -395,16 +395,6 @@ export default {
     },
     mountDroppedChipsWithParticipant(newPayload) {
       console.log('newPayload',newPayload);
-      this.droppedChips = this.droppedChips.map(droppedChip => {
-        console.log('droppedChip',droppedChip);
-        console.log('this.chips',this.chips);
-        const existingChip = this.chips.find(chip => chip?.destinyId === droppedChip.destinyId && chip?.value === droppedChip?.value);
-        if (existingChip) {
-          droppedChip.count += 1;
-          droppedChip.participants.push(newPayload);
-        }
-        return droppedChip;
-      });
 
       const newParticipantVoted = this.chips.map(chip => {
         console.log('chip',chip);
@@ -415,6 +405,15 @@ export default {
           destinyId = this.isProblemA ? newPayload?.easeA : newPayload?.easeB;
         } else if (chip.value === 'preference') {
           destinyId = this.isProblemA ? newPayload?.preferenceA : newPayload?.preferenceB;
+        }
+
+        const existingChip = this.droppedChips.find(droppedChip => {
+          return droppedChip.destinyId === destinyId && droppedChip.value === chip.value;
+        });
+        if (existingChip) {
+          droppedChip.count += 1;
+          droppedChip.participants.push(newPayload);
+          return null;
         }
 
         const destinyIdAlreadyHasCoinWithValue = this.droppedChips.find(droppedChip => droppedChip.destinyId === destinyId && droppedChip.value === chip.value);
