@@ -407,12 +407,12 @@ export default {
           destinyId = this.isProblemA ? newPayload?.preferenceA : newPayload?.preferenceB;
         }
 
-        const existingChip = this.droppedChips.find(droppedChip => {
+        const existingChip = this.droppedChips.findIndex(droppedChip => {
           return droppedChip.destinyId === destinyId && droppedChip.value === chip.value;
         });
-        if (existingChip) {
-          droppedChip.count += 1;
-          droppedChip.participants.push(newPayload);
+        if (existingChip !== -1) {
+          this.droppedChips[existingChip].count += 1;
+          this.droppedChips[existingChip].participants.push(newPayload);
           return null;
         }
 
