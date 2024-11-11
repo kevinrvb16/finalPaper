@@ -396,6 +396,8 @@ export default {
     mountDroppedChipsWithParticipant(newPayload) {
       console.log('newPayload',newPayload);
       this.droppedChips = this.droppedChips.map(droppedChip => {
+        console.log('droppedChip',droppedChip);
+        console.log('this.chips',this.chips);
         const existingChip = this.chips.find(chip => chip?.destinyId === droppedChip.destinyId && chip?.value === droppedChip?.value);
         if (existingChip) {
           droppedChip.count += 1;
