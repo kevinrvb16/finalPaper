@@ -360,10 +360,9 @@ export default {
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'participants' }, this.handleUpdate)
         .subscribe();
     }
-    if (this.participants > 0) {
-      this.participants.forEach(participant => {
-        this.mountDroppedChipsWithParticipant(participant);
-      });
+    console.log('participants',this.participants);
+    if (this.participants > 0 && this.isDealer) {
+      this.loadDroppedChipsWithParticipants();
     }
   },
   watch: {
@@ -381,9 +380,15 @@ export default {
         this.mountDroppedChipsWithParticipant(payload.new);
       }
     },
+    loadDroppedChipsWithParticipants() {
+      this.participants.forEach(participant => {
+        this.mountDroppedChipsWithParticipant(participant);
+      });
+    },
     mountDroppedChipsWithParticipant(newPayload) {
+      console.log('newPayload',newPayload);
       this.droppedChips = this.droppedChips.map(droppedChip => {
-      const existingChip = this.chips.find(chip => chip.destinyId === droppedChip.destinyId && chip.value === droppedChip.value);
+      const existingChip = this.chips.find(chip => chip?.destinyId === droppedChip?.destinyId && chip?.value === droppedChip?.value);
       if (existingChip) {
         droppedChip.count += 1;
         droppedChip.participants.push(newPayload);
@@ -396,6 +401,7 @@ export default {
         if (destinyIdAlreadyHasCoinWithValue) {
           return null;
         }
+        console.log('chip',chip);
         let destinyId = null;
         if (chip.value === 'relevance') {
           destinyId = this.isProblemA ? newPayload?.relevanceA : newPayload?.relevanceB;
@@ -412,7 +418,7 @@ export default {
 
         return { ...chip, destinyId, count: 1, participants: [newPayload] };
       }).filter(chip => chip !== null && chip.destinyId !== null);
-
+      console.log('newParticipantVoted',newParticipantVoted);
       this.droppedChips.push(...newParticipantVoted);
     },
     dragStart(event, index) {
