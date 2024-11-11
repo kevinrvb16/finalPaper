@@ -396,12 +396,12 @@ export default {
     mountDroppedChipsWithParticipant(newPayload) {
       console.log('newPayload',newPayload);
       this.droppedChips = this.droppedChips.map(droppedChip => {
-      const existingChip = this.chips.find(chip => chip?.destinyId === droppedChip?.destinyId && chip?.value === droppedChip?.value);
-      if (existingChip) {
-        droppedChip.count += 1;
-        droppedChip.participants.push(newPayload);
-      }
-      return droppedChip;
+        const existingChip = this.chips.find(chip => chip?.destinyId === droppedChip.destinyId && chip?.value === droppedChip?.value);
+        if (existingChip) {
+          droppedChip.count += 1;
+          droppedChip.participants.push(newPayload);
+        }
+        return droppedChip;
       });
 
       const newParticipantVoted = this.chips.map(chip => {
