@@ -154,6 +154,7 @@ export default {
       ease: null,
       preference: null,
       problemsSaved: false,
+      participants: [],
       chips: [
         {
           value: 'relevance',
