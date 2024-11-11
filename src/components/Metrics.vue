@@ -149,6 +149,14 @@ export default {
       required: false
     }
   },
+  watch: {
+    participants: {
+      handler() {
+        this.loadDroppedChipsWithParticipants();
+      },
+      deep: true
+    }
+  },
   data() {
     return {
       email: '',
@@ -382,6 +390,7 @@ export default {
     },
     loadDroppedChipsWithParticipants() {
       this.participants.forEach(participant => {
+        console.log('participant',participant);
         this.mountDroppedChipsWithParticipant(participant);
       });
     },
