@@ -145,8 +145,7 @@ export default {
     },
     participants: {
       type: Array,
-      default: null,
-      required: false
+      required: true
     }
   },
   watch: {
