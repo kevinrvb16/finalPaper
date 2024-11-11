@@ -407,10 +407,6 @@ export default {
       });
 
       const newParticipantVoted = this.chips.map(chip => {
-        const destinyIdAlreadyHasCoinWithValue = this.droppedChips.find(droppedChip => droppedChip.destinyId === destinyId && droppedChip.value === chip.value);
-        if (destinyIdAlreadyHasCoinWithValue) {
-          return null;
-        }
         console.log('chip',chip);
         let destinyId = null;
         if (chip.value === 'relevance') {
@@ -419,6 +415,11 @@ export default {
           destinyId = this.isProblemA ? newPayload?.easeA : newPayload?.easeB;
         } else if (chip.value === 'preference') {
           destinyId = this.isProblemA ? newPayload?.preferenceA : newPayload?.preferenceB;
+        }
+
+        const destinyIdAlreadyHasCoinWithValue = this.droppedChips.find(droppedChip => droppedChip.destinyId === destinyId && droppedChip.value === chip.value);
+        if (destinyIdAlreadyHasCoinWithValue) {
+          return null;
         }
 
         const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChip => droppedChip.destinyId === destinyId && droppedChip.value !== chip.value);
