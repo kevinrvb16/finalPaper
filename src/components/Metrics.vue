@@ -143,18 +143,6 @@ export default {
       default: {},
       required: false
     },
-    participants: {
-      type: Array,
-      required: true
-    }
-  },
-  watch: {
-    participants: {
-      handler() {
-        this.loadDroppedChipsWithParticipants();
-      },
-      deep: true
-    }
   },
   data() {
     return {
@@ -357,7 +345,7 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
     this.metricsOfFirstGroup = this.metricOfEachGroup[this.metricsGroup[0]?.value]
     this.metricsOfSecondGroup = this.metricOfEachGroup[this.metricsGroup[1]?.value]
     // create channel to listen to changes in the database participants
@@ -368,6 +356,9 @@ export default {
         .subscribe();
     }
     console.log('participants',this.participants);
+    if (this.participants.length == 0) {
+      await this.getParticipants()
+    }
     if (this.participants > 0 && this.isDealer) {
       this.loadDroppedChipsWithParticipants();
     }
@@ -382,6 +373,15 @@ export default {
     }
   },
   methods: {
+    async getParticipants() {
+      const participantsInDataBase = await supabase
+          .from('participants')
+          .select("*")
+          .eq('game_session', this.game.id)
+      if (!participantsInDataBase.error) {
+          this.participants = participantsInDataBase?.data
+      }
+  },
     handleUpdate(payload) {
       if (!payload?.errors && payload?.new?.game_session == this.game?.id) {
         this.mountDroppedChipsWithParticipant(payload.new);
