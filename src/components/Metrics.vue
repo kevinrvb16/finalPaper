@@ -472,8 +472,8 @@ export default {
           metricOfGroup = this.metricOfEachGroup[this.metricsGroup[0]?.value].find(metric => metric.value === card.metric) || this.metricOfEachGroup[this.metricsGroup[1]?.value].find(metric => metric.value === card.metric);
         }
         console.log('metricOfGroup',metricOfGroup);
-        card.name = metric.name;
-        card.description = metric.description;
+        card.name = metricOfGroup.name;
+        card.description = metricOfGroup.description;
       });
       this.$emit('input', this.selectedMetrics);
     },
