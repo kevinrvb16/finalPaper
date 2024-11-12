@@ -359,9 +359,6 @@ export default {
     if (this.participants.length == 0 && this.isDealer) {
       await this.getParticipants()
     }
-    if (this.participants > 0 && this.isDealer) {
-      this.loadDroppedChipsWithParticipants();
-    }
   },
   watch: {
     metricsGroup: {
@@ -381,6 +378,7 @@ export default {
       console.log('participantsInDataBase',participantsInDataBase);
       if (!participantsInDataBase.error) {
           this.participants = participantsInDataBase?.data
+          this.loadDroppedChipsWithParticipants();
       }
   },
     handleUpdate(payload) {
