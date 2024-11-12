@@ -113,7 +113,7 @@
       </div>
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10" class="pr-0">
-          <metrics @input="setTwoMetricsSelected" :game=game :isProblemA="game?.currentProblem?.id == game?.problemA?.id" :metricsGroup="twoMetricsGroupsSelected" :problem="problem" :avatars="choosenByParticipants" :isDealer="isDealer" ></metrics>
+          <metrics @input="setMetricsSelected" :game=game :isProblemA="game?.currentProblem?.id == game?.problemA?.id" :metricsGroup="twoMetricsGroupsSelected" :problem="problem" :avatars="choosenByParticipants" :isDealer="isDealer" ></metrics>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
           <participants :gameId="id" @input="setParticipants"></participants>
@@ -135,7 +135,7 @@
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus">Iniciar Próxima Dor</v-btn>
       </div>
       <v-row no-gutters class="mb-3">
-        <div v-for="(metric, index) in twoMetricsSelected" :key="metric.metric" class=" d-flex justify-center text-center mb-3">
+        <div v-for="(metric, index) in metricsSelected" :key="metric.metric" class=" d-flex justify-center text-center mb-3">
           <flip-card :votes="metric.count" :id="metric.metric"  :cardIcon="'mdi-cards-diamond'" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="index < 2 ? 'success' : 'black'"></flip-card>
         </div>
         <div class="d-flex align-center justify-end">
@@ -181,7 +181,7 @@ export default {
   data() {
     return {
       selectedGroups: [],
-      twoMetricsSelected: [],
+      metricsSelected: [],
       twoMetricsGroupsSelected: [],
       game: {},
       problemsSaved: false,
@@ -364,12 +364,40 @@ export default {
         }
       }
       if (this.status == 'ended') {
-        this.getCurrentProblem()
+        if (this.isDealer) {
+          this.saveProblemsDatabase()
+        }
       }
     },
-    setTwoMetricsSelected(metrics) {
+    async saveProblemsDatabase() {
+      const twoMetrics = this.metricsSelected.slice(0, 2)
+      const { data, error } = await supabase
+        .from('metrics')
+        .insert({ problem: this.problem.id, value: twoMetrics[0].metric, name: twoMetrics[0].name, description: twoMetrics[0].description, count: twoMetrics[0].count, game_session: this.id, participants: twoMetrics[0].participants })
+        .select()
+      if (error) {
+        console.error("Erro ao salvar métricas:", error);
+        this.errorMessage = error.message
+        this.showError = true
+        return;
+      }
+      const { data: data2, error: error2 } = await supabase
+        .from('metrics')
+        .insert({ problem: this.problem.id, value: twoMetrics[1].metric, name: twoMetrics[1].name, description: twoMetrics[1].description, count: twoMetrics[1].count, game_session: this.id, participants: twoMetrics[1].participants })
+        .select()
+      if (error2) {
+        console.error("Erro ao salvar métricas:", error2);
+        this.errorMessage = error2.message
+        this.showError = true
+        return;
+      }
+      this.message = 'Métricas salvas com sucesso'
+      this.showSnackBar = true
+    },
+    setMetricsSelected(metrics) {
       console.log('metrics', metrics)
-      this.twoMetricsSelected = metrics
+      this.metricsSelected = metrics
+      
     },
     async sendToProblemsDatabase() {
       const selected = [...this.twoMetricsGroupsSelected]
