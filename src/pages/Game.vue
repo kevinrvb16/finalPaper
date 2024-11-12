@@ -365,11 +365,11 @@ export default {
       }
       if (this.status == 'ended') {
         if (this.isDealer) {
-          this.saveProblemsDatabase()
+          this.saveMetricsDatabase()
         }
       }
     },
-    async saveProblemsDatabase() {
+    async saveMetricsDatabase() {
       const twoMetrics = this.metricsSelected.slice(0, 2)
       const { data, error } = await supabase
         .from('metrics')
