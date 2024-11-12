@@ -138,9 +138,9 @@
         <div v-for="(metric, index) in twoMetricsSelected" :key="metric.metric" class=" d-flex justify-center text-center mb-3">
           <flip-card :votes="metric.count" :id="metric.metric"  :cardIcon="'mdi-cards-diamond'" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="index < 2 ? 'success' : 'black'"></flip-card>
         </div>
-        <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
+        <div class="d-flex align-center justify-end">
           <participants :gameId="id" @input="setParticipants"></participants>
-        </v-col>
+        </div>
       </v-row>
     </v-responsive>
     <div v-else>
