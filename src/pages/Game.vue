@@ -135,7 +135,7 @@
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus">Iniciar Próxima Dor</v-btn>
       </div>
       <v-row no-gutters class="mb-3">
-        <v-col no-gutters cols="6" v-for="metric in twoMetricsSelected" :key="metric.metric">
+        <v-col no-gutters cols="5" v-for="metric in twoMetricsSelected" :key="metric.metric">
           <flip-card :id="metric.metric"  :cardIcon="'mdi-cards-diamond'" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" color="black"></flip-card>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
@@ -368,6 +368,7 @@ export default {
       }
     },
     setTwoMetricsSelected(metrics) {
+      console.log('metrics', metrics)
       this.twoMetricsSelected = metrics
     },
     async sendToProblemsDatabase() {
