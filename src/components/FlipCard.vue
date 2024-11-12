@@ -23,7 +23,7 @@
                 </v-tooltip>
               </v-chip>
             </template>
-              <v-chip v-if="vote" size="x-large" variant="text" :text="vote" style="position: absolute; bottom: 5px; left: 5px; font-size: 24px;"></v-chip>
+            <v-chip v-if="vote" size="x-large" variant="text" :text="vote" style="position: absolute; bottom: 5px; left: 5px; font-size: 24px;"></v-chip>
             <v-icon :icon="cardIcon" style="position: absolute; bottom: 5px; right: 5px; font-size: 24px; " :color="color" ></v-icon>
           </v-card>
         </template>
