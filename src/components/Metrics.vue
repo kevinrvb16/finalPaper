@@ -438,7 +438,13 @@ export default {
       }
       this.droppedChips.forEach( droppedchip => {
         const i = this.selectedMetrics.findIndex(card => card?.metric === droppedchip.destinyId)
-        i !== -1 ? this.selectedMetrics[i].count += 1 : this.selectedMetrics.push({ metric: droppedchip?.destinyId, count: 1 });
+       if( i !== -1) {
+          this.selectedMetrics[i].count += 1
+          this.selectedMetrics = droppedchip.participants.map(participant => participant.nickname);
+        } else {
+          const lisOfParticipantsNickname = droppedchip.participants.map(participant => participant.nickname);
+          this.selectedMetrics.push({ metric: droppedchip?.destinyId, count: 1, participants: lisOfParticipantsNickname });
+       }
       })
       this.selectedMetrics.sort((a, b) => b.count - a.count);
       this.selectedMetrics = this.selectedMetrics.filter((card, index) => {
