@@ -366,8 +366,26 @@ export default {
       if (this.status == 'ended') {
         if (this.isDealer) {
           this.saveMetricsDatabase()
+        } else {
+          this.retrieveSelectedMetricsDatabase()
         }
       }
+    },
+    async retrieveSelectedMetricsDatabase() {
+      const { data, error } = await supabase
+        .from('metrics')
+        .select('*')
+        .eq('game_session', this.id)
+        .eq('problem', this.problem.id)
+      if (error) {
+        console.error("Erro ao buscar métricas:", error);
+        this.errorMessage = error.message
+        this.showError = true
+        return;
+      }
+      this.message = 'Métricas votadas com sucesso'
+      this.showSnackBar = true
+      this.metricsSelected = data
     },
     async saveMetricsDatabase() {
       const twoMetrics = this.metricsSelected.slice(0, 2)
