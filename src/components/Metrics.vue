@@ -461,7 +461,9 @@ export default {
           const selectedMetrics = this.groups.split(',');
           metricOfGroup = this.metricOfEachGroup[selectedMetrics[0]].find(metric => metric.value === card.metric) || this.metricOfEachGroup[selectedMetrics[1]].find(metric => metric.value === card.metric);
         } else {
-          metricOfGroup = this.metricOfEachGroup[this.metricsGroup[0]?.value].find(metric => metric.value === card.metric) || this.metricOfEachGroup[this.metricsGroup[1]?.value].find(metric => metric.value === card.metric);
+          console.log('this.metricsGroup[0].value', this.metricsGroup[0].value);
+          console.log('this.metricsOfEachGroup[this.metricsGroup[0].value]', this.metricsOfEachGroup[this.metricsGroup[0].value]);
+          metricOfGroup = this.metricOfEachGroup[this.metricsGroup[0].value].find(metric => metric.value === card.metric) || this.metricOfEachGroup[this.metricsGroup[1].value].find(metric => metric.value === card.metric);
         }
         console.log('metricOfGroup', metricOfGroup);
         card.name = metricOfGroup.name;
