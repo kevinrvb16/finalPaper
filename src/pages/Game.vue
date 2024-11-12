@@ -134,9 +134,9 @@
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus">Iniciar Próxima Dor</v-btn>
       </div>
-      <v-row no-gutters class="mb-3">
+      <v-row no-gutters class="mb-3 justify-space-between">
         <div v-for="(metric, index) in metricsSelected" :key="metric.metric" class=" d-flex justify-center text-center mb-3">
-          <flip-card :votes="metric.count" :id="metric.metric"  :cardIcon="'mdi-cards-diamond'" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="index < 2 ? 'success' : 'black'"></flip-card>
+          <flip-card :vote="metric.count" :id="metric.metric"  :cardIcon="'mdi-cards-diamond'" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="index < 2 ? 'success' : 'black'"></flip-card>
         </div>
         <div class="d-flex align-center justify-end">
           <participants :gameId="id" @input="setParticipants"></participants>
