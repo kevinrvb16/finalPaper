@@ -464,6 +464,7 @@ export default {
       this.selectedMetrics.forEach(card => {
         console.log('this.metricsGroup[0]?.value',this.metricsGroup[0]?.value);
         let metric = null
+        console.log('this.groups',this.groups);
         if (!this.metricsGroup && this.groups) {
           const selectedMetrics = this.groups.split(',');
           metric = this.metricOfEachGroup[selectedMetrics[0]].find(metric => metric.value === card.metric) || this.metricOfEachGroup[selectedMetrics[1]].find(metric => metric.value === card.metric);
