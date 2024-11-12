@@ -130,7 +130,8 @@
             </template>
           </v-tooltip>
           <p class="text-caption">Dor escolhida</p>
-          <p> Métricas escolhidas</p>
+          <p class="my-2"> Métricas escolhidas</p>
+          <p class="text-caption">Em verde estão as métricas escolhidas, em preto as empatadas, porém não selecionadas. o critério de desempate é qual métrica foi escolhida primeiro</p>
         </div>
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus">Iniciar Próxima Dor</v-btn>
       </div>
