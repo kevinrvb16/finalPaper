@@ -64,9 +64,6 @@ export default {
     customClassFlipCard: {
       type: String
     },
-    textColor: {
-      type: String
-    },
     cardIcon: {
       type: String
     },

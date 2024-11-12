@@ -113,7 +113,30 @@
       </div>
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10" class="pr-0">
-          <metrics :game=game :isProblemA="game?.currentProblem?.id == game?.problemA?.id" :metricsGroup="twoMetricsGroupsSelected" :problem="problem" :avatars="choosenByParticipants" :isDealer="isDealer" ></metrics>
+          <metrics @input="setTwoMetricsSelected" :game=game :isProblemA="game?.currentProblem?.id == game?.problemA?.id" :metricsGroup="twoMetricsGroupsSelected" :problem="problem" :avatars="choosenByParticipants" :isDealer="isDealer" ></metrics>
+        </v-col>
+        <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
+          <participants :gameId="id" @input="setParticipants"></participants>
+        </v-col>
+      </v-row>
+    </v-responsive>
+    <v-responsive class="align-center fill-height mx-auto" v-else-if="status == 'ended'">
+      <div class="pb-4 pt-0 d-flex justify-space-around align-center">
+        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-left" @click="changeStatus('prev')">Voltar para as Métricas</v-btn>
+        <div class="text-center">
+          <v-tooltip :text="game?.currentProblem ? game?.currentProblem?.description : problem?.description">
+            <template v-slot:activator="{ props }">
+              <v-btn v-bind="props" prepend-icon="mdi-dots-hexagon" variant="tonal" color="indigo-darken-3" size="large" rounded="xl" :ripple="false">{{  game?.currentProblem ? game?.currentProblem?.name : problem?.name }}</v-btn>
+            </template>
+          </v-tooltip>
+          <p class="text-caption">Dor escolhida</p>
+          <p> Métricas escolhidas</p>
+        </div>
+        <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus">Iniciar Próxima Dor</v-btn>
+      </div>
+      <v-row no-gutters class="mb-3">
+        <v-col no-gutters cols="6" v-for="metric in twoMetricsSelected" :key="metric.metric">
+          <flip-card :id="metric.metric"  :cardIcon="'mdi-cards-diamond'" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" color="black"></flip-card>
         </v-col>
         <v-col no-gutters cols="2" class="d-flex pl-2 align-center justify-end">
           <participants :gameId="id" @input="setParticipants"></participants>
@@ -143,6 +166,7 @@ import MetricsGroup from '@/components/MetricsGroup.vue';
 import Participants from '@/components/Participants.vue';
 import Metrics from '@/components/Metrics.vue';
 import { metricsGroupList } from '@/db/metricsGroup';
+import FlipCard from '@/components/FlipCard.vue';
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -151,11 +175,13 @@ export default {
     HeaderApp,
     MetricsGroup,
     Participants,
-    Metrics
+    Metrics,
+    FlipCard
   },
   data() {
     return {
       selectedGroups: [],
+      twoMetricsSelected: [],
       twoMetricsGroupsSelected: [],
       game: {},
       problemsSaved: false,
@@ -164,7 +190,7 @@ export default {
       anonUser: '',
       nickname: '',
       status: '',
-      statusOptions: [ 'not_started', 'started', 'select_metrics', 'voting', 'ended'],
+      statusOptions: [ 'not_started', 'started', 'select_metrics', 'ended'],
       participants: [],
       problem: null,
       id: JSON.parse(this?.$route.query.id),
@@ -292,6 +318,10 @@ export default {
       try {
       let i = this.statusOptions.indexOf(this.status)
       direction != 'prev' ? i++ : i--
+      if (i == this.statusOptions.length) {
+        i = 1
+        this.problem = this.game?.currentProblem.id == this.game?.problemA?.id ? this.game?.problemB : this.game?.problemA
+      }
       const { data, error } = await supabase
         .from('game_sessions')
         .update({ status: this.statusOptions[i], currentProblem: this?.problem?.id })
@@ -333,6 +363,12 @@ export default {
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => this.problem.metricsGroups.split(',').includes(item.value))
         }
       }
+      if (this.status == 'ended') {
+        this.getCurrentProblem()
+      }
+    },
+    setTwoMetricsSelected(metrics) {
+      this.twoMetricsSelected = metrics
     },
     async sendToProblemsDatabase() {
       const selected = [...this.twoMetricsGroupsSelected]
@@ -401,3 +437,11 @@ export default {
   }
 }
 </script>
+<style lang="css">
+  .custom-flip-card {
+    border: 1px solid black;
+    border-radius: 5%;
+    padding: 4px;
+    max-width: 250px;
+  }
+</style>

@@ -35,7 +35,7 @@
           </template>
         </v-tooltip>
         <v-col v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-          <flip-card :id="metric.value" :chips="droppedChips" :cardIcon="'mdi-cards-spade'" @dragover.prevent @drop="dropChip" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
+          <flip-card :id="metric.value" :chips="droppedChips" :cardIcon="'mdi-cards-spade'" @dragover.prevent @drop="dropChip" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
         </v-col>
       </v-row>
       <v-row class="bg-table-horizontal mt-1"  justify="center" align="center" no-gutters>
@@ -69,7 +69,7 @@
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
-          <flip-card :id="metric.value" :chips="droppedChips" :cardIcon="'mdi-cards-club'" @dragover.prevent @drop="dropChip" @click="selectedMetrics.push(metric)" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
+          <flip-card :id="metric.value" :chips="droppedChips" :cardIcon="'mdi-cards-club'" @dragover.prevent @drop="dropChip" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
         </v-col>
       </v-row>
     </div>
@@ -356,7 +356,6 @@ export default {
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'participants' }, this.handleUpdate)
         .subscribe();
     }
-    console.log('participants',this.participants);
     if (this.participants.length == 0 && this.isDealer) {
       await this.getParticipants()
     }
@@ -431,6 +430,27 @@ export default {
       }).filter(chip => chip !== null && chip.destinyId !== null);
       console.log('newParticipantVoted',newParticipantVoted);
       this.droppedChips.push(...newParticipantVoted);
+      this.sendDroppedChipsToParent();
+    },
+    sendDroppedChipsToParent() {
+      if (this.selectedMetrics.length > 0) {
+        this.selectedMetrics = [];
+      }
+      this.droppedChips.forEach( droppedchip => {
+        const i = this.selectedMetrics.findIndex(card => card?.metric === droppedchip.destinyId)
+        i !== -1 ? this.selectedMetrics[i].count += 1 : this.selectedMetrics.push({ metric: droppedchip?.destinyId, count: 1 });
+      })
+      this.selectedMetrics.sort((a, b) => b.count - a.count);
+      this.selectedMetrics = this.selectedMetrics.filter((card, index) => {
+        return index < 2;
+      });
+      // antes de enviar para o pai, trás os dados de cada card. metric que estão no droppedChips
+      this.selectedMetrics.forEach(card => {
+        const metric = this.metricsOfFirstGroup.find(metric => metric.value === card.metric) || this.metricsOfSecondGroup.find(metric => metric.value === card.metric);
+        card.name = metric.name;
+        card.description = metric.description;
+      });
+      this.$emit('input', this.selectedMetrics);
     },
     dragStart(event, index) {
       event.dataTransfer.effectAllowed = 'move';
