@@ -143,6 +143,11 @@ export default {
       default: {},
       required: false
     },
+    groups: {
+      type: String,
+      default: "",
+      required: false
+    }
   },
   data() {
     return {
@@ -458,7 +463,14 @@ export default {
       // antes de enviar para o pai, trás os dados de cada card. metric que estão no droppedChips
       this.selectedMetrics.forEach(card => {
         console.log('this.metricsGroup[0]?.value',this.metricsGroup[0]?.value);
-        const metric = this.metricOfEachGroup[this.metricsGroup[0]?.value].find(metric => metric.value === card.metric) || this.metricOfEachGroup[this.metricsGroup[1]?.value].find(metric => metric.value === card.metric);
+        let metric = null
+        if (!this.metricsGroup && this.groups) {
+          const selectedMetrics = this.groups.split(',');
+          metric = this.metricOfEachGroup[selectedMetrics[0]].find(metric => metric.value === card.metric) || this.metricOfEachGroup[selectedMetrics[1]].find(metric => metric.value === card.metric);
+        } else {
+          metric = this.metricOfEachGroup[this.metricsGroup[0]?.value].find(metric => metric.value === card.metric) || this.metricOfEachGroup[this.metricsGroup[1]?.value].find(metric => metric.value === card.metric);
+        }
+
         card.name = metric.name;
         card.description = metric.description;
       });
