@@ -297,11 +297,11 @@ export default {
         }
       }
     },
-    handleUpdate(payload) {
+    async handleUpdate(payload) {
       if (payload?.new?.status) {
         this.status = payload.new.status
         this.getCurrentProblem()
-        this.prepareVariables()
+        await this.prepareVariables()
       }
       if (payload?.new?.nickname) {
         const participant = payload.new
@@ -333,14 +333,14 @@ export default {
       this.showSnackBar = true
       this.game = data[0]
       this.status = this?.game?.status
-      this.prepareVariables()
+      await this.prepareVariables()
       } catch (error) {
       console.error("Error changing status:", error);
       this.errorMessage = error.message
       this.showError = true
       }
     },
-    prepareVariables() {
+    async prepareVariables() {
       if(this.status == 'select_metrics') {
         this.getCurrentProblem()
         this.problemsSaved = false
@@ -358,7 +358,7 @@ export default {
           }, {})
           const onlyTwo = Object.keys(metricsGroupsVotes).sort((a, b) => metricsGroupsVotes[b] - metricsGroupsVotes[a]).slice(0, 2)
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => onlyTwo.includes(item.value))
-          this.sendToProblemsDatabase()
+          await this.sendToProblemsDatabase()
         } else {
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => this.problem.metricsGroups.split(',').includes(item.value))
         }
@@ -435,7 +435,7 @@ export default {
         this.participants?.forEach((participant)=> {
           this.setChoosenParticipants(participant)
         })
-        this.prepareVariables()
+        await this.prepareVariables()
       }
     },
     setSelectedGroups(selectedGroups) {
