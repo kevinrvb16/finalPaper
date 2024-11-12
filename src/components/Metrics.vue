@@ -1,33 +1,24 @@
 <template>
-  <v-responsive
-    class="align-center mx-auto"
-    max-width="1200"
-  >
+  <v-responsive class="align-center mx-auto" max-width="1200">
     <div>
       <v-row justify="center" align="center" class=" bg-table-horizontal mb-1" no-gutters>
         <v-tooltip :text="metricsGroup[0]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
-            <v-card
-              :color="metricsGroup[0]?.backgroundColor"
-              variant="tonal"
-              class="mx-auto"
-              hover
-              v-bind="props"
-              max-width="136"
-            >
+            <v-card :color="metricsGroup[0]?.backgroundColor" variant="tonal" class="mx-auto" hover v-bind="props"
+              max-width="136">
               <v-card-item>
                 <div class="text-overline">
                   {{ metricsGroup[0]?.title }}
                 </div>
                 <div>
                   <template v-for="avatar in avatars">
-                      <v-avatar size="28" v-if="avatar.value == metricsGroup[0]?.value">
-                          <v-tooltip :text="avatar.nickname">
-                              <template v-slot:activator="{ props }">
-                                  <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
-                              </template>
-                          </v-tooltip>
-                      </v-avatar>
+                    <v-avatar size="28" v-if="avatar.value == metricsGroup[0]?.value">
+                      <v-tooltip :text="avatar.nickname">
+                        <template v-slot:activator="{ props }">
+                          <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                        </template>
+                      </v-tooltip>
+                    </v-avatar>
                   </template>
                 </div>
               </v-card-item>
@@ -35,33 +26,29 @@
           </template>
         </v-tooltip>
         <v-col v-for="(metric, index) in metricsOfFirstGroup" :key="index">
-          <flip-card :id="metric.value" :chips="droppedChips" :cardIcon="'mdi-cards-spade'" @dragover.prevent @drop="dropChip" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
+          <flip-card :id="metric.value" :chips="droppedChips" :cardIcon="'mdi-cards-spade'" @dragover.prevent
+            @drop="dropChip" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'"
+            :title="metric.name" :description="metric.description" :color="metricsGroup[0].backgroundColor"></flip-card>
         </v-col>
       </v-row>
-      <v-row class="bg-table-horizontal mt-1"  justify="center" align="center" no-gutters>
+      <v-row class="bg-table-horizontal mt-1" justify="center" align="center" no-gutters>
         <v-tooltip :text="metricsGroup[1]?.description" max-width="360px">
           <template v-slot:activator="{ props }">
-            <v-card
-              :color="metricsGroup[1]?.backgroundColor"
-              variant="tonal"
-              class="mx-auto"
-              hover
-              v-bind="props"
-              max-width="136"
-            >
+            <v-card :color="metricsGroup[1]?.backgroundColor" variant="tonal" class="mx-auto" hover v-bind="props"
+              max-width="136">
               <v-card-item>
                 <div class="text-overline">
                   {{ metricsGroup[1]?.title }}
                 </div>
                 <div>
                   <template v-for="avatar in avatars">
-                      <v-avatar size="28" v-if="avatar.value == metricsGroup[1]?.value">
-                          <v-tooltip :text="avatar.nickname">
-                              <template v-slot:activator="{ props }">
-                                  <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
-                              </template>
-                          </v-tooltip>
-                      </v-avatar>
+                    <v-avatar size="28" v-if="avatar.value == metricsGroup[1]?.value">
+                      <v-tooltip :text="avatar.nickname">
+                        <template v-slot:activator="{ props }">
+                          <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                        </template>
+                      </v-tooltip>
+                    </v-avatar>
                   </template>
                 </div>
               </v-card-item>
@@ -69,7 +56,9 @@
           </template>
         </v-tooltip>
         <v-col class="px-1" v-for="(metric, index) in metricsOfSecondGroup" :key="index">
-          <flip-card :id="metric.value" :chips="droppedChips" :cardIcon="'mdi-cards-club'" @dragover.prevent @drop="dropChip" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
+          <flip-card :id="metric.value" :chips="droppedChips" :cardIcon="'mdi-cards-club'" @dragover.prevent
+            @drop="dropChip" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'"
+            :title="metric.name" :description="metric.description" :color="metricsGroup[1].backgroundColor"></flip-card>
         </v-col>
       </v-row>
     </div>
@@ -77,10 +66,12 @@
       <div class="d-flex flex-column mx-4 align-center" v-for="(chip, index) in chips" :key="index">
         <v-hover>
           <template v-slot:default="{ isHovering, props }">
-            <v-chip size="x-large" variant="text" :value="chip?.value" v-bind="props"  :class="`mx-4 ${chip?.customClass}`" draggable rounded="circle" @dragstart="dragStart($event, index)" @dragover.prevent @drop="dropCard">
+            <v-chip size="x-large" variant="text" :value="chip?.value" v-bind="props"
+              :class="`mx-4 ${chip?.customClass}`" draggable rounded="circle" @dragstart="dragStart($event, index)"
+              @dragover.prevent @drop="dropCard">
               <v-tooltip :text="chip?.description">
                 <template v-slot:activator="{ props }">
-                  <v-avatar :size="isHovering && !isDealer ? 54 : 42" v-bind="props" >
+                  <v-avatar :size="isHovering && !isDealer ? 54 : 42" v-bind="props">
                     <v-img :src="'/img/' + chip?.image + '.png'"></v-img>
                   </v-avatar>
                 </template>
@@ -92,7 +83,8 @@
           {{ chip?.text }}
         </p>
       </div>
-      <v-btn v-if="!isDealer" :disabled="problemsSaved" append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
+      <v-btn v-if="!isDealer" :disabled="problemsSaved" append-icon="mdi-chevron-double-right"
+        @click="send">enviar</v-btn>
     </div>
   </v-responsive>
 </template>
@@ -377,15 +369,15 @@ export default {
   methods: {
     async getParticipants() {
       const participantsInDataBase = await supabase
-          .from('participants')
-          .select("*")
-          .eq('game_session', this.game.id)
-      console.log('participantsInDataBase',participantsInDataBase);
+        .from('participants')
+        .select("*")
+        .eq('game_session', this.game.id)
+      console.log('participantsInDataBase', participantsInDataBase);
       if (!participantsInDataBase.error) {
-          this.participants = participantsInDataBase?.data
-          this.loadDroppedChipsWithParticipants();
+        this.participants = participantsInDataBase?.data
+        this.loadDroppedChipsWithParticipants();
       }
-  },
+    },
     handleUpdate(payload) {
       if (!payload?.errors && payload?.new?.game_session == this.game?.id) {
         this.mountDroppedChipsWithParticipant(payload.new);
@@ -393,7 +385,7 @@ export default {
     },
     loadDroppedChipsWithParticipants() {
       this.participants.forEach(participant => {
-        console.log('participant',participant);
+        console.log('participant', participant);
         this.mountDroppedChipsWithParticipant(participant);
       });
     },
@@ -446,15 +438,15 @@ export default {
       if (this.selectedMetrics.length > 0) {
         this.selectedMetrics = [];
       }
-      this.droppedChips.forEach( droppedchip => {
+      this.droppedChips.forEach(droppedchip => {
         const i = this.selectedMetrics.findIndex(card => card?.metric === droppedchip.destinyId)
-       if( i !== -1) {
+        if (i !== -1) {
           this.selectedMetrics[i].count += 1
           this.selectedMetrics = droppedchip.participants.map(participant => participant.nickname);
         } else {
           const lisOfParticipantsNickname = droppedchip.participants.map(participant => participant.nickname);
           this.selectedMetrics.push({ metric: droppedchip?.destinyId, count: 1, participants: lisOfParticipantsNickname });
-       }
+        }
       })
       this.selectedMetrics.sort((a, b) => b.count - a.count);
       this.selectedMetrics = this.selectedMetrics.filter((card, index) => {
@@ -462,16 +454,16 @@ export default {
       });
       // antes de enviar para o pai, trás os dados de cada card. metric que estão no droppedChips
       this.selectedMetrics.forEach(card => {
-        console.log('this.metricsGroup[0]?.value',this.metricsGroup[0]?.value);
+        console.log('this.metricsGroup[0]?.value', this.metricsGroup[0]?.value);
         let metricOfGroup = null
-        console.log('this.groups',this.groups);
+        console.log('this.groups', this.groups);
         if (!this.metricsGroup && this.groups) {
           const selectedMetrics = this.groups.split(',');
           metricOfGroup = this.metricOfEachGroup[selectedMetrics[0]].find(metric => metric.value === card.metric) || this.metricOfEachGroup[selectedMetrics[1]].find(metric => metric.value === card.metric);
         } else {
           metricOfGroup = this.metricOfEachGroup[this.metricsGroup[0]?.value].find(metric => metric.value === card.metric) || this.metricOfEachGroup[this.metricsGroup[1]?.value].find(metric => metric.value === card.metric);
         }
-        console.log('metricOfGroup',metricOfGroup);
+        console.log('metricOfGroup', metricOfGroup);
         card.name = metricOfGroup.name;
         card.description = metricOfGroup.description;
       });
@@ -480,10 +472,10 @@ export default {
     dragStart(event, index) {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.setData('text/plain', index);
-      console.log('event drag start',event);
+      console.log('event drag start', event);
     },
     dropChip(event) {
-      console.log('event dropChip',event);
+      console.log('event dropChip', event);
       const index = event.dataTransfer.getData('text/plain');
       const destinyId = event?.target?.id;
       if (index !== null && destinyId !== null) {
@@ -491,30 +483,30 @@ export default {
           ...this.chips[index],
           destinyId
         };
-        console.log('chip drop chip',chip);
+        console.log('chip drop chip', chip);
         this.droppedChips.push(chip);
-        console.log('droppedChips drop chip',this.droppedChips);
+        console.log('droppedChips drop chip', this.droppedChips);
         this.chips.splice(index, 1);
-        console.log('chips drop chip',this.chips);
+        console.log('chips drop chip', this.chips);
       }
     },
     dropCard(event) {
-      console.log('event dropCard',event);
+      console.log('event dropCard', event);
       const index = event.dataTransfer.getData('text/plain');
-      console.log('index drop card',index);
+      console.log('index drop card', index);
       if (index !== null) {
         const chip = this.droppedChips[index];
         chip.destinyId = null;
-        console.log('chip drop card',chip);
+        console.log('chip drop card', chip);
         this.chips.push(chip);
-        console.log('chips drop card',this.chips);
+        console.log('chips drop card', this.chips);
         this.droppedChips.splice(index, 1);
-        console.log('droppedChips drop card',this.droppedChips);
+        console.log('droppedChips drop card', this.droppedChips);
       }
     },
     send() {
       this.problemsSaved = true;
-      console.log('droppedChips',this.droppedChips);
+      console.log('droppedChips', this.droppedChips);
       this.droppedChips.forEach(chip => {
         if (chip.value === 'relevance') {
           this.relevance = chip.destinyId
@@ -525,9 +517,9 @@ export default {
         }
       });
       this.sendToSupabase();
-      console.log('relevance',this.relevance);
-      console.log('ease',this.ease);
-      console.log('preference',this.preference);
+      console.log('relevance', this.relevance);
+      console.log('ease', this.ease);
+      console.log('preference', this.preference);
     },
     async sendToSupabase() {
       // verify if problem is problemA or problemB to save in relevanceB or relevanceA, easeB or easeA, preferenceB or preferenceA
@@ -543,7 +535,7 @@ export default {
             })
             .eq('id', uId)
             .select('*')
-        :
+          :
           await supabase
             .from('participants')
             .update({
@@ -555,7 +547,7 @@ export default {
             .select('*')
         this.$emit('successOnSend', participants[0]);
       } catch (error) {
-        console.error('error',error);
+        console.error('error', error);
         this.problemsSaved = false;
         this.$emit('errorOnSend', error);
       }
@@ -569,22 +561,23 @@ export default {
 }
 </script>
 <style lang="scss">
-
 .white-space-normal {
-  white-space: normal!important;
+  white-space: normal !important;
 }
 
 .bg-table-horizontal {
   background-image: linear-gradient(black, white), linear-gradient(white, black);
-  background-size: 2px 0%, 87% 2px; /* Tamanho das linhas */
-  background-position: 100px, 135px; /* Posiciona as linhas */
+  background-size: 2px 0%, 87% 2px;
+  /* Tamanho das linhas */
+  background-position: 100px, 135px;
+  /* Posiciona as linhas */
   background-repeat: no-repeat;
-  }
+}
 
-  .custom-flip-card {
-    border: 1px solid black;
-    border-radius: 5%;
-    padding: 4px;
-    max-width: 250px;
-  }
+.custom-flip-card {
+  border: 1px solid black;
+  border-radius: 5%;
+  padding: 4px;
+  max-width: 250px;
+}
 </style>
