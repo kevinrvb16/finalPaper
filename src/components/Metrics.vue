@@ -455,14 +455,11 @@ export default {
       // antes de enviar para o pai, trás os dados de cada card. metric que estão no droppedChips
       this.selectedMetrics.forEach(card => {
         console.log('this.metricsGroup', this.metricsGroup);
-        let metricOfGroup = null
-        console.log('this.groups', this.groups);
+        let metricOfGroup = null;
         if ( !this.metricsGroup ) {
           const selectedMetrics = this.groups.split(',');
           metricOfGroup = this.metricOfEachGroup[selectedMetrics[0]].find(metric => metric.value === card.metric) || this.metricOfEachGroup[selectedMetrics[1]].find(metric => metric.value === card.metric);
         } else {
-          console.log('this.metricsGroup[0].value', this.metricsGroup[0].value);
-          console.log('this.metricsOfEachGroup[this.metricsGroup[0].value]', this.metricsOfEachGroup[this.metricsGroup[0].value]);
           metricOfGroup = this.metricOfEachGroup[this.metricsGroup[0].value].find(metric => metric.value === card.metric) || this.metricOfEachGroup[this.metricsGroup[1].value].find(metric => metric.value === card.metric);
         }
         console.log('metricOfGroup', metricOfGroup);
