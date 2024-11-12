@@ -442,7 +442,7 @@ export default {
       })
       this.selectedMetrics.sort((a, b) => b.count - a.count);
       this.selectedMetrics = this.selectedMetrics.filter((card, index) => {
-        return index < 2;
+        return index < 2 || card.count === this.selectedMetrics[1].count;
       });
       // antes de enviar para o pai, trás os dados de cada card. metric que estão no droppedChips
       this.selectedMetrics.forEach(card => {
