@@ -309,7 +309,7 @@ export default {
       }
     },
     getCurrentProblem() {
-      if (this.status == 'select_metrics') {
+      if (this.status == 'select_metrics' || this.status == 'ended') {
         const problem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ? this?.game?.problemA : this?.game?.problemB
         this.problem = problem
       }
