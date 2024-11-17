@@ -24,7 +24,7 @@
       <v-row no-gutters class="mb-3">
         <v-col no-gutters cols="10">
           <v-row class="pa-0" align="center">
-            <metrics-group :isDealer="isDealer" @input="setSelectedGroups" :alreadyChoose="problemsSaved" :avatars="choosenByParticipants" ></metrics-group>
+            <metrics-group :isDealer="isDealer" @input="setSelectedGroups" :choose="problemsSaved" :avatars="choosenByParticipants" ></metrics-group>
             <v-col v-if="!isDealer" cols="3" justify="center" align="center">
               <v-btn :disabled="problemsSaved" append-icon="mdi-chevron-double-right" @click="send">enviar</v-btn>
               <div v-if="problemsSaved">Enviado com sucesso, aguarde o Dealer avançar.</div>

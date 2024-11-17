@@ -21,10 +21,10 @@
                 <div class="text-caption align-justify">{{ metricGroup.description }}</div>
                 </div>
                 <span class="pt-0" v-for="(avatar, index) in avatars" :key="index" size="32">
-                    <v-avatar v-if="avatars.length > 0 && isDealer && avatar.value == metricGroup.value" :key="avatar.nickname" size="32">
-                        <v-tooltip :text="avatar.nickname">
+                    <v-avatar v-if="avatars?.length > 0 && isDealer && avatar?.value == metricGroup?.value" :key="avatar?.nickname" size="32">
+                        <v-tooltip :text="avatar?.nickname">
                             <template v-slot:activator="{ props }">
-                                <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
+                                <v-img v-bind="props" :src="`https://robohash.org/${avatar?.nickname}`"></v-img>
                             </template>
                         </v-tooltip>
                     </v-avatar>
@@ -43,7 +43,7 @@ export default {
             problems: [],
             selectedGroups: [],
             metricsGroup: this.getMetricsGroup(),
-            selectedTwo: this.alreadyChoose
+            selectedTwo: this.choose
         }
     },
     props: {
@@ -52,7 +52,7 @@ export default {
             type: Boolean,
             default: false
         },
-        alreadyChoose: {
+        choose: {
             required: false,
             type: Boolean,
             default: false,
