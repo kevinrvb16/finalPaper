@@ -480,6 +480,10 @@ export default {
           ...this.chips[index],
           destinyId
         };
+        const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChip => droppedChip.destinyId === destinyId && droppedChip.value !== chip.value);
+        if (destinyIdAlreadyHasCoin) {
+          chip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(chip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
+        }
         console.log('chip drop chip', chip);
         this.droppedChips.push(chip);
         console.log('droppedChips drop chip', this.droppedChips);
