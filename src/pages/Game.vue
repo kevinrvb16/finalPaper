@@ -416,7 +416,6 @@ export default {
       this.showSnackBar = true
     },
     setMetricsSelected(metrics) {
-      console.log('metrics', metrics)
       this.metricsSelected = metrics
       
     },
