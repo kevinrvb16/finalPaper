@@ -99,6 +99,10 @@ export default {
       } else {
         this.$emit('create', payload)
       }
+        // clean form
+        this.name = ''
+        this.problemA = {}
+        this.problemB = {}
       isActive.value = false
     },
     edit(row) {
