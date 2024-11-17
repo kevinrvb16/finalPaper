@@ -12,7 +12,7 @@
                 </div>
                 <div>
                   <template v-for="avatar in avatars">
-                    <v-avatar size="28" v-if="avatar.value == metricsGroup[0]?.value">
+                    <v-avatar :key="avatar.value" size="28" v-if="avatar.value == metricsGroup[0]?.value">
                       <v-tooltip :text="avatar.nickname">
                         <template v-slot:activator="{ props }">
                           <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
@@ -42,7 +42,7 @@
                 </div>
                 <div>
                   <template v-for="avatar in avatars">
-                    <v-avatar size="28" v-if="avatar.value == metricsGroup[1]?.value">
+                    <v-avatar :key="avatar.value" size="28" v-if="avatar.value == metricsGroup[1]?.value">
                       <v-tooltip :text="avatar.nickname">
                         <template v-slot:activator="{ props }">
                           <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
@@ -93,7 +93,6 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators'
 import FlipCard from '@/components/FlipCard.vue';
-import HeaderApp from '@/components/HeaderApp.vue'
 import { supabase } from '@/main';
 
 export default {
@@ -101,8 +100,7 @@ export default {
     return { v$: useVuelidate() }
   },
   components: {
-    FlipCard,
-    HeaderApp
+    FlipCard
   },
   props: {
     metricsGroup: {
