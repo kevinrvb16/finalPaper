@@ -389,7 +389,8 @@ export default {
     },
     mountDroppedChipsWithParticipant(newPayload) {
       console.log('newPayload', newPayload);
-
+      if ( this.isProblemA && !newPayload.relevanceA && !newPayload.easeA && !newPayload.preferenceA ) return;
+      if ( !this.isProblemA && !newPayload.relevanceB && !newPayload.easeB && !newPayload.preferenceB ) return;
       // Remove the participant from the list of participants of the droppedChips
       this.droppedChips.forEach(droppedChip => {
         droppedChip.participants = droppedChip.participants.filter(participant => participant.id !== newPayload.id);
