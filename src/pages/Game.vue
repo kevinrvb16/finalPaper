@@ -82,16 +82,9 @@
             </v-list>
           </div>
         </div>
-        <div v-if="hasParticipants()">
+        <div>
           <h4>Participantes: </h4>
-          <v-list>
-            <v-list-item v-for="(item, i) in participants" :key="i" :value="item" color="seccondary">
-              <template v-slot:prepend>
-                <v-img :width="48" :src="`https://robohash.org/${item.nickname}`"></v-img>
-              </template>
-              <v-list-item-title>{{ item.nickname }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
+          <participants :gameId="id" @input="setParticipants"></participants>
         </div>
       </div>
     </v-responsive>
