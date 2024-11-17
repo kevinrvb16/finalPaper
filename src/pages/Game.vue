@@ -452,7 +452,7 @@ export default {
         { problemA: selected } : { problemB: selected }
       const uId = localStorage.getItem("anonUser").split(',')[2];
       try {
-        const { data, error } = await supabase
+        const { error } = await supabase
           .from('participants')
           .update(updateProblem)
           .eq('id', uId)
