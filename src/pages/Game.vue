@@ -293,7 +293,16 @@ export default {
     async handleUpdate(payload) {
       if (payload?.new?.status) {
         this.status = payload.new.status
-        this.game = payload.new
+        if (!payload.new.currentProblem?.name && payload.new.status == 'started') {
+          await supabase
+            .from('problems')
+            .select('id, name, description')
+            .eq('id', payload.new.currentProblem)
+            .then(({ data, error }) => {
+              if (error) throw error
+              this.game.currentProblem = data[0]
+            })
+        }
         this.getCurrentProblem()
         await this.prepareVariables()
       }
@@ -303,7 +312,7 @@ export default {
       }
     },
     getCurrentProblem() {
-      if (this.status == 'select_metrics' || this.status == 'ended' || this.status == 'started') {
+      if (this.status == 'select_metrics' || this.status == 'ended') {
         const problem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ? this?.game?.problemA : this?.game?.problemB
         this.problem = problem
       }
