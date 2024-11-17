@@ -445,7 +445,9 @@ export default {
       this.selectedGroups = selectedGroups
     },
     async send() {
-      const selected = JSON.parse(JSON.stringify(this.selectedGroups)).reduce((acc, curr) => {
+      const copy = JSON.parse(JSON.stringify(this.selectedGroups))
+      console.log('copy', copy)
+      const selected = copy.reduce((acc, curr) => {
         return acc + ',' + curr.value
       }, this.selectedGroups.shift().value)
       const  updateProblem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ?
