@@ -3,14 +3,14 @@
         <v-card
             :color="metricGroup.backgroundColor"
             variant="outlined"
-            @click="alreadyChoose ? selectGroup(metricGroup) : null"
+            @click="selectGroup(metricGroup)"
             class="mx-auto"
             hover
             :link="!isDealer"
             :min-height="isDealer ? '307' : '240'"
             :height="isDealer ? '42vh' : '30vh'"
             max-width="288"
-            :disabled="alreadyChoose || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
+            :disabled="selectedTwo || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 16"
             >
             <v-card-item>
@@ -42,7 +42,8 @@ export default {
         return {
             problems: [],
             selectedGroups: [],
-            metricsGroup: this.getMetricsGroup()
+            metricsGroup: this.getMetricsGroup(),
+            selectedTwo: this.alreadyChoose
         }
     },
     props: {
