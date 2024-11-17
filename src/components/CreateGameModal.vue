@@ -99,10 +99,8 @@ export default {
       } else {
         this.$emit('create', payload)
       }
-        // clean form
-        this.name = ''
-        this.problemA = {}
-        this.problemB = {}
+        // clean form with vuelidate
+      this.v$.$reset()
       isActive.value = false
     },
     edit(row) {
