@@ -446,10 +446,9 @@ export default {
     },
     async send() {
       const copy = JSON.parse(JSON.stringify(this.selectedGroups))
-      console.log('copy', copy)
       const selected = copy.reduce((acc, curr) => {
         return acc + ',' + curr.value
-      }, this.selectedGroups.shift().value)
+      }, copy.shift().value)
       const  updateProblem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ?
         { problemA: selected } : { problemB: selected }
       const uId = localStorage.getItem("anonUser").split(',')[2];

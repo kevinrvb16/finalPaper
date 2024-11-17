@@ -72,7 +72,7 @@ export default {
                 const index = this.selectedGroups.indexOf(metricGroup)
                 index != -1 ? this.selectedGroups.splice(index, 1) : this.selectedGroups.push(metricGroup)
                 if ( this.selectedGroups.length == 2) {
-                    this.$emit('sendGroupsToFather', this.selectedGroups)
+                    this.$emit('input', this.selectedGroups)
                 }
             }
         },
