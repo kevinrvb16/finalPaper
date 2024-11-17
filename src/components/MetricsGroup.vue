@@ -12,7 +12,7 @@
             max-width="288"
             :disabled="selectedTwo || selectedGroups.length > 1 && !selectedGroups.includes(metricGroup)"
             :elevation="!selectedGroups.includes(metricGroup) ? 0 : 16"
-            >
+        >
             <v-card-item>
                 <div>
                 <div :class="text-overline">
@@ -72,7 +72,7 @@ export default {
                 const index = this.selectedGroups.indexOf(metricGroup)
                 index != -1 ? this.selectedGroups.splice(index, 1) : this.selectedGroups.push(metricGroup)
                 if ( this.selectedGroups.length == 2) {
-                    this.$emit('input', this.selectedGroups)
+                    this.$emit('sendGroupsToFather', this.selectedGroups)
                 }
             }
         },
