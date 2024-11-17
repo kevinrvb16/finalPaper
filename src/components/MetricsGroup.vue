@@ -20,15 +20,15 @@
                 </div>
                 <div class="text-caption align-justify">{{ metricGroup.description }}</div>
                 </div>
-                <template v-if="avatars.length > 0 && isDealer" class="pt-0" v-for="avatar in avatars">
-                    <v-avatar size="32" v-if="avatar.value == metricGroup.value">
+                <span class="pt-0" v-for="(avatar, index) in avatars" :key="index" size="32">
+                    <v-avatar v-if="avatars.length > 0 && isDealer && avatar.value == metricGroup.value" :key="avatar.nickname" size="32">
                         <v-tooltip :text="avatar.nickname">
                             <template v-slot:activator="{ props }">
                                 <v-img v-bind="props" :src="`https://robohash.org/${avatar.nickname}`"></v-img>
                             </template>
                         </v-tooltip>
                     </v-avatar>
-                </template>
+                </span>
             </v-card-item>
         </v-card>
     </v-col>
