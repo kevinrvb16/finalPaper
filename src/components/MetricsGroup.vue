@@ -66,6 +66,8 @@ export default {
     },
     methods: {
         selectGroup(metricGroup) {
+            console.log(this.selectedGroups)
+            console.log(this.selectedTwo)
             if (!this.isDealer && !this.selectedTwo) {
                 const index = this.selectedGroups.indexOf(metricGroup)
                 index != -1 ? this.selectedGroups.splice(index, 1) : this.selectedGroups.push(metricGroup)
