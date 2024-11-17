@@ -83,7 +83,6 @@
           </div>
         </div>
         <div>
-          <h4>Participantes: </h4>
           <participants :gameId="id" @input="setParticipants"></participants>
         </div>
       </div>
