@@ -421,6 +421,7 @@ export default {
         if (destinyIdAlreadyHasCoinWithValue) {
           return null;
         }
+        console.log('droppedChips', this.droppedChips);
 
         const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChip => droppedChip.destinyId === destinyId && droppedChip.value !== chip.value);
         if (destinyIdAlreadyHasCoin) {
