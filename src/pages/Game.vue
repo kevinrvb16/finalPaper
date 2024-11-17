@@ -293,6 +293,7 @@ export default {
     async handleUpdate(payload) {
       if (payload?.new?.status) {
         this.status = payload.new.status
+        this.game = payload.new
         this.getCurrentProblem()
         await this.prepareVariables()
       }
@@ -302,7 +303,7 @@ export default {
       }
     },
     getCurrentProblem() {
-      if (this.status == 'select_metrics' || this.status == 'ended') {
+      if (this.status == 'select_metrics' || this.status == 'ended' || this.status == 'started') {
         const problem = this?.game?.currentProblem?.id == this?.game?.problemA?.id ? this?.game?.problemA : this?.game?.problemB
         this.problem = problem
       }
