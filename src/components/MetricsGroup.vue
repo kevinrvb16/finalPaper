@@ -3,7 +3,7 @@
         <v-card
             :color="metricGroup.backgroundColor"
             variant="outlined"
-            @click="selectGroup(metricGroup)"
+            @click="alreadyChoose ? selectGroup(metricGroup) : null"
             class="mx-auto"
             hover
             :link="!isDealer"
@@ -65,7 +65,7 @@ export default {
     },
     methods: {
         selectGroup(metricGroup) {
-            if (!this.isDealer && !this.alreadyChoose) {
+            if (!this.isDealer) {
                 const index = this.selectedGroups.indexOf(metricGroup)
                 index != -1 ? this.selectedGroups.splice(index, 1) : this.selectedGroups.push(metricGroup)
                 if ( this.selectedGroups.length == 2) {
