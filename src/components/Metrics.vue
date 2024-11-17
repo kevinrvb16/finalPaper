@@ -459,12 +459,12 @@ export default {
         if ( !this.metricsGroup ) {
           const selectedMetrics = this.groups.split(',');
           metricOfGroup = this.metricOfEachGroup[selectedMetrics[0]].find(metric => metric.value === card.metric) || this.metricOfEachGroup[selectedMetrics[1]].find(metric => metric.value === card.metric);
-        } else {
+        } else if (this.metricsGroup.length > 0) {
           metricOfGroup = this.metricOfEachGroup[this.metricsGroup[0].value].find(metric => metric.value === card.metric) || this.metricOfEachGroup[this.metricsGroup[1].value].find(metric => metric.value === card.metric);
         }
         console.log('metricOfGroup', metricOfGroup);
-        card.name = metricOfGroup.name;
-        card.description = metricOfGroup.description;
+        card.name = metricOfGroup?.name;
+        card.description = metricOfGroup?.description;
       });
       this.$emit('input', this.selectedMetrics);
     },
