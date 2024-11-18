@@ -367,7 +367,7 @@ export default {
         }
       }
       if (this.status == 'ended') {
-        if (this.isDealer && this.twoMetrics.length !== 0) {
+        if (this.isDealer && this.metricsSelected.length !== 0) {
           await this.saveMetricsDatabase()
         } else {
           this.retrieveSelectedMetricsDatabase()
