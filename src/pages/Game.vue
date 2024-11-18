@@ -392,6 +392,24 @@ export default {
     },
     async saveMetricsDatabase() {
       const twoMetrics = this.metricsSelected.slice(0, 2)
+
+      const { data: metricsAlreadySaved, error: errorMetrics } = await supabase
+        .from('metrics')
+        .select('*')
+        .eq('game_session', this.id)
+        .eq('problem', this.problem.id)
+      if (errorMetrics) {
+        console.error("Erro ao buscar métricas:", errorMetrics);
+        this.errorMessage = errorMetrics.message
+        this.showError = true
+        return;
+      }
+      console.log('metricsAlreadySaved', metricsAlreadySaved)
+      if (metricsAlreadySaved.length > 0) {
+        this.message = 'Métricas já salvas'
+        this.showSnackBar = true 
+        return
+      }
       console.log('twoMetrics', twoMetrics)
       const { error } = await supabase
         .from('metrics')
