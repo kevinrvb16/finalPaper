@@ -393,11 +393,6 @@ export default {
       // Remove the participant from the list of participants of the droppedChips
       this.droppedChips.forEach(droppedChip => {
         droppedChip.participants = droppedChip.participants.filter(participant => participant.id !== newPayload.id);
-        // verify if there is another droppedChip with the same destinyId and change styleInsideCard
-        const destinyIdAlreadyHasCoin = this.droppedChips.find(chipDropped => chipDropped.destinyId === droppedChip.destinyId && chipDropped.value !== droppedChip.value);
-        if (destinyIdAlreadyHasCoin) {
-          droppedChip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(droppedChip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
-        }
       });
 
       const newParticipantVoted = this.chips.map(chip => {
@@ -436,6 +431,12 @@ export default {
       }).filter(chip => chip !== null && chip.destinyId !== null);
       console.log('newParticipantVoted', newParticipantVoted);
       this.droppedChips.push(...newParticipantVoted);
+      // verify if there is another droppedChip with the same destinyId and change styleInsideCard
+      this.droppedChips.forEach(droppedChip => {
+        const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChipFind => droppedChipFind.destinyId === droppedChip.destinyId && droppedChipFind.value !== droppedChip.value);
+        if (destinyIdAlreadyHasCoin) {
+          droppedChip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(droppedChip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
+        }
       this.sendDroppedChipsToParent();
     },
     sendDroppedChipsToParent() {
