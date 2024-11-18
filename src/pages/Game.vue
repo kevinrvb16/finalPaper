@@ -128,7 +128,7 @@
         <v-btn v-if="isDealer" append-icon="mdi-chevron-double-right" @click="changeStatus">Iniciar Próxima Dor</v-btn>
       </div>
       <v-row no-gutters class="mb-3 justify-space-between">
-        <div v-for="(metric, index) in metricsSelected" :key="metric.metric" class=" d-flex justify-center text-center mb-3">
+        <div v-for="(metric, index) in metricsSelected.slice(0, 2)" :key="metric.metric" class=" d-flex justify-center text-center mb-3">
           <flip-card :vote="metric.count" :id="metric.metric"  :cardIcon="'mdi-cards-diamond'" :customClassFlipCard="'custom-flip-card'" :customClassTitle="'white-space-normal'" :title="metric.name" :description="metric.description" :color="index < 2 ? 'success' : 'black'"></flip-card>
         </div>
         <div class="d-flex align-center justify-end">
@@ -392,6 +392,7 @@ export default {
     },
     async saveMetricsDatabase() {
       const twoMetrics = this.metricsSelected.slice(0, 2)
+      console.log('twoMetrics', twoMetrics)
       const { data, error } = await supabase
         .from('metrics')
         .insert({ problem: this.problem.id, value: twoMetrics[0].metric, name: twoMetrics[0].name, description: twoMetrics[0].description, count: twoMetrics[0].count, game_session: this.id, participants: twoMetrics[0].participants })
@@ -424,7 +425,7 @@ export default {
       const metricsGroups = selected.reduce((acc, curr) => {
         return acc + ',' + curr.value
       }, selected.shift().value)
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('problems')
         .update({ metricsGroups })
         .eq('id', this.problem.id)
