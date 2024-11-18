@@ -420,7 +420,6 @@ export default {
 
         const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChip => droppedChip.destinyId === destinyId && droppedChip.value !== chip.value);
         if (destinyIdAlreadyHasCoin) {
-          console.log('destinyIdAlreadyHasCoin', destinyIdAlreadyHasCoin);
           chip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(chip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
         }
 
@@ -429,12 +428,9 @@ export default {
       this.droppedChips.push(...newParticipantVoted);
       // verify if there is another droppedChip with the same destinyId and change styleInsideCard
       this.droppedChips.forEach(droppedChip => {
-        console.log('droppedChip', droppedChip);
-        const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChipFind => droppedChipFind.destinyId === droppedChip.destinyId && droppedChipFind.value !== droppedChip.value);
+        const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChipFind => droppedChipFind.destinyId === droppedChip.destinyId && droppedChipFind.value !== droppedChip.value && droppedChipFind.styleInsideCard === droppedChip.styleInsideCard);
         console.log('destinyIdAlreadyHasCoin', destinyIdAlreadyHasCoin);
         if (destinyIdAlreadyHasCoin) {
-          console.log('entrouuu')
-          console.log('destinyIdAlreadyHasCoin', droppedChip);
           droppedChip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(droppedChip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
         }
       });
@@ -460,7 +456,6 @@ export default {
       });
       // antes de enviar para o pai, trás os dados de cada card. metric que estão no droppedChips
       this.selectedMetrics.forEach(card => {
-        console.log('this.metricsGroup', this.metricsGroup);
         let metricOfGroup = null;
         if ( !this.metricsGroup ) {
           const selectedMetrics = this.groups.split(',');
@@ -468,7 +463,6 @@ export default {
         } else if (this.metricsGroup.length > 0) {
           metricOfGroup = this.metricOfEachGroup[this.metricsGroup[0].value].find(metric => metric.value === card.metric) || this.metricOfEachGroup[this.metricsGroup[1].value].find(metric => metric.value === card.metric);
         }
-        console.log('metricOfGroup', metricOfGroup);
         if (!metricOfGroup) return;
         card.name = metricOfGroup?.name;
         card.description = metricOfGroup?.description;
@@ -478,10 +472,8 @@ export default {
     dragStart(event, index) {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.setData('text/plain', index);
-      console.log('event drag start', event);
     },
     dropChip(event) {
-      console.log('event dropChip', event);
       const index = event.dataTransfer.getData('text/plain');
       const destinyId = event?.target?.id;
       if (index !== null && destinyId !== null) {
@@ -493,30 +485,21 @@ export default {
         if (destinyIdAlreadyHasCoin) {
           chip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(chip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
         }
-        console.log('chip drop chip', chip);
         this.droppedChips.push(chip);
-        console.log('droppedChips drop chip', this.droppedChips);
         this.chips.splice(index, 1);
-        console.log('chips drop chip', this.chips);
       }
     },
     dropCard(event) {
-      console.log('event dropCard', event);
       const index = event.dataTransfer.getData('text/plain');
-      console.log('index drop card', index);
       if (index !== null) {
         const chip = this.droppedChips[index];
         chip.destinyId = null;
-        console.log('chip drop card', chip);
         this.chips.push(chip);
-        console.log('chips drop card', this.chips);
         this.droppedChips.splice(index, 1);
-        console.log('droppedChips drop card', this.droppedChips);
       }
     },
     send() {
       this.problemsSaved = true;
-      console.log('droppedChips', this.droppedChips);
       this.droppedChips.forEach(chip => {
         if (chip.value === 'relevance') {
           this.relevance = chip.destinyId
@@ -527,9 +510,6 @@ export default {
         }
       });
       this.sendToSupabase();
-      console.log('relevance', this.relevance);
-      console.log('ease', this.ease);
-      console.log('preference', this.preference);
     },
     async sendToSupabase() {
       // verify if problem is problemA or problemB to save in relevanceB or relevanceA, easeB or easeA, preferenceB or preferenceA
