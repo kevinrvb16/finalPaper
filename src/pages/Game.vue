@@ -367,7 +367,7 @@ export default {
         }
       }
       if (this.status == 'ended') {
-        if (this.isDealer) {
+        if (this.isDealer && this.twoMetrics.length !== 0) {
           await this.saveMetricsDatabase()
         } else {
           this.retrieveSelectedMetricsDatabase()
@@ -393,7 +393,7 @@ export default {
     async saveMetricsDatabase() {
       const twoMetrics = this.metricsSelected.slice(0, 2)
       console.log('twoMetrics', twoMetrics)
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('metrics')
         .insert({ problem: this.problem.id, value: twoMetrics[0].metric, name: twoMetrics[0].name, description: twoMetrics[0].description, count: twoMetrics[0].count, game_session: this.id, participants: twoMetrics[0].participants })
         .select()
@@ -403,7 +403,7 @@ export default {
         this.showError = true
         return;
       }
-      const { data: data2, error: error2 } = await supabase
+      const { error: error2 } = await supabase
         .from('metrics')
         .insert({ problem: this.problem.id, value: twoMetrics[1].metric, name: twoMetrics[1].name, description: twoMetrics[1].description, count: twoMetrics[1].count, game_session: this.id, participants: twoMetrics[1].participants })
         .select()
