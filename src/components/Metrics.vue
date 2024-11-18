@@ -427,14 +427,16 @@ export default {
       }).filter(chip => chip !== null && chip.destinyId !== null);
       this.droppedChips.push(...newParticipantVoted);
       // verify if there is another droppedChip with the same destinyId and change styleInsideCard
-      this.droppedChips.forEach(droppedChip => {
-        const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChipFind => droppedChipFind.destinyId === droppedChip.destinyId && droppedChipFind.value !== droppedChip.value && droppedChipFind.styleInsideCard === droppedChip.styleInsideCard);
-        console.log('destinyIdAlreadyHasCoin', destinyIdAlreadyHasCoin);
+      this.changeStyleInsideCard();
+      this.sendDroppedChipsToParent();
+    },
+    changeStyleInsideCard() {
+      this.droppedChips.forEach((droppedChip) => {
+        const destinyIdAlreadyHasCoin = this.droppedChips.find((droppedChip2) => droppedChip2.destinyId === droppedChip.destinyId && droppedChip2.value !== droppedChip.value && droppedChip2.styleInsideCard === droppedChip.styleInsideCard);
         if (destinyIdAlreadyHasCoin) {
           droppedChip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(droppedChip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
         }
       });
-      this.sendDroppedChipsToParent();
     },
     sendDroppedChipsToParent() {
       if (this.selectedMetrics.length > 0) {
@@ -481,14 +483,12 @@ export default {
           ...this.chips[index],
           destinyId
         };
-        console.log('chip', chip);
-        console.log('this.droppedChips', this.droppedChips);
         const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChip => droppedChip.destinyId === destinyId && droppedChip.value !== chip.value);
-        console.log('destinyIdAlreadyHasCoin', destinyIdAlreadyHasCoin);
         if (destinyIdAlreadyHasCoin) {
           chip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(chip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
         }
         this.droppedChips.push(chip);
+        this.changeStyleInsideCard();
         this.chips.splice(index, 1);
       }
     },
