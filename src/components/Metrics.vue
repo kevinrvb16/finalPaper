@@ -429,8 +429,12 @@ export default {
       this.droppedChips.push(...newParticipantVoted);
       // verify if there is another droppedChip with the same destinyId and change styleInsideCard
       this.droppedChips.forEach(droppedChip => {
+        console.log('droppedChip', droppedChip);
         const destinyIdAlreadyHasCoin = this.droppedChips.find(droppedChipFind => droppedChipFind.destinyId === droppedChip.destinyId && droppedChipFind.value !== droppedChip.value);
+        console.log('destinyIdAlreadyHasCoin', destinyIdAlreadyHasCoin);
         if (destinyIdAlreadyHasCoin) {
+          console.log('entrouuu')
+          console.log('destinyIdAlreadyHasCoin', droppedChip);
           droppedChip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(droppedChip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
         }
       });
