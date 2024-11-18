@@ -386,8 +386,6 @@ export default {
       });
     },
     mountDroppedChipsWithParticipant(newPayload) {
-      console.log('newPayload', newPayload);
-      console.log('droppedChips', this.droppedChips);
       if ( this.isProblemA && !newPayload.relevanceA && !newPayload.easeA && !newPayload.preferenceA ) return;
       if ( !this.isProblemA && !newPayload.relevanceB && !newPayload.easeB && !newPayload.preferenceB ) return;
       // Remove the participant from the list of participants of the droppedChips
@@ -396,7 +394,6 @@ export default {
       });
 
       const newParticipantVoted = this.chips.map(chip => {
-        console.log('chip', chip);
         let destinyId = null;
         if (chip.value === 'relevance') {
           destinyId = this.isProblemA ? newPayload?.relevanceA : newPayload?.relevanceB;
@@ -429,7 +426,6 @@ export default {
 
         return { ...chip, destinyId, count: 1, participants: [newPayload] };
       }).filter(chip => chip !== null && chip.destinyId !== null);
-      console.log('newParticipantVoted', newParticipantVoted);
       this.droppedChips.push(...newParticipantVoted);
       // verify if there is another droppedChip with the same destinyId and change styleInsideCard
       this.droppedChips.forEach(droppedChip => {
@@ -437,6 +433,7 @@ export default {
         if (destinyIdAlreadyHasCoin) {
           droppedChip.styleInsideCard = `position: absolute; bottom: 5px; left: ${parseInt(droppedChip.styleInsideCard.split(' ')[5]) + 40}px; font-size: 24px; `;
         }
+      });
       this.sendDroppedChipsToParent();
     },
     sendDroppedChipsToParent() {
