@@ -368,7 +368,7 @@ export default {
       }
       if (this.status == 'ended') {
         if (this.isDealer) {
-          this.saveMetricsDatabase()
+          await this.saveMetricsDatabase()
         } else {
           this.retrieveSelectedMetricsDatabase()
         }
