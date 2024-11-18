@@ -370,7 +370,6 @@ export default {
         .from('participants')
         .select("*")
         .eq('game_session', this.game.id)
-      console.log('participantsInDataBase', participantsInDataBase);
       if (!participantsInDataBase.error) {
         this.participants = participantsInDataBase?.data
         this.loadDroppedChipsWithParticipants();
@@ -383,7 +382,6 @@ export default {
     },
     loadDroppedChipsWithParticipants() {
       this.participants.forEach(participant => {
-        console.log('participant', participant);
         this.mountDroppedChipsWithParticipant(participant);
       });
     },
