@@ -367,10 +367,14 @@ export default {
         }
       }
       if (this.status == 'ended') {
+        console.log('this.metricsSelected', this.metricsSelected)
+        console.log('this.problem antes', this.problem)
+        this.getCurrentProblem()
+        console.log('this.problem depois', this.problem)
         if (this.isDealer && this.metricsSelected.length !== 0) {
           await this.saveMetricsDatabase()
         } else {
-          this.retrieveSelectedMetricsDatabase()
+          await this.retrieveSelectedMetricsDatabase()
         }
       }
     },
@@ -379,7 +383,7 @@ export default {
         .from('metrics')
         .select('*')
         .eq('game_session', this.id)
-        .eq('problem', this.problem.id)
+        .eq('problem', this.problem?.id)
       if (error) {
         console.error("Erro ao buscar métricas:", error);
         this.errorMessage = error.message
