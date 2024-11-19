@@ -349,6 +349,7 @@ export default {
         this.problemsSaved = false
         if (!this.problem?.metricsGroups) {
           if (this.choosenByParticipants.length == 0) {
+            console.log('this.participants', this.participants)
             this.setChoosenParticipants(this.participants)
           }
           const metricsGroupsVotes = this.choosenByParticipants.reduce((acc, curr) => {
