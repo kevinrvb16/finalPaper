@@ -363,7 +363,9 @@ export default {
           }, {})
           const onlyTwo = Object.keys(metricsGroupsVotes).sort((a, b) => metricsGroupsVotes[b] - metricsGroupsVotes[a]).slice(0, 2)
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => onlyTwo.includes(item.value))
-          await this.sendToProblemsDatabase()
+          if (this.twoMetricsGroupsSelected.length > 0) {
+            await this.sendToProblemsDatabase()
+          }
         } else {
           this.twoMetricsGroupsSelected = this.metricsGroup.filter(item => this.problem.metricsGroups.split(',').includes(item.value))
         }
