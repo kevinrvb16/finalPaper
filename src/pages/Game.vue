@@ -334,7 +334,6 @@ export default {
       this.showSnackBar = true
       this.game = data[0]
       this.status = this?.game?.status
-      await this.prepareVariables()
       } catch (error) {
       console.error("Error changing status:", error);
       this.errorMessage = error.message
@@ -366,7 +365,6 @@ export default {
         }
       }
       if (this.status == 'ended') {
-        console.log('this.metricsSelected', this.metricsSelected)
         this.getCurrentProblem()
         if (this.isDealer && this.metricsSelected.length !== 0) {
           console.log('this.metricsSelected 2', this.metricsSelected)
