@@ -220,7 +220,7 @@ export default {
             .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'game_sessions' }, this.handleUpdate)
             .subscribe();
             if (this.status == 'ended') {
-              await this.retrieveSelectedMetricsDatabase()
+              await this.prepareVariables()
             }
         }
 
