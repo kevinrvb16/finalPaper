@@ -369,6 +369,7 @@ export default {
         console.log('this.metricsSelected', this.metricsSelected)
         this.getCurrentProblem()
         if (this.isDealer && this.metricsSelected.length !== 0) {
+          console.log('this.metricsSelected 2', this.metricsSelected)
           await this.saveMetricsDatabase()
         } else {
           await this.retrieveSelectedMetricsDatabase()
