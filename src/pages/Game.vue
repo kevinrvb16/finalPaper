@@ -495,8 +495,8 @@ export default {
         this.showError = true
       }
     },
-    successOnSend(participant) {
-      this.successMessage = `${participant.nickname} seus votos foram enviadas com sucesso para o Dealer`
+    successOnSend(participant = '') {
+      this.successMessage = `${participant?.nickname} seus votos foram enviadas com sucesso para o Dealer`
       this.showSnackBar = true
     },
     errorOnSend(error) {
