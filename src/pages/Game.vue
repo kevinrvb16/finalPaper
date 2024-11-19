@@ -253,7 +253,6 @@ export default {
         .eq('game_session', this.id)
         .eq('nickname', this.anonUser)
       if (err) {
-        console.log('error CreateAnonUser', err)
         this.errorMessage = err.message
         this.showError = true
         return
@@ -265,7 +264,6 @@ export default {
       }
       const { data, error } = await supabase.auth.signInAnonymously()
       if (error) {
-        console.log('error CreateAnonUser', error)
         this.errorMessage = error.message
         this.showError = true
         return
@@ -370,7 +368,6 @@ export default {
       if (this.status == 'ended') {
         console.log('this.metricsSelected', this.metricsSelected)
         this.getCurrentProblem()
-        console.log('this.problem depois', this.problem)
         if (this.isDealer && this.metricsSelected.length !== 0) {
           await this.saveMetricsDatabase()
         } else {
