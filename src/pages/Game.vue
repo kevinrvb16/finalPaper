@@ -368,7 +368,6 @@ export default {
       }
       if (this.status == 'ended') {
         console.log('this.metricsSelected', this.metricsSelected)
-        console.log('this.problem antes', this.problem)
         this.getCurrentProblem()
         console.log('this.problem depois', this.problem)
         if (this.isDealer && this.metricsSelected.length !== 0) {
@@ -488,6 +487,7 @@ export default {
           return;
         }
         this.problemsSaved = true
+        this.successOnSend()
       } catch (error) {
         console.error("Erro na execução da atualização:", error);
         this.errorMessage = error.message
@@ -495,11 +495,11 @@ export default {
       }
     },
     successOnSend(participant) {
-      this.successMessage = `${participant.nickname} suas fichas foram enviadas com sucesso para o Dealer`
+      this.successMessage = `${participant.nickname} seus votos foram enviadas com sucesso para o Dealer`
       this.showSnackBar = true
     },
     errorOnSend(error) {
-      this.errorMessage = 'Ocorreu um erro: '.error.message
+      this.errorMessage = `Ocorreu um erro: ${error.message}`
       this.showError = true
     }
   },
